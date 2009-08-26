@@ -86,7 +86,7 @@
 	webview.delegate = self;
     [super viewDidLoad];
 	
-	nui = [NSString stringWithFormat:@"<center><b>%@</b></center>%@ " , selectedCountry,selectedSumary];
+	NSString *nui = [NSString stringWithFormat:@"<center><b>%@</b></center>%@ " , selectedCountry,selectedSumary];
 	NSRange myRange = NSMakeRange(0,16);
 	datum.text = [selecteddate substringWithRange:myRange];
 	titel.text = selectedCountry;
