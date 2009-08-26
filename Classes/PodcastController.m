@@ -8,7 +8,6 @@
 
 
 #import "PodcastController.h"
-#import "ApfeltalkMagazinAppDelegate.h"
 #import "DetailPodcast.h"
 
 

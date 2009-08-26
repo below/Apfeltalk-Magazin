@@ -8,7 +8,6 @@
 
 
 #import "RootViewController.h"
-#import "ApfeltalkMagazinAppDelegate.h"
 #import "DetailViewController.h"
 
 @interface RootViewController (private)
