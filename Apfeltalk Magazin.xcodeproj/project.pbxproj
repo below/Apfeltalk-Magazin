@@ -11,22 +11,18 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		28216C970DB411BC00E5133A /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28216C960DB411BC00E5133A /* FirstViewController.m */; };
-		282CCBFE0DB6C98000C4EA27 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282CCBFD0DB6C98000C4EA27 /* SecondView.xib */; };
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
 		CB9E946E104490B700768B8B /* gelesen.db in Resources */ = {isa = PBXBuildFile; fileRef = CB9E946D104490B700768B8B /* gelesen.db */; };
 		CB9E94841044929D00768B8B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9E94831044929D00768B8B /* libsqlite3.dylib */; };
 		F6222F011041D90D00FC030D /* rss.png in Resources */ = {isa = PBXBuildFile; fileRef = F6222F001041D90D00FC030D /* rss.png */; };
 		F62230401043488D00FC030D /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F622303F1043488D00FC030D /* MediaPlayer.framework */; };
-		F634305310362AA4004ACF93 /* ApfeltalkMagazinAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F634304910362AA4004ACF93 /* ApfeltalkMagazinAppDelegate.m */; };
 		F634305410362AA4004ACF93 /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F634304A10362AA4004ACF93 /* DetailView.xib */; };
 		F634305510362AA4004ACF93 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F634304C10362AA4004ACF93 /* DetailViewController.m */; };
 		F634305810362AA4004ACF93 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F634305110362AA4004ACF93 /* RootViewController.m */; };
 		F634306510362AC6004ACF93 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F634306010362AC6004ACF93 /* Default.png */; };
 		F634306610362AC6004ACF93 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F634306110362AC6004ACF93 /* icon.png */; };
 		F634306810362AC6004ACF93 /* leiste.png in Resources */ = {isa = PBXBuildFile; fileRef = F634306310362AC6004ACF93 /* leiste.png */; };
-		F634306910362AC6004ACF93 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F634306410362AC6004ACF93 /* RootViewController.xib */; };
 		F634308510362E27004ACF93 /* GalleryController.m in Sources */ = {isa = PBXBuildFile; fileRef = F634308410362E27004ACF93 /* GalleryController.m */; };
 		F6B4FC73103697960080D615 /* DetailGallery.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B4FC72103697960080D615 /* DetailGallery.m */; };
 		F6DACAC7103EA57700003B92 /* PodcastController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6DACAC6103EA57700003B92 /* PodcastController.m */; };
@@ -43,9 +39,6 @@
 		1D3623250D0F684500981E51 /* Apfeltalk_MagazinAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Apfeltalk_MagazinAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* Apfeltalk Magazin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Apfeltalk Magazin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		28216C950DB411BC00E5133A /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		28216C960DB411BC00E5133A /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		282CCBFD0DB6C98000C4EA27 /* SecondView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondView.xib; sourceTree = "<group>"; };
 		288765070DF74369002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AB4B0D9B1048005BE974 /* Apfeltalk_Magazin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Apfeltalk_Magazin_Prefix.pch; sourceTree = "<group>"; };
 		28AD73870D9D96C1002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -53,10 +46,8 @@
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB9E946D104490B700768B8B /* gelesen.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = gelesen.db; sourceTree = "<group>"; };
 		CB9E94831044929D00768B8B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		F6222F001041D90D00FC030D /* rss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rss.png; path = Classes/rss.png; sourceTree = "<group>"; };
+		F6222F001041D90D00FC030D /* rss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rss.png; sourceTree = "<group>"; };
 		F622303F1043488D00FC030D /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		F634304810362AA4004ACF93 /* ApfeltalkMagazinAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApfeltalkMagazinAppDelegate.h; path = ../ApfeltalkMagazinAppDelegate.h; sourceTree = "<group>"; };
-		F634304910362AA4004ACF93 /* ApfeltalkMagazinAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ApfeltalkMagazinAppDelegate.m; path = ../ApfeltalkMagazinAppDelegate.m; sourceTree = "<group>"; };
 		F634304A10362AA4004ACF93 /* DetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailView.xib; sourceTree = "<group>"; };
 		F634304B10362AA4004ACF93 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		F634304C10362AA4004ACF93 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
@@ -65,7 +56,6 @@
 		F634306010362AC6004ACF93 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		F634306110362AC6004ACF93 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		F634306310362AC6004ACF93 /* leiste.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leiste.png; sourceTree = "<group>"; };
-		F634306410362AC6004ACF93 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		F634308310362E27004ACF93 /* GalleryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryController.h; sourceTree = "<group>"; };
 		F634308410362E27004ACF93 /* GalleryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryController.m; sourceTree = "<group>"; };
 		F6B4FC71103697960080D615 /* DetailGallery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailGallery.h; sourceTree = "<group>"; };
@@ -74,10 +64,10 @@
 		F6DACAC6103EA57700003B92 /* PodcastController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastController.m; sourceTree = "<group>"; };
 		F6DACACD103EA73F00003B92 /* DetailPodcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailPodcast.h; sourceTree = "<group>"; };
 		F6DACACE103EA73F00003B92 /* DetailPodcast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailPodcast.m; sourceTree = "<group>"; };
-		F6DC30BF1039781600A734AF /* gallery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gallery.png; path = Classes/gallery.png; sourceTree = "<group>"; };
-		F6DC30C01039781600A734AF /* magazin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = magazin.png; path = Classes/magazin.png; sourceTree = "<group>"; };
-		F6E1BB05103DE9340099D241 /* thread_dot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = thread_dot.gif; path = Classes/thread_dot.gif; sourceTree = "<group>"; };
-		F6E1BB06103DE9340099D241 /* thread_dot_hot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = thread_dot_hot.gif; path = Classes/thread_dot_hot.gif; sourceTree = "<group>"; };
+		F6DC30BF1039781600A734AF /* gallery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gallery.png; sourceTree = "<group>"; };
+		F6DC30C01039781600A734AF /* magazin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magazin.png; sourceTree = "<group>"; };
+		F6E1BB05103DE9340099D241 /* thread_dot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = thread_dot.gif; sourceTree = "<group>"; };
+		F6E1BB06103DE9340099D241 /* thread_dot_hot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = thread_dot_hot.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +93,6 @@
 				F6DACACE103EA73F00003B92 /* DetailPodcast.m */,
 				F634308310362E27004ACF93 /* GalleryController.h */,
 				F634308410362E27004ACF93 /* GalleryController.m */,
-				F634304810362AA4004ACF93 /* ApfeltalkMagazinAppDelegate.h */,
-				F634304910362AA4004ACF93 /* ApfeltalkMagazinAppDelegate.m */,
 				F634304B10362AA4004ACF93 /* DetailViewController.h */,
 				F634304C10362AA4004ACF93 /* DetailViewController.m */,
 				F6B4FC71103697960080D615 /* DetailGallery.h */,
@@ -113,8 +101,6 @@
 				F6DACAC6103EA57700003B92 /* PodcastController.m */,
 				F634305010362AA4004ACF93 /* RootViewController.h */,
 				F634305110362AA4004ACF93 /* RootViewController.m */,
-				28216C950DB411BC00E5133A /* FirstViewController.h */,
-				28216C960DB411BC00E5133A /* FirstViewController.m */,
 				1D3623240D0F684500981E51 /* Apfeltalk_MagazinAppDelegate.h */,
 				1D3623250D0F684500981E51 /* Apfeltalk_MagazinAppDelegate.m */,
 			);
@@ -164,8 +150,6 @@
 				F6DC30BF1039781600A734AF /* gallery.png */,
 				F6DC30C01039781600A734AF /* magazin.png */,
 				F634306310362AC6004ACF93 /* leiste.png */,
-				F634306410362AC6004ACF93 /* RootViewController.xib */,
-				282CCBFD0DB6C98000C4EA27 /* SecondView.xib */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 			);
@@ -226,12 +210,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */,
-				282CCBFE0DB6C98000C4EA27 /* SecondView.xib in Resources */,
 				F634305410362AA4004ACF93 /* DetailView.xib in Resources */,
 				F634306510362AC6004ACF93 /* Default.png in Resources */,
 				F634306610362AC6004ACF93 /* icon.png in Resources */,
 				F634306810362AC6004ACF93 /* leiste.png in Resources */,
-				F634306910362AC6004ACF93 /* RootViewController.xib in Resources */,
 				F6DC30C11039781600A734AF /* gallery.png in Resources */,
 				F6DC30C21039781600A734AF /* magazin.png in Resources */,
 				F6E1BB07103DE9340099D241 /* thread_dot.gif in Resources */,
@@ -250,8 +232,6 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* Apfeltalk_MagazinAppDelegate.m in Sources */,
-				28216C970DB411BC00E5133A /* FirstViewController.m in Sources */,
-				F634305310362AA4004ACF93 /* ApfeltalkMagazinAppDelegate.m in Sources */,
 				F634305510362AA4004ACF93 /* DetailViewController.m in Sources */,
 				F634305810362AA4004ACF93 /* RootViewController.m in Sources */,
 				F634308510362E27004ACF93 /* GalleryController.m in Sources */,

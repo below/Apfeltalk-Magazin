@@ -8,7 +8,6 @@
 
 
 #import "GalleryController.h"
-#import "ApfeltalkMagazinAppDelegate.h"
 #import "DetailGallery.h"
 
 
