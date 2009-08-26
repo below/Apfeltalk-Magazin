@@ -18,8 +18,20 @@
 - (NSString *) readDocumentsFilename; 
 @end
 
-@implementation RootViewController
+static NSDate *oldestStoryDate = nil;
 
+@implementation RootViewController
+#pragma mark Class Methods
++ (NSDate *) oldestStoryDate {
+	return oldestStoryDate;
+}	
+
++ (void) setOldestStoryDate:(NSDate *)date {
+	[oldestStoryDate release];
+	oldestStoryDate = [date copy];
+}
+
+#pragma mark Instance Methods
 //- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle {
 //	if (( self = [super initWithNibName:nibName bundle:nibBundle] )) {
 //		oldestStoryDate = [[NSDate distantPast] retain];
@@ -177,8 +189,9 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 		}
 		error = sqlite3_finalize(insert_statement);	
 	
+#warning This really needs to go into app shutdown. It is too dangerous to do this while the app is alive
 		sqlite3_stmt *delete_statement;
-		NSString *deleteSql = [NSString stringWithFormat:@"delete from read where date<%f", [oldestStoryDate timeIntervalSinceReferenceDate]];
+		NSString *deleteSql = [NSString stringWithFormat:@"delete from read where date<%f", [[[self class] oldestStoryDate] timeIntervalSinceReferenceDate]];
 		error = sqlite3_prepare_v2(database, [deleteSql UTF8String], -1, &delete_statement, NULL); 
 		if (error != SQLITE_OK)
 			NSLog (@"An error occurred: %s", sqlite3_errmsg(database));
@@ -306,9 +319,8 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 		{
 			// Question here is: Should we store the string, or an NSDate object?
 			NSDate *date = [[self dateFormatter]  dateFromString:currentText];
-			if (oldestStoryDate == nil || [date compare:oldestStoryDate] == NSOrderedAscending) {
-				[oldestStoryDate release];
-				oldestStoryDate = [date copy];
+			if ([[self class] oldestStoryDate] == nil || [date compare:[[self class] oldestStoryDate]] == NSOrderedAscending) {
+				[[self class] setOldestStoryDate:date];
 			}
 			[item setObject:currentText forKey:@"date"];
 		}
@@ -359,7 +371,6 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	[item release];
 	[currentText release];
 	[dateFormatter release];
-	[oldestStoryDate release];
 	
 	[super dealloc];
 }

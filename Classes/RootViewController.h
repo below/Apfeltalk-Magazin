@@ -21,7 +21,6 @@
 	
 	NSMutableArray * stories;
 		
-	NSDate *oldestStoryDate;
 	// a temporary item; added to the "stories" array one at a time, and cleared for the next one
 	@protected
 	NSMutableDictionary * item;
@@ -39,4 +38,7 @@
 - (void)parseXMLFileAtURL:(NSString *)URL;
 - (IBAction)openSafari:(id)sender;
 - (IBAction)about:(id)sender;
+
++ (NSDate *) oldestStoryDate;
++ (void) setOldestStoryDate:(NSDate *)date;
 @end
