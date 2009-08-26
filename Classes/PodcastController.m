@@ -14,41 +14,19 @@
 
 @implementation PodcastController
 
- - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	 // Navigation logic
-	 	 
-	 NSString *selectedCountry = [[stories objectAtIndex: indexPath.row] objectForKey: @"title"];
-	 NSString *selectedSumary = [[stories objectAtIndex: indexPath.row] objectForKey: @"summary"];
-	 NSString *selecteddate = [[stories objectAtIndex: indexPath.row] objectForKey: @"date"];
-	 	 
-	 // open in Safari
-	 DetailPodcast *dvController = [[DetailPodcast alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle]];
-	 dvController.selectedCountry = selectedCountry;
-	 dvController.selecteddate = selecteddate;
-	 dvController.selectedSumary = selectedSumary;
-	 
-	 // Really, only the follwing is different:
-	 
-	 NSString *linkString = [[stories objectAtIndex: indexPath.row] objectForKey: @"link"];
-	 dvController.selectedLink = linkString;
-	 
-	 //This is common again
-	 NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	 NSString *documentsDirectory = [paths objectAtIndex:0];
-	 NSString *text = [documentsDirectory stringByAppendingPathComponent:@"gelesen.txt"];
-	 
-	 NSString *mynewString = [[[NSString alloc] initWithContentsOfFile: text encoding:NSUnicodeStringEncoding error: NULL] autorelease];
-	 
-	 mynewString = [NSString stringWithFormat:@"%@ -- %@ " , mynewString,selecteddate];
-	 
-	 NSString *myFilename = [documentsDirectory stringByAppendingPathComponent:@"gelesen.txt"];
-	 NSError *error = nil;
-	 [mynewString writeToFile:myFilename atomically:YES encoding:NSUnicodeStringEncoding error:&error];	
+- (UIViewController *) detailViewControllerForItem:(NSDictionary *)story {
+	NSString *selectedCountry = [story valueForKey: @"title"];
+	NSString *selectedSumary = [story valueForKey: @"summary"];
+	NSString *selecteddate = [story valueForKey: @"date"];
+	NSString *link = [story valueForKey:@"link"];
 	
-	 [self.navigationController pushViewController:dvController animated:YES];
-	 [dvController release];
-	 dvController = nil;
-	 
+	DetailPodcast *dvController = [[DetailPodcast alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle]];
+	dvController.selectedCountry = selectedCountry;
+	dvController.selecteddate = selecteddate;
+	dvController.selectedSumary = selectedSumary;	 
+	dvController.selectedLink = link;
+	
+	return [dvController autorelease];
 }
 
 - (NSString *) documentPath {

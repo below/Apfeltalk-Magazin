@@ -156,27 +156,29 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	return dateFormatter;
 }
 
+- (UIViewController *) detailViewControllerForItem:(NSDictionary *)story {
+	NSString *selectedCountry = [story valueForKey: @"title"];
+	NSString *selectedSumary = [story valueForKey: @"summary"];
+	NSString *selecteddate = [story valueForKey: @"date"];
+	
+	DetailViewController *dvController = [[DetailViewController alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle]];
+	dvController.selectedCountry = selectedCountry;
+	dvController.selecteddate = selecteddate;
+	dvController.selectedSumary = selectedSumary;	 
+	
+	return [dvController autorelease];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	 // Navigation logic
 	 	 
-	 NSString *selectedCountry = [[stories objectAtIndex: indexPath.row] objectForKey: @"title"];
-	 NSString *selectedSumary = [[stories objectAtIndex: indexPath.row] objectForKey: @"summary"];
-	 NSString *selecteddate = [[stories objectAtIndex: indexPath.row] objectForKey: @"date"];
-	 	 
-	 // The above appears to be common 
-	 
-	 // open in Safari
-	 DetailViewController *dvController = [[DetailViewController alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle]];
-	 dvController.selectedCountry = selectedCountry;
-	 dvController.selecteddate = selecteddate;
-	 dvController.selectedSumary = selectedSumary;	 
+	UIViewController *detailController = [self detailViewControllerForItem:[stories objectAtIndex: indexPath.row]];	 
 	 
 	 NSString * link = [[stories objectAtIndex: indexPath.row] objectForKey: @"link"];
-	if (![self databaseContainsURL:link]) {
-		
-	//	Tue, 25 Aug 2009 11:18:34 GMT
 
-		NSDate *date = [[self dateFormatter] dateFromString:selecteddate];
+	if ([link length] > 0 && ![self databaseContainsURL:link]) {
+		NSString *dateString = [[stories objectAtIndex: indexPath.row] objectForKey: @"date"];
+		NSDate *date = [[self dateFormatter] dateFromString:dateString];
 
 		const char *sql = "insert into read(url, date) values(?,?)"; 
 		sqlite3_stmt *insert_statement;
@@ -189,7 +191,9 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 		}
 		error = sqlite3_finalize(insert_statement);	
 	
-#warning This really needs to go into app shutdown. It is too dangerous to do this while the app is alive
+/*
+ *	More thinking needs to go into the deletion of reads
+ *
 		sqlite3_stmt *delete_statement;
 		NSString *deleteSql = [NSString stringWithFormat:@"delete from read where date<%f", [[[self class] oldestStoryDate] timeIntervalSinceReferenceDate]];
 		error = sqlite3_prepare_v2(database, [deleteSql UTF8String], -1, &delete_statement, NULL); 
@@ -202,13 +206,11 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 		error = sqlite3_finalize(delete_statement);	
 		if (error != SQLITE_OK)
 			NSLog (@"An error occurred: %s", sqlite3_errmsg(database));
-		
+ */	
 		[newsTable reloadData];
 	}
 
-	 [self.navigationController pushViewController:dvController animated:YES];
-	 [dvController release];
-	 dvController = nil;
+	 [self.navigationController pushViewController:detailController animated:YES];
 }
 
 - (BOOL) openDatabase {

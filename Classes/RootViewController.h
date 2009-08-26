@@ -41,4 +41,7 @@
 
 + (NSDate *) oldestStoryDate;
 + (void) setOldestStoryDate:(NSDate *)date;
+
+- (UIViewController *) detailViewControllerForItem:(NSDictionary *)story;
+
 @end
