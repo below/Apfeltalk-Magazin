@@ -21,7 +21,9 @@
 	
 	NSMutableArray * stories;
 		
+	NSDate *oldestStoryDate;
 	// a temporary item; added to the "stories" array one at a time, and cleared for the next one
+	@protected
 	NSMutableDictionary * item;
 	
 	// it parses through the document, from top to bottom...
@@ -30,8 +32,8 @@
 	NSString * currentElement;
 
 	NSMutableString * currentText;
-	
 	sqlite3 * database;
+	NSDateFormatter *dateFormatter;
 }
 
 - (void)parseXMLFileAtURL:(NSString *)URL;

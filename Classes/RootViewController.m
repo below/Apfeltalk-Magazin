@@ -14,10 +14,19 @@
 @interface RootViewController (private)
 - (BOOL) openDatabase;
 - (BOOL) databaseContainsURL:(NSString *)link;
+- (NSDateFormatter *) dateFormatter;
+- (NSString *) readDocumentsFilename; 
 @end
 
 @implementation RootViewController
 
+//- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle {
+//	if (( self = [super initWithNibName:nibName bundle:nibBundle] )) {
+//		oldestStoryDate = [[NSDate distantPast] retain];
+//	}
+//	return self;
+//}
+//
 //- (void)viewDidLoad {
 	// Add the following line if you want the list to be editable
 	// self.navigationItem.leftBarButtonItem = self.editButtonItem;
@@ -57,6 +66,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	return 1;
 }
 
+#pragma mark Table View Delegate Methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	return [stories count];
@@ -97,16 +107,24 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
  */
 - (BOOL) databaseContainsURL:(NSString *)link {
 	BOOL found = NO;
+	
 	const char *sql = "select url from read where url=?";
 	sqlite3_stmt *statement;
-	if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) 
-		== SQLITE_OK) {
-		sqlite3_bind_text (statement, 1, [link UTF8String], -1, SQLITE_TRANSIENT);
-		if (sqlite3_step(statement) == SQLITE_ROW) {
+	int error;
+	
+	error = sqlite3_prepare_v2(database, sql, -1, &statement, NULL);
+	if (error == SQLITE_OK) {
+		error = sqlite3_bind_text (statement, 1, [link UTF8String], -1, SQLITE_TRANSIENT);
+		if (error == SQLITE_OK && sqlite3_step(statement) == SQLITE_ROW) {
 			found = YES;
 		}
 	}
-	sqlite3_finalize(statement);	
+	if (error != SQLITE_OK)
+		NSLog (@"An error occurred: %s", sqlite3_errmsg(database));
+	error = sqlite3_finalize(statement);	
+	if (error != SQLITE_OK)
+		NSLog (@"An error occurred: %s", sqlite3_errmsg(database));
+
 	return found;
 }
 
@@ -116,6 +134,14 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	assert ([paths count]);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	return [documentsDirectory stringByAppendingPathComponent:@"gelesen.db"];
+}
+
+- (NSDateFormatter *) dateFormatter {
+	if (dateFormatter == nil) {
+		dateFormatter = [[NSDateFormatter alloc] init];
+		[dateFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
+	}
+	return dateFormatter;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -138,30 +164,32 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 		
 	//	Tue, 25 Aug 2009 11:18:34 GMT
 
-		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-		[dateFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
-		NSDate *date = [dateFormatter dateFromString:selecteddate];
-		
+		NSDate *date = [[self dateFormatter] dateFromString:selecteddate];
 
 		const char *sql = "insert into read(url, date) values(?,?)"; 
 		sqlite3_stmt *insert_statement;
-		sqlite3_prepare_v2(database, sql, -1, &insert_statement, NULL); 
-		
-		sqlite3_bind_text(insert_statement, 1, [link UTF8String], -1, SQLITE_TRANSIENT); 
-		sqlite3_bind_double(insert_statement, 2, [date timeIntervalSinceReferenceDate]);
-		sqlite3_step(insert_statement); 
-		sqlite3_finalize(insert_statement);	
-		
+		int error;
+		error = sqlite3_prepare_v2(database, sql, -1, &insert_statement, NULL); 
+		if (error == SQLITE_OK) {
+			sqlite3_bind_text(insert_statement, 1, [link UTF8String], -1, SQLITE_TRANSIENT); 
+			sqlite3_bind_double(insert_statement, 2, [date timeIntervalSinceReferenceDate]);
+			(sqlite3_step(insert_statement) != SQLITE_DONE);
+		}
+		error = sqlite3_finalize(insert_statement);	
+	
 		sqlite3_stmt *delete_statement;
-		NSDate *oldestDate = [NSDate distantPast]; // Currently, we don't delete anything
-		NSString *deleteSql = [NSString stringWithFormat:@"delete from read where date<%f", [oldestDate timeIntervalSinceReferenceDate]];
-		sqlite3_prepare_v2(database, [deleteSql UTF8String], -1, &delete_statement, NULL); 
-		
-		sqlite3_step(delete_statement); 
-		sqlite3_finalize(delete_statement);	
-		
-		[dateFormatter release];
+		NSString *deleteSql = [NSString stringWithFormat:@"delete from read where date<%f", [oldestStoryDate timeIntervalSinceReferenceDate]];
+		error = sqlite3_prepare_v2(database, [deleteSql UTF8String], -1, &delete_statement, NULL); 
+		if (error != SQLITE_OK)
+			NSLog (@"An error occurred: %s", sqlite3_errmsg(database));
 
+		error = sqlite3_step(delete_statement); 
+		error = error != SQLITE_DONE;
+	
+		error = sqlite3_finalize(delete_statement);	
+		if (error != SQLITE_OK)
+			NSLog (@"An error occurred: %s", sqlite3_errmsg(database));
+		
 		[newsTable reloadData];
 	}
 
@@ -191,7 +219,8 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	[super viewWillAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
 	int error = sqlite3_close(database);
 	assert (error == 0);
 }
@@ -223,9 +252,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     NSURL *xmlURL = [NSURL URLWithString:URL];
 		
     rssParser = [[NSXMLParser alloc] initWithContentsOfURL:xmlURL];
-	
-	NSLog ([NSString stringWithContentsOfURL:xmlURL]);
-	
+		
     // Set self as the delegate of the parser so that it will receive the parser delegate methods callbacks.
     [rssParser setDelegate:self];
 	
@@ -276,7 +303,15 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 		if ([elementName isEqualToString:[self summaryElementName]] )
 			[item setObject:currentText forKey:@"summary"];
 		else if ([elementName isEqualToString:[self dateElementname]])
+		{
+			// Question here is: Should we store the string, or an NSDate object?
+			NSDate *date = [[self dateFormatter]  dateFromString:currentText];
+			if (oldestStoryDate == nil || [date compare:oldestStoryDate] == NSOrderedAscending) {
+				[oldestStoryDate release];
+				oldestStoryDate = [date copy];
+			}
 			[item setObject:currentText forKey:@"date"];
+		}
 		else
 			[item setObject:currentText forKey:elementName];
 		
@@ -323,6 +358,8 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	[stories release];
 	[item release];
 	[currentText release];
+	[dateFormatter release];
+	[oldestStoryDate release];
 	
 	[super dealloc];
 }
