@@ -6,25 +6,11 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 #import <UIKit/UIKit.h>
+#import "DetailViewController.h"
 
-@interface DetailPodcast : UIViewController <UIWebViewDelegate> {
-	IBOutlet UILabel *datum;
-	IBOutlet UILabel *lblText;
-	IBOutlet UIImageView *thumbnail;
-	IBOutlet UIScrollView *scrollView2;
-	IBOutlet UITextView *sunText;
-	NSString *selectedCountry;
-	NSString *selectedSumary;
-	NSString *selecteddate;
+@interface DetailPodcast : DetailViewController <UIWebViewDelegate> {
 	NSString *selectedLink;
-	NSString *nui;
-	IBOutlet UINavigationBar *Textvar;
-	IBOutlet UIWebView *webview;
-	IBOutlet UILabel *titel;
 }
-@property (nonatomic, retain) NSString *selectedCountry;
-@property (nonatomic, retain) NSString *selectedSumary;
-@property (nonatomic, retain) NSString *selecteddate;
 @property (nonatomic, retain) NSString *selectedLink;
 
 @end

@@ -12,66 +12,7 @@
 
 @implementation DetailPodcast
 
-@synthesize selectedCountry;
-@synthesize selectedSumary;
-@synthesize selecteddate;
 @synthesize selectedLink;
-
-
-
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
-- (NSString *)strip_tags:(NSString *)data :(NSArray *)valid_tags
-{
-        //use to strip the HTML tags from the data
-        NSScanner *scanner;
-        NSString *text = nil;
-        NSString *tag = nil;
-	
-        //set up the scanner
-        scanner = [NSScanner scannerWithString:data];
-	
-        while([scanner isAtEnd] == NO) {
-		        //find start of tag
-		        [scanner scanUpToString:@"<" intoString:NULL];
-		
-		        //find end of tag
-		        [scanner scanUpToString:@">" intoString:&text];
-		
-		        //get the name of the tag
-		        if([text rangeOfString:@"</"].location != NSNotFound)
-			            tag = [text substringFromIndex:2]; //remove </
-				else {
-			            tag = [text substringFromIndex:1]; //remove <
-			            //find out if there is a space in the tag
-			        if([tag rangeOfString:@" "].location != NSNotFound)
-				            //remove text after a space
-				            tag = [tag substringToIndex:[tag rangeOfString:@" "].location];
-		        }
-		
-		        //if not a valid tag, replace the tag with a space
-		        if([valid_tags containsObject:tag] == NO)
-			            data = [data stringByReplacingOccurrencesOfString:
-								                  [NSString stringWithFormat:@"%@>", text] withString:@""];
-        }
-	
-        //return the cleaned up data
-        return data;
-}
 
 -(void)playMovieAtURL:(NSURL*)theURL 
 
@@ -145,48 +86,9 @@
 }
 
 
--(IBAction)speichern:(id)sender
-{
-	NSString *myString = [NSString stringWithFormat:@"%@", selectedCountry];
-	NSString *myString2 = [NSString stringWithFormat:@"%@", selectedSumary];
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *myFilename = [documentsDirectory stringByAppendingPathComponent:@"Titel.txt"];
-	NSString *myFilename2 = [documentsDirectory stringByAppendingPathComponent:@"Text.txt"];
-	NSError *error = [[NSError alloc] init];
-	[myString writeToFile:myFilename atomically:YES encoding:NSUnicodeStringEncoding error:&error];	
-	[myString2 writeToFile:myFilename2 atomically:YES encoding:NSUnicodeStringEncoding error:&error];	
-	
-	UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"News gespeichert" message:@"Die News wurde erfolgreich gespeichert. Du siehst sie beim nächsten Start der Applikation ohne Internetverbindung." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-	[errorAlert show];
-}
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-
-}
-
 
 - (void)dealloc {
-	[selectedCountry release];
-	[selectedSumary release];
-	[selecteddate release];
-	[lblText release];
+	[selectedLink release];
 	[super dealloc];
 }
 

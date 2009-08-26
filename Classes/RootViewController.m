@@ -300,11 +300,12 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{			
     //NSLog(@"found this element: %@", elementName);
 	currentElement = [elementName copy];
-
+	
 	if ([elementName isEqualToString:@"item"])
 		item = [[NSMutableDictionary alloc] init];
 	else if ([elementName isEqualToString:@"title"] || [elementName isEqualToString:@"link"]
-		|| [elementName isEqualToString:[self summaryElementName]] || [elementName isEqualToString:[self dateElementname]])
+			 || [elementName isEqualToString:[self summaryElementName]] || [elementName isEqualToString:[self dateElementname]]
+			 || [elementName isEqualToString:@"dc:creator"])
 		currentText = [NSMutableString new];
 }
 

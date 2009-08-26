@@ -24,7 +24,7 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	// All of this is redundant. The code needs to be changed
+	// We leave it like this for the moment, because the gallery has no read indicators
 	int storyIndex = [indexPath indexAtPosition: [indexPath length] - 1];
 	
 	// No special customization
@@ -36,6 +36,7 @@
 
 
  - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	 // Right now, let's leave it at that because the gallery has no read-indicators
 	 // Navigation logic
 	 	 
 	 NSString *selectedCountry = [[stories objectAtIndex: indexPath.row] objectForKey: @"title"];
