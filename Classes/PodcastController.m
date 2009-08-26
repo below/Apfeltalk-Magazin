@@ -28,8 +28,9 @@
 	 dvController.selectedSumary = selectedSumary;
 	 
 	 // Really, only the follwing is different:
-	 NSURL *linkURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.itouchloads.de/furserver/%i.txt" , indexPath.row]];
-	 dvController.selectedLink = [[[NSString alloc] initWithContentsOfURL:linkURL] autorelease];
+	 
+	 NSString *linkString = [[stories objectAtIndex: indexPath.row] objectForKey: @"link"];
+	 dvController.selectedLink = linkString;
 	 
 	 //This is common again
 	 NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
