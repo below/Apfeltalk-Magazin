@@ -16,7 +16,6 @@
 	NSString *selectedCountry;
 	NSString *selectedSumary;
 	NSString *selecteddate;
-	NSString *nui;
 	IBOutlet UINavigationBar *Textvar;
 	IBOutlet UIWebView *webview;
 	IBOutlet UILabel *titel;
@@ -24,5 +23,7 @@
 @property (nonatomic, retain) NSString *selectedCountry;
 @property (nonatomic, retain) NSString *selectedSumary;
 @property (nonatomic, retain) NSString *selecteddate;
+
+- (NSString *)strip_tags:(NSString *)data :(NSArray *)valid_tags;
 
 @end
