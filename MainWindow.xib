@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="106"/>
+			<integer value="157"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -49,18 +49,18 @@
 			<object class="IBUITabBarController" id="1034742383">
 				<object class="IBUISimulatedTabBarMetrics" key="IBUISimulatedBottomBarMetrics"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
-				<object class="IBUINavigationController" key="IBUISelectedViewController" id="339608518">
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="639888864">
-						<string key="IBUITitle">News</string>
+				<object class="IBUINavigationController" key="IBUISelectedViewController" id="112103980">
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="1028248403">
+						<string key="IBUITitle">Podcast</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">magazin.png</string>
+							<string key="NSResourceName">rss.png</string>
 						</object>
 						<reference key="IBUITabBar"/>
 					</object>
 					<reference key="IBUIParentViewController" ref="1034742383"/>
 					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
-					<object class="IBUINavigationBar" key="IBUINavigationBar" id="424012101">
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="19749428">
 						<nil key="NSNextResponder"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{0, 0}</string>
@@ -69,13 +69,13 @@
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<object class="NSColor" key="IBUITintColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC42NzM0Njk0MiAwLjAzODA4MDk0MiAwLjA1MjY5ODY1NwA</bytes>
+							<bytes key="NSRGB">MC42NzQ1MDk4MiAwLjAzOTIxNTY4OCAwLjA1MDk4MDM5MwA</bytes>
 						</object>
 					</object>
 					<object class="NSMutableArray" key="IBUIViewControllers">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="IBUIViewController" id="251304095">
-							<object class="IBUITableView" key="IBUIView" id="901649474">
+						<object class="IBUIViewController" id="442635437">
+							<object class="IBUITableView" key="IBUIView" id="814183920">
 								<reference key="NSNextResponder"/>
 								<int key="NSvFlags">274</int>
 								<string key="NSFrameSize">{320, 367}</string>
@@ -88,29 +88,85 @@
 								<int key="IBUISeparatorStyle">1</int>
 								<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
 								<bool key="IBUIShowsSelectionImmediatelyOnTouchBegin">YES</bool>
-								<float key="IBUIRowHeight">4.000000e+01</float>
+								<float key="IBUIRowHeight">4.400000e+01</float>
 								<float key="IBUISectionHeaderHeight">1.000000e+01</float>
 								<float key="IBUISectionFooterHeight">1.000000e+01</float>
 							</object>
-							<object class="IBUINavigationItem" key="IBUINavigationItem" id="641780202">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="859135274">
 								<reference key="IBUINavigationBar"/>
-								<string key="IBUITitle">Apfeltalk Magazin</string>
-								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="881086681">
+								<string key="IBUITitle">Apfelshow</string>
+								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="287417718">
 									<string key="IBUITitle">Safari</string>
 									<int key="IBUIStyle">1</int>
 								</object>
-								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="920440853">
+								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="407705883">
 									<string key="IBUITitle">Credits</string>
 									<int key="IBUIStyle">1</int>
 								</object>
 							</object>
-							<reference key="IBUIParentViewController" ref="339608518"/>
+							<reference key="IBUIParentViewController" ref="112103980"/>
 						</object>
 					</object>
 				</object>
 				<object class="NSMutableArray" key="IBUIViewControllers">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<reference ref="339608518"/>
+					<object class="IBUINavigationController" id="339608518">
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="639888864">
+							<string key="IBUITitle">News</string>
+							<object class="NSCustomResource" key="IBUIImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">magazin.png</string>
+							</object>
+							<reference key="IBUITabBar"/>
+						</object>
+						<reference key="IBUIParentViewController" ref="1034742383"/>
+						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+						<object class="IBUINavigationBar" key="IBUINavigationBar" id="424012101">
+							<nil key="NSNextResponder"/>
+							<int key="NSvFlags">256</int>
+							<string key="NSFrameSize">{0, 0}</string>
+							<bool key="IBUIOpaque">NO</bool>
+							<bool key="IBUIClipsSubviews">YES</bool>
+							<bool key="IBUIMultipleTouchEnabled">YES</bool>
+							<object class="NSColor" key="IBUITintColor">
+								<int key="NSColorSpace">1</int>
+								<bytes key="NSRGB">MC42NzM0Njk0MiAwLjAzODA4MDk0MiAwLjA1MjY5ODY1NwA</bytes>
+							</object>
+						</object>
+						<object class="NSMutableArray" key="IBUIViewControllers">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBUIViewController" id="251304095">
+								<object class="IBUITableView" key="IBUIView" id="901649474">
+									<nil key="NSNextResponder"/>
+									<int key="NSvFlags">274</int>
+									<string key="NSFrameSize">{320, 367}</string>
+									<bool key="IBUIOpaque">NO</bool>
+									<bool key="IBUIClipsSubviews">YES</bool>
+									<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+									<bool key="IBUIBouncesZoom">NO</bool>
+									<int key="IBUIStyle">1</int>
+									<int key="IBUISeparatorStyle">1</int>
+									<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
+									<bool key="IBUIShowsSelectionImmediatelyOnTouchBegin">YES</bool>
+									<float key="IBUIRowHeight">4.000000e+01</float>
+									<float key="IBUISectionHeaderHeight">1.000000e+01</float>
+									<float key="IBUISectionFooterHeight">1.000000e+01</float>
+								</object>
+								<object class="IBUINavigationItem" key="IBUINavigationItem" id="641780202">
+									<string key="IBUITitle">Apfeltalk Magazin</string>
+									<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="881086681">
+										<string key="IBUITitle">Safari</string>
+										<int key="IBUIStyle">1</int>
+									</object>
+									<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="920440853">
+										<string key="IBUITitle">Credits</string>
+										<int key="IBUIStyle">1</int>
+									</object>
+								</object>
+								<reference key="IBUIParentViewController" ref="339608518"/>
+							</object>
+						</object>
+					</object>
 					<object class="IBUINavigationController" id="495321501">
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="1068159736">
 							<string key="IBUITitle">Gallery</string>
@@ -168,66 +224,7 @@
 							</object>
 						</object>
 					</object>
-					<object class="IBUINavigationController" id="112103980">
-						<object class="IBUITabBarItem" key="IBUITabBarItem" id="1028248403">
-							<string key="IBUITitle">Podcast</string>
-							<object class="NSCustomResource" key="IBUIImage">
-								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">rss.png</string>
-							</object>
-							<reference key="IBUITabBar"/>
-						</object>
-						<reference key="IBUIParentViewController" ref="1034742383"/>
-						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
-						<object class="IBUINavigationBar" key="IBUINavigationBar" id="19749428">
-							<nil key="NSNextResponder"/>
-							<int key="NSvFlags">256</int>
-							<string key="NSFrameSize">{0, 0}</string>
-							<bool key="IBUIOpaque">NO</bool>
-							<bool key="IBUIClipsSubviews">YES</bool>
-							<bool key="IBUIMultipleTouchEnabled">YES</bool>
-							<object class="NSColor" key="IBUITintColor">
-								<int key="NSColorSpace">1</int>
-								<bytes key="NSRGB">MC42NzQ1MDk4MiAwLjAzOTIxNTY4OCAwLjA1MDk4MDM5MwA</bytes>
-							</object>
-						</object>
-						<object class="NSMutableArray" key="IBUIViewControllers">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIViewController" id="442635437">
-								<object class="IBUITableView" key="IBUIView" id="814183920">
-									<nil key="NSNextResponder"/>
-									<int key="NSvFlags">274</int>
-									<string key="NSFrameSize">{320, 367}</string>
-									<object class="NSColor" key="IBUIBackgroundColor">
-										<int key="NSColorSpace">3</int>
-										<bytes key="NSWhite">MQA</bytes>
-									</object>
-									<bool key="IBUIOpaque">NO</bool>
-									<bool key="IBUIClipsSubviews">YES</bool>
-									<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-									<bool key="IBUIBouncesZoom">NO</bool>
-									<int key="IBUISeparatorStyle">1</int>
-									<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
-									<bool key="IBUIShowsSelectionImmediatelyOnTouchBegin">YES</bool>
-									<float key="IBUIRowHeight">4.400000e+01</float>
-									<float key="IBUISectionHeaderHeight">2.200000e+01</float>
-									<float key="IBUISectionFooterHeight">2.200000e+01</float>
-								</object>
-								<object class="IBUINavigationItem" key="IBUINavigationItem" id="859135274">
-									<string key="IBUITitle">Apfelshow</string>
-									<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="287417718">
-										<string key="IBUITitle">Safari</string>
-										<int key="IBUIStyle">1</int>
-									</object>
-									<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="407705883">
-										<string key="IBUITitle">Credits</string>
-										<int key="IBUIStyle">1</int>
-									</object>
-								</object>
-								<reference key="IBUIParentViewController" ref="112103980"/>
-							</object>
-						</object>
-					</object>
+					<reference ref="112103980"/>
 				</object>
 				<object class="IBUITabBar" key="IBUITabBar" id="795333663">
 					<nil key="NSNextResponder"/>
@@ -822,6 +819,5 @@
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.LastKnownRelativeProjectPath">Apfeltalk Magazin.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">3.0</string>
 	</data>
 </archive>
