@@ -15,14 +15,14 @@
 	IBOutlet UITextView *sunText;
 	NSString *selectedCountry;
 	NSString *selectedSumary;
-	NSString *selecteddate;
+	NSDate *date;
 	IBOutlet UINavigationBar *Textvar;
 	IBOutlet UIWebView *webview;
 	IBOutlet UILabel *titel;
 }
 @property (nonatomic, retain) NSString *selectedCountry;
 @property (nonatomic, retain) NSString *selectedSumary;
-@property (nonatomic, retain) NSString *selecteddate;
+@property (nonatomic, copy) NSDate *date;
 
 - (NSString *)strip_tags:(NSString *)data :(NSArray *)valid_tags;
 

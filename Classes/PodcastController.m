@@ -21,7 +21,7 @@
 	
 	DetailPodcast *dvController = [[DetailPodcast alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle]];
 	dvController.selectedCountry = selectedCountry;
-	dvController.selecteddate = selecteddate;
+	dvController.date = [[self dateFormatter] dateFromString:selecteddate];
 	dvController.selectedSumary = selectedSumary;
 	// This is really the only change. We might change that later
 	dvController.selectedLink = link;

@@ -11,11 +11,7 @@
 
 @implementation DetailViewController
 
-@synthesize selectedCountry;
-@synthesize selectedSumary;
-@synthesize selecteddate;
-
-
+@synthesize selectedCountry, selectedSumary, date;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -80,24 +76,44 @@
     return YES; // URL is not http/https and should open in UIWebView
 }
 
+- (NSString *) htmlString {
+	NSString *nui = [NSString stringWithFormat:@"<center><b>%@</b></center>%@ " , selectedCountry,selectedSumary];
+	
+	NSArray *tags = [NSArray arrayWithObjects: @"a", @"b", @"p", @"br", @"img", @"div",@"li", nil];
+	nui = [self strip_tags:nui :tags];
+	nui = [nui stringByReplacingOccurrencesOfString:@"Miniaturansicht angehängter Grafiken" withString:@""];
+	
+	NSString *name2 = [NSString stringWithFormat:@"<head> <title>Kommentare</title> <style type=\"text/css\"> \
+					   body		{font-family: \"Helvetica\", sans-serif; font-size:13px; margin: 0; padding: 0;\
+					   background: url(http://touch-mania.com/wp-content/plugins/wptouch/themes/default/images/blank.gif) \
+					   repeat scroll 0 0;} div.button 	{border:1px solid #B1B1B1;cursor:pointer;\
+					   font-weight:bold;margin-left:10px;margin-right:10px; background-color: white; \
+					   padding-bottom:10px; padding-left:10px;padding-top:10px;text-shadow:0 1px 0 #FFFFFF; \
+					   margin-top: 10px;} div#frame	{padding: 0; margin: 0;} iframe		{padding: 0; margin: 0; \
+					   border: 0;} </style> <script type=\"text/javascript\" \
+					   src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js\" /> \
+					   <script type=\"text/javascript\"> $(document).ready(function() \
+					   { $(\"div#frame\").hide(); $(\"div#show\").click(function(){ $(\"div#frame\").slideToggle();\
+					   }); }); </script> </div> <meta name=\"viewport\" \
+					   content=\"maximum-scale=1.0 width=device-width initial-scale=1.0 user-scalable=no\" /> \
+					   </head> <body>  </div> </body> ", [[self date] description]];
+	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;\
+			border: 1px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br>",nui, name2];
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	webview.delegate = self;
     [super viewDidLoad];
 	
-	NSString *nui = [NSString stringWithFormat:@"<center><b>%@</b></center>%@ " , selectedCountry,selectedSumary];
-	NSRange myRange = NSMakeRange(0,16);
-	datum.text = [selecteddate substringWithRange:myRange];
+	// Very common
 	titel.text = selectedCountry;
-	NSArray *tags = [NSArray arrayWithObjects: @"a", @"b", @"p", @"br", @"img", @"div",@"li", nil];
-	nui = [self strip_tags:nui :tags];
-	nui = [nui stringByReplacingOccurrencesOfString:@"Miniaturansicht angehängter Grafiken" withString:@""];
-	
-	NSString *name2 = [NSString stringWithFormat:@"<head> <title>Kommentare</title> <style type=\"text/css\"> body		{font-family: \"Helvetica\", sans-serif; font-size:13px; margin: 0; padding: 0; background: url(http://touch-mania.com/wp-content/plugins/wptouch/themes/default/images/blank.gif) repeat scroll 0 0;} div.button 	{border:1px solid #B1B1B1;cursor:pointer;font-weight:bold;margin-left:10px;margin-right:10px; background-color: white; padding-bottom:10px; padding-left:10px;padding-top:10px;text-shadow:0 1px 0 #FFFFFF; margin-top: 10px;} div#frame	{padding: 0; margin: 0;} iframe		{padding: 0; margin: 0; border: 0;} </style> <script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js\" /> <script type=\"text/javascript\"> $(document).ready(function() { $(\"div#frame\").hide(); $(\"div#show\").click(function(){ $(\"div#frame\").slideToggle(); }); }); </script> </div> <meta name=\"viewport\" content=\"maximum-scale=1.0 width=device-width initial-scale=1.0 user-scalable=no\" /> </head> <body>  </div> </body> ", selecteddate];
-	
-	[webview loadHTMLString:[NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;border: 1px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br> %@",nui, name2] baseURL:nil];
-		
+
+	NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+	datum.text = [dateFormatter stringFromDate:[self date]];
+	[dateFormatter release];
+
 	//Set the title of the navigation bar
 	//-150x150
 	
@@ -108,6 +124,10 @@
 										action:@selector(speichern:)];
 	self.navigationItem.rightBarButtonItem = speichernButton;
 	[speichernButton release];
+
+	NSString * htmlString = [self htmlString];
+	[webview loadHTMLString:htmlString baseURL:nil];
+		
 	[webview release];
 }
 
@@ -152,7 +172,7 @@
 - (void)dealloc {
 	[selectedCountry release];
 	[selectedSumary release];
-	[selecteddate release];
+	[date release];
 	[lblText release];
 	[super dealloc];
 }

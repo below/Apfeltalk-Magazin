@@ -13,7 +13,6 @@
 @interface RootViewController (private)
 - (BOOL) openDatabase;
 - (BOOL) databaseContainsURL:(NSString *)link;
-- (NSDateFormatter *) dateFormatter;
 - (NSString *) readDocumentsFilename; 
 @end
 
@@ -162,7 +161,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	
 	DetailViewController *dvController = [[DetailViewController alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle]];
 	dvController.selectedCountry = selectedCountry;
-	dvController.selecteddate = selecteddate;
+	dvController.date = [[self dateFormatter] dateFromString:selecteddate];
 	dvController.selectedSumary = selectedSumary;	 
 	
 	return [dvController autorelease];
@@ -265,7 +264,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     //you must then convert the path to a proper NSURL or it won't work
     NSURL *xmlURL = [NSURL URLWithString:URL];
 		
-    rssParser = [[NSXMLParser alloc] initWithContentsOfURL:xmlURL];
+    NSXMLParser *rssParser = [[NSXMLParser alloc] initWithContentsOfURL:xmlURL];
 		
     // Set self as the delegate of the parser so that it will receive the parser delegate methods callbacks.
     [rssParser setDelegate:self];
@@ -276,6 +275,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     [rssParser setShouldResolveExternalEntities:NO];
 	
     [rssParser parse];
+	[rssParser release];
 	
 }
 
@@ -368,7 +368,6 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 - (void)dealloc {
 	
 	[currentElement release];
-	[rssParser release];
 	[stories release];
 	[item release];
 	[currentText release];

@@ -48,7 +48,7 @@
 	 // open in Safari
 	 DetailGallery *dvController = [[DetailGallery alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle]];
 	 dvController.selectedCountry = selectedCountry;
-	 dvController.selecteddate = selecteddate;
+	 dvController.date = [[self dateFormatter] dateFromString:selecteddate];
 	 dvController.selectedSumary = selectedSumary;
 	 [self.navigationController pushViewController:dvController animated:YES];
 	 [dvController release];

@@ -123,7 +123,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				CB9E94831044929D00768B8B /* libsqlite3.dylib */,
 			);
 			name = "Apfeltalk Magazin";
 			sourceTree = "<group>";
@@ -163,6 +162,7 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765070DF74369002DB57D /* CoreGraphics.framework */,
+				CB9E94831044929D00768B8B /* libsqlite3.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

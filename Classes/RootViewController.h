@@ -16,9 +16,7 @@
 	UIActivityIndicatorView * activityIndicator;
 	
 	CGSize cellSize;
-	
-	NSXMLParser * rssParser;
-	
+		
 	NSMutableArray * stories;
 		
 	// a temporary item; added to the "stories" array one at a time, and cleared for the next one
@@ -43,5 +41,6 @@
 + (void) setOldestStoryDate:(NSDate *)date;
 
 - (UIViewController *) detailViewControllerForItem:(NSDictionary *)story;
+- (NSDateFormatter *) dateFormatter;
 
 @end

@@ -6,23 +6,9 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 #import <UIKit/UIKit.h>
+#import "DetailViewController.h"
 
-@interface DetailGallery : UIViewController <UIWebViewDelegate> {
-	IBOutlet UILabel *datum;
-	IBOutlet UILabel *lblText;
-	IBOutlet UIImageView *thumbnail;
-	IBOutlet UIScrollView *scrollView2;
-	IBOutlet UITextView *sunText;
-	NSString *selectedCountry;
-	NSString *selectedSumary;
-	NSString *selecteddate;
-	NSString *nui;
-	IBOutlet UINavigationBar *Textvar;
-	IBOutlet UIWebView *webview;
-	IBOutlet UILabel *titel;
+@interface DetailGallery : DetailViewController <UIWebViewDelegate> {
 }
-@property (nonatomic, retain) NSString *selectedCountry;
-@property (nonatomic, retain) NSString *selectedSumary;
-@property (nonatomic, retain) NSString *selecteddate;
 
 @end
