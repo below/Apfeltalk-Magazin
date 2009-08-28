@@ -94,7 +94,7 @@
 	nui = [self strip_tags:nui :tags];
 	nui = [nui stringByReplacingOccurrencesOfString:@"Miniaturansicht angehängter Grafiken" withString:@""];
 	
-	NSString *name2 = [NSString stringWithFormat:@"<head> <title>Kommentare</title> <style type=\"text/css\"> body		{font-family: \"Helvetica\", sans-serif; font-size:13px; margin: 0; padding: 0; background: url(http://touch-mania.com/wp-content/plugins/wptouch/themes/default/images/blank.gif) repeat scroll 0 0;} div.button 	{border:1px solid #B1B1B1;cursor:pointer;font-weight:bold;margin-left:10px;margin-right:10px; background-color: white; padding-bottom:10px; padding-left:10px;padding-top:10px;text-shadow:0 1px 0 #FFFFFF; margin-top: 10px;} div#frame	{padding: 0; margin: 0;} iframe		{padding: 0; margin: 0; border: 0;} </style> <script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js\" /> <script type=\"text/javascript\"> $(document).ready(function() { $(\"div#frame\").hide(); $(\"div#show\").click(function(){ $(\"div#frame\").slideToggle(); }); }); </script> </div> <meta name=\"viewport\" content=\"maximum-scale=1.0 width=device-width initial-scale=1.0 user-scalable=no\" /> </head> <body>  </div> </body> ", selecteddate];
+	NSString *name2 = [NSString stringWithFormat:@"<style type=\"text/css\"> body {font-family: \"Helvetica\", sans-serif; font-size:13px; margin: 0; padding: 0; } </style> </div> </body> ", selecteddate];
 	
 	[webview loadHTMLString:[NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;border: 1px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br> %@",nui, name2] baseURL:nil];
 		
