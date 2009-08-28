@@ -149,6 +149,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 - (NSDateFormatter *) dateFormatter {
 	if (dateFormatter == nil) {
 		dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"en"] autorelease]];
 		[dateFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
 	}
 	return dateFormatter;
