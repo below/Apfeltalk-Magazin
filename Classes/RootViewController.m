@@ -8,7 +8,6 @@
 
 
 #import "RootViewController.h"
-#import "DetailViewController.h"
 
 @interface RootViewController (private)
 - (BOOL) openDatabase;
@@ -148,37 +147,38 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 - (NSDateFormatter *) dateFormatter {
 	if (dateFormatter == nil) {
+		NSLocale *enLocale = [[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease];
+		
 		dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"en"] autorelease]];
+		[dateFormatter setLocale:enLocale];	
 		[dateFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
 	}
 	return dateFormatter;
 }
 
-- (UIViewController *) detailViewControllerForItem:(NSDictionary *)story {
-	NSString *selectedCountry = [story valueForKey: @"title"];
-	NSString *selectedSumary = [story valueForKey: @"summary"];
-	NSString *selecteddate = [story valueForKey: @"date"];
-	
+- (DetailViewController *) detailViewControllerForItem:(NSDictionary *)story {	
 	DetailViewController *dvController = [[DetailViewController alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle]];
-	dvController.selectedCountry = selectedCountry;
-	dvController.date = [[self dateFormatter] dateFromString:selecteddate];
-	dvController.selectedSumary = selectedSumary;	 
-	
 	return [dvController autorelease];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	 // Navigation logic
-	 	 
-	UIViewController *detailController = [self detailViewControllerForItem:[stories objectAtIndex: indexPath.row]];	 
-	 
-	 NSString * link = [[stories objectAtIndex: indexPath.row] objectForKey: @"link"];
-
+	// Navigation logic
+	
+	NSDictionary *story = [stories objectAtIndex: indexPath.row];
+	DetailViewController *detailController = [self detailViewControllerForItem:story];	 
+	
+	NSString * link = [[stories objectAtIndex: indexPath.row] objectForKey: @"link"];
+	NSString *selectedCountry = [story valueForKey: @"title"];
+	NSString *selectedSumary = [story valueForKey: @"summary"];
+	NSString *selecteddate = [story valueForKey:@"date"];
+	detailController.selectedCountry = selectedCountry;
+	detailController.date = [[self dateFormatter] dateFromString:selecteddate];
+	detailController.selectedSumary = selectedSumary;	 
+	
 	if ([link length] > 0 && ![self databaseContainsURL:link]) {
 		NSString *dateString = [[stories objectAtIndex: indexPath.row] objectForKey: @"date"];
 		NSDate *date = [[self dateFormatter] dateFromString:dateString];
-
+		
 		const char *sql = "insert into read(url, date) values(?,?)"; 
 		sqlite3_stmt *insert_statement;
 		int error;
@@ -189,27 +189,27 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 			(sqlite3_step(insert_statement) != SQLITE_DONE);
 		}
 		error = sqlite3_finalize(insert_statement);	
-	
-/*
- *	More thinking needs to go into the deletion of reads
- *
-		sqlite3_stmt *delete_statement;
-		NSString *deleteSql = [NSString stringWithFormat:@"delete from read where date<%f", [[[self class] oldestStoryDate] timeIntervalSinceReferenceDate]];
-		error = sqlite3_prepare_v2(database, [deleteSql UTF8String], -1, &delete_statement, NULL); 
-		if (error != SQLITE_OK)
-			NSLog (@"An error occurred: %s", sqlite3_errmsg(database));
-
-		error = sqlite3_step(delete_statement); 
-		error = error != SQLITE_DONE;
-	
-		error = sqlite3_finalize(delete_statement);	
-		if (error != SQLITE_OK)
-			NSLog (@"An error occurred: %s", sqlite3_errmsg(database));
- */	
+		
+		/*
+		 *	More thinking needs to go into the deletion of reads
+		 *
+		 sqlite3_stmt *delete_statement;
+		 NSString *deleteSql = [NSString stringWithFormat:@"delete from read where date<%f", [[[self class] oldestStoryDate] timeIntervalSinceReferenceDate]];
+		 error = sqlite3_prepare_v2(database, [deleteSql UTF8String], -1, &delete_statement, NULL); 
+		 if (error != SQLITE_OK)
+		 NSLog (@"An error occurred: %s", sqlite3_errmsg(database));
+		 
+		 error = sqlite3_step(delete_statement); 
+		 error = error != SQLITE_DONE;
+		 
+		 error = sqlite3_finalize(delete_statement);	
+		 if (error != SQLITE_OK)
+		 NSLog (@"An error occurred: %s", sqlite3_errmsg(database));
+		 */	
 		[newsTable reloadData];
 	}
-
-	 [self.navigationController pushViewController:detailController animated:YES];
+	
+	[self.navigationController pushViewController:detailController animated:YES];
 }
 
 - (BOOL) openDatabase {

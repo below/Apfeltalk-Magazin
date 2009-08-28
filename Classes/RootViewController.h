@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
+#import "DetailViewController.h"
 
 @interface RootViewController : UITableViewController {
 	
@@ -40,7 +41,7 @@
 + (NSDate *) oldestStoryDate;
 + (void) setOldestStoryDate:(NSDate *)date;
 
-- (UIViewController *) detailViewControllerForItem:(NSDictionary *)story;
+- (DetailViewController *) detailViewControllerForItem:(NSDictionary *)story;
 - (NSDateFormatter *) dateFormatter;
 
 @end
