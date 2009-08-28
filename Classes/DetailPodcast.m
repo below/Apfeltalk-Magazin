@@ -118,13 +118,9 @@
     [super viewDidLoad];
 	
 	nui = [NSString stringWithFormat:@"<center><b>%@</b></center>%@ " , selectedCountry,selectedSumary];
-	NSString *link = selecteddate;
 	NSRange myRange = NSMakeRange(0,16);
 	datum.text = [selecteddate substringWithRange:myRange];
 	titel.text = selectedCountry;
-	link = [link stringByReplacingOccurrencesOfString:@"#comments" withString:@"?onlycomments=yes"];
-	//NSArray *tags = [NSArray arrayWithObjects: @"a", @"b", @"p", @"br", @"img", @"div",@"li", nil];
-	//nui = [self strip_tags:nui :tags];
 	nui = [nui stringByReplacingOccurrencesOfString:@"Miniaturansicht angehängter Grafiken" withString:@""];
 	
 	NSString *name2 = [NSString stringWithFormat:@"<style type=\"text/css\"> body		{font-family: \"Helvetica\", sans-serif; font-size:13px; </style> </div> <a href=\"%@\"><center><img src=\"http://www.itouchloads.de/playbutton.png\" alt=\"Play Podcast\" /></center></a> </div> </body> ", selectedLink];
