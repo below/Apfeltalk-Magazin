@@ -14,6 +14,7 @@
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
 		4CCD3C6A10470EB300627499 /* DetailBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD3C6910470EB300627499 /* DetailBackground.png */; };
+		CB9DBA091048827C00A7B50B /* playbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DBA081048827C00A7B50B /* playbutton.png */; };
 		CB9E946E104490B700768B8B /* gelesen.db in Resources */ = {isa = PBXBuildFile; fileRef = CB9E946D104490B700768B8B /* gelesen.db */; };
 		CB9E94841044929D00768B8B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9E94831044929D00768B8B /* libsqlite3.dylib */; };
 		F6222F011041D90D00FC030D /* rss.png in Resources */ = {isa = PBXBuildFile; fileRef = F6222F001041D90D00FC030D /* rss.png */; };
@@ -45,6 +46,7 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4CCD3C6910470EB300627499 /* DetailBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DetailBackground.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB9DBA081048827C00A7B50B /* playbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playbutton.png; sourceTree = "<group>"; };
 		CB9E946D104490B700768B8B /* gelesen.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = gelesen.db; sourceTree = "<group>"; };
 		CB9E94831044929D00768B8B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F6222F001041D90D00FC030D /* rss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rss.png; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CB9DBA081048827C00A7B50B /* playbutton.png */,
 				4CCD3C6910470EB300627499 /* DetailBackground.png */,
 				CB9E946D104490B700768B8B /* gelesen.db */,
 				F6222F001041D90D00FC030D /* rss.png */,
@@ -220,6 +223,7 @@
 				F6222F011041D90D00FC030D /* rss.png in Resources */,
 				CB9E946E104490B700768B8B /* gelesen.db in Resources */,
 				4CCD3C6A10470EB300627499 /* DetailBackground.png in Resources */,
+				CB9DBA091048827C00A7B50B /* playbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
