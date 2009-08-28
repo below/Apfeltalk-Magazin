@@ -14,15 +14,9 @@
 @implementation PodcastController
 
 - (UIViewController *) detailViewControllerForItem:(NSDictionary *)story {
-	NSString *selectedCountry = [story valueForKey: @"title"];
-	NSString *selectedSumary = [story valueForKey: @"summary"];
-	NSString *selecteddate = [story valueForKey: @"date"];
 	NSString *link = [story valueForKey:@"link"];
 	
 	DetailPodcast *dvController = [[DetailPodcast alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle]];
-	dvController.selectedCountry = selectedCountry;
-	dvController.date = [[self dateFormatter] dateFromString:selecteddate];
-	dvController.selectedSumary = selectedSumary;
 	// This is really the only change. We might change that later
 	dvController.selectedLink = link;
 	
