@@ -10,7 +10,7 @@
 #import "NewsController.h"
 
 @implementation DetailNews
-@synthesize showSave, story;
+@synthesize showSave;
 
 // This is the new designated initializer for the class
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory
