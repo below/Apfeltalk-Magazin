@@ -134,18 +134,6 @@
 
 -(IBAction)speichern:(id)sender
 {
-	NSString *myString = [NSString stringWithFormat:@"%@", [[self story] title]];
-	NSString *myString2 = [NSString stringWithFormat:@"%@", [[self story] summary]];
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *myFilename = [documentsDirectory stringByAppendingPathComponent:@"Titel.txt"];
-	NSString *myFilename2 = [documentsDirectory stringByAppendingPathComponent:@"Text.txt"];
-	NSError *error = [[NSError alloc] init];
-	[myString writeToFile:myFilename atomically:YES encoding:NSUnicodeStringEncoding error:&error];	
-	[myString2 writeToFile:myFilename2 atomically:YES encoding:NSUnicodeStringEncoding error:&error];	
-	
-	UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"News gespeichert" message:@"Die News wurde erfolgreich gespeichert. Du siehst sie beim nächsten Start der Applikation ohne Internetverbindung." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-	[errorAlert show];
 }
 
 /*

@@ -20,6 +20,13 @@
 	return [savedStories count];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	if (section != 1)
+		return @"";
+	
+	return NSLocalizedString (@"Gespeicherte News", @"");
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	if ([indexPath section] != 1) 
@@ -37,7 +44,7 @@
 	int storyIndex = [indexPath row];
 	// This cries for some more refactoring
 	
-	cell.textLabel.text = [[savedStories objectAtIndex: storyIndex] objectForKey: @"title"];
+	cell.textLabel.text = [[savedStories objectAtIndex: storyIndex] title];
 	
     return cell;
 }
@@ -62,6 +69,17 @@
 	[self.navigationController pushViewController:detailController animated:YES];
 }
 
+- (Class) detailControllerClass {
+	return [DetailNews self];
+}
+
+- (void) addSavedStory:(Story *)newStory {
+	if (savedStories == nil)
+		savedStories = [NSMutableArray new];
+	[savedStories addObject:newStory];
+	[newsTable reloadData];
+}
+
 - (BOOL) saveStories {
 	NSString *error;
 	NSData * data = [NSPropertyListSerialization dataFromPropertyList:savedStories
@@ -69,5 +87,10 @@
 													 errorDescription:&error];
 	
 	return NO;
+}
+
+- (void) dealloc {
+	[savedStories release];
+	[super dealloc];
 }
 @end

@@ -14,4 +14,5 @@
 	NSMutableArray *savedStories;
 }
 
+- (void) addSavedStory:(Story *)newStory;
 @end

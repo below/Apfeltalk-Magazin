@@ -7,6 +7,7 @@
 //
 
 #import "DetailNews.h"
+#import "NewsController.h"
 
 @implementation DetailNews
 @synthesize showSave, story;
@@ -21,18 +22,14 @@
 	return self;
 }
 
-- (NSString *) storyTitle {
-	return [story title];
-}
-
-- (NSString *) selectedSumary {
-	return [story summary];
-}
-- (NSDate *) date {
-	return [story date];
-}
-- (NSString *) author {
-	return [story author];
+-(IBAction)speichern:(id)sender
+{
+	// This is an ugly hack
+	UINavigationController *navController = [self navigationController];
+	NSArray *controllers = [navController viewControllers];
+	
+	NewsController *newsController = (NewsController*) [controllers objectAtIndex:[controllers count] -2];
+	[newsController addSavedStory:[self story]];
 }
 
 @end
