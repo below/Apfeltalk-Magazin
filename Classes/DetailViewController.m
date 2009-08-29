@@ -11,7 +11,7 @@
 
 @implementation DetailViewController
 
-@synthesize selectedCountry, selectedSumary, date;
+@synthesize selectedCountry, selectedSumary, date, author;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -108,7 +108,7 @@
 	
 	// Very common
 	titel.text = selectedCountry;
-
+	[authorLabel setText:[self author]];
 	NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 	datum.text = [dateFormatter stringFromDate:[self date]];

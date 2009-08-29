@@ -13,7 +13,7 @@
 
 @implementation PodcastController
 
-- (UIViewController *) detailViewControllerForItem:(NSDictionary *)story {
+- (DetailViewController *) detailViewControllerForItem:(NSDictionary *)story {
 	NSString *link = [story valueForKey:@"link"];
 	
 	DetailPodcast *dvController = [[DetailPodcast alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle]];

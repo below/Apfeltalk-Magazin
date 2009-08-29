@@ -171,9 +171,12 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	NSString *selectedCountry = [story valueForKey: @"title"];
 	NSString *selectedSumary = [story valueForKey: @"summary"];
 	NSString *selecteddate = [story valueForKey:@"date"];
+	NSString *author = [story valueForKey:@"author"];
 	detailController.selectedCountry = selectedCountry;
 	detailController.date = [[self dateFormatter] dateFromString:selecteddate];
 	detailController.selectedSumary = selectedSumary;	 
+	if ([author length] > 0)
+		[detailController setAuthor:author];
 	
 	if ([link length] > 0 && ![self databaseContainsURL:link]) {
 		NSString *dateString = [[stories objectAtIndex: indexPath.row] objectForKey: @"date"];
@@ -186,7 +189,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 		if (error == SQLITE_OK) {
 			sqlite3_bind_text(insert_statement, 1, [link UTF8String], -1, SQLITE_TRANSIENT); 
 			sqlite3_bind_double(insert_statement, 2, [date timeIntervalSinceReferenceDate]);
-			(sqlite3_step(insert_statement) != SQLITE_DONE);
+			error = (sqlite3_step(insert_statement) != SQLITE_DONE);
 		}
 		error = sqlite3_finalize(insert_statement);	
 		
@@ -276,8 +279,8 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     [rssParser setShouldResolveExternalEntities:NO];
 	
     [rssParser parse];
+	// This causes a bug. It has been filed with Apple as Bug ID 7180951    
 	[rssParser release];
-	
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
@@ -327,6 +330,8 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 			}
 			[item setObject:currentText forKey:@"date"];
 		}
+		else if ([elementName isEqualToString:@"dc:creator"])
+			[item setObject:currentText forKey:@"author"];			
 		else
 			[item setObject:currentText forKey:elementName];
 		

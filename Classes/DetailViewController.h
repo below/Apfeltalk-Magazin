@@ -13,16 +13,20 @@
 	IBOutlet UIImageView *thumbnail;
 	IBOutlet UIScrollView *scrollView2;
 	IBOutlet UITextView *sunText;
-	NSString *selectedCountry;
-	NSString *selectedSumary;
-	NSDate *date;
 	IBOutlet UINavigationBar *Textvar;
 	IBOutlet UIWebView *webview;
 	IBOutlet UILabel *titel;
+	IBOutlet UILabel *authorLabel;
+
+	NSString *selectedCountry;
+	NSString *selectedSumary;
+	NSDate *date;
+	NSString *author;
 }
 @property (nonatomic, retain) NSString *selectedCountry;
 @property (nonatomic, retain) NSString *selectedSumary;
 @property (nonatomic, copy) NSDate *date;
+@property (nonatomic, copy) 	NSString *author;
 
 - (NSString *)strip_tags:(NSString *)data :(NSArray *)valid_tags;
 
