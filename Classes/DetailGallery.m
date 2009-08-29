@@ -11,18 +11,18 @@
 
 @implementation DetailGallery
 
-- (NSString *) selectedCountry {
-	if (selectedCountry == @"")
+- (NSString *) storyTitle {
+	if ([[self story] title] == @"")
 		return NSLocalizedString (@"--Kein Titel--", @"");
 	else
-		return selectedCountry;
+		return [[self story] title];
 }
 
 - (NSString *) htmlString {
-	NSString *nui = [NSString stringWithFormat:@"<center><b>%@</b></center> ",selectedSumary];
-	NSString *link = [[self date] description];
+	NSString *nui = [NSString stringWithFormat:@"<center><b>%@</b></center> ", [[self story] summary]];
+	NSString *link = [[[self story] date] description];
 	link = [link stringByReplacingOccurrencesOfString:@"#comments" withString:@"?onlycomments=yes"];
-	NSString *str = selectedSumary;
+	NSString *str = [[self story] summary];
 	
 	NSRange pos1 = [str rangeOfString: @"http://www.apfeltalk.de/gallery/data"]; //-42 .... 
 	NSRange pos2 = NSMakeRange(1,2);
@@ -40,7 +40,7 @@
 	}
 	pos2.location = pos2.location + 4;
 	NSRange myRange2 = NSMakeRange(pos1.location,pos2.location - pos1.location);
-	str = [selectedSumary substringWithRange:myRange2];
+	str = [[[self story] summary] substringWithRange:myRange2];
 	
 	str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
 	NSArray *tags = [NSArray arrayWithObjects: @"a", @"b", @"p", @"br", @"div",@"li", nil];
@@ -54,7 +54,7 @@
 
 -(IBAction)speichern:(id)sender
 {
-	NSString *str = selectedSumary;
+	NSString *str = [[self story] summary];
 	
 	NSRange pos1 = [str rangeOfString: @"http://www.apfeltalk.de/gallery/data"]; //-42 .... 
 	NSRange pos2 = NSMakeRange(1,2);
@@ -72,7 +72,7 @@
 	}
 	pos2.location = pos2.location + 4;
 	NSRange myRange2 = NSMakeRange(pos1.location,pos2.location - pos1.location);
-	str = [selectedSumary substringWithRange:myRange2];
+	str = [[[self story] summary] substringWithRange:myRange2];
 	
 	str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];	
 	UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:str]]];

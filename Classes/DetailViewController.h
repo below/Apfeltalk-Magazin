@@ -6,6 +6,7 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 #import <UIKit/UIKit.h>
+#import "Story.h"
 
 @interface DetailViewController : UIViewController <UIWebViewDelegate> {
 	IBOutlet UILabel *datum;
@@ -15,19 +16,14 @@
 	IBOutlet UITextView *sunText;
 	IBOutlet UINavigationBar *Textvar;
 	IBOutlet UIWebView *webview;
-	IBOutlet UILabel *titel;
+	IBOutlet UILabel *titleLabel;
 	IBOutlet UILabel *authorLabel;
 
-	NSString *selectedCountry;
-	NSString *selectedSumary;
-	NSDate *date;
-	NSString *author;
+	Story *story;
 }
-@property (nonatomic, retain) NSString *selectedCountry;
-@property (nonatomic, retain) NSString *selectedSumary;
-@property (nonatomic, copy) NSDate *date;
-@property (nonatomic, copy) 	NSString *author;
+@property (readwrite, retain) Story *story;
 
+- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory;
 - (NSString *)strip_tags:(NSString *)data :(NSArray *)valid_tags;
 
 @end

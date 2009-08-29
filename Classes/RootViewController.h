@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 #import "DetailViewController.h"
+#import "Story.h"
 
 @interface RootViewController : UITableViewController {
 	
@@ -22,8 +23,8 @@
 		
 	// a temporary item; added to the "stories" array one at a time, and cleared for the next one
 	@protected
-	NSMutableDictionary * item;
-	
+	Story *item;
+		
 	// it parses through the document, from top to bottom...
 	// we collect and cache each sub-element value, and then save each item to our array.
 	// we use these to track each current item, until it's ready to be added to the "stories" array
@@ -32,6 +33,9 @@
 	NSMutableString * currentText;
 	sqlite3 * database;
 	NSDateFormatter *dateFormatter;
+@private
+	NSArray *desiredElementKeysCache;
+
 }
 
 - (void)parseXMLFileAtURL:(NSString *)URL;
@@ -40,8 +44,8 @@
 
 + (NSDate *) oldestStoryDate;
 + (void) setOldestStoryDate:(NSDate *)date;
-
-- (DetailViewController *) detailViewControllerForItem:(NSDictionary *)story;
+- (Class) detailControllerClass;
+- (Class) storyClass;
 - (NSDateFormatter *) dateFormatter;
-
+- (NSArray *) desiredElementKeys;
 @end

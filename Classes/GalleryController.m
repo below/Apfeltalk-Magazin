@@ -28,7 +28,7 @@
 	
 	// No special customization
 	
-	cell.textLabel.text = [[stories objectAtIndex: storyIndex] objectForKey: @"title"];
+	cell.textLabel.text = [[stories objectAtIndex: storyIndex] title];
 	cell.textLabel.font = [UIFont boldSystemFontOfSize:12];
     return cell;
 }
@@ -38,18 +38,11 @@
 	 // Right now, let's leave it at that because the gallery has no read-indicators
 	 // Navigation logic
 	 	 
-	 NSString *selectedCountry = [[stories objectAtIndex: indexPath.row] objectForKey: @"title"];
-	 NSString *selectedSumary = [[stories objectAtIndex: indexPath.row] objectForKey: @"summary"];
-	 NSString *selecteddate = [[stories objectAtIndex: indexPath.row] objectForKey: @"date"];
-	 	
-	 
 	 // Custom code
 	 
 	 // open in Safari
-	 DetailGallery *dvController = [[DetailGallery alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle]];
-	 dvController.selectedCountry = selectedCountry;
-	 dvController.date = [[self dateFormatter] dateFromString:selecteddate];
-	 dvController.selectedSumary = selectedSumary;
+	 DetailGallery *dvController = [[DetailGallery alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle] 
+																	story:[stories objectAtIndex: indexPath.row]];
 	 [self.navigationController pushViewController:dvController animated:YES];
 	 [dvController release];
 	 dvController = nil;

@@ -89,6 +89,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		cell.textLabel.font = [UIFont boldSystemFontOfSize:12];
     }
     
 	// Configure the cell.
@@ -96,7 +97,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	int storyIndex = [indexPath row];
 	// Everything below here is customization
 		
-	NSString * link = [[stories objectAtIndex: indexPath.row] objectForKey: @"link"];
+	NSString * link = [[stories objectAtIndex: indexPath.row] link];
 	BOOL read = [self databaseContainsURL:link];
 
 	if (read){
@@ -105,8 +106,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 		cell.imageView.image = [UIImage imageNamed:@"thread_dot_hot.gif"];
 	}
 
-	cell.textLabel.text = [[stories objectAtIndex: storyIndex] objectForKey: @"title"];
-	cell.textLabel.font = [UIFont boldSystemFontOfSize:12];
+	cell.textLabel.text = [[stories objectAtIndex: storyIndex] title];
 
     return cell;
 }
@@ -156,31 +156,27 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	return dateFormatter;
 }
 
-- (DetailViewController *) detailViewControllerForItem:(NSDictionary *)story {	
-	DetailViewController *dvController = [[DetailViewController alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle]];
-	return [dvController autorelease];
+- (Class) detailControllerClass {
+	return [DetailViewController self];
+}
+
+- (Class) storyClass {
+	return [Story self];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	// Navigation logic
 	
-	NSDictionary *story = [stories objectAtIndex: indexPath.row];
-	DetailViewController *detailController = [self detailViewControllerForItem:story];	 
+	Story *story = [stories objectAtIndex: indexPath.row];
+	Class dvClass = [self detailControllerClass];
+	DetailViewController *detailController = [[dvClass alloc] initWithNibName:@"DetailView" 
+																	   bundle:[NSBundle mainBundle]
+																		story:story];
 	
-	NSString * link = [[stories objectAtIndex: indexPath.row] objectForKey: @"link"];
-	NSString *selectedCountry = [story valueForKey: @"title"];
-	NSString *selectedSumary = [story valueForKey: @"summary"];
-	NSString *selecteddate = [story valueForKey:@"date"];
-	NSString *author = [story valueForKey:@"author"];
-	detailController.selectedCountry = selectedCountry;
-	detailController.date = [[self dateFormatter] dateFromString:selecteddate];
-	detailController.selectedSumary = selectedSumary;	 
-	if ([author length] > 0)
-		[detailController setAuthor:author];
-	
+	NSString * link = [story link];
+
 	if ([link length] > 0 && ![self databaseContainsURL:link]) {
-		NSString *dateString = [[stories objectAtIndex: indexPath.row] objectForKey: @"date"];
-		NSDate *date = [[self dateFormatter] dateFromString:dateString];
+		NSDate *date = [[stories objectAtIndex: indexPath.row] date];
 		
 		const char *sql = "insert into read(url, date) values(?,?)"; 
 		sqlite3_stmt *insert_statement;
@@ -213,6 +209,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	}
 	
 	[self.navigationController pushViewController:detailController animated:YES];
+	[detailController release];
 }
 
 - (BOOL) openDatabase {
@@ -257,8 +254,9 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 }
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser{	
-	NSLog(@"found file and started parsing");
-	
+	[desiredElementKeysCache release];
+	desiredElementKeysCache = [self desiredElementKeys];
+	[desiredElementKeysCache retain];
 }
 
 - (void)parseXMLFileAtURL:(NSString *)URL
@@ -291,6 +289,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	[errorAlert show];
 }
 
+#pragma mark The things that can/should be subclassed should be grouped somehow
 - (NSString *) summaryElementName {
 	// It should be discussed if the design should be changed. "summary" may not be the right key
 	return @"content:encoded";
@@ -300,27 +299,33 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	return @"pubDate";
 }
 
+- (NSArray *) desiredElementKeys {
+	return [NSArray arrayWithObjects:@"title", @"link", [self summaryElementName], [self dateElementname], 
+									  @"dc:creator", nil];
+}
+
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{			
     //NSLog(@"found this element: %@", elementName);
 	currentElement = [elementName copy];
 	
-	if ([elementName isEqualToString:@"item"])
-		item = [[NSMutableDictionary alloc] init];
-	else if ([elementName isEqualToString:@"title"] || [elementName isEqualToString:@"link"]
-			 || [elementName isEqualToString:[self summaryElementName]] || [elementName isEqualToString:[self dateElementname]]
-			 || [elementName isEqualToString:@"dc:creator"])
+	if ([elementName isEqualToString:@"item"]) {
+		Class storyClass = [self storyClass];
+		item = [[storyClass alloc] init];
+		
+	}
+	else if ([desiredElementKeysCache containsObject:elementName])
 		currentText = [NSMutableString new];
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{     
 	if ([elementName isEqualToString:@"item"]) {
-		[stories addObject:[item copy]];
+		[stories addObject:item];
 		[item release];
 		item = nil;
 	}
 	else if (currentText) {
 		if ([elementName isEqualToString:[self summaryElementName]] )
-			[item setObject:currentText forKey:@"summary"];
+			[item setSummary:currentText];
 		else if ([elementName isEqualToString:[self dateElementname]])
 		{
 			// Question here is: Should we store the string, or an NSDate object?
@@ -328,12 +333,12 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 			if ([[self class] oldestStoryDate] == nil || [date compare:[[self class] oldestStoryDate]] == NSOrderedAscending) {
 				[[self class] setOldestStoryDate:date];
 			}
-			[item setObject:currentText forKey:@"date"];
+			[item setDate:date];
 		}
 		else if ([elementName isEqualToString:@"dc:creator"])
-			[item setObject:currentText forKey:@"author"];			
+			[item setAuthor:currentText];			
 		else
-			[item setObject:currentText forKey:elementName];
+			[item setValue:currentText forKey:elementName];
 		
 		[currentText release];
 		currentText = nil;
@@ -374,6 +379,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 - (void)dealloc {
 	
 	[currentElement release];
+	[desiredElementKeysCache release];
 	[stories release];
 	[item release];
 	[currentText release];

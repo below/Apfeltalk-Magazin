@@ -11,17 +11,17 @@
 
 @implementation DetailViewController
 
-@synthesize selectedCountry, selectedSumary, date, author;
+@synthesize story;
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
+ // This is the new designated initializer for the class
+ - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory
+{
+	self = [super initWithNibName:nibName bundle:nibBundle];
+	if (self != nil) {
+		[self setStory:newStory];
+	}
+	return self;
 }
-*/
 
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -77,7 +77,7 @@
 }
 
 - (NSString *) htmlString {
-	NSString *nui = [NSString stringWithFormat:@"<center><b>%@</b></center>%@ " , selectedCountry,selectedSumary];
+	NSString *nui = [NSString stringWithFormat:@"<center><b>%@</b></center>%@ " , [[self story] title], [[self story] summary]];
 	
 	NSArray *tags = [NSArray arrayWithObjects: @"a", @"b", @"p", @"br", @"img", @"div",@"li", nil];
 	nui = [self strip_tags:nui :tags];
@@ -96,7 +96,7 @@
 					   { $(\"div#frame\").hide(); $(\"div#show\").click(function(){ $(\"div#frame\").slideToggle();\
 					   }); }); </script> </div> <meta name=\"viewport\" \
 					   content=\"maximum-scale=1.0 width=device-width initial-scale=1.0 user-scalable=no\" /> \
-					   </head> <body>  </div> </body> ", [[self date] description]];
+					   </head> <body>  </div> </body> ", [[[self story] date] description]];
 	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;\
 			border: 1px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br>",nui, name2];
 }
@@ -107,11 +107,11 @@
     [super viewDidLoad];
 	
 	// Very common
-	titel.text = selectedCountry;
-	[authorLabel setText:[self author]];
+	titleLabel.text = [[self story] title];
+	[authorLabel setText:[[self story] author]];
 	NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-	datum.text = [dateFormatter stringFromDate:[self date]];
+	datum.text = [dateFormatter stringFromDate:[[self story] date]];
 	[dateFormatter release];
 
 	//Set the title of the navigation bar
@@ -134,8 +134,8 @@
 
 -(IBAction)speichern:(id)sender
 {
-	NSString *myString = [NSString stringWithFormat:@"%@", selectedCountry];
-	NSString *myString2 = [NSString stringWithFormat:@"%@", selectedSumary];
+	NSString *myString = [NSString stringWithFormat:@"%@", [[self story] title]];
+	NSString *myString2 = [NSString stringWithFormat:@"%@", [[self story] summary]];
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSString *myFilename = [documentsDirectory stringByAppendingPathComponent:@"Titel.txt"];
@@ -170,9 +170,7 @@
 
 
 - (void)dealloc {
-	[selectedCountry release];
-	[selectedSumary release];
-	[date release];
+	[story release];
 	[lblText release];
 	[super dealloc];
 }

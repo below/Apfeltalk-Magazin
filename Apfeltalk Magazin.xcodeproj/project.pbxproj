@@ -14,6 +14,9 @@
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
 		4CCD3C6A10470EB300627499 /* DetailBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD3C6910470EB300627499 /* DetailBackground.png */; };
+		CB15C87B10498EBF00360BDC /* NewsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15C87A10498EBF00360BDC /* NewsController.m */; };
+		CB15C89C1049950900360BDC /* DetailNews.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15C89B1049950900360BDC /* DetailNews.m */; };
+		CB15C8CE1049A0CF00360BDC /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15C8CD1049A0CF00360BDC /* Story.m */; };
 		CB9DBA091048827C00A7B50B /* playbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DBA081048827C00A7B50B /* playbutton.png */; };
 		CB9E946E104490B700768B8B /* gelesen.db in Resources */ = {isa = PBXBuildFile; fileRef = CB9E946D104490B700768B8B /* gelesen.db */; };
 		CB9E94841044929D00768B8B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9E94831044929D00768B8B /* libsqlite3.dylib */; };
@@ -46,6 +49,12 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4CCD3C6910470EB300627499 /* DetailBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DetailBackground.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB15C87910498EBF00360BDC /* NewsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsController.h; sourceTree = "<group>"; };
+		CB15C87A10498EBF00360BDC /* NewsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsController.m; sourceTree = "<group>"; };
+		CB15C89A1049950900360BDC /* DetailNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailNews.h; sourceTree = "<group>"; };
+		CB15C89B1049950900360BDC /* DetailNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailNews.m; sourceTree = "<group>"; };
+		CB15C8CC1049A0CF00360BDC /* Story.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Story.h; sourceTree = "<group>"; };
+		CB15C8CD1049A0CF00360BDC /* Story.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Story.m; sourceTree = "<group>"; };
 		CB9DBA081048827C00A7B50B /* playbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playbutton.png; sourceTree = "<group>"; };
 		CB9E946D104490B700768B8B /* gelesen.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = gelesen.db; sourceTree = "<group>"; };
 		CB9E94831044929D00768B8B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -91,18 +100,9 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F6DACACD103EA73F00003B92 /* DetailPodcast.h */,
-				F6DACACE103EA73F00003B92 /* DetailPodcast.m */,
-				F634308310362E27004ACF93 /* GalleryController.h */,
-				F634308410362E27004ACF93 /* GalleryController.m */,
-				F634304B10362AA4004ACF93 /* DetailViewController.h */,
-				F634304C10362AA4004ACF93 /* DetailViewController.m */,
-				F6B4FC71103697960080D615 /* DetailGallery.h */,
-				F6B4FC72103697960080D615 /* DetailGallery.m */,
-				F6DACAC5103EA57700003B92 /* PodcastController.h */,
-				F6DACAC6103EA57700003B92 /* PodcastController.m */,
-				F634305010362AA4004ACF93 /* RootViewController.h */,
-				F634305110362AA4004ACF93 /* RootViewController.m */,
+				CB15C9691049B72000360BDC /* Master View Controllers */,
+				CB15C9681049B70100360BDC /* Detail View Controllers */,
+				CB15C8E81049A2D000360BDC /* Story Containers */,
 				1D3623240D0F684500981E51 /* Apfeltalk_MagazinAppDelegate.h */,
 				1D3623250D0F684500981E51 /* Apfeltalk_MagazinAppDelegate.m */,
 			);
@@ -168,6 +168,45 @@
 				CB9E94831044929D00768B8B /* libsqlite3.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CB15C8E81049A2D000360BDC /* Story Containers */ = {
+			isa = PBXGroup;
+			children = (
+				CB15C8CC1049A0CF00360BDC /* Story.h */,
+				CB15C8CD1049A0CF00360BDC /* Story.m */,
+			);
+			name = "Story Containers";
+			sourceTree = "<group>";
+		};
+		CB15C9681049B70100360BDC /* Detail View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F634304B10362AA4004ACF93 /* DetailViewController.h */,
+				F634304C10362AA4004ACF93 /* DetailViewController.m */,
+				F6DACACD103EA73F00003B92 /* DetailPodcast.h */,
+				F6DACACE103EA73F00003B92 /* DetailPodcast.m */,
+				CB15C89A1049950900360BDC /* DetailNews.h */,
+				CB15C89B1049950900360BDC /* DetailNews.m */,
+				F6B4FC71103697960080D615 /* DetailGallery.h */,
+				F6B4FC72103697960080D615 /* DetailGallery.m */,
+			);
+			name = "Detail View Controllers";
+			sourceTree = "<group>";
+		};
+		CB15C9691049B72000360BDC /* Master View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F634305010362AA4004ACF93 /* RootViewController.h */,
+				F634305110362AA4004ACF93 /* RootViewController.m */,
+				F6DACAC5103EA57700003B92 /* PodcastController.h */,
+				F6DACAC6103EA57700003B92 /* PodcastController.m */,
+				F634308310362E27004ACF93 /* GalleryController.h */,
+				F634308410362E27004ACF93 /* GalleryController.m */,
+				CB15C87910498EBF00360BDC /* NewsController.h */,
+				CB15C87A10498EBF00360BDC /* NewsController.m */,
+			);
+			name = "Master View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +281,9 @@
 				F6B4FC73103697960080D615 /* DetailGallery.m in Sources */,
 				F6DACAC7103EA57700003B92 /* PodcastController.m in Sources */,
 				F6DACACF103EA73F00003B92 /* DetailPodcast.m in Sources */,
+				CB15C87B10498EBF00360BDC /* NewsController.m in Sources */,
+				CB15C89C1049950900360BDC /* DetailNews.m in Sources */,
+				CB15C8CE1049A0CF00360BDC /* Story.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
