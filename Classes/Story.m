@@ -11,4 +11,15 @@
 
 @implementation Story
 @synthesize title, summary, date, author, link;
+
+- (void) dealloc
+{
+	[title release];
+	[summary release];
+	[date release];
+	[author release];
+	[link release];
+	[super dealloc];
+}
+
 @end
