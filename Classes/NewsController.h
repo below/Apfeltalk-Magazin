@@ -31,4 +31,5 @@
 }
 
 - (void) addSavedStory:(Story *)newStory;
+- (BOOL) isSavedStory:(Story *)story;
 @end

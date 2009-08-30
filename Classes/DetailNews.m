@@ -45,9 +45,20 @@
 	NSArray *controllers = [navController viewControllers];
 	
 	NewsController *newsController = (NewsController*) [controllers objectAtIndex:[controllers count] -2];
-    [[self story] setSaved:YES];
 	[newsController addSavedStory:[self story]];
     [[self navigationItem] setRightBarButtonItem:nil animated:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSArray *controllers = [[self navigationController] viewControllers];
+    NewsController *newsController = (NewsController *)[controllers objectAtIndex:[controllers count] - 2];
+
+    if ([self showSave] && [newsController isSavedStory:[self story]])
+        [self setShowSave:NO];
+
+    if (![self showSave])
+        [[self navigationItem] setRightBarButtonItem:nil];
 }
 
 @end

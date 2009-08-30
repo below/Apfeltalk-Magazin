@@ -133,16 +133,12 @@
 	//Set the title of the navigation bar
 	//-150x150
 
-	if (![[self story] isSaved])
-    {
-        UIBarButtonItem *speichernButton = [[UIBarButtonItem alloc]
-                                            initWithTitle:@"Speichern"
-                                            style:UIBarButtonItemStyleBordered
-                                            target:self
-                                            action:@selector(speichern:)];
-        self.navigationItem.rightBarButtonItem = speichernButton;
-        [speichernButton release];
-    }
+    UIBarButtonItem *speichernButton = [[UIBarButtonItem alloc] initWithTitle:@"Speichern"
+                                                                        style:UIBarButtonItemStyleBordered
+                                                                       target:self
+                                                                       action:@selector(speichern:)];
+    self.navigationItem.rightBarButtonItem = speichernButton;
+    [speichernButton release];
 
 	NSString * htmlString = [self htmlString];
 	[webview loadHTMLString:htmlString baseURL:nil];

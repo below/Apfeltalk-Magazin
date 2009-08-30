@@ -108,6 +108,19 @@
 	[newsTable reloadData];
 }
 
+- (BOOL)isSavedStory:(Story *)story {
+    BOOL result = NO;
+    NSString *storyLink = [story link];
+
+    for (Story *savedStory in savedStories)
+    {
+        if ([storyLink isEqualToString:[savedStory link]])
+            result = YES;
+    }
+
+    return result;
+}
+
 - (NSString *) savedStoryFilepath {
 	return [[self supportFolderPath] stringByAppendingPathComponent:@"saved.ATStories"];
 }
