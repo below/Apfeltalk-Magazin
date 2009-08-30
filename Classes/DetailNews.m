@@ -29,7 +29,9 @@
 	NSArray *controllers = [navController viewControllers];
 	
 	NewsController *newsController = (NewsController*) [controllers objectAtIndex:[controllers count] -2];
+    [[self story] setSaved:YES];
 	[newsController addSavedStory:[self story]];
+    self.navigationItem.rightBarButtonItem = nil;
 }
 
 @end

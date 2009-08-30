@@ -15,10 +15,12 @@
 	NSDate *date;
 	NSString *author;
 	NSString *link;
+    BOOL saved;
 }
 @property (readwrite, copy) NSString *title;
 @property (readwrite, copy) NSString *summary;
 @property (readwrite, copy) NSDate *date;
 @property (readwrite, copy) NSString *author;
 @property (readwrite, copy) NSString *link;
+@property (readwrite, assign, getter=isSaved) BOOL saved;
 @end
