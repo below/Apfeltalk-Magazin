@@ -46,6 +46,7 @@
 	NSString *urlString = [[request URL ] absoluteString];
 	if ([urlString rangeOfString:@".m"].location !=NSNotFound){
 		[self playMovieAtURL:[NSURL URLWithString:[[self story] link]]];
+		return NO;
 	}    
 	return YES;
 }
