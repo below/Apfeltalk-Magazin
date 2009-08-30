@@ -26,7 +26,7 @@
 
 
 @implementation Story
-@synthesize title, summary, date, author, link;
+@synthesize title, summary, date, author, link, saved;
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
 	if (self = [super init]) {
@@ -36,6 +36,7 @@
 			[self setDate:[aDecoder decodeObjectForKey:@"date"]];
 			[self setAuthor:[aDecoder decodeObjectForKey:@"author"]];
 			[self setLink:[aDecoder decodeObjectForKey:@"link"]];
+            [self setSaved:[aDecoder decodeBoolForKey:@"saved"]];
 		}
 	}
 	return self;
@@ -47,6 +48,7 @@
 	[aCoder encodeObject:[self date] forKey:@"date"];
 	[aCoder encodeObject:[self author] forKey:@"author"];
 	[aCoder encodeObject:[self link] forKey:@"link"];
+    [aCoder encodeObject:[self isSaved] forKey:@"saved"];
 }
 
 - (void) dealloc
