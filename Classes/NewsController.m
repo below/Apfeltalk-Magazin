@@ -9,7 +9,18 @@
 #import "NewsController.h"
 #import "DetailNews.h"
 
+@interface NewsController (private)
+- (NSString *) savedStoryFilepath;
+- (BOOL) saveStories;
+@end
+
 @implementation NewsController
+
+- (void)viewWillAppear:(BOOL)animated {
+	savedStories = [[NSKeyedUnarchiver unarchiveObjectWithFile:[self savedStoryFilepath]] mutableCopy];
+	[super viewWillAppear:animated];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 2;
 }
@@ -77,14 +88,16 @@
 	if (savedStories == nil)
 		savedStories = [NSMutableArray new];
 	[savedStories addObject:newStory];
+	[self saveStories];
 	[newsTable reloadData];
 }
 
+- (NSString *) savedStoryFilepath {
+	return [[self supportFolderPath] stringByAppendingPathComponent:@"saved.ATStories"];
+}
+
 - (BOOL) saveStories {
-	// Once we have the path
-//	return [NSKeyedArchiver archiveRootObject:savedStories toFile:path];
-	
-	return NO;
+	return [NSKeyedArchiver archiveRootObject:savedStories toFile:[self savedStoryFilepath]];
 }
 
 - (void) dealloc {

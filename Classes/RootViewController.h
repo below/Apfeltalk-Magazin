@@ -41,6 +41,7 @@
 - (void)parseXMLFileAtURL:(NSString *)URL;
 - (IBAction)openSafari:(id)sender;
 - (IBAction)about:(id)sender;
+- (NSString *) supportFolderPath;
 
 + (NSDate *) oldestStoryDate;
 + (void) setOldestStoryDate:(NSDate *)date;

@@ -137,12 +137,16 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	return found;
 }
 
-- (NSString *) readDocumentsFilename {	 
+- (NSString *) supportFolderPath {
 	// This could be static
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	assert ([paths count]);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
-	return [documentsDirectory stringByAppendingPathComponent:@"gelesen.db"];
+	return documentsDirectory;
+}
+
+- (NSString *) readDocumentsFilename {	 
+	return [[self supportFolderPath] stringByAppendingPathComponent:@"gelesen.db"];
 }
 
 - (NSDateFormatter *) dateFormatter {
