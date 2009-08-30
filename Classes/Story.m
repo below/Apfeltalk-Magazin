@@ -48,7 +48,7 @@
 	[aCoder encodeObject:[self date] forKey:@"date"];
 	[aCoder encodeObject:[self author] forKey:@"author"];
 	[aCoder encodeObject:[self link] forKey:@"link"];
-    [aCoder encodeObject:[self isSaved] forKey:@"saved"];
+    [aCoder encodeBool:[self isSaved] forKey:@"saved"];
 }
 
 - (void) dealloc
