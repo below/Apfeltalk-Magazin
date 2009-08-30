@@ -9,8 +9,6 @@
 #import "DetailViewController.h"
 
 @interface DetailPodcast : DetailViewController <UIWebViewDelegate> {
-	NSString *selectedLink;
 }
-@property (nonatomic, retain) NSString *selectedLink;
 
 @end

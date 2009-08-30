@@ -12,8 +12,6 @@
 
 @implementation DetailPodcast
 
-@synthesize selectedLink;
-
 -(void)playMovieAtURL:(NSURL*)theURL 
 
 {
@@ -45,10 +43,9 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {    
-	NSURL *loadURL = [ [ request URL ] retain ]; // retain the loadURL for use
-	NSString *urlString = loadURL.absoluteString;
+	NSString *urlString = [[request URL ] absoluteString];
 	if ([urlString rangeOfString:@".m"].location !=NSNotFound){
-		[self playMovieAtURL:[NSURL URLWithString:selectedLink]];
+		[self playMovieAtURL:[NSURL URLWithString:[[self story] link]]];
 	}    
 	return YES;
 }
@@ -60,16 +57,12 @@
 	
 	NSURL *playbuttonURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"playbutton" ofType:@"png"]];
 	// We should check if this exists
-	NSString *name2 = [NSString stringWithFormat:@"<style type=\"text/css\"> body		{font-family: \"Helvetica\", sans-serif; font-size:13px; </style> </div> <a href=\"%@\"><center><img src=\"%@\" alt=\"Play Podcast\" /></center></a> </div> </body> ", 
-					   selectedLink, [playbuttonURL absoluteString]];
+	NSString *name2 = [NSString stringWithFormat:@"<style type=\"text/css\"> body		{font-family: \"Helvetica\", sans-serif; font-size:13px;\
+					   </style> </div> <a href=\"%@\"><center><img src=\"%@\" alt=\"Play Podcast\" /></center></a> </div> </body> ", 
+					   [[self story] link], [playbuttonURL absoluteString]];
 	
-	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;border: 1px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ %@",nui, name2];
+	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;border: 1px solid rgb(173, 173, 173);\
+			margin: 10px;padding:10px;\"> %@ %@",nui, name2];
 }
-
-- (void)dealloc {
-	[selectedLink release];
-	[super dealloc];
-}
-
 
 @end
