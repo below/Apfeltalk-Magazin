@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface Story : NSObject {
+@interface Story : NSObject <NSCoding> {
 	NSString *title;
 	NSString *summary;
 	NSDate *date;

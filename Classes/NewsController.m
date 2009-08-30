@@ -81,10 +81,8 @@
 }
 
 - (BOOL) saveStories {
-	NSString *error;
-	NSData * data = [NSPropertyListSerialization dataFromPropertyList:savedStories
-															   format:NSPropertyListXMLFormat_v1_0
-													 errorDescription:&error];
+	// Once we have the path
+//	return [NSKeyedArchiver archiveRootObject:savedStories toFile:path];
 	
 	return NO;
 }
