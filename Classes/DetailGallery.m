@@ -25,6 +25,7 @@
 #import "DetailGallery.h"
 #import "RootViewController.h"
 
+
 @implementation DetailGallery
 
 - (NSString *) storyTitle {
@@ -117,7 +118,7 @@
 		
 	}
 	if (buttonIdx == 0) {
-		str = [str stringByReplacingOccurrencesOfString:@"/medium" withString:@""];
+		str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@"/medium"];
 		UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:str]]];
 		UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
 		pasteboard.image = image;
