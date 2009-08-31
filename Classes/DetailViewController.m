@@ -132,9 +132,9 @@
 
 	//Set the title of the navigation bar
 	//-150x150
-	NSString * Buttonstring = [self Buttonstr];
+	NSString * buttonTitle = [self rightBarButtonTitle];
 
-    UIBarButtonItem *speichernButton = [[UIBarButtonItem alloc] initWithTitle:Buttonstring
+    UIBarButtonItem *speichernButton = [[UIBarButtonItem alloc] initWithTitle:buttonTitle
                                                                         style:UIBarButtonItemStyleBordered
                                                                        target:self
                                                                        action:@selector(speichern:)];
@@ -147,6 +147,9 @@
 	[webview release];
 }
 
+- (NSString *) rightBarButtonTitle {
+	return @"Speichern";
+}
 
 -(IBAction)speichern:(id)sender
 {

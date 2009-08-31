@@ -70,7 +70,7 @@
 	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;border: 1px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br> %@", showpicture, nui, name2];
 }
 
-- (NSString *) Buttonstr {
+- (NSString *) rightBarButtonTitle {
 	return @"Bildoptionen";
 }
 
