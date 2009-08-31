@@ -49,6 +49,10 @@
     [[self navigationItem] setRightBarButtonItem:nil animated:YES];
 }
 
+- (NSString *) Buttonstr {
+	return @"Speichern";
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     NSArray *controllers = [[self navigationController] viewControllers];

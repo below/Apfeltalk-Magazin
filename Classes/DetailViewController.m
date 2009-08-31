@@ -132,8 +132,9 @@
 
 	//Set the title of the navigation bar
 	//-150x150
+	NSString * Buttonstring = [self Buttonstr];
 
-    UIBarButtonItem *speichernButton = [[UIBarButtonItem alloc] initWithTitle:@"Speichern"
+    UIBarButtonItem *speichernButton = [[UIBarButtonItem alloc] initWithTitle:Buttonstring
                                                                         style:UIBarButtonItemStyleBordered
                                                                        target:self
                                                                        action:@selector(speichern:)];

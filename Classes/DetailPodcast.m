@@ -82,4 +82,8 @@
 			margin: 10px;padding:10px;\"> %@ %@",nui, name2];
 }
 
+- (NSString *) Buttonstr {
+	return @"Speichern";
+}
+
 @end

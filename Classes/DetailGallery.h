@@ -3,7 +3,7 @@
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
-//	Copyright (C) 2009	Stephan König (stephankoenig at me dot com), Stefan Kofler
+//	Copyright (C) 2009	Stephan König (stephankoenig at mac dot com), Stefan Kofler
 //						Alexander von Below, Michael Fenske, Jesper (Graphics),
 //						Patrick Rollbis (Graphics),
 //						
@@ -25,7 +25,7 @@
 #import <UIKit/UIKit.h>
 #import "DetailViewController.h"
 
-@interface DetailGallery : DetailViewController <UIWebViewDelegate> {
+@interface DetailGallery : DetailViewController <UIWebViewDelegate, UIActionSheetDelegate> {
 }
 
 @end
