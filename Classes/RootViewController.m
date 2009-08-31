@@ -28,6 +28,7 @@
 - (BOOL) openDatabase;
 - (BOOL) databaseContainsURL:(NSString *)link;
 - (NSString *) readDocumentsFilename; 
+- (void)updateApplicationIconBadgeNumber;
 @end
 
 static NSDate *oldestStoryDate = nil;
@@ -225,6 +226,9 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 		 NSLog (@"An error occurred: %s", sqlite3_errmsg(database));
 		 */	
 		[newsTable reloadData];
+		
+		// update the number of unread messages in Application Badge
+		[self updateApplicationIconBadgeNumber];
 	}
 	
 	[self.navigationController pushViewController:detailController animated:YES];
@@ -373,7 +377,10 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	
 	[activityIndicator stopAnimating];
 	[activityIndicator removeFromSuperview];
-	
+
+	//update Application Badge
+	[self updateApplicationIconBadgeNumber];
+
 	NSLog(@"all done!");
 	NSLog(@"stories array has %d items", [stories count]);
 	[newsTable reloadData];
@@ -394,6 +401,23 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	// Release anything that's not essential, such as cached data
 }
 
+- (void)updateApplicationIconBadgeNumber {
+	int unreadMessages = 0;
+	
+	//calculate the number of unread messages
+	for (Story *s in stories) {
+		NSString * link = [s link];
+		BOOL found = [self databaseContainsURL:link];
+		if(!found){
+			unreadMessages++;
+		}
+	}
+	
+	NSLog(@"%d unread Messages left", unreadMessages);
+	
+	//update the Badge
+	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:unreadMessages];
+}
 
 - (void)dealloc {
 	
