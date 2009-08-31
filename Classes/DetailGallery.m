@@ -92,22 +92,22 @@
 	
 	NSRange pos1 = [str rangeOfString: @"http://www.apfeltalk.de/gallery/data"]; //-42 .... 
 	NSRange pos2 = NSMakeRange(1,2);
-	if ([str rangeOfString:@".jpg\" alt="].location !=NSNotFound){
-		pos2 = [str rangeOfString: @".jpg\" alt="]; //+4 ....
-	}	
-	if ([str rangeOfString:@".JPG\" alt="].location !=NSNotFound){
-		pos2 = [str rangeOfString: @".JPG\" alt="]; //+4 ....
-	}	
-	if ([str rangeOfString:@".png\" alt="].location !=NSNotFound){
-		pos2 = [str rangeOfString: @".png\" alt="]; //+4 ....
-	}	
-	if ([str rangeOfString:@".PNG\" alt="].location !=NSNotFound){
-		pos2 = [str rangeOfString: @".PNG\" alt="]; //+4 ....
+	NSRange findRange;
+	
+	findRange = [[str lowercaseString] rangeOfString:@".jpg\" alt="];
+	if (findRange.location !=NSNotFound){
+		pos2 = findRange; //+4 ....
+	}
+	else {
+		findRange = [[str lowercaseString] rangeOfString:@".png\" alt="];
+		if (findRange.location !=NSNotFound){
+			pos2 = findRange; //+4 ....
+		}  
 	}
 	pos2.location = pos2.location + 4;
 	NSRange myRange2 = NSMakeRange(pos1.location,pos2.location - pos1.location);
 	str = [[[self story] summary] substringWithRange:myRange2];
-		
+	
     if (buttonIdx == 1) {
 		str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
 		UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:str]]];
