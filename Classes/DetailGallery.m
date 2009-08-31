@@ -24,6 +24,7 @@
 
 #import "DetailGallery.h"
 #import "RootViewController.h"
+#import "Apfeltalk_MagazinAppDelegate.h"
 
 
 @implementation DetailGallery
@@ -76,15 +77,17 @@
 
 -(IBAction)speichern:(id)sender
 {
+    Apfeltalk_MagazinAppDelegate *appDelegate = (Apfeltalk_MagazinAppDelegate *)[[UIApplication sharedApplication] delegate];
+
 	UIActionSheet *myMenu = [[UIActionSheet alloc]
 							 initWithTitle: nil
 							 delegate:self
 							 cancelButtonTitle:@"Abbrechen"
 							 destructiveButtonTitle:nil
 							 otherButtonTitles:@"Kopieren", @"Bild speichern",nil];
-    [myMenu showInView:self.view];
-	
-	}
+
+    [myMenu showFromTabBar:[[appDelegate tabBarController] tabBar]];
+}
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIdx
 {
