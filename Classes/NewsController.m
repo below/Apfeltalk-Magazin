@@ -76,11 +76,34 @@
     return cell;
 }
 
+-(BOOL) isStoryInSavedStories:(Story *)story {
+	BOOL ret = FALSE;
+	for (Story *s in savedStories){
+		NSLog(@"check if %@ is equal to %@", [s link], [story link]);
+		NSString *firstLink = [s link];
+		NSString *secondLink = [story link];
+		
+		if ([firstLink isEqualToString: secondLink]) {
+			NSLog(@"string matches");
+			ret = TRUE;
+		}
+	}
+
+	return ret;
+}
+
 //set editingStyle on current row. If set do UITableViewCellEditingStyleDelete, delete button is shown at swipe gesture
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSLog(@"there");		//remove this
 	UITableViewCellEditingStyle editingStyle = UITableViewCellEditingStyleNone;		//default
 	//if (self.editing) editingStyle = UITableViewCellEditingStyleDelete;
+	
+	Story *story = [stories objectAtIndex: indexPath.row];
+	if ([self isStoryInSavedStories:story]) {
+		NSLog(@"we should allow deleting");
+	}
+	
+	NSLog(@"story: %@", story);
 	
 	return editingStyle;
 }
