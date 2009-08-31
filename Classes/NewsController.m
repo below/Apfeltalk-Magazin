@@ -76,6 +76,21 @@
     return cell;
 }
 
+//set editingStyle on current row. If set do UITableViewCellEditingStyleDelete, delete button is shown at swipe gesture
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+	NSLog(@"there");		//remove this
+	UITableViewCellEditingStyle editingStyle = UITableViewCellEditingStyleNone;		//default
+	//if (self.editing) editingStyle = UITableViewCellEditingStyleDelete;
+	
+	return editingStyle;
+}
+
+//handle tab on delete button
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+	NSLog(@"here");			//remove this
+	//TODO trigger delete here
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if ([indexPath section] != 1) {
 		[super tableView:tableView didSelectRowAtIndexPath:indexPath];

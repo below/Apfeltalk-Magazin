@@ -75,7 +75,6 @@ static NSDate *oldestStoryDate = nil;
 	[alert release];
 }
 
-
 - (void)alertView:(UIAlertView *)alertView
 didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
@@ -83,9 +82,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	{
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:info@apfeltalk.de"]];
 	}
-	
 }
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 1;
@@ -96,7 +93,6 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	return [stories count];
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
