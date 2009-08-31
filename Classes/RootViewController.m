@@ -65,7 +65,7 @@ static NSDate *oldestStoryDate = nil;
 	[newsTable reloadData];
 	UIAlertView *alert = [[UIAlertView alloc]
 						  initWithTitle:@"Credits" // oder einfach Wilkommen in der Touch-Mania.com Applikation?
-						  message:@"Apfeltalk.de App \n \nIdee: Stephan König \nProgrammierung: Stefan Kofler und Stephan König \nSplashcreen: Stefan Meier (Idee) und Patrick Rollbis (Umsetzung) \n Icons: Jesper Frommherz."
+						  message:@"Apfeltalk.de App \n \nIdee: Stephan König \nProgrammierung: Alexander von Below, Stefan Kofler, Michael Fenske und Stephan König \nSplashcreen: Patrick Rollbis \n Icons: Jesper Frommherz."
 						  delegate:self
 						  cancelButtonTitle:@"OK"
 						  otherButtonTitles:@"Kontakt"
