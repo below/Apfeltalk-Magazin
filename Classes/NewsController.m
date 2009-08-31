@@ -107,6 +107,17 @@
 
 //handle tab on delete button
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+	[savedStories removeObjectAtIndex:indexPath.row];
+	
+	if ([savedStories count] == 0) {
+		//[tableContents removeObjectAtIndex:indexPath.section];
+		[tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+	} else {
+		//section is not empty, just remove the row
+		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+	}
+	[tableView reloadData];
+		
 	NSLog(@"here");			//remove this
 	//TODO trigger delete here
 }
