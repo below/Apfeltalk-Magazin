@@ -1,0 +1,10 @@
+/* 
+   Localizable.strings
+   Apfeltalk Magazin
+
+   Created by Andreas Rami on 9/1/09.
+   Copyright 2009 Bizzons eMarketing. All rights reserved.
+ */
+
+
+"NewsController.TableView.DeleteButtonLabel" = "lösch mich";
