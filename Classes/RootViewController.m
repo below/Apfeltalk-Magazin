@@ -26,7 +26,6 @@
 
 @interface RootViewController (private)
 - (BOOL) openDatabase;
-- (BOOL) databaseContainsURL:(NSString *)link;
 - (NSString *) readDocumentsFilename; 
 @end
 

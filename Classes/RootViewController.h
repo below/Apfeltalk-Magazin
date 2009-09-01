@@ -67,5 +67,5 @@
 - (NSArray *) desiredElementKeys;
 
 - (void)updateApplicationIconBadgeNumber;
-
+- (BOOL) databaseContainsURL:(NSString *)link;
 @end
