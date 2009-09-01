@@ -169,6 +169,25 @@
 	return [NSKeyedArchiver archiveRootObject:savedStories toFile:[self savedStoryFilepath]];
 }
 
+- (void)updateApplicationIconBadgeNumber {
+	int unreadMessages = 0;
+	
+	//calculate the number of unread messages
+	for (Story *s in stories) {
+		NSString * link = [s link];
+		BOOL found = [self databaseContainsURL:link];
+		if(!found){
+			unreadMessages++;
+		}
+	}
+	
+	NSLog(@"%d unread Messages left", unreadMessages);
+	
+	//update the Badge
+	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:unreadMessages];
+	[super updateApplicationIconBadgeNumber];	
+}
+
 - (void) dealloc {
 	[savedStories release];
 	[super dealloc];

@@ -65,4 +65,7 @@
 - (Class) storyClass;
 - (NSDateFormatter *) dateFormatter;
 - (NSArray *) desiredElementKeys;
+
+- (void)updateApplicationIconBadgeNumber;
+
 @end
