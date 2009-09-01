@@ -45,5 +45,10 @@
 	else
 		[super parser:parser didStartElement:elementName namespaceURI:namespaceURI qualifiedName:qName attributes:attributeDict];
 }
-@end
 
+- (void)updateApplicationIconBadgeNumber {
+	//We don't want to update the Application Icon Badge for Podcasts
+	[super updateApplicationIconBadgeNumber];
+}
+
+@end

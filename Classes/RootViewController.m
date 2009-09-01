@@ -26,9 +26,7 @@
 
 @interface RootViewController (private)
 - (BOOL) openDatabase;
-- (BOOL) databaseContainsURL:(NSString *)link;
 - (NSString *) readDocumentsFilename; 
-- (void)updateApplicationIconBadgeNumber;
 @end
 
 static NSDate *oldestStoryDate = nil;
@@ -75,7 +73,6 @@ static NSDate *oldestStoryDate = nil;
 	[alert release];
 }
 
-
 - (void)alertView:(UIAlertView *)alertView
 didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
@@ -83,9 +80,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	{
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:info@apfeltalk.de"]];
 	}
-	
 }
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 1;
@@ -96,7 +91,6 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	return [stories count];
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
@@ -386,37 +380,18 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	[newsTable reloadData];
 }
 
-
-
-
-
 /*- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {return YES;
 	// Return YES for supported orientations
 	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }*/
-
 
 - (void)didReceiveMemoryWarning {
 	[super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
 	// Release anything that's not essential, such as cached data
 }
 
-- (void)updateApplicationIconBadgeNumber {
-	int unreadMessages = 0;
-	
-	//calculate the number of unread messages
-	for (Story *s in stories) {
-		NSString * link = [s link];
-		BOOL found = [self databaseContainsURL:link];
-		if(!found){
-			unreadMessages++;
-		}
-	}
-	
-	NSLog(@"%d unread Messages left", unreadMessages);
-	
-	//update the Badge
-	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:unreadMessages];
+- (void)updateApplicationIconBadgeNumber{
+	//logic is now in each Controllers
 }
 
 - (void)dealloc {
@@ -431,6 +406,4 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	[super dealloc];
 }
 
-
 @end
-
