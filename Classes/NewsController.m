@@ -107,9 +107,11 @@
 
 //handle tab on delete button
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+	//remove element from savedStoris array
 	[savedStories removeObjectAtIndex:indexPath.row];
 	[self saveStories];
 	
+	//remove element from TableView
 	[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
 	[tableView reloadData];
 }
