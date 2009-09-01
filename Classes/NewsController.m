@@ -107,8 +107,7 @@
 
 //localize the delete button
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-	//return NSLocalizedString(@"NewsController.TableView.DeleteButtonLabel", @"");
-	return @"";
+	return NSLocalizedString(@"NewsController.TableView.DeleteButtonLabel", @"");
 }
 
 //handle tab on delete button

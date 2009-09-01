@@ -6,5 +6,4 @@
    Copyright 2009 Bizzons eMarketing. All rights reserved.
  */
 
-
-"NewsController.TableView.DeleteButtonLabel" = "lösch mich";
+"NewsController.TableView.DeleteButtonLabel" = "löschen";
