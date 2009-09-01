@@ -76,6 +76,46 @@
     return cell;
 }
 
+//check if the given story is in the list of saved ones
+-(BOOL) isStoryInSavedStories:(Story *)story {
+	BOOL ret = FALSE;
+	for (Story *s in savedStories){
+		NSString *firstLink = [s link];
+		NSString *secondLink = [story link];
+		if ([firstLink isEqualToString: secondLink]) {
+			ret = TRUE;
+		}
+	}
+
+	return ret;
+}
+
+//set editingStyle on current row. If set do UITableViewCellEditingStyleDelete, delete button is shown at swipe gesture
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+	UITableViewCellEditingStyle editingStyle = UITableViewCellEditingStyleNone;		//default
+	int section = [indexPath section];
+	
+	if(section == 1) {  //Replace hardcoded 1 with Constant
+		Story *story = [savedStories objectAtIndex: indexPath.row];
+		if ([self isStoryInSavedStories:story]) {
+			editingStyle = UITableViewCellEditingStyleDelete;
+		}
+	}
+	
+	return editingStyle;
+}
+
+//handle tab on delete button
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+	//remove element from savedStoris array
+	[savedStories removeObjectAtIndex:indexPath.row];
+	[self saveStories];
+	
+	//remove element from TableView
+	[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+	[tableView reloadData];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if ([indexPath section] != 1) {
 		[super tableView:tableView didSelectRowAtIndexPath:indexPath];
