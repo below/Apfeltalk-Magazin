@@ -57,6 +57,11 @@
     [theMovie release]; 
 }
 
+- (NSString *) rightBarButtonTitle {
+	return nil;
+}
+
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {    
 	NSString *urlString = [[request URL ] absoluteString];
@@ -69,12 +74,12 @@
 
 - (NSString *) htmlString {
 	NSString *nui = [NSString stringWithFormat:@"<center><b>%@</b></center>%@ " , [[self story] title], [[self story] summary]];
-
+	
 	nui = [nui stringByReplacingOccurrencesOfString:@"Miniaturansicht angehängter Grafiken" withString:@""];
 	
 	NSURL *playbuttonURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"playbutton" ofType:@"png"]];
 	// We should check if this exists
-	NSString *name2 = [NSString stringWithFormat:@"<style type=\"text/css\"> body		{font-family: \"Helvetica\", sans-serif; font-size:13px;\
+	NSString *name2 = [NSString stringWithFormat:@"<style type=\"text/css\"> body    {font-family: \"Helvetica\", sans-serif; font-size:13px;\
 					   </style> </div> <a href=\"%@\"><center><img src=\"%@\" alt=\"Play Podcast\" /></center></a> </div> </body> ", 
 					   [[self story] link], [playbuttonURL absoluteString]];
 	
