@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">437.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="156"/>
+			<integer value="157"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -94,7 +94,7 @@
 							</object>
 							<object class="IBUINavigationItem" key="IBUINavigationItem" id="859135274">
 								<reference key="IBUINavigationBar"/>
-								<string key="IBUITitle">AT Podcasts</string>
+								<string key="IBUITitle">Apfeltalk Podcasts</string>
 								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="287417718">
 									<string key="IBUITitle">Safari</string>
 									<int key="IBUIStyle">1</int>
