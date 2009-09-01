@@ -105,6 +105,12 @@
 	return editingStyle;
 }
 
+//localize the delete button
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+	//return NSLocalizedString(@"NewsController.TableView.DeleteButtonLabel", @"");
+	return @"";
+}
+
 //handle tab on delete button
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	//remove element from savedStoris array
