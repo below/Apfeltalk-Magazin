@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">437.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="156"/>
+			<integer value="157"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -51,7 +51,7 @@
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUINavigationController" key="IBUISelectedViewController" id="112103980">
 					<object class="IBUITabBarItem" key="IBUITabBarItem" id="1028248403">
-						<string key="IBUITitle">Podcasts</string>
+						<string key="IBUITitle">Apfelshow</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">rss.png</string>
@@ -94,7 +94,7 @@
 							</object>
 							<object class="IBUINavigationItem" key="IBUINavigationItem" id="859135274">
 								<reference key="IBUINavigationBar"/>
-								<string key="IBUITitle">AT Podcasts</string>
+								<string key="IBUITitle">Apfelshow</string>
 								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="287417718">
 									<string key="IBUITitle">Safari</string>
 									<int key="IBUIStyle">1</int>

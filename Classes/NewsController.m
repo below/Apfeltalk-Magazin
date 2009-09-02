@@ -28,6 +28,7 @@
 @interface NewsController (private)
 - (NSString *) savedStoryFilepath;
 - (BOOL) saveStories;
+- (void) activateShakeToReload;
 @end
 
 @implementation NewsController
@@ -35,6 +36,13 @@
 - (void)viewWillAppear:(BOOL)animated {
 	savedStories = [[NSKeyedUnarchiver unarchiveObjectWithFile:[self savedStoryFilepath]] mutableCopy];
 	[super viewWillAppear:animated];
+	
+	if(shakeToReload) {
+		NSLog(@"Shake To Reload is on, activae UIAccelerometer");
+		[self activateShakeToReload];
+	} else {
+		NSLog(@"Shake To Reload is off, don't activae UIAccelerometer");
+	}
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -76,6 +84,24 @@
     return cell;
 }
 
+// activate the UIAcceleromter for Shake To Reload
+- (void) activateShakeToReload {
+	UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
+    accel.delegate = self;
+    accel.updateInterval = kUpdateInterval;	
+}
+
+// handle acceleromter event
+- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
+	if (acceleration.x > kAccelerationThreshold || acceleration.y > kAccelerationThreshold || acceleration.z > kAccelerationThreshold) {
+		NSLog(@"didAccelerate called: %@. (and shake was recognized)", acceleration);
+		// TODO trigger reload
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+		[super parseXMLFileAtURL:[self documentPath]];
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	}
+}
+
 //check if the given story is in the list of saved ones
 -(BOOL) isStoryInSavedStories:(Story *)story {
 	BOOL ret = FALSE;
@@ -95,9 +121,9 @@
 	UITableViewCellEditingStyle editingStyle = UITableViewCellEditingStyleNone;		//default
 	int section = [indexPath section];
 	
-	if(section == 1) {  //Replace hardcoded 1 with Constant
+	if(section == 1) {  //TODO Replace hardcoded 1 with Constant
 		Story *story = [savedStories objectAtIndex: indexPath.row];
-		if ([self isStoryInSavedStories:story]) {
+		if ([self isStoryInSavedStories:story]) {						//TODO this needs refactoring. We should just check if message in correct Section, instead of checking every story.
 			editingStyle = UITableViewCellEditingStyleDelete;
 		}
 	}
@@ -175,21 +201,28 @@
 }
 
 - (void)updateApplicationIconBadgeNumber {
-	int unreadMessages = 0;
 	
-	//calculate the number of unread messages
-	for (Story *s in stories) {
-		NSString * link = [s link];
-		BOOL found = [self databaseContainsURL:link];
-		if(!found){
-			unreadMessages++;
+	if(showIconBadge) {
+		int unreadMessages = 0;
+		
+		//calculate the number of unread messages
+		for (Story *s in stories) {
+			NSString * link = [s link];
+			BOOL found = [self databaseContainsURL:link];
+			if(!found){
+				unreadMessages++;
+			}
 		}
+		
+		NSLog(@"%d unread Messages left", unreadMessages);
+		
+		//update the Badge
+		[[UIApplication sharedApplication] setApplicationIconBadgeNumber:unreadMessages];
+	} else {
+		NSLog(@"showIconBadges turned off");
+		[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 	}
-	
-	NSLog(@"%d unread Messages left", unreadMessages);
-	
-	//update the Badge
-	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:unreadMessages];
+
 	[super updateApplicationIconBadgeNumber];	
 }
 

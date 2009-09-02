@@ -26,7 +26,8 @@
 
 @interface RootViewController (private)
 - (BOOL) openDatabase;
-- (NSString *) readDocumentsFilename; 
+- (NSString *) readDocumentsFilename;
+- (void) setApplicationDefaults;
 @end
 
 static NSDate *oldestStoryDate = nil;
@@ -50,11 +51,6 @@ static NSDate *oldestStoryDate = nil;
 //	return self;
 //}
 //
-//- (void)viewDidLoad {
-	// Add the following line if you want the list to be editable
-	// self.navigationItem.leftBarButtonItem = self.editButtonItem;
-	
-//}
 
 - (IBAction)openSafari:(id)sender {
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.apfeltalk.de"]];
@@ -247,6 +243,9 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 - (void)viewWillAppear:(BOOL)animated {
 	[self openDatabase];
+	// read and set defaults from preference pane
+	[self setApplicationDefaults];
+	
 	[super viewWillAppear:animated];
 }
 
@@ -254,6 +253,26 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	[super viewDidDisappear:animated];
 	int error = sqlite3_close(database);
 	assert (error == 0);
+}
+
+- (void)setApplicationDefaults {
+	// set the showIconBadge property
+	NSString *iconBadgeToogleValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"showIconBadge"];
+	if([iconBadgeToogleValue isEqualToString: @"1"]) {
+		showIconBadge = YES;
+	} else {
+		showIconBadge = NO;
+	}
+	
+	// set the shakeToReload property
+	NSString *shakeToReloadToggleValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"shakeToReload"];
+	if([shakeToReloadToggleValue isEqualToString: @"1"]) {
+		shakeToReload = YES;
+	} else {
+		shakeToReload = NO;
+	}
+	
+	NSLog(@"Application configuration: [showIconBadge: %d], [shakeToReload: %d]", showIconBadge, shakeToReload);
 }
 
 - (NSString *) documentPath {
@@ -364,7 +383,6 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
 	[currentText appendString:string];
-	
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
@@ -375,8 +393,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	//update Application Badge
 	[self updateApplicationIconBadgeNumber];
 
-	NSLog(@"all done!");
-	NSLog(@"stories array has %d items", [stories count]);
+	NSLog(@"all done! stories array has %d items", [stories count]);
 	[newsTable reloadData];
 }
 
