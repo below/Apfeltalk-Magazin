@@ -10,7 +10,7 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Show Icon Badge</string>
+			<string>ShowIconBadge</string>
 			<key>Key</key>
 			<string>showIconBadge</string>
 			<key>DefaultValue</key>
