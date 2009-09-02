@@ -51,11 +51,6 @@ static NSDate *oldestStoryDate = nil;
 //	return self;
 //}
 //
-//- (void)viewDidLoad {
-	// Add the following line if you want the list to be editable
-	// self.navigationItem.leftBarButtonItem = self.editButtonItem;
-	
-//}
 
 - (IBAction)openSafari:(id)sender {
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.apfeltalk.de"]];

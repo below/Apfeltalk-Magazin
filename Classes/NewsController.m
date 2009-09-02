@@ -28,6 +28,7 @@
 @interface NewsController (private)
 - (NSString *) savedStoryFilepath;
 - (BOOL) saveStories;
+- (void) activateShakeToReload;
 @end
 
 @implementation NewsController
@@ -35,6 +36,13 @@
 - (void)viewWillAppear:(BOOL)animated {
 	savedStories = [[NSKeyedUnarchiver unarchiveObjectWithFile:[self savedStoryFilepath]] mutableCopy];
 	[super viewWillAppear:animated];
+	
+	if(shakeToReload) {
+		NSLog(@"Shake To Reload is on, activae UIAccelerometer");
+		[self activateShakeToReload];
+	} else {
+		NSLog(@"Shake To Reload is off, don't activae UIAccelerometer");
+	}
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -74,6 +82,20 @@
 	cell.textLabel.text = [[savedStories objectAtIndex: storyIndex] title];
 	
     return cell;
+}
+
+- (void) activateShakeToReload {
+	UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
+    accel.delegate = self;
+    accel.updateInterval = kUpdateInterval;	
+}
+
+// handle acceleromter event
+- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
+	if (acceleration.x > kAccelerationThreshold || acceleration.y > kAccelerationThreshold || acceleration.z > kAccelerationThreshold) {
+		NSLog(@"didAccelerate called: %@. (and shake was recognized)", acceleration);
+		// trigger reload
+	}
 }
 
 //check if the given story is in the list of saved ones
