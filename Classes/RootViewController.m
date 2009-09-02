@@ -26,7 +26,8 @@
 
 @interface RootViewController (private)
 - (BOOL) openDatabase;
-- (NSString *) readDocumentsFilename; 
+- (NSString *) readDocumentsFilename;
+- (void) setApplicationDefaults;
 @end
 
 static NSDate *oldestStoryDate = nil;
@@ -247,6 +248,9 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 - (void)viewWillAppear:(BOOL)animated {
 	[self openDatabase];
+	// read and set defaults from preference pane
+	[self setApplicationDefaults];
+	
 	[super viewWillAppear:animated];
 }
 
@@ -254,6 +258,16 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	[super viewDidDisappear:animated];
 	int error = sqlite3_close(database);
 	assert (error == 0);
+}
+
+- (void)setApplicationDefaults {
+	// set the showIconBadge property
+	NSString *toogleValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"showIconBadge"];
+	if([toogleValue isEqualToString: @"1"]) {
+		showIconBadge = YES;
+	} else {
+		showIconBadge = NO;
+	}
 }
 
 - (NSString *) documentPath {
@@ -364,7 +378,6 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
 	[currentText appendString:string];
-	
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
@@ -375,8 +388,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	//update Application Badge
 	[self updateApplicationIconBadgeNumber];
 
-	NSLog(@"all done!");
-	NSLog(@"stories array has %d items", [stories count]);
+	NSLog(@"all done! stories array has %d items", [stories count]);
 	[newsTable reloadData];
 }
 

@@ -95,9 +95,9 @@
 	UITableViewCellEditingStyle editingStyle = UITableViewCellEditingStyleNone;		//default
 	int section = [indexPath section];
 	
-	if(section == 1) {  //Replace hardcoded 1 with Constant
+	if(section == 1) {  //TODO Replace hardcoded 1 with Constant
 		Story *story = [savedStories objectAtIndex: indexPath.row];
-		if ([self isStoryInSavedStories:story]) {
+		if ([self isStoryInSavedStories:story]) {						//TODO this needs refactoring. We should just check if message in correct Section, instead of checking every story.
 			editingStyle = UITableViewCellEditingStyleDelete;
 		}
 	}
@@ -175,21 +175,28 @@
 }
 
 - (void)updateApplicationIconBadgeNumber {
-	int unreadMessages = 0;
 	
-	//calculate the number of unread messages
-	for (Story *s in stories) {
-		NSString * link = [s link];
-		BOOL found = [self databaseContainsURL:link];
-		if(!found){
-			unreadMessages++;
+	if(showIconBadge) {
+		int unreadMessages = 0;
+		
+		//calculate the number of unread messages
+		for (Story *s in stories) {
+			NSString * link = [s link];
+			BOOL found = [self databaseContainsURL:link];
+			if(!found){
+				unreadMessages++;
+			}
 		}
+		
+		NSLog(@"%d unread Messages left", unreadMessages);
+		
+		//update the Badge
+		[[UIApplication sharedApplication] setApplicationIconBadgeNumber:unreadMessages];
+	} else {
+		NSLog(@"showIconBadges turned off");
+		[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 	}
-	
-	NSLog(@"%d unread Messages left", unreadMessages);
-	
-	//update the Badge
-	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:unreadMessages];
+
 	[super updateApplicationIconBadgeNumber];	
 }
 

@@ -36,6 +36,9 @@
 	CGSize cellSize;
 		
 	NSMutableArray * stories;
+	
+	// should we show Icon Badges. (this could be switched on/off in preferences pane)
+	BOOL showIconBadge;
 		
 	// a temporary item; added to the "stories" array one at a time, and cleared for the next one
 	@protected
