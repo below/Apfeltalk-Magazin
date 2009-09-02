@@ -22,6 +22,22 @@
 			<key>DefaultValue</key>
 			<true/>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Group_ShakeToReload</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>ShakeToReload</string>
+			<key>Key</key>
+			<string>shakeToReload</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
 	</array>
 </dict>
 </plist>
