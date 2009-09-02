@@ -96,7 +96,9 @@
 	if (acceleration.x > kAccelerationThreshold || acceleration.y > kAccelerationThreshold || acceleration.z > kAccelerationThreshold) {
 		NSLog(@"didAccelerate called: %@. (and shake was recognized)", acceleration);
 		// TODO trigger reload
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 		[super parseXMLFileAtURL:[self documentPath]];
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	}
 }
 
