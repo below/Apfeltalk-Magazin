@@ -84,6 +84,7 @@
     return cell;
 }
 
+// activate the UIAcceleromter for Shake To Reload
 - (void) activateShakeToReload {
 	UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
     accel.delegate = self;
@@ -94,7 +95,8 @@
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
 	if (acceleration.x > kAccelerationThreshold || acceleration.y > kAccelerationThreshold || acceleration.z > kAccelerationThreshold) {
 		NSLog(@"didAccelerate called: %@. (and shake was recognized)", acceleration);
-		// trigger reload
+		// TODO trigger reload
+		[super parseXMLFileAtURL:[self documentPath]];
 	}
 }
 

@@ -74,4 +74,6 @@
 
 - (void)updateApplicationIconBadgeNumber;
 - (BOOL) databaseContainsURL:(NSString *)link;
+
+- (NSString *) documentPath;
 @end
