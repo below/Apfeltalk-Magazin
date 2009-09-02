@@ -279,6 +279,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	return @"http://feeds.apfeltalk.de/apfeltalk-magazin";
 }
 
+
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -287,6 +288,11 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 		[self parseXMLFileAtURL:[self documentPath]];
 	}
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {return YES;
+	// Return YES for supported orientations
+	return YES;
 }
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser{	

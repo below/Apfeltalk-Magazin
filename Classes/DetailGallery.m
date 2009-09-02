@@ -23,6 +23,7 @@
 //
 
 #import "DetailGallery.h"
+#import "fullscreen.h"
 #import "RootViewController.h"
 #import "Apfeltalk_MagazinAppDelegate.h"
 
@@ -60,7 +61,7 @@
 	NSRange myRange2 = NSMakeRange(pos1.location,pos2.location - pos1.location);
 	str = [[[self story] summary] substringWithRange:myRange2];
 	
-	str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@"/medium"];
+	str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
 	
 	NSArray *tags = [NSArray arrayWithObjects: @"a", @"b", @"p", @"br", @"div",@"li", nil];
 	nui = [self strip_tags:nui :tags];
@@ -77,14 +78,14 @@
 
 -(IBAction)speichern:(id)sender
 {
-    Apfeltalk_MagazinAppDelegate *appDelegate = (Apfeltalk_MagazinAppDelegate *)[[UIApplication sharedApplication] delegate];
+	Apfeltalk_MagazinAppDelegate *appDelegate = (Apfeltalk_MagazinAppDelegate *)[[UIApplication sharedApplication] delegate];
 
 	UIActionSheet *myMenu = [[UIActionSheet alloc]
 							 initWithTitle: nil
 							 delegate:self
 							 cancelButtonTitle:@"Abbrechen"
 							 destructiveButtonTitle:nil
-							 otherButtonTitles:@"Kopieren", @"Bild speichern",nil];
+							 otherButtonTitles:@"Kopieren", @"Bild speichern", @"Zeige Bild",nil];
 
     [myMenu showFromTabBar:[[appDelegate tabBarController] tabBar]];
 }
@@ -110,6 +111,14 @@
 	pos2.location = pos2.location + 4;
 	NSRange myRange2 = NSMakeRange(pos1.location,pos2.location - pos1.location);
 	str = [[[self story] summary] substringWithRange:myRange2];
+	
+	if (buttonIdx == 2) {
+		fullscreen *dvController = [[fullscreen alloc] initWithNibName:@"fullscreen" bundle:[NSBundle mainBundle]];
+		dvController.string = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
+		
+		[self.navigationController pushViewController:dvController animated:YES];
+		[dvController release];	
+	}
 	
     if (buttonIdx == 1) {
 		str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
