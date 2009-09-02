@@ -262,12 +262,22 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 - (void)setApplicationDefaults {
 	// set the showIconBadge property
-	NSString *toogleValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"showIconBadge"];
-	if([toogleValue isEqualToString: @"1"]) {
+	NSString *iconBadgeToogleValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"showIconBadge"];
+	if([iconBadgeToogleValue isEqualToString: @"1"]) {
 		showIconBadge = YES;
 	} else {
 		showIconBadge = NO;
 	}
+	
+	// set the shakeToReload property
+	NSString *shakeToReloadToggleValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"shakeToReload"];
+	if([shakeToReloadToggleValue isEqualToString: @"1"]) {
+		shakeToReload = YES;
+	} else {
+		shakeToReload = NO;
+	}
+	
+	NSLog(@"Application configuration: [showIconBadge: %d], [shakeToReload: %d]", showIconBadge, shakeToReload);
 }
 
 - (NSString *) documentPath {
