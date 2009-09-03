@@ -24,7 +24,13 @@
 
 #import "GalleryStory.h"
 
-
 @implementation GalleryStory
+@synthesize thumbnailLink;
+
+- (void) dealloc
+{
+	[thumbnailLink release];
+	[super dealloc];
+}
 
 @end

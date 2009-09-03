@@ -26,7 +26,6 @@
 #import "RootViewController.h"
 
 @interface GalleryController : RootViewController {
-		
 }
 
 @end

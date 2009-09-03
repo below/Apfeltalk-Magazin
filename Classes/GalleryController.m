@@ -49,7 +49,10 @@
 	
 	AsyncImageView* asyncImage = [[[AsyncImageView alloc] initWithFrame:previewImageFrame] autorelease];
 	asyncImage.tag = [indexPath row];
-	NSURL *url = [NSURL URLWithString: @"http://www.apfeltalk.de/gallery/data/501/thumbs/IMG_00241.JPG"]; // TODO remove this hardcoded url. we need to get the thumb url from the rss feed
+//	NSURL *url = [NSURL URLWithString: @"http://www.apfeltalk.de/gallery/data/501/thumbs/IMG_00241.JPG"]; // TODO remove this hardcoded url. we need to get the thumb url from the rss feed
+//	NSString * link = [[stories objectAtIndex: indexPath.row] link];
+	GalleryStory *story = [stories objectAtIndex:indexPath.row];
+	NSURL *url = [NSURL URLWithString: [story thumbnailLink]]; // TODO remove this hardcoded url. we need to get the thumb url from the rss feed
 	[asyncImage loadImageFromURL:url];
 	
 	[cell.contentView addSubview:asyncImage];    
@@ -63,6 +66,32 @@
 	cell.textLabel.font = [UIFont boldSystemFontOfSize:12];
     return cell;
 }
+
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
+	[super parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName];
+	
+	NSString *str = [item summary];
+	
+	NSRange pos1 = [str rangeOfString: @"http://www.apfeltalk.de/gallery/data"]; //-42 .... 
+	NSRange pos2 = NSMakeRange(1,2);
+	if ([str rangeOfString:@".jpg\" alt="].location !=NSNotFound){
+		pos2 = [str rangeOfString: @".jpg\" alt="]; //+4 ....
+	}	
+	if ([str rangeOfString:@".JPG\" alt="].location !=NSNotFound){
+		pos2 = [str rangeOfString: @".JPG\" alt="]; //+4 ....
+	}	
+	if ([str rangeOfString:@".png\" alt="].location !=NSNotFound){
+		pos2 = [str rangeOfString: @".png\" alt="]; //+4 ....
+	}	
+	if ([str rangeOfString:@".PNG\" alt="].location !=NSNotFound){
+		pos2 = [str rangeOfString: @".PNG\" alt="]; //+4 ....
+	}
+	pos2.location = pos2.location + 4;
+	NSRange myRange2 = NSMakeRange(pos1.location,pos2.location - pos1.location);
+	str = [[item summary] substringWithRange:myRange2];
+	
+	[item setThumbnailLink:str];
+}     
 
  - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	 // Right now, let's leave it at that because the gallery has no read-indicators
@@ -96,6 +125,10 @@
 
 - (Class) storyClass {
 	return [GalleryStory self];
+}
+
+- (void)dealloc {
+	[super dealloc];
 }
 
 @end

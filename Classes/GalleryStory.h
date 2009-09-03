@@ -25,7 +25,9 @@
 #import "Story.h"
 
 @interface GalleryStory : Story {
-
+	NSString *thumbnailLink;
 }
+
+@property (readwrite, copy) NSString *thumbnailLink;
 
 @end
