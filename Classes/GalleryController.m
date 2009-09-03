@@ -49,7 +49,8 @@
 	previewImageFrame.origin.y=0;
 	
 	AsyncImageView* asyncImage = [[[AsyncImageView alloc] initWithFrame:previewImageFrame] autorelease];
-	asyncImage.tag = [indexPath row];
+//	asyncImage.tag = [indexPath row];
+	asyncImage.tag = 999;
 	GalleryStory *story = [stories objectAtIndex:indexPath.row];
 	NSURL *url = [NSURL URLWithString: [story thumbnailLink]];
 	[asyncImage loadImageFromURL:url];
@@ -93,6 +94,7 @@
 	
 	
 	[(GalleryStory *)item setThumbnailLink:str];
+	NSLog(@"thumbnaillink: %@", str);
 }     
 
  - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
