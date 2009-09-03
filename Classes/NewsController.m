@@ -33,6 +33,8 @@
 
 @implementation NewsController
 
+const int SAVED_MESSAGES_SECTION_INDEX = 1;
+
 - (void)viewWillAppear:(BOOL)animated {
 	savedStories = [[NSKeyedUnarchiver unarchiveObjectWithFile:[self savedStoryFilepath]] mutableCopy];
 	[super viewWillAppear:animated];
@@ -50,13 +52,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (section != 1)
+	if (section != SAVED_MESSAGES_SECTION_INDEX)
 		return [super tableView:tableView numberOfRowsInSection:section];
 	return [savedStories count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	if (section != 1)
+	if (section != SAVED_MESSAGES_SECTION_INDEX)
 		return @"";
 	
 	return NSLocalizedString (@"Gespeicherte News", @"");
@@ -121,7 +123,7 @@
 	UITableViewCellEditingStyle editingStyle = UITableViewCellEditingStyleNone;		//default
 	int section = [indexPath section];
 	
-	if(section == 1) {  //TODO Replace hardcoded 1 with Constant
+	if(section == SAVED_MESSAGES_SECTION_INDEX) {
 		Story *story = [savedStories objectAtIndex: indexPath.row];
 		if ([self isStoryInSavedStories:story]) {						//TODO this needs refactoring. We should just check if message in correct Section, instead of checking every story.
 			editingStyle = UITableViewCellEditingStyleDelete;
@@ -148,7 +150,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if ([indexPath section] != 1) {
+	if ([indexPath section] != SAVED_MESSAGES_SECTION_INDEX) {
 		[super tableView:tableView didSelectRowAtIndexPath:indexPath];
 		 return;
 	}
