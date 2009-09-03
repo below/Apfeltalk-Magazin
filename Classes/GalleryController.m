@@ -41,17 +41,18 @@
 		[oldImage removeFromSuperview];
 	}
 
-	CGRect frame;
-	frame.size.width=44.f; 
-	frame.size.height=44.f;
-	frame.origin.x=6; frame.origin.y=0;
-	AsyncImageView* asyncImage = [[[AsyncImageView alloc] initWithFrame:frame] autorelease];
-	asyncImage.tag = 999;
-	NSURL *url = [NSURL URLWithString: @"http://www.apfeltalk.de/gallery/data/501/thumbs/IMG_00241.JPG"];
+	CGRect previewImageFrame;
+	previewImageFrame.size.width=44.f; 
+	previewImageFrame.size.height=44.f;
+	previewImageFrame.origin.x=6;
+	previewImageFrame.origin.y=0;
+	
+	AsyncImageView* asyncImage = [[[AsyncImageView alloc] initWithFrame:previewImageFrame] autorelease];
+	asyncImage.tag = [indexPath row];
+	NSURL *url = [NSURL URLWithString: @"http://www.apfeltalk.de/gallery/data/501/thumbs/IMG_00241.JPG"]; // TODO remove this hardcoded url. we need to get the thumb url from the rss feed
 	[asyncImage loadImageFromURL:url];
 	
 	[cell.contentView addSubview:asyncImage];    
-	
 	
 	// We leave it like this for the moment, because the gallery has no read indicators
 	int storyIndex = [indexPath indexAtPosition: [indexPath length] - 1];
@@ -93,5 +94,8 @@
 	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-@end
+- (Class) storyClass {
+	return [GalleryStory self];
+}
 
+@end

@@ -12,6 +12,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		22090EBE104FAC4700A20868 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22090EBD104FAC4700A20868 /* AsyncImageView.m */; };
+		22090F2C104FBECA00A20868 /* GalleryStory.m in Sources */ = {isa = PBXBuildFile; fileRef = 22090F2B104FBECA00A20868 /* GalleryStory.m */; };
 		22FB6028104D9DEA00A0F65A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22FB6026104D9DEA00A0F65A /* Localizable.strings */; };
 		22FB60C5104DBD5100A0F65A /* Icon-Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FB60C4104DBD5100A0F65A /* Icon-Settings.png */; };
 		22FB60DE104DC15600A0F65A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 22FB60DD104DC15600A0F65A /* Settings.bundle */; };
@@ -49,6 +50,8 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22090EBC104FAC4700A20868 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		22090EBD104FAC4700A20868 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
+		22090F2A104FBECA00A20868 /* GalleryStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryStory.h; sourceTree = "<group>"; };
+		22090F2B104FBECA00A20868 /* GalleryStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryStory.m; sourceTree = "<group>"; };
 		22FB6027104D9DEA00A0F65A /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		22FB602B104D9DFE00A0F65A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		22FB60C4104DBD5100A0F65A /* Icon-Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Settings.png"; sourceTree = "<group>"; };
@@ -198,6 +201,8 @@
 			children = (
 				CB15C8CC1049A0CF00360BDC /* Story.h */,
 				CB15C8CD1049A0CF00360BDC /* Story.m */,
+				22090F2A104FBECA00A20868 /* GalleryStory.h */,
+				22090F2B104FBECA00A20868 /* GalleryStory.m */,
 			);
 			name = "Story Containers";
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 				CB15C89C1049950900360BDC /* DetailNews.m in Sources */,
 				CB15C8CE1049A0CF00360BDC /* Story.m in Sources */,
 				22090EBE104FAC4700A20868 /* AsyncImageView.m in Sources */,
+				22090F2C104FBECA00A20868 /* GalleryStory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

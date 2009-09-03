@@ -1,5 +1,5 @@
 //
-//  Story.m
+//  GalleryStory.m
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
@@ -22,40 +22,9 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
-#import "Story.h"
+#import "GalleryStory.h"
 
-@implementation Story
-@synthesize title, summary, date, author, link;
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
-	if (self = [super init]) {
-		if ([aDecoder allowsKeyedCoding]) {
-			[self setTitle:[aDecoder decodeObjectForKey:@"title"]];
-			[self setSummary:[aDecoder decodeObjectForKey:@"summary"]];
-			[self setDate:[aDecoder decodeObjectForKey:@"date"]];
-			[self setAuthor:[aDecoder decodeObjectForKey:@"author"]];
-			[self setLink:[aDecoder decodeObjectForKey:@"link"]];
-		}
-	}
-	return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-	[aCoder encodeObject:[self title] forKey:@"title"];
-	[aCoder encodeObject:[self summary] forKey:@"summary"];
-	[aCoder encodeObject:[self date] forKey:@"date"];
-	[aCoder encodeObject:[self author] forKey:@"author"];
-	[aCoder encodeObject:[self link] forKey:@"link"];
-}
-
-- (void) dealloc
-{
-	[title release];
-	[summary release];
-	[date release];
-	[author release];
-	[link release];
-	[super dealloc];
-}
+@implementation GalleryStory
 
 @end
