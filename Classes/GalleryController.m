@@ -37,8 +37,7 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     } else {
-		AsyncImageView* oldImage = (AsyncImageView*)
-			[cell.contentView viewWithTag:999];
+		AsyncImageView* oldImage = (AsyncImageView*) [cell.contentView viewWithTag:999];
 		[oldImage removeFromSuperview];
 	}
 
@@ -92,9 +91,7 @@
 	NSRange myRange2 = NSMakeRange(pos1.location,pos2.location - pos1.location);
 	str = [[item summary] substringWithRange:myRange2];
 	
-	
 	[(GalleryStory *)item setThumbnailLink:str];
-	NSLog(@"thumbnaillink: %@", str);
 }     
 
  - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

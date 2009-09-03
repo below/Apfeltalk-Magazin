@@ -39,7 +39,7 @@
 	
 	NSURLRequest* request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
 	connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-	//TODO add erro handlinc if url is nill
+	//TODO add erro handling if url is nill
 }
 
 //the URL connection calls this repeatedly as data arrives
