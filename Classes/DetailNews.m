@@ -95,7 +95,7 @@
 	
     if (![self showSave]) {
 		if (buttonIdx == 0) {
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"mailto:me@me.com?subject=subject&body=%@", @"DER TEXT"]]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:me@me.com?subject=subject&body=TEXT"]];
 		}
 	}
 
