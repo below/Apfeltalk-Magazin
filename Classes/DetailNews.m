@@ -94,9 +94,9 @@
         [self setShowSave:NO];
 	
     if (![self showSave]) {
-	if (buttonIdx == 0) {
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"mailto:me@me.com?subject=subject&body=%@", @"DER TEXT"]]];
-	}
+		if (buttonIdx == 0) {
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"mailto:me@me.com?subject=subject&body=%@", @"DER TEXT"]]];
+		}
 	}
 
     [actionSheet release];
