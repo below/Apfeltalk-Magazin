@@ -331,7 +331,7 @@
 				CB15C87B10498EBF00360BDC /* NewsController.m in Sources */,
 				CB15C89C1049950900360BDC /* DetailNews.m in Sources */,
 				CB15C8CE1049A0CF00360BDC /* Story.m in Sources */,
-        22090EBE104FAC4700A20868 /* AsyncImageView.m in Sources */,
+				22090EBE104FAC4700A20868 /* AsyncImageView.m in Sources */,
 				22090F2C104FBECA00A20868 /* GalleryStory.m in Sources */,
 				F6FB7DD6104EDE2F007F5A54 /* fullscreen.m in Sources */,
 				F6658266104FC21300BF91E9 /* RootViewController.m in Sources */,
