@@ -92,13 +92,15 @@
 	
     if ([self showSave] && [newsController isSavedStory:[self story]])
         [self setShowSave:NO];
-	
-    if (![self showSave]) {
-		if (buttonIdx == 0) {
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:me@me.com?subject=subject&body=TEXT"]];
-		}
-	}
 
+	
+	if (buttonIdx == 0) {
+		NSString *url = [NSString stringWithString: @"mailto:foo@example.com?cc=bar@example.com&subject=Greetings%20from%20Cupertino!&body=Wish%20you%20were%20here!"];
+		[[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+		
+		//[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:me@me.com?subject=subject&body=TEXT"]];
+	}
+	
     [actionSheet release];
 }
 
