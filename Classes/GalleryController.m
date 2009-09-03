@@ -25,6 +25,7 @@
 #import "GalleryController.h"
 #import "DetailGallery.h"
 #import "AsyncImageView.h";
+#import "GalleryStory.h";
 
 @implementation GalleryController
 
@@ -49,10 +50,8 @@
 	
 	AsyncImageView* asyncImage = [[[AsyncImageView alloc] initWithFrame:previewImageFrame] autorelease];
 	asyncImage.tag = [indexPath row];
-//	NSURL *url = [NSURL URLWithString: @"http://www.apfeltalk.de/gallery/data/501/thumbs/IMG_00241.JPG"]; // TODO remove this hardcoded url. we need to get the thumb url from the rss feed
-//	NSString * link = [[stories objectAtIndex: indexPath.row] link];
 	GalleryStory *story = [stories objectAtIndex:indexPath.row];
-	NSURL *url = [NSURL URLWithString: [story thumbnailLink]]; // TODO remove this hardcoded url. we need to get the thumb url from the rss feed
+	NSURL *url = [NSURL URLWithString: [story thumbnailLink]];
 	[asyncImage loadImageFromURL:url];
 	
 	[cell.contentView addSubview:asyncImage];    
@@ -92,7 +91,8 @@
 	NSRange myRange2 = NSMakeRange(pos1.location,pos2.location - pos1.location);
 	str = [[item summary] substringWithRange:myRange2];
 	
-	[item setThumbnailLink:str];
+	
+	[(GalleryStory *)item setThumbnailLink:str];
 }     
 
  - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
