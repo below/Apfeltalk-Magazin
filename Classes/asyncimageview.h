@@ -1,5 +1,5 @@
 //
-//  Story.h
+//  AsyncImageView.m
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
@@ -22,19 +22,14 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-
-@interface Story : NSObject <NSCoding> {
-	NSString *title;
-	NSString *summary;
-	NSDate *date;
-	NSString *author;
-	NSString *link;
+@interface AsyncImageView : UIView {
+	NSURLConnection* connection; //keep a reference to the connection so we can cancel download in dealloc
+	NSMutableData* data; //keep reference to the data so we can collect it as it downloads
 }
-@property (readwrite, copy) NSString *title;
-@property (readwrite, copy) NSString *summary;
-@property (readwrite, copy) NSDate *date;
-@property (readwrite, copy) NSString *author;
-@property (readwrite, copy) NSString *link;
+
+- (void)loadImageFromURL:(NSURL*)url;
+- (UIImage*) image;
+
 @end

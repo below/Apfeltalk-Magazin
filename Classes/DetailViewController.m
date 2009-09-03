@@ -148,12 +148,14 @@
 }
 
 - (NSString *) rightBarButtonTitle {
-	return @"Speichern";
+	return @"Newsoptionen";
 }
 
 -(IBAction)speichern:(id)sender
 {
 }
+
+
 
 /*
 // Override to allow orientations other than the default portrait orientation.

@@ -1,5 +1,5 @@
 //
-//  Story.h
+//  GalleryStory.m
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
@@ -22,19 +22,15 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
-#import <Foundation/Foundation.h>
+#import "GalleryStory.h"
 
+@implementation GalleryStory
+@synthesize thumbnailLink;
 
-@interface Story : NSObject <NSCoding> {
-	NSString *title;
-	NSString *summary;
-	NSDate *date;
-	NSString *author;
-	NSString *link;
+- (void) dealloc
+{
+	[thumbnailLink release];
+	[super dealloc];
 }
-@property (readwrite, copy) NSString *title;
-@property (readwrite, copy) NSString *summary;
-@property (readwrite, copy) NSDate *date;
-@property (readwrite, copy) NSString *author;
-@property (readwrite, copy) NSString *link;
+
 @end
