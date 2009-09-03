@@ -22,7 +22,6 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
-
 #import "GalleryController.h"
 #import "DetailGallery.h"
 #import "asyncimageview.h";
@@ -58,12 +57,11 @@
 	int storyIndex = [indexPath indexAtPosition: [indexPath length] - 1];
 	
 	// No special customization
-	
-	//cell.textLabel.text = [[stories objectAtIndex: storyIndex] title];
-	//cell.textLabel.font = [UIFont boldSystemFontOfSize:12];
+	cell.indentationLevel = 5; // intend, so the image does not get cut off
+	cell.textLabel.text = [[stories objectAtIndex: storyIndex] title];
+	cell.textLabel.font = [UIFont boldSystemFontOfSize:12];
     return cell;
 }
-
 
  - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	 // Right now, let's leave it at that because the gallery has no read-indicators
