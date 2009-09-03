@@ -76,6 +76,11 @@
 	return @"Bildoptionen";
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {return YES;
+	// Return YES for supported orientations
+	return YES;
+}
+
 -(IBAction)speichern:(id)sender
 {
 	Apfeltalk_MagazinAppDelegate *appDelegate = (Apfeltalk_MagazinAppDelegate *)[[UIApplication sharedApplication] delegate];
