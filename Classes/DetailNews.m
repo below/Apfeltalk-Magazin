@@ -77,7 +77,10 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIdx
 {	
-	if (buttonIdx == 1) {
+	int numberOfButtons = [actionSheet numberOfButtons];
+	
+	// assume that when we have 3 buttons, the one with idx 1 is the save button
+	if (buttonIdx == 1 && numberOfButtons == 3) {
 		UINavigationController *navController = [self navigationController];
 		 NSArray *controllers = [navController viewControllers];
 		 
