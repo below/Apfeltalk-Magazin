@@ -24,7 +24,6 @@
 
 #import "Story.h"
 
-
 @implementation Story
 @synthesize title, summary, date, author, link;
 

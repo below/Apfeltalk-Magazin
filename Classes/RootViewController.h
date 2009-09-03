@@ -26,6 +26,7 @@
 #import <sqlite3.h>
 #import "DetailViewController.h"
 #import "Story.h"
+#import "GalleryStory.h"
 
 @interface RootViewController : UITableViewController {
 	
