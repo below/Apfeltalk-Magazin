@@ -24,6 +24,7 @@
 
 #import "DetailNews.h"
 #import "NewsController.h"
+#import "Apfeltalk_MagazinAppDelegate.h"
 
 @implementation DetailNews
 @synthesize showSave;
@@ -38,15 +39,64 @@
 	return self;
 }
 
+- (NSString *) Mailsendecode {
+	NSArray *controllers = [[self navigationController] viewControllers];
+    NewsController *newsController = (NewsController *)[controllers objectAtIndex:[controllers count] - 2];
+	
+    if ([self showSave] && [newsController isSavedStory:[self story]])
+        [self setShowSave:NO];
+	
+    if (![self showSave]) {
+		return nil;
+	} else {
+		return @"Speichern";
+	}
+}
+
 -(IBAction)speichern:(id)sender
 {
 	// This is an ugly hack
-	UINavigationController *navController = [self navigationController];
+	/*UINavigationController *navController = [self navigationController];
 	NSArray *controllers = [navController viewControllers];
 	
 	NewsController *newsController = (NewsController*) [controllers objectAtIndex:[controllers count] -2];
 	[newsController addSavedStory:[self story]];
     [[self navigationItem] setRightBarButtonItem:nil animated:YES];
+	 */
+	Apfeltalk_MagazinAppDelegate *appDelegate = (Apfeltalk_MagazinAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	UIActionSheet *myMenu = [[UIActionSheet alloc]
+							 initWithTitle: nil
+							 delegate:self
+							 cancelButtonTitle:@"Abbrechen"
+							 destructiveButtonTitle:nil
+							 otherButtonTitles: @"Per Mail versenden" , [self Mailsendecode],nil];
+	
+    [myMenu showFromTabBar:[[appDelegate tabBarController] tabBar]];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIdx
+{	
+	if (buttonIdx == 1) {
+		UINavigationController *navController = [self navigationController];
+		 NSArray *controllers = [navController viewControllers];
+		 
+		 NewsController *newsController = (NewsController*) [controllers objectAtIndex:[controllers count] -2];
+		 [newsController addSavedStory:[self story]];
+	}
+	NSArray *controllers = [[self navigationController] viewControllers];
+    NewsController *newsController = (NewsController *)[controllers objectAtIndex:[controllers count] - 2];
+	
+    if ([self showSave] && [newsController isSavedStory:[self story]])
+        [self setShowSave:NO];
+	
+    if (![self showSave]) {
+	if (buttonIdx == 0) {
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"mailto:me@me.com?subject=subject&body=%@", @"DER TEXT"]]];
+	}
+	}
+
+    [actionSheet release];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -57,8 +107,8 @@
     if ([self showSave] && [newsController isSavedStory:[self story]])
         [self setShowSave:NO];
 
-    if (![self showSave])
-        [[self navigationItem] setRightBarButtonItem:nil];
+    //if (![self showSave])
+      //  [[self navigationItem] setRightBarButtonItem:nil];
 }
 
 @end

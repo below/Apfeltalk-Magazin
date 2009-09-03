@@ -148,7 +148,7 @@
 }
 
 - (NSString *) rightBarButtonTitle {
-	return @"Speichern";
+	return @"Newsoptionen";
 }
 
 -(IBAction)speichern:(id)sender
