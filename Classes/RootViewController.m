@@ -290,11 +290,6 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {return YES;
-	// Return YES for supported orientations
-	return YES;
-}
-
 - (void)parserDidStartDocument:(NSXMLParser *)parser{	
 	[desiredElementKeysCache release];
 	desiredElementKeysCache = [self desiredElementKeys];
