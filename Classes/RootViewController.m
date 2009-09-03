@@ -279,6 +279,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	return @"http://feeds.apfeltalk.de/apfeltalk-magazin";
 }
 
+
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;

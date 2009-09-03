@@ -29,10 +29,10 @@
 		F62230401043488D00FC030D /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F622303F1043488D00FC030D /* MediaPlayer.framework */; };
 		F634305410362AA4004ACF93 /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F634304A10362AA4004ACF93 /* DetailView.xib */; };
 		F634305510362AA4004ACF93 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F634304C10362AA4004ACF93 /* DetailViewController.m */; };
-		F634305810362AA4004ACF93 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F634305110362AA4004ACF93 /* RootViewController.m */; };
 		F634306510362AC6004ACF93 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F634306010362AC6004ACF93 /* Default.png */; };
 		F634306610362AC6004ACF93 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F634306110362AC6004ACF93 /* icon.png */; };
 		F634308510362E27004ACF93 /* GalleryController.m in Sources */ = {isa = PBXBuildFile; fileRef = F634308410362E27004ACF93 /* GalleryController.m */; };
+		F6658266104FC21300BF91E9 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6658265104FC21300BF91E9 /* RootViewController.m */; };
 		F6B4FC73103697960080D615 /* DetailGallery.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B4FC72103697960080D615 /* DetailGallery.m */; };
 		F6DACAC7103EA57700003B92 /* PodcastController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6DACAC6103EA57700003B92 /* PodcastController.m */; };
 		F6DACACF103EA73F00003B92 /* DetailPodcast.m in Sources */ = {isa = PBXBuildFile; fileRef = F6DACACE103EA73F00003B92 /* DetailPodcast.m */; };
@@ -40,6 +40,8 @@
 		F6DC30C21039781600A734AF /* magazin.png in Resources */ = {isa = PBXBuildFile; fileRef = F6DC30C01039781600A734AF /* magazin.png */; };
 		F6E1BB07103DE9340099D241 /* thread_dot.gif in Resources */ = {isa = PBXBuildFile; fileRef = F6E1BB05103DE9340099D241 /* thread_dot.gif */; };
 		F6E1BB08103DE9340099D241 /* thread_dot_hot.gif in Resources */ = {isa = PBXBuildFile; fileRef = F6E1BB06103DE9340099D241 /* thread_dot_hot.gif */; };
+		F6FB7DD6104EDE2F007F5A54 /* fullscreen.m in Sources */ = {isa = PBXBuildFile; fileRef = F6FB7DD4104EDE2F007F5A54 /* fullscreen.m */; };
+		F6FB7DD7104EDE2F007F5A54 /* fullscreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6FB7DD5104EDE2F007F5A54 /* fullscreen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,11 +79,11 @@
 		F634304B10362AA4004ACF93 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		F634304C10362AA4004ACF93 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		F634305010362AA4004ACF93 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		F634305110362AA4004ACF93 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		F634306010362AC6004ACF93 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		F634306110362AC6004ACF93 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		F634308310362E27004ACF93 /* GalleryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryController.h; sourceTree = "<group>"; };
 		F634308410362E27004ACF93 /* GalleryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryController.m; sourceTree = "<group>"; };
+		F6658265104FC21300BF91E9 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		F6B4FC71103697960080D615 /* DetailGallery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailGallery.h; sourceTree = "<group>"; };
 		F6B4FC72103697960080D615 /* DetailGallery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailGallery.m; sourceTree = "<group>"; };
 		F6DACAC5103EA57700003B92 /* PodcastController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastController.h; sourceTree = "<group>"; };
@@ -92,6 +94,9 @@
 		F6DC30C01039781600A734AF /* magazin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magazin.png; sourceTree = "<group>"; };
 		F6E1BB05103DE9340099D241 /* thread_dot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = thread_dot.gif; sourceTree = "<group>"; };
 		F6E1BB06103DE9340099D241 /* thread_dot_hot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = thread_dot_hot.gif; sourceTree = "<group>"; };
+		F6FB7DD3104EDE2F007F5A54 /* fullscreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fullscreen.h; sourceTree = "<group>"; };
+		F6FB7DD4104EDE2F007F5A54 /* fullscreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fullscreen.m; sourceTree = "<group>"; };
+		F6FB7DD5104EDE2F007F5A54 /* fullscreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fullscreen.xib; path = Classes/fullscreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +169,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F6FB7DD5104EDE2F007F5A54 /* fullscreen.xib */,
 				22FB60C4104DBD5100A0F65A /* Icon-Settings.png */,
 				CB9DBA081048827C00A7B50B /* playbutton.png */,
 				4CCD3C6910470EB300627499 /* DetailBackground.png */,
@@ -214,6 +220,8 @@
 				F634304C10362AA4004ACF93 /* DetailViewController.m */,
 				F6DACACD103EA73F00003B92 /* DetailPodcast.h */,
 				F6DACACE103EA73F00003B92 /* DetailPodcast.m */,
+				F6FB7DD3104EDE2F007F5A54 /* fullscreen.h */,
+				F6FB7DD4104EDE2F007F5A54 /* fullscreen.m */,
 				CB15C89A1049950900360BDC /* DetailNews.h */,
 				CB15C89B1049950900360BDC /* DetailNews.m */,
 				F6B4FC71103697960080D615 /* DetailGallery.h */,
@@ -225,8 +233,8 @@
 		CB15C9691049B72000360BDC /* Master View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F6658265104FC21300BF91E9 /* RootViewController.m */,
 				F634305010362AA4004ACF93 /* RootViewController.h */,
-				F634305110362AA4004ACF93 /* RootViewController.m */,
 				F6DACAC5103EA57700003B92 /* PodcastController.h */,
 				F6DACAC6103EA57700003B92 /* PodcastController.m */,
 				F634308310362E27004ACF93 /* GalleryController.h */,
@@ -302,6 +310,7 @@
 				22FB6028104D9DEA00A0F65A /* Localizable.strings in Resources */,
 				22FB60C5104DBD5100A0F65A /* Icon-Settings.png in Resources */,
 				22FB60DE104DC15600A0F65A /* Settings.bundle in Resources */,
+				F6FB7DD7104EDE2F007F5A54 /* fullscreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,7 +324,6 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* Apfeltalk_MagazinAppDelegate.m in Sources */,
 				F634305510362AA4004ACF93 /* DetailViewController.m in Sources */,
-				F634305810362AA4004ACF93 /* RootViewController.m in Sources */,
 				F634308510362E27004ACF93 /* GalleryController.m in Sources */,
 				F6B4FC73103697960080D615 /* DetailGallery.m in Sources */,
 				F6DACAC7103EA57700003B92 /* PodcastController.m in Sources */,
@@ -323,8 +331,10 @@
 				CB15C87B10498EBF00360BDC /* NewsController.m in Sources */,
 				CB15C89C1049950900360BDC /* DetailNews.m in Sources */,
 				CB15C8CE1049A0CF00360BDC /* Story.m in Sources */,
-				22090EBE104FAC4700A20868 /* AsyncImageView.m in Sources */,
+        22090EBE104FAC4700A20868 /* AsyncImageView.m in Sources */,
 				22090F2C104FBECA00A20868 /* GalleryStory.m in Sources */,
+				F6FB7DD6104EDE2F007F5A54 /* fullscreen.m in Sources */,
+				F6658266104FC21300BF91E9 /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
