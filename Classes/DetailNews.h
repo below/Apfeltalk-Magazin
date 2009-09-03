@@ -25,7 +25,7 @@
 #import <Foundation/Foundation.h>
 #import "DetailViewController.h"
 
-@interface DetailNews : DetailViewController {
+@interface DetailNews : DetailViewController <UIActionSheetDelegate> {
 	BOOL showSave;
 }
 @property (readwrite) BOOL showSave;
