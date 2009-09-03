@@ -25,27 +25,42 @@
 
 #import "GalleryController.h"
 #import "DetailGallery.h"
-
-
+#import "asyncimageview.h";
 
 @implementation GalleryController
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	static NSString *CellIdentifier = @"Cell";
+	static NSString *CellIdentifier = @"ImageCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
+    } else {
+		AsyncImageView* oldImage = (AsyncImageView*)
+			[cell.contentView viewWithTag:999];
+		[oldImage removeFromSuperview];
+	}
+
+	CGRect frame;
+	frame.size.width=44.f; 
+	frame.size.height=44.f;
+	frame.origin.x=6; frame.origin.y=0;
+	AsyncImageView* asyncImage = [[[AsyncImageView alloc] initWithFrame:frame] autorelease];
+	asyncImage.tag = 999;
+	NSURL *url = [NSURL URLWithString: @"http://www.apfeltalk.de/gallery/data/501/thumbs/IMG_00241.JPG"];
+	[asyncImage loadImageFromURL:url];
+	
+	[cell.contentView addSubview:asyncImage];    
+	
+	
 	// We leave it like this for the moment, because the gallery has no read indicators
 	int storyIndex = [indexPath indexAtPosition: [indexPath length] - 1];
 	
 	// No special customization
 	
-	cell.textLabel.text = [[stories objectAtIndex: storyIndex] title];
-	cell.textLabel.font = [UIFont boldSystemFontOfSize:12];
+	//cell.textLabel.text = [[stories objectAtIndex: storyIndex] title];
+	//cell.textLabel.font = [UIFont boldSystemFontOfSize:12];
     return cell;
 }
 
