@@ -1,5 +1,5 @@
 //
-//  asyncimageview.m
+//  AsyncImageView.m
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de

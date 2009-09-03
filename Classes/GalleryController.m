@@ -24,7 +24,7 @@
 
 #import "GalleryController.h"
 #import "DetailGallery.h"
-#import "asyncimageview.h";
+#import "AsyncImageView.h";
 
 @implementation GalleryController
 

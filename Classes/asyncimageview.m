@@ -1,5 +1,5 @@
 //
-//  asyncimageview.m
+//  AsyncImageView.m
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
@@ -21,7 +21,7 @@
 //	along with this program; if not, write to the Free Software
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
-#import "asyncimageview.h"
+#import "AsyncImageView.h"
 
 @implementation AsyncImageView
 
