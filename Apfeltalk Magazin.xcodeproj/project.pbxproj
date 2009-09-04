@@ -42,6 +42,7 @@
 		F6DC30C21039781600A734AF /* magazin.png in Resources */ = {isa = PBXBuildFile; fileRef = F6DC30C01039781600A734AF /* magazin.png */; };
 		F6E1BB07103DE9340099D241 /* thread_dot.gif in Resources */ = {isa = PBXBuildFile; fileRef = F6E1BB05103DE9340099D241 /* thread_dot.gif */; };
 		F6E1BB08103DE9340099D241 /* thread_dot_hot.gif in Resources */ = {isa = PBXBuildFile; fileRef = F6E1BB06103DE9340099D241 /* thread_dot_hot.gif */; };
+		F6FB789F10512B8600B10BA3 /* DetailBackground2.png in Resources */ = {isa = PBXBuildFile; fileRef = F6FB789E10512B8600B10BA3 /* DetailBackground2.png */; };
 		F6FB7DD6104EDE2F007F5A54 /* fullscreen.m in Sources */ = {isa = PBXBuildFile; fileRef = F6FB7DD4104EDE2F007F5A54 /* fullscreen.m */; };
 		F6FB7DD7104EDE2F007F5A54 /* fullscreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6FB7DD5104EDE2F007F5A54 /* fullscreen.xib */; };
 /* End PBXBuildFile section */
@@ -98,6 +99,7 @@
 		F6DC30C01039781600A734AF /* magazin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magazin.png; sourceTree = "<group>"; };
 		F6E1BB05103DE9340099D241 /* thread_dot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = thread_dot.gif; sourceTree = "<group>"; };
 		F6E1BB06103DE9340099D241 /* thread_dot_hot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = thread_dot_hot.gif; sourceTree = "<group>"; };
+		F6FB789E10512B8600B10BA3 /* DetailBackground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DetailBackground2.png; sourceTree = "<group>"; };
 		F6FB7DD3104EDE2F007F5A54 /* fullscreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fullscreen.h; sourceTree = "<group>"; };
 		F6FB7DD4104EDE2F007F5A54 /* fullscreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fullscreen.m; sourceTree = "<group>"; };
 		F6FB7DD5104EDE2F007F5A54 /* fullscreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fullscreen.xib; path = Classes/fullscreen.xib; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				F6FB7DD5104EDE2F007F5A54 /* fullscreen.xib */,
+				F6FB789E10512B8600B10BA3 /* DetailBackground2.png */,
 				22FB60C4104DBD5100A0F65A /* Icon-Settings.png */,
 				CB9DBA081048827C00A7B50B /* playbutton.png */,
 				4CCD3C6910470EB300627499 /* DetailBackground.png */,
@@ -319,6 +322,7 @@
 				22FB60DE104DC15600A0F65A /* Settings.bundle in Resources */,
 				F6FB7DD7104EDE2F007F5A54 /* fullscreen.xib in Resources */,
 				22D4A69F105001D500BC3317 /* COPYING in Resources */,
+				F6FB789F10512B8600B10BA3 /* DetailBackground2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

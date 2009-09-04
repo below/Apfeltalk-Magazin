@@ -61,6 +61,10 @@
 	return nil;
 }
 
+- (UIImage *) usedimage {
+	authorLabel.text = nil;
+	return [UIImage imageNamed:@"DetailBackground2.png"];
+}
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {    

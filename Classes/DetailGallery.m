@@ -76,6 +76,9 @@
 	return @"Bildoptionen";
 }
 
+- (UIImage *) usedimage {
+	return [UIImage imageNamed:@"DetailBackground2.png"];
+}
 
 -(IBAction)speichern:(id)sender
 {
