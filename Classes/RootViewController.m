@@ -70,13 +70,21 @@ static NSDate *oldestStoryDate = nil;
 	[alert release];
 }
 
-- (void)alertView:(UIAlertView *)alertView
-didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	if (buttonIndex == 1)
 	{
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:info@apfeltalk.de"]];
+		NSArray *recipients = [[NSArray alloc] initWithObjects:@"info@apfeltalk.de", nil];
+		MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
+		controller.mailComposeDelegate = self;
+		[controller setToRecipients:recipients];
+		[self presentModalViewController:controller animated:YES];
+		[controller release];
 	}
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+	[self becomeFirstResponder];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
