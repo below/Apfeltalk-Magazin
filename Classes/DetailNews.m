@@ -95,12 +95,12 @@
 
 	if (buttonIdx == 0) {
 		if (TARGET_IPHONE_SIMULATOR) {
-			NSLog(@"sorry, no mail app in simulator");
+			NSLog(@"Keep in mind, that no mail could be send in Simulator mode... just providing the UI");
 			
 			MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
 			controller.mailComposeDelegate = self;
-			[controller setSubject:@"In app email..."];
-			[controller setMessageBody:@"...a tutorial from mobileorchard.com" isHTML:NO];
+			[controller setSubject:[story title] ];
+			[controller setMessageBody:[story summary] isHTML:YES];
 			[self presentModalViewController:controller animated:YES];
 			[controller release];
 		} else {
@@ -115,7 +115,7 @@
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
-//	[self becomeFirstResponder];
+	[self becomeFirstResponder];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
