@@ -96,6 +96,13 @@
 	if (buttonIdx == 0) {
 		if (TARGET_IPHONE_SIMULATOR) {
 			NSLog(@"sorry, no mail app in simulator");
+			
+			MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
+			controller.mailComposeDelegate = self;
+			[controller setSubject:@"In app email..."];
+			[controller setMessageBody:@"...a tutorial from mobileorchard.com" isHTML:NO];
+			[self presentModalViewController:controller animated:YES];
+			[controller release];
 		} else {
 			NSString *url = [NSString stringWithString: @"mailto:foo@example.com?cc=bar@example.com&subject=Greetings%20from%20Cupertino!&body=Wish%20you%20were%20here!"];
 			[[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
@@ -105,6 +112,11 @@
 	}
 	
     [actionSheet release];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+//	[self becomeFirstResponder];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -117,6 +129,10 @@
 
     //if (![self showSave])
       //  [[self navigationItem] setRightBarButtonItem:nil];
+}
+
+- (void)dealloc {
+    [super dealloc];
 }
 
 @end
