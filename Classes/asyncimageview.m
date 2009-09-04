@@ -34,18 +34,11 @@ static ImageCache *imageCache = nil;
 
 @implementation AsyncImageView
 
-
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
     }
     return self;
 }
-
-
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-
 
 - (void)dealloc {
     [connection cancel];
@@ -86,11 +79,13 @@ static ImageCache *imageCache = nil;
         return;
     }
     
-#define SPINNY_TAG 5555   
+	#define SPINNY_TAG 5555   
     
     UIActivityIndicatorView *spinny = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     spinny.tag = SPINNY_TAG;
-    spinny.center = self.center;
+	CGPoint spinnyCenter = self.center;
+	spinnyCenter.x = spinnyCenter.x - 5;
+	spinny.center = spinnyCenter;
     [spinny startAnimating];
     [self addSubview:spinny];
     [spinny release];
