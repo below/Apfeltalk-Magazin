@@ -35,6 +35,7 @@
 	IBOutlet UIWebView *webview;
 	IBOutlet UILabel *titleLabel;
 	IBOutlet UILabel *authorLabel;
+	IBOutlet UIImageView *detailimage;
 
 	Story *story;
 }
@@ -43,5 +44,6 @@
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory;
 - (NSString *)strip_tags:(NSString *)data :(NSArray *)valid_tags;
 - (NSString *) rightBarButtonTitle;
+- (UIImage *) usedimage;
 
 @end

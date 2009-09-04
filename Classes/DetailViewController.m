@@ -133,6 +133,7 @@
 	//Set the title of the navigation bar
 	//-150x150
 	NSString * buttonTitle = [self rightBarButtonTitle];
+	detailimage.image = [self usedimage];
 
     UIBarButtonItem *speichernButton = [[UIBarButtonItem alloc] initWithTitle:buttonTitle
                                                                         style:UIBarButtonItemStyleBordered
@@ -149,6 +150,10 @@
 
 - (NSString *) rightBarButtonTitle {
 	return @"Newsoptionen";
+}
+
+- (UIImage *) usedimage {
+	return [UIImage imageNamed:@"DetailBackground.png"];
 }
 
 -(IBAction)speichern:(id)sender

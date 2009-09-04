@@ -26,6 +26,11 @@
 #import "NewsController.h"
 #import "Apfeltalk_MagazinAppDelegate.h"
 
+
+@interface DetailNews (private)
+- (void)createMailComposer;
+@end
+
 @implementation DetailNews
 @synthesize showSave;
 
@@ -77,7 +82,10 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIdx
 {	
-	if (buttonIdx == 1) {
+	int numberOfButtons = [actionSheet numberOfButtons];
+	
+	// assume that when we have 3 buttons, the one with idx 1 is the save button
+	if (buttonIdx == 1 && numberOfButtons == 3) {
 		UINavigationController *navController = [self navigationController];
 		 NSArray *controllers = [navController viewControllers];
 		 
@@ -89,14 +97,31 @@
 	
     if ([self showSave] && [newsController isSavedStory:[self story]])
         [self setShowSave:NO];
-	
-    if (![self showSave]) {
-	if (buttonIdx == 0) {
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"mailto:me@me.com?subject=subject&body=%@", @"DER TEXT"]]];
-	}
-	}
 
+	if (buttonIdx == 0) {
+		if (TARGET_IPHONE_SIMULATOR) {
+			NSLog(@"Keep in mind, that no mail could be send in Simulator mode... just providing the UI");
+			[self createMailComposer];
+		} else {
+			[self createMailComposer];
+		}
+	}
+	
     [actionSheet release];
+}
+
+- (void)createMailComposer {
+	MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
+	controller.mailComposeDelegate = self;
+	[controller setSubject:[story title] ];
+	[controller setMessageBody:[story summary] isHTML:YES];
+	[self presentModalViewController:controller animated:YES];
+	[controller release];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+	[self becomeFirstResponder];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -109,6 +134,10 @@
 
     //if (![self showSave])
       //  [[self navigationItem] setRightBarButtonItem:nil];
+}
+
+- (void)dealloc {
+    [super dealloc];
 }
 
 @end
