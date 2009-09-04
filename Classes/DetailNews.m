@@ -26,6 +26,11 @@
 #import "NewsController.h"
 #import "Apfeltalk_MagazinAppDelegate.h"
 
+
+@interface DetailNews (private)
+- (void)createMailComposer;
+@end
+
 @implementation DetailNews
 @synthesize showSave;
 
@@ -96,22 +101,22 @@
 	if (buttonIdx == 0) {
 		if (TARGET_IPHONE_SIMULATOR) {
 			NSLog(@"Keep in mind, that no mail could be send in Simulator mode... just providing the UI");
-			
-			MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
-			controller.mailComposeDelegate = self;
-			[controller setSubject:[story title] ];
-			[controller setMessageBody:[story summary] isHTML:YES];
-			[self presentModalViewController:controller animated:YES];
-			[controller release];
+			[self createMailComposer];
 		} else {
-			NSString *url = [NSString stringWithString: @"mailto:foo@example.com?cc=bar@example.com&subject=Greetings%20from%20Cupertino!&body=Wish%20you%20were%20here!"];
-			[[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
-			
-			//[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:me@me.com?subject=subject&body=TEXT"]];
+			[self createMailComposer];
 		}
 	}
 	
     [actionSheet release];
+}
+
+- (void)createMailComposer {
+	MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
+	controller.mailComposeDelegate = self;
+	[controller setSubject:[story title] ];
+	[controller setMessageBody:[story summary] isHTML:YES];
+	[self presentModalViewController:controller animated:YES];
+	[controller release];
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
