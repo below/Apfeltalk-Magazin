@@ -25,8 +25,9 @@
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 #import "DetailViewController.h"
+#import <MessageUI/MessageUI.h>
 
-@interface RootViewController : UITableViewController {
+@interface RootViewController : UITableViewController <MFMailComposeViewControllerDelegate> {
 	
 	IBOutlet UITableView * newsTable;
 		
@@ -56,7 +57,6 @@
 	NSDateFormatter *dateFormatter;
 @private
 	NSArray *desiredElementKeysCache;
-
 }
 
 - (void)parseXMLFileAtURL:(NSString *)URL;

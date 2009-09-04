@@ -1,5 +1,5 @@
 //
-//  AsyncImageView.m
+//  ImageCacheObject.h
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
@@ -22,14 +22,20 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@interface AsyncImageView : UIView {
-    NSURLConnection *connection;
-    NSMutableData *data;
-    NSString *urlString; // key for image cache dictionary
+
+@interface ImageCacheObject : NSObject {
+    NSUInteger size;    // size in bytes of image data
+    NSDate *timeStamp;  // time of last access
+    UIImage *image;     // cached image
 }
 
--(void)loadImageFromURL:(NSURL*)url;
+@property (nonatomic, readonly) NSUInteger size;
+@property (nonatomic, retain, readonly) NSDate *timeStamp;
+@property (nonatomic, retain, readonly) UIImage *image;
+
+-(id)initWithSize:(NSUInteger)sz Image:(UIImage*)anImage;
+-(void)resetTimeStamp;
 
 @end
