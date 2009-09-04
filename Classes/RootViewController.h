@@ -56,7 +56,6 @@
 	NSDateFormatter *dateFormatter;
 @private
 	NSArray *desiredElementKeysCache;
-
 }
 
 - (void)parseXMLFileAtURL:(NSString *)URL;

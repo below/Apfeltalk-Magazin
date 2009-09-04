@@ -33,6 +33,7 @@
 static NSDate *oldestStoryDate = nil;
 
 @implementation RootViewController
+
 #pragma mark Class Methods
 + (NSDate *) oldestStoryDate {
 	return oldestStoryDate;

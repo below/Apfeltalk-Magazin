@@ -61,7 +61,7 @@
 	
 	// No special customization
 	cell.indentationLevel = 5; // intend, so the image does not get cut off
-	cell.textLabel.text = [[stories objectAtIndex: storyIndex] title];
+	cell.textLabel.text = [[stories objectAtIndex: storyIndex] title];    // TODO show author name in cell text
 	cell.textLabel.font = [UIFont boldSystemFontOfSize:12];
     return cell;
 }
