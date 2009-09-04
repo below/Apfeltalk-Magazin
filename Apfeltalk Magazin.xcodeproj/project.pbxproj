@@ -14,6 +14,8 @@
 		22090EBE104FAC4700A20868 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22090EBD104FAC4700A20868 /* AsyncImageView.m */; };
 		22090F2C104FBECA00A20868 /* GalleryStory.m in Sources */ = {isa = PBXBuildFile; fileRef = 22090F2B104FBECA00A20868 /* GalleryStory.m */; };
 		22250A7210510E5E008B2EEC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22250A7110510E5E008B2EEC /* MessageUI.framework */; };
+		227E1B5F105191D600844235 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 227E1B5E105191D600844235 /* ImageCache.m */; };
+		227E1B64105191F000844235 /* ImageCacheObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 227E1B63105191F000844235 /* ImageCacheObject.m */; };
 		22D4A69F105001D500BC3317 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 22D4A69E105001D500BC3317 /* COPYING */; };
 		22FB6028104D9DEA00A0F65A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22FB6026104D9DEA00A0F65A /* Localizable.strings */; };
 		22FB60C5104DBD5100A0F65A /* Icon-Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FB60C4104DBD5100A0F65A /* Icon-Settings.png */; };
@@ -58,6 +60,10 @@
 		22090F2A104FBECA00A20868 /* GalleryStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryStory.h; sourceTree = "<group>"; };
 		22090F2B104FBECA00A20868 /* GalleryStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryStory.m; sourceTree = "<group>"; };
 		22250A7110510E5E008B2EEC /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		227E1B5D105191D600844235 /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
+		227E1B5E105191D600844235 /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
+		227E1B62105191F000844235 /* ImageCacheObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCacheObject.h; sourceTree = "<group>"; };
+		227E1B63105191F000844235 /* ImageCacheObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCacheObject.m; sourceTree = "<group>"; };
 		22D4A69E105001D500BC3317 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
 		22FB6027104D9DEA00A0F65A /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		22FB602B104D9DFE00A0F65A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -146,6 +152,10 @@
 		22090EBB104FAC3200A20868 /* Helper Views */ = {
 			isa = PBXGroup;
 			children = (
+				227E1B62105191F000844235 /* ImageCacheObject.h */,
+				227E1B63105191F000844235 /* ImageCacheObject.m */,
+				227E1B5D105191D600844235 /* ImageCache.h */,
+				227E1B5E105191D600844235 /* ImageCache.m */,
 				22090EBC104FAC4700A20868 /* AsyncImageView.h */,
 				22090EBD104FAC4700A20868 /* AsyncImageView.m */,
 			);
@@ -347,6 +357,8 @@
 				22090F2C104FBECA00A20868 /* GalleryStory.m in Sources */,
 				F6FB7DD6104EDE2F007F5A54 /* fullscreen.m in Sources */,
 				F6658266104FC21300BF91E9 /* RootViewController.m in Sources */,
+				227E1B5F105191D600844235 /* ImageCache.m in Sources */,
+				227E1B64105191F000844235 /* ImageCacheObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
