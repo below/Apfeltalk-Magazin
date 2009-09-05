@@ -266,20 +266,28 @@ static NSDate *oldestStoryDate = nil;
 }
 
 - (void)setApplicationDefaults {
-	// set the showIconBadge property
-	NSString *iconBadgeToogleValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"showIconBadge"];
-	if([iconBadgeToogleValue isEqualToString: @"1"]) {
+	NSString *testValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"showIconBadge"];
+	if (testValue == nil)
+	{
+		// no default values have been set, create them here based on what's in our Settings bundle info
 		showIconBadge = YES;
-	} else {
-		showIconBadge = NO;
-	}
-	
-	// set the shakeToReload property
-	NSString *shakeToReloadToggleValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"shakeToReload"];
-	if([shakeToReloadToggleValue isEqualToString: @"1"]) {
 		shakeToReload = YES;
 	} else {
-		shakeToReload = NO;
+		// set the showIconBadge property
+		NSString *iconBadgeToogleValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"showIconBadge"];
+		if([iconBadgeToogleValue isEqualToString: @"1"]) {
+			showIconBadge = YES;
+		} else {
+			showIconBadge = NO;
+		}
+		
+		// set the shakeToReload property
+		NSString *shakeToReloadToggleValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"shakeToReload"];
+		if([shakeToReloadToggleValue isEqualToString: @"1"]) {
+			shakeToReload = YES;
+		} else {
+			shakeToReload = NO;
+		}
 	}
 	
 	NSLog(@"Application configuration: [showIconBadge: %d], [shakeToReload: %d]", showIconBadge, shakeToReload);
