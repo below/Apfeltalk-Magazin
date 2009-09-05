@@ -47,6 +47,16 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	}
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+	// if our view is not active/visible, we don't want to receive Accelerometer events
+	if(shakeToReload)
+	{
+		UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
+		accel.delegate = nil;
+	}
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 2;
 }
@@ -87,7 +97,8 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 }
 
 // activate the UIAcceleromter for Shake To Reload
-- (void) activateShakeToReload {
+- (void) activateShakeToReload
+{
 	UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
     accel.delegate = self;
     accel.updateInterval = kUpdateInterval;	
