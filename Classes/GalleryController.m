@@ -41,6 +41,18 @@
 	}	
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	
+	// if our view is not active/visible, we don't want to receive Accelerometer events
+	if(shakeToReload)
+	{
+		UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
+		accel.delegate = nil;
+	}
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	static NSString *CellIdentifier = @"ImageCell";
