@@ -103,20 +103,6 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	}
 }
 
-//check if the given story is in the list of saved ones
--(BOOL) isStoryInSavedStories:(Story *)story {
-	BOOL ret = FALSE;
-	for (Story *s in savedStories){
-		NSString *firstLink = [s link];
-		NSString *secondLink = [story link];
-		if ([firstLink isEqualToString: secondLink]) {
-			ret = TRUE;
-		}
-	}
-
-	return ret;
-}
-
 //set editingStyle on current row. If set do UITableViewCellEditingStyleDelete, delete button is shown at swipe gesture
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCellEditingStyle editingStyle = UITableViewCellEditingStyleNone;		//default
@@ -124,7 +110,7 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	
 	if(section == SAVED_MESSAGES_SECTION_INDEX) {
 		Story *story = [savedStories objectAtIndex: indexPath.row];
-		if ([self isStoryInSavedStories:story]) {						//TODO this needs refactoring. We should just check if message in correct Section, instead of checking every story.
+		if ([self isSavedStory:story]) {						//TODO this needs refactoring. We should just check if message in correct Section, instead of checking every story.
 			editingStyle = UITableViewCellEditingStyleDelete;
 		}
 	}

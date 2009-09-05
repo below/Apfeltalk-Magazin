@@ -1,5 +1,5 @@
 //
-//  fullscreen.m
+//  Fullscreen.m
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
@@ -22,10 +22,10 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
-#import "fullscreen.h"
+#import "Fullscreen.h"
 
 
-@implementation fullscreen
+@implementation Fullscreen
 
 @synthesize string;
 

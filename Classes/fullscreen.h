@@ -1,5 +1,5 @@
 //
-//  fullscreen.h
+//  Fullscreen.h
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
@@ -25,7 +25,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface fullscreen : UIViewController {
+@interface Fullscreen : UIViewController {
 	IBOutlet UIImageView *imageview;
 	NSString *string;
 }
