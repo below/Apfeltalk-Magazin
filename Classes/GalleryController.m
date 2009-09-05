@@ -29,6 +29,18 @@
 
 @implementation GalleryController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	if(shakeToReload) {
+		NSLog(@"Shake To Reload is on, activae UIAccelerometer");
+		[self activateShakeToReload:self];
+	} else {
+		NSLog(@"Shake To Reload is off, don't activae UIAccelerometer");
+	}	
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	static NSString *CellIdentifier = @"ImageCell";
@@ -48,7 +60,6 @@
 	previewImageFrame.origin.y=0;
 	
 	AsyncImageView* asyncImage = [[[AsyncImageView alloc] initWithFrame:previewImageFrame] autorelease];
-//	asyncImage.tag = [indexPath row];
 	asyncImage.tag = 999;
 	GalleryStory *story = [stories objectAtIndex:indexPath.row];
 	NSURL *url = [NSURL URLWithString: [story thumbnailLink]];
@@ -92,7 +103,7 @@
 	str = [[item summary] substringWithRange:myRange2];
 	
 	[(GalleryStory *)item setThumbnailLink:str];
-}     
+}
 
  - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	 // Right now, let's leave it at that because the gallery has no read-indicators
@@ -126,6 +137,15 @@
 
 - (Class) storyClass {
 	return [GalleryStory self];
+}
+
+// handle acceleromter event
+- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
+	if ([self isShake:acceleration]) {
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+		[super parseXMLFileAtURL:[self documentPath]];
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	}
 }
 
 - (void)dealloc {

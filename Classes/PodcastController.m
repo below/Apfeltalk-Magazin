@@ -27,6 +27,18 @@
 
 @implementation PodcastController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	if(shakeToReload) {
+		NSLog(@"Shake To Reload is on, activae UIAccelerometer");
+		[self activateShakeToReload:self];
+	} else {
+		NSLog(@"Shake To Reload is off, don't activae UIAccelerometer");
+	}	
+}
+
 - (Class) detailControllerClass {
 	return [DetailPodcast self];
 }
@@ -48,6 +60,15 @@
 - (void)updateApplicationIconBadgeNumber {
 	//We don't want to update the Application Icon Badge for Podcasts
 	[super updateApplicationIconBadgeNumber];
+}
+
+// handle acceleromter event
+- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
+	if ([self isShake:acceleration]) {
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+		[super parseXMLFileAtURL:[self documentPath]];
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	}
 }
 
 @end

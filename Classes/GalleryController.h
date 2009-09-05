@@ -25,7 +25,7 @@
 #import <UIKit/UIKit.h>
 #import "RootViewController.h"
 
-@interface GalleryController : RootViewController {
+@interface GalleryController : RootViewController <UIAccelerometerDelegate> {
 }
 
 @end
