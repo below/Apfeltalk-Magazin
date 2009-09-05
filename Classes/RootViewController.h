@@ -79,4 +79,5 @@
 
 - (NSString *) documentPath;
 - (BOOL)isShake:(UIAcceleration *)acceleration;
+- (void)activateShakeToReload:(id)delegate;
 @end

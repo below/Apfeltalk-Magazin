@@ -425,6 +425,14 @@ static NSDate *oldestStoryDate = nil;
 	//logic is now in each Controllers
 }
 
+// activate the UIAcceleromter for Shake To Reload
+- (void) activateShakeToReload:(id)delegate
+{
+	UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
+    accel.delegate = delegate;
+    accel.updateInterval = kUpdateInterval;	
+}
+
 - (BOOL) isShake:(UIAcceleration *)acceleration
 {
 	BOOL ret = NO;

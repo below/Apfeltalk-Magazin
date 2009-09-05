@@ -28,7 +28,6 @@
 @interface NewsController (private)
 - (NSString *) savedStoryFilepath;
 - (BOOL) saveStories;
-- (void) activateShakeToReload;
 @end
 
 @implementation NewsController
@@ -41,7 +40,7 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	
 	if(shakeToReload) {
 		NSLog(@"Shake To Reload is on, activae UIAccelerometer");
-		[self activateShakeToReload];
+		[self activateShakeToReload:self];
 	} else {
 		NSLog(@"Shake To Reload is off, don't activae UIAccelerometer");
 	}
@@ -96,14 +95,6 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	cell.textLabel.text = [[savedStories objectAtIndex: storyIndex] title];
 	
     return cell;
-}
-
-// activate the UIAcceleromter for Shake To Reload
-- (void) activateShakeToReload
-{
-	UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
-    accel.delegate = self;
-    accel.updateInterval = kUpdateInterval;	
 }
 
 // handle acceleromter event
