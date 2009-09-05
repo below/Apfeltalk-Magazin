@@ -25,9 +25,6 @@
 #import <UIKit/UIKit.h>
 #import "RootViewController.h"
 
-#define kAccelerationThreshold        2.2
-#define kUpdateInterval               (1.0f/10.0f)
-
 @interface NewsController : RootViewController <UIAccelerometerDelegate> {
 	@private
 	NSMutableArray *savedStories;

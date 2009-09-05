@@ -416,11 +416,6 @@ static NSDate *oldestStoryDate = nil;
 	[newsTable reloadData];
 }
 
-/*- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {return YES;
-	// Return YES for supported orientations
-	return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}*/
-
 - (void)didReceiveMemoryWarning {
 	[super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
 	// Release anything that's not essential, such as cached data
@@ -429,6 +424,20 @@ static NSDate *oldestStoryDate = nil;
 - (void)updateApplicationIconBadgeNumber{
 	//logic is now in each Controllers
 }
+
+- (BOOL) isShake:(UIAcceleration *)acceleration
+{
+	BOOL ret = NO;
+	
+	if (acceleration.x > kAccelerationThreshold || acceleration.y > kAccelerationThreshold || acceleration.z > kAccelerationThreshold)
+	{
+		ret = YES;
+		NSLog(@"shake was recognized", acceleration);
+	}
+	
+	return ret;
+}
+
 
 - (void)dealloc {
 	

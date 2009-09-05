@@ -22,6 +22,9 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
+#define kAccelerationThreshold        2.2
+#define kUpdateInterval               (1.0f/10.0f)
+
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 #import "DetailViewController.h"
@@ -75,4 +78,5 @@
 - (BOOL) databaseContainsURL:(NSString *)link;
 
 - (NSString *) documentPath;
+- (BOOL)isShake:(UIAcceleration *)acceleration;
 @end

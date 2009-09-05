@@ -49,6 +49,8 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+	[super viewWillDisappear:animated];
+	
 	// if our view is not active/visible, we don't want to receive Accelerometer events
 	if(shakeToReload)
 	{
@@ -106,8 +108,7 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 
 // handle acceleromter event
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
-	if (acceleration.x > kAccelerationThreshold || acceleration.y > kAccelerationThreshold || acceleration.z > kAccelerationThreshold) {
-		NSLog(@"didAccelerate called: %@. (and shake was recognized)", acceleration);
+	if ([self isShake:acceleration]) {
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 		[super parseXMLFileAtURL:[self documentPath]];
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
