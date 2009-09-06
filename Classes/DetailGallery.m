@@ -23,7 +23,7 @@
 //
 
 #import "DetailGallery.h"
-#import "fullscreen.h"
+#import "Fullscreen.h"
 #import "RootViewController.h"
 #import "Apfeltalk_MagazinAppDelegate.h"
 
@@ -117,7 +117,7 @@
 	str = [[[self story] summary] substringWithRange:myRange2];
 	
 	if (buttonIdx == 2) {
-		fullscreen *dvController = [[fullscreen alloc] initWithNibName:@"fullscreen" bundle:[NSBundle mainBundle]];
+		Fullscreen *dvController = [[Fullscreen alloc] initWithNibName:@"fullscreen" bundle:[NSBundle mainBundle]];
 		dvController.string = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
 		
 		[self.navigationController pushViewController:dvController animated:YES];
