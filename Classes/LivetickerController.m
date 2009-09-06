@@ -23,18 +23,94 @@
 //
 
 #import "LivetickerController.h"
+#import "Story.h"
 
 
 @implementation LivetickerController
 
-@synthesize tickerEntries;
+@synthesize stories;
+@synthesize reloadTimer;
+@synthesize shortTimeFormatter;
+
+
+- (void)setReloadTimer:(NSTimer *)timer
+{
+    if (timer != reloadTimer)
+    {
+        [reloadTimer invalidate];
+        [reloadTimer release];
+        reloadTimer = [timer retain];
+    }
+}
 
 
 
 - (void)dealloc
 {
-    [tickerEntries release];
+    [stories release];
+    if (reloadTimer)
+    {
+        [reloadTimer invalidate];
+        [reloadTimer release];
+    }
+
     [super dealloc];
+}
+
+
+
+- (void)viewDidLoad
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+
+    [formatter setDateFormat:@"HH:mm"];
+    [self setShortTimeFormatter:formatter];
+    [formatter release];
+
+    [self setStories:[NSMutableArray array]];
+}
+
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self setReloadTimer:[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(reloadTickerEntries:) userInfo:nil repeats:YES]];
+    [self reloadTickerEntries:nil];
+}
+
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self setReloadTimer:nil];
+}
+
+
+
+- (NSString *)dateElementName
+{
+    return @"pubDate";  // Can be inherited from the super class
+}
+
+
+
+- (void)reloadTickerEntries:(NSTimer *)timer
+{
+    NSArray      *names = [NSArray arrayWithObjects:@"title", @"link", [self dateElementName], @"dc:creator", @"content:encoded", nil];
+    NSArray      *keys = [NSArray arrayWithObjects:@"title", @"link", @"date", @"author", @"summary", nil];
+    NSDictionary *elementKeys = [NSDictionary dictionaryWithObjects:keys forKeys:names];
+
+    ATXMLParser  *parser = [ATXMLParser parserWithURLString:@"http://feeds.apfeltalk.de/apfeltalk-live"];
+
+    [parser setDelegate:self];
+    [parser setStoryClass:[Story self]];
+    [parser setDateElementName:[self dateElementName]];
+    [parser setDesiredElementKeys:elementKeys];
+
+    if ([parser parse])
+        [(UITableView *)[self view] reloadData];
+    else
+        [self setReloadTimer:nil];
 }
 
 
@@ -49,11 +125,15 @@
 
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdendifier] autorelease];
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:12.0];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdendifier] autorelease];
+        [[cell textLabel] setFont:[UIFont boldSystemFontOfSize:12.0]];
+        [[cell detailTextLabel] setFont:[UIFont boldSystemFontOfSize:12.0]];
     }
 
-    cell.textLabel.text = @"BlaBlubb";
+    Story *story = [stories objectAtIndex:[indexPath row]];
+
+    [[cell detailTextLabel] setText:[story title]];
+    [[cell textLabel] setText:[[self shortTimeFormatter] stringFromDate:[story date]]];
 
     return cell;
 }
@@ -62,7 +142,28 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [tickerEntries count];
+    return [stories count];
+}
+
+
+
+#pragma mark -
+#pragma mark ATXMLParserDelegateProtocol
+
+- (void)parser:(ATXMLParser *)parser setParsedStories:(NSArray *)parsedStories
+{
+    [self setStories:parsedStories];
+}
+
+
+
+- (void)parser:(ATXMLParser *)parser parseErrorOccurred:(NSError *)parseError
+{
+    [self setReloadTimer:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Parsing Error", nil) message:[parseError localizedDescription]
+                                                       delegate:nil cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:nil];
+    [alertView show];
+    [alertView release];
 }
 
 @end

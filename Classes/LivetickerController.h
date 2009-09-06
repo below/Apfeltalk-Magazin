@@ -23,14 +23,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RootViewController.h"
+#import "ATXMLParser.h"
 
 
-@interface LivetickerController : UITableViewController
+@interface LivetickerController : UITableViewController <ATXMLParserDelegateProtocol>
 {
-    NSMutableArray *tickerEntries;
+    NSArray         *stories;
+    NSTimer         *reloadTimer;
+    NSDateFormatter *shortTimeFormatter;
 }
 
-@property(retain) NSMutableArray *tickerEntries;
+@property(retain) NSArray *stories;
+@property(retain) NSTimer *reloadTimer;
+@property(retain) NSDateFormatter *shortTimeFormatter;
+
+- (void)reloadTickerEntries:(NSTimer *)timer;
 
 @end
