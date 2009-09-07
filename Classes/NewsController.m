@@ -164,7 +164,7 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 - (void) addSavedStory:(Story *)newStory {
 	if (savedStories == nil)
 		savedStories = [NSMutableArray new];
-	[savedStories addObject:newStory];
+	[savedStories insertObject:newStory atIndex:0];
 	[self saveStories];
 	[newsTable reloadData];
 }
