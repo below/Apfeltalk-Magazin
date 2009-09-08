@@ -78,6 +78,7 @@ static NSDate *oldestStoryDate = nil;
 		MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
 		controller.mailComposeDelegate = self;
 		[controller setToRecipients:recipients];
+		[recipients release];
 		[self presentModalViewController:controller animated:YES];
 		[controller release];
 	}
@@ -341,6 +342,7 @@ static NSDate *oldestStoryDate = nil;
 	
 	UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Error loading content" message:errorString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 	[errorAlert show];
+	[errorAlert release];
 }
 
 #pragma mark The things that can/should be subclassed should be grouped somehow
