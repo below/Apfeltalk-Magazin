@@ -28,6 +28,10 @@
 @interface DetailViewController : UIViewController <UIWebViewDelegate> {
 	IBOutlet UILabel *datum;
 	IBOutlet UILabel *lblText;
+	IBOutlet UIImageView *thumbnail;
+	IBOutlet UIScrollView *scrollView2;
+	IBOutlet UITextView *sunText;
+	IBOutlet UINavigationBar *Textvar;
 	IBOutlet UIWebView *webview;
 	IBOutlet UILabel *titleLabel;
 	IBOutlet UILabel *authorLabel;
@@ -37,6 +41,7 @@
 }
 @property (readwrite, retain) Story *story;
 
+- (void)setAllowsRubberBanding:(BOOL)allowsRubberBanding;
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory;
 - (NSString *)strip_tags:(NSString *)data :(NSArray *)valid_tags;
 - (NSString *) rightBarButtonTitle;

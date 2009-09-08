@@ -77,7 +77,7 @@
 }
 
 - (UIImage *) usedimage {
-	return [UIImage imageNamed:@"DetailBackground2.png"];
+	return [UIImage imageNamed:@"header.png"];
 }
 
 -(IBAction)speichern:(id)sender

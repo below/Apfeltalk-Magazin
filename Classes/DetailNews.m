@@ -78,7 +78,6 @@
 							 otherButtonTitles: @"Per Mail versenden" , [self Mailsendecode],nil];
 	
     [myMenu showFromTabBar:[[appDelegate tabBarController] tabBar]];
-	[myMenu release];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIdx
