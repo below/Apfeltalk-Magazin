@@ -144,8 +144,6 @@
 
 	NSString * htmlString = [self htmlString];
 	[webview loadHTMLString:htmlString baseURL:nil];
-		
-	[webview release];
 }
 
 - (NSString *) rightBarButtonTitle {
