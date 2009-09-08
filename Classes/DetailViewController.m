@@ -99,9 +99,10 @@
 //	nui = [self strip_tags:nui :tags];
 	nui = [nui stringByReplacingOccurrencesOfString:@"Miniaturansicht angehängter Grafiken" withString:@""];
 	
+	NSURL *bubbleMiddleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"button_middle" ofType:@"png"]];
 	NSString *name2 = [NSString stringWithFormat:@"<head> <title>Kommentare</title> <style type=\"text/css\"> \
 					   body		{font-family: \"Helvetica\", sans-serif; font-size:13px; margin: 0; padding: 0;\
-					   background: url(http://www.itouchloads.de/bubble_middle.png) \
+					   background: url(%@) \
 					   repeat scroll 0 0;} div.button 	{border:1px solid #B1B1B1;cursor:pointer;\
 					   font-weight:bold;margin-left:10px;margin-right:10px; background-color: white; \
 					   padding-bottom:10px; padding-left:10px;padding-top:10px;text-shadow:0 1px 0 #FFFFFF; \
@@ -114,7 +115,8 @@
 					   content=\"maximum-scale=1.0 width=device-width initial-scale=1.0 user-scalable=no\" /> \
 					   </head> <body>  </body> ", [[[self story] date] description]];
 	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;\
-			border: 0px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br>",nui, name2];
+			border: 0px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br>",
+			[bubbleMiddleURL absoluteString], nui, name2];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
