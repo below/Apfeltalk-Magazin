@@ -28,10 +28,6 @@
 @interface DetailViewController : UIViewController <UIWebViewDelegate> {
 	IBOutlet UILabel *datum;
 	IBOutlet UILabel *lblText;
-	IBOutlet UIImageView *thumbnail;
-	IBOutlet UIScrollView *scrollView2;
-	IBOutlet UITextView *sunText;
-	IBOutlet UINavigationBar *Textvar;
 	IBOutlet UIWebView *webview;
 	IBOutlet UILabel *titleLabel;
 	IBOutlet UILabel *authorLabel;
