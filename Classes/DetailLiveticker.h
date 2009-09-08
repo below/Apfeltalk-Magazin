@@ -1,5 +1,5 @@
 //
-//  LivetickerController.h
+//  DetailLiveticker.h
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
@@ -23,18 +23,23 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ATXMLParser.h"
+#import "Story.h"
 
 
-@interface LivetickerController : UITableViewController <ATXMLParserDelegateProtocol>
+@interface DetailLiveticker : UIViewController <UIWebViewDelegate>
 {
-    NSArray         *stories;
-    NSDateFormatter *shortTimeFormatter;
+    IBOutlet UILabel     *titleLabel;
+    IBOutlet UILabel     *authorLabel;
+    IBOutlet UILabel     *datum;
+    IBOutlet UIWebView   *webview;
+    IBOutlet UIImageView *detailimage;
+
+    Story *story;
 }
 
-@property(retain) NSArray *stories;
-@property(retain) NSDateFormatter *shortTimeFormatter;
+@property(retain) Story *story;
 
-- (void)reloadTickerEntries:(NSTimer *)timer;
+- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory;
+- (NSString *)htmlString;
 
 @end

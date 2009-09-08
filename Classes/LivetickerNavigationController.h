@@ -1,12 +1,12 @@
 //
-//  LivetickerController.h
+//  LivetickerNavigationController.h
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
 //	Copyright (C) 2009	Stephan König (stephankoenig at me dot com), Stefan Kofler
 //						Alexander von Below, Andreas Rami, Michael Fenske, Jesper (Graphics),
 //						Patrick Rollbis (Graphics),
-//						
+//
 //	This program is free software; you can redistribute it and/or
 //	modify it under the terms of the GNU General Public License
 //	as published by the Free Software Foundation; either version 2
@@ -23,18 +23,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ATXMLParser.h"
 
 
-@interface LivetickerController : UITableViewController <ATXMLParserDelegateProtocol>
+@interface LivetickerNavigationController : UINavigationController
 {
-    NSArray         *stories;
-    NSDateFormatter *shortTimeFormatter;
+    NSTimer *reloadTimer;
 }
 
-@property(retain) NSArray *stories;
-@property(retain) NSDateFormatter *shortTimeFormatter;
-
-- (void)reloadTickerEntries:(NSTimer *)timer;
+@property(retain) NSTimer *reloadTimer;
 
 @end

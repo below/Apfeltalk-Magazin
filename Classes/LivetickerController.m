@@ -23,36 +23,20 @@
 //
 
 #import "LivetickerController.h"
+#import "LivetickerNavigationController.h"
+#import "DetailLiveticker.h"
 #import "Story.h"
 
 
 @implementation LivetickerController
 
 @synthesize stories;
-@synthesize reloadTimer;
 @synthesize shortTimeFormatter;
-
-
-- (void)setReloadTimer:(NSTimer *)timer
-{
-    if (timer != reloadTimer)
-    {
-        [reloadTimer invalidate];
-        [reloadTimer release];
-        reloadTimer = [timer retain];
-    }
-}
-
 
 
 - (void)dealloc
 {
     [stories release];
-    if (reloadTimer)
-    {
-        [reloadTimer invalidate];
-        [reloadTimer release];
-    }
 
     [super dealloc];
 }
@@ -68,21 +52,6 @@
     [formatter release];
 
     [self setStories:[NSMutableArray array]];
-}
-
-
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [self setReloadTimer:[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(reloadTickerEntries:) userInfo:nil repeats:YES]];
-    [self reloadTickerEntries:nil];
-}
-
-
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [self setReloadTimer:nil];
 }
 
 
@@ -110,13 +79,13 @@
     if ([parser parse])
         [(UITableView *)[self view] reloadData];
     else
-        [self setReloadTimer:nil];
+        [(LivetickerNavigationController *)[self navigationController] setReloadTimer:nil];
 }
 
 
 
 #pragma mark -
-#pragma mark UITableViewDataSource methods
+#pragma mark UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -147,6 +116,17 @@
 
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Story            *story = [stories objectAtIndex:[indexPath row]];
+    DetailLiveticker *detailController = [[DetailLiveticker alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle] story:story];
+
+    [[self navigationController] pushViewController:detailController animated:YES];
+    [detailController release];
+}
+
+
+
 #pragma mark -
 #pragma mark ATXMLParserDelegateProtocol
 
@@ -159,7 +139,7 @@
 
 - (void)parser:(ATXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
-    [self setReloadTimer:nil];
+    [(LivetickerNavigationController *)[self navigationController] setReloadTimer:nil];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Parsing Error", nil) message:[parseError localizedDescription]
                                                        delegate:nil cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:nil];
     [alertView show];
