@@ -1,9 +1,9 @@
 //
-//  Localizable.strings
+//  DetailLiveticker.h
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
-//	Copyright (C) 2009	Stephan König (stephankoenig at mac dot com), Stefan Kofler
+//	Copyright (C) 2009	Stephan König (stephankoenig at me dot com), Stefan Kofler
 //						Alexander von Below, Andreas Rami, Michael Fenske, Jesper (Graphics),
 //						Patrick Rollbis (Graphics),
 //						
@@ -22,6 +22,24 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
-"Cancel" = "Cancel";
-"NewsController.TableView.DeleteButtonLabel" = "Delete";
-"Parsing Error" = "Parser Fehler";
+#import <UIKit/UIKit.h>
+#import "Story.h"
+
+
+@interface DetailLiveticker : UIViewController <UIWebViewDelegate>
+{
+    IBOutlet UILabel     *titleLabel;
+    IBOutlet UILabel     *authorLabel;
+    IBOutlet UILabel     *datum;
+    IBOutlet UIWebView   *webview;
+    IBOutlet UIImageView *detailimage;
+
+    Story *story;
+}
+
+@property(retain) Story *story;
+
+- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory;
+- (NSString *)htmlString;
+
+@end

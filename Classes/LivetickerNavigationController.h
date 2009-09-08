@@ -1,12 +1,12 @@
 //
-//  Localizable.strings
+//  LivetickerNavigationController.h
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
-//	Copyright (C) 2009	Stephan König (stephankoenig at mac dot com), Stefan Kofler
+//	Copyright (C) 2009	Stephan König (stephankoenig at me dot com), Stefan Kofler
 //						Alexander von Below, Andreas Rami, Michael Fenske, Jesper (Graphics),
 //						Patrick Rollbis (Graphics),
-//						
+//
 //	This program is free software; you can redistribute it and/or
 //	modify it under the terms of the GNU General Public License
 //	as published by the Free Software Foundation; either version 2
@@ -22,6 +22,14 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
-"Cancel" = "Cancel";
-"NewsController.TableView.DeleteButtonLabel" = "Delete";
-"Parsing Error" = "Parser Fehler";
+#import <UIKit/UIKit.h>
+
+
+@interface LivetickerNavigationController : UINavigationController
+{
+    NSTimer *reloadTimer;
+}
+
+@property(retain) NSTimer *reloadTimer;
+
+@end

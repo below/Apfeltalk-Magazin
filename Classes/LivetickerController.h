@@ -1,9 +1,9 @@
 //
-//  Localizable.strings
+//  LivetickerController.h
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
-//	Copyright (C) 2009	Stephan König (stephankoenig at mac dot com), Stefan Kofler
+//	Copyright (C) 2009	Stephan König (stephankoenig at me dot com), Stefan Kofler
 //						Alexander von Below, Andreas Rami, Michael Fenske, Jesper (Graphics),
 //						Patrick Rollbis (Graphics),
 //						
@@ -22,6 +22,19 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
-"Cancel" = "Cancel";
-"NewsController.TableView.DeleteButtonLabel" = "Delete";
-"Parsing Error" = "Parser Fehler";
+#import <UIKit/UIKit.h>
+#import "ATXMLParser.h"
+
+
+@interface LivetickerController : UITableViewController <ATXMLParserDelegateProtocol>
+{
+    NSArray         *stories;
+    NSDateFormatter *shortTimeFormatter;
+}
+
+@property(retain) NSArray *stories;
+@property(retain) NSDateFormatter *shortTimeFormatter;
+
+- (void)reloadTickerEntries:(NSTimer *)timer;
+
+@end
