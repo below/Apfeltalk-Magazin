@@ -92,7 +92,6 @@
 							 otherButtonTitles:@"Kopieren", @"Bild speichern", @"Zeige Bild",nil];
 
     [myMenu showFromTabBar:[[appDelegate tabBarController] tabBar]];
-	[myMenu release];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIdx
