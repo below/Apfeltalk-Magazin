@@ -24,13 +24,21 @@
 
 #import <Foundation/Foundation.h>
 
+
 @class ATXMLParser;
 
+
 @protocol ATXMLParserDelegateProtocol
+
+@optional
+- (void)parser:(ATXMLParser *)parser didFinishedSuccessfull:(BOOL)success;
+
 @required
 - (void)parser:(ATXMLParser *)parser setParsedStories:(NSArray *)parsedStories;
 - (void)parser:(ATXMLParser *)parser parseErrorOccurred:(NSError *)parserError;
+
 @end
+
 
 
 #pragma mark -
@@ -62,7 +70,8 @@
 + (ATXMLParser *)parserWithURLString:(NSString *)urlString;
 
 - (id)initWithURLString:(NSString *)urlString;
-- (BOOL)parse;
 - (void)setDateFormat:(NSString *)format localeIdentifier:(NSString *)identifier;
+- (BOOL)parse;
+- (void)parseInBackgroundWithDelegate:(id <ATXMLParserDelegateProtocol>)object;
 
 @end

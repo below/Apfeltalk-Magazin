@@ -23,6 +23,7 @@
 //
 
 #import "ATXMLParser.h"
+#import "Story.h";
 
 
 @implementation ATXMLParser
@@ -48,7 +49,15 @@
 {
     if (self = [super init])
     {
+        [self setStoryClass:[Story self]];
+        [self setDateElementName:@"pubDate"];
         [self setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz" localeIdentifier:@"en_US"];
+
+        NSArray      *names = [NSArray arrayWithObjects:@"title", @"link", [self dateElementName], @"dc:creator", @"content:encoded", nil];
+        NSArray      *keys = [NSArray arrayWithObjects:@"title", @"link", @"date", @"author", @"summary", nil];
+        NSDictionary *elementKeys = [NSDictionary dictionaryWithObjects:keys forKeys:names];
+        [self setDesiredElementKeys:elementKeys];
+
         xmlParser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:urlString]];
         [xmlParser setDelegate:self];
     }
@@ -73,13 +82,6 @@
 
 
 
-- (BOOL)parse
-{
-    return [xmlParser parse];
-}
-
-
-
 - (void)setDateFormat:(NSString *)format localeIdentifier:(NSString *)identifier
 {
     NSLocale        *locale = [[NSLocale alloc] initWithLocaleIdentifier:identifier];
@@ -94,13 +96,36 @@
 }
 
 
+
+- (BOOL)parse
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    return [xmlParser parse];
+}
+
+
+
+- (void)parseInBackgroundWithDelegate:(id <ATXMLParserDelegateProtocol>)object
+{
+    BOOL               result;
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    [self setDelegate:object];
+
+    result = [self parse];
+    if ([(NSObject *)delegate respondsToSelector:@selector(parser:didFinishedSuccessfull:)])
+        [delegate parser:self didFinishedSuccessfull:result];
+
+    [pool release];
+}
+
+
 #pragma mark -
 #pragma mark NSXMLParser delegate methods
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser
 {
     [self setStories:[NSMutableArray array]];
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 }
 
 

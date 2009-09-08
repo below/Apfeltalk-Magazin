@@ -56,30 +56,11 @@
 
 
 
-- (NSString *)dateElementName
-{
-    return @"pubDate";  // Can be inherited from the super class
-}
-
-
-
 - (void)reloadTickerEntries:(NSTimer *)timer
 {
-    NSArray      *names = [NSArray arrayWithObjects:@"title", @"link", [self dateElementName], @"dc:creator", @"content:encoded", nil];
-    NSArray      *keys = [NSArray arrayWithObjects:@"title", @"link", @"date", @"author", @"summary", nil];
-    NSDictionary *elementKeys = [NSDictionary dictionaryWithObjects:keys forKeys:names];
-
     ATXMLParser  *parser = [ATXMLParser parserWithURLString:@"http://feeds.apfeltalk.de/apfeltalk-live"];
 
-    [parser setDelegate:self];
-    [parser setStoryClass:[Story self]];
-    [parser setDateElementName:[self dateElementName]];
-    [parser setDesiredElementKeys:elementKeys];
-
-    if ([parser parse])
-        [(UITableView *)[self view] reloadData];
-    else
-        [(LivetickerNavigationController *)[self navigationController] setReloadTimer:nil];
+    [NSThread detachNewThreadSelector:@selector(parseInBackgroundWithDelegate:) toTarget:parser withObject:self];
 }
 
 
@@ -129,6 +110,16 @@
 
 #pragma mark -
 #pragma mark ATXMLParserDelegateProtocol
+
+- (void)parser:(ATXMLParser *)parser didFinishedSuccessfull:(BOOL)success
+{
+    if (success)
+        [(UITableView *)[self view] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    else
+        [(LivetickerNavigationController *)[self navigationController] setReloadTimer:nil];
+}
+
+
 
 - (void)parser:(ATXMLParser *)parser setParsedStories:(NSArray *)parsedStories
 {
