@@ -92,6 +92,7 @@
 							 otherButtonTitles:@"Kopieren", @"Bild speichern", @"Zeige Bild",nil];
 
     [myMenu showFromTabBar:[[appDelegate tabBarController] tabBar]];
+	[myMenu release];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIdx
@@ -131,6 +132,7 @@
 		
 		UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Bild gespeichert" message:@"Das Bild wurde erfolgreich in deine Fotogallerie gespeichert." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[errorAlert show];
+		[errorAlert release];
 		
 	}
 	if (buttonIdx == 0) {

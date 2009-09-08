@@ -332,7 +332,6 @@ static NSDate *oldestStoryDate = nil;
     [rssParser setShouldResolveExternalEntities:NO];
 	
     [rssParser parse];
-	// This causes a bug. It has been filed with Apple as Bug ID 7180951    
 	[rssParser release];
 }
 
@@ -361,14 +360,13 @@ static NSDate *oldestStoryDate = nil;
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{			
     //NSLog(@"found this element: %@", elementName);
-	currentElement = [elementName copy];
 	
 	if ([elementName isEqualToString:@"item"]) {
 		Class storyClass = [self storyClass];
 		item = [[storyClass alloc] init];
 		
 	}
-	else if ([desiredElementKeysCache containsObject:elementName])
+	else if (item !=nil && [desiredElementKeysCache containsObject:elementName])
 		currentText = [NSMutableString new];
 }
 
@@ -449,7 +447,6 @@ static NSDate *oldestStoryDate = nil;
 
 - (void)dealloc {
 	
-	[currentElement release];
 	[desiredElementKeysCache release];
 	[stories release];
 	[item release];

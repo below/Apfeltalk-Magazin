@@ -24,8 +24,10 @@
 
 #import <UIKit/UIKit.h>
 #import "DetailViewController.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface DetailPodcast : DetailViewController <UIWebViewDelegate> {
+	MPMoviePlayerController* theMovie;
 }
 
 @end

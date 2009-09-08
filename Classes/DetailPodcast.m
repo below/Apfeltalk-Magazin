@@ -22,7 +22,6 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
-#import <MediaPlayer/MediaPlayer.h>
 #import "DetailPodcast.h"
 #import "RootViewController.h"
 
@@ -31,7 +30,9 @@
 -(void)playMovieAtURL:(NSURL*)theURL 
 
 {
-    MPMoviePlayerController* theMovie=[[MPMoviePlayerController alloc] initWithContentURL:theURL]; 
+	[theMovie release];
+	// theMovie is an iVar just for the sake of the analyzer...
+    theMovie=[[MPMoviePlayerController alloc] initWithContentURL:theURL]; 
     theMovie.scalingMode=MPMovieScalingModeAspectFill; 
 	
     // Register for the playback finished notification. 
@@ -48,7 +49,6 @@
 // When the movie is done,release the controller. 
 -(void)myMovieFinishedCallback:(NSNotification*)aNotification 
 {
-    MPMoviePlayerController* theMovie=[aNotification object]; 
     [[NSNotificationCenter defaultCenter] removeObserver:self 
                                                     name:MPMoviePlayerPlaybackDidFinishNotification 
                                                   object:theMovie]; 
@@ -89,6 +89,12 @@
 	
 	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;border: 1px solid rgb(173, 173, 173);\
 			margin: 10px;padding:10px;\"> %@ %@",nui, name2];
+}
+
+- (void) dealloc
+{
+	[theMovie release];
+	[super dealloc];
 }
 
 @end

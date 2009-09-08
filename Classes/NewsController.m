@@ -35,6 +35,7 @@
 const int SAVED_MESSAGES_SECTION_INDEX = 1;
 
 - (void)viewWillAppear:(BOOL)animated {
+	[savedStories release];
 	savedStories = [[NSKeyedUnarchiver unarchiveObjectWithFile:[self savedStoryFilepath]] mutableCopy];
 	[super viewWillAppear:animated];
 	
