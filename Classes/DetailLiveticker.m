@@ -109,8 +109,8 @@
         }
     }
 
-    return [NSString stringWithFormat:@"<head> <style type=\"text/css\"> body { background-color: white; font: 13px Helvetica, sans-serif; margin: 10px;"
-                                      @"padding: 10px; -webkit-border-radius: 10px; border: 1px solid #bbb; } </style></head> <body>%@</body>", htmlString];
+    return [NSString stringWithFormat:@"<head> <style type=\"text/css\"> body { font:11pt Helvetica; margin:0; padding:0; color:#6a6a6a }"
+            @"</style></head> <body><div style=\"padding-left:20px; padding-right:20px;\">%@</div></body>", htmlString];
 }
 
 @end
