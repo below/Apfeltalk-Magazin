@@ -4,7 +4,7 @@
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
 //	Copyright (C) 2009	Stephan König (stephankoenig at me dot com), Stefan Kofler
-//						Alexander von Below, Andreas Rami, Michael Fenske, Jesper (Graphics),
+//						Alexander von Below, Andreas Rami, Michael Fenske, Laurids Düllmann, Jesper (Graphics),
 //						Patrick Rollbis (Graphics),
 //						
 //	This program is free software; you can redistribute it and/or
@@ -24,6 +24,10 @@
 
 #import "NewsController.h"
 #import "DetailNews.h"
+
+#import <libxml/HTMLparser.h>
+#import <libxml/xpath.h>
+#import <libxml/xpathInternals.h>
 
 @interface NewsController (private)
 - (NSString *) savedStoryFilepath;
@@ -216,6 +220,50 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	}
 
 	[super updateApplicationIconBadgeNumber];	
+}
+
+#pragma mark special XML processing
+
+- (NSString *) extractThumbnailLink:(NSString *)htmlInput {
+	NSString *value = nil;	
+	
+	NSData *data = [htmlInput dataUsingEncoding:NSUTF8StringEncoding];
+	htmlDocPtr	doc = htmlReadMemory([data bytes],[data length], NULL, NULL, 0);
+	// Create xpath evaluation context
+	xmlXPathContextPtr xpathCtx = xmlXPathNewContext(doc);
+	
+	xmlChar * xpathExpr = (xmlChar*)"//img[attribute::class=\"thumbnail\"]/attribute::src";
+	
+	xmlXPathObjectPtr xpathObj = xmlXPathEvalExpression(xpathExpr, xpathCtx);
+	if(xpathObj == NULL) {
+		fprintf(stderr,"Error: unable to evaluate xpath expression \"%s\"\n", xpathExpr);
+	}
+	else  {
+		xmlNodeSetPtr nodeset = xpathObj->nodesetval;
+		if (nodeset && nodeset->nodeNr == 1 && nodeset->nodeTab[0]->children){
+			xmlNodePtr child = nodeset->nodeTab[0]->children;
+			
+			if (child->type == XML_TEXT_NODE)
+				value = [NSString stringWithCString:(char*)child->content encoding:NSUTF8StringEncoding];
+		}
+		xmlXPathFreeObject(xpathObj);
+	}		
+	
+	xmlXPathFreeContext(xpathCtx); 
+	xmlFreeDoc(doc); 
+	xmlCleanupParser();		
+	return value;
+}
+
+- (void)parseXMLFileAtURL:(NSString *)URL {
+	[super parseXMLFileAtURL:URL];
+	
+	// This needs to be done in post-processing, as libxml2 interferes with NSXMLParser
+	for (Story *s in stories) {
+		NSString *thumbnailLink = [self extractThumbnailLink:[s summary]];
+		if ([thumbnailLink length] > 0)
+			[s setThumbnailLink:thumbnailLink];
+	}
 }
 
 - (void) dealloc {

@@ -4,7 +4,7 @@
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
 //	Copyright (C) 2009	Stephan König (stephankoenig at me dot com), Stefan Kofler
-//						Alexander von Below, Andreas Rami, Michael Fenske, Jesper (Graphics),
+//						Alexander von Below, Andreas Rami, Michael Fenske,  Laurids Düllmann, Jesper (Graphics),
 //						Patrick Rollbis (Graphics),
 //						
 //	This program is free software; you can redistribute it and/or
@@ -23,24 +23,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DetailViewController.h"
 #import "Story.h"
 
 
-@interface DetailLiveticker : UIViewController <UIWebViewDelegate>
+@interface DetailLiveticker : DetailViewController <UIWebViewDelegate>
 {
-    IBOutlet UILabel     *titleLabel;
-    IBOutlet UILabel     *authorLabel;
-    IBOutlet UILabel     *datum;
-    IBOutlet UIWebView   *webview;
-    IBOutlet UIImageView *detailimage;
-
-    Story *story;
 }
 
-@property(retain) Story *story;
-
-- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory;
-- (NSString *)htmlString;
 - (UISegmentedControl *)storyControl;
 - (void)updateInterface;
 

@@ -1,9 +1,11 @@
 //
-//  DetailNews.h
+//  UIScrollViewPrivate.h
 //  Apfeltalk Magazin
 //
+//  Created by Alexander v. Below on 09.09.09.
+//
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
-//	Copyright (C) 2009	Stephan König (stephankoenig at me dot com), Stefan Kofler
+//	Copyright (C) 2009	Stephan König (stephankoenig at mac dot com), Stefan Kofler
 //						Alexander von Below, Andreas Rami, Michael Fenske, Laurids Düllmann, Jesper (Graphics),
 //						Patrick Rollbis (Graphics),
 //						
@@ -22,13 +24,7 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
-#import <Foundation/Foundation.h>
-#import "DetailViewController.h"
-#import <MessageUI/MessageUI.h>
-
-@interface DetailNews : DetailViewController <UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
-	BOOL showSave;
-}
-@property (readwrite) BOOL showSave;
-
+@interface UIScrollView (private)
+- (void)setAllowsRubberBanding:(Boolean)flag;
 @end
+

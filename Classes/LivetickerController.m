@@ -4,7 +4,7 @@
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
 //	Copyright (C) 2009	Stephan König (stephankoenig at me dot com), Stefan Kofler
-//						Alexander von Below, Andreas Rami, Michael Fenske, Jesper (Graphics),
+//						Alexander von Below, Andreas Rami, Michael Fenske, Laurids Düllmann, Jesper (Graphics),
 //						Patrick Rollbis (Graphics),
 //
 //	This program is free software; you can redistribute it and/or
@@ -59,7 +59,7 @@
 
 - (void)reloadTickerEntries:(NSTimer *)timer
 {
-    ATXMLParser  *parser = [ATXMLParser parserWithURLString:@"http://feeds.apfeltalk.de/apfeltalk-live"];
+    ATXMLParser  *parser = [ATXMLParser parserWithURLString:@"http://www.apfeltalk.de/live/?feed=rss2"];
 
     [NSThread detachNewThreadSelector:@selector(parseInBackgroundWithDelegate:) toTarget:parser withObject:self];
 }

@@ -4,7 +4,7 @@
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
 //	Copyright (C) 2009	Stephan König (stephankoenig at me dot com), Stefan Kofler
-//						Alexander von Below, Andreas Rami, Michael Fenske, Jesper (Graphics),
+//						Alexander von Below, Andreas Rami, Michael Fenske, Laurids Düllmann, Jesper (Graphics),
 //						Patrick Rollbis (Graphics),
 //						
 //	This program is free software; you can redistribute it and/or
@@ -24,6 +24,7 @@
 
 #import "DetailViewController.h"
 #import "RootViewController.h"
+#import "UIScrollViewPrivate.h"
 
 @implementation DetailViewController
 
@@ -131,6 +132,12 @@
 	datum.text = [NSString stringWithFormat:@"von %@ - %@", [[self story] author], [dateFormatter stringFromDate:[[self story] date]]];
 	[dateFormatter release];
 
+	NSString *thumbnailLink = [[self story] thumbnailLink];
+	if (thumbnailLink) {
+		NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailLink]];
+		UIImage * thumbnailImage = [UIImage imageWithData:imageData];
+		[thumbnail setImage:thumbnailImage];
+	}
 	//Set the title of the navigation bar
 	//-150x150
 	NSString * buttonTitle = [self rightBarButtonTitle];

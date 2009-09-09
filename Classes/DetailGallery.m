@@ -4,7 +4,7 @@
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
 //	Copyright (C) 2009	Stephan König (stephankoenig at mac dot com), Stefan Kofler
-//						Alexander von Below, Andreas Rami, Michael Fenske, Jesper (Graphics),
+//						Alexander von Below, Andreas Rami, Michael Fenske, Laurids Düllmann, Jesper (Graphics),
 //						Patrick Rollbis (Graphics),
 //						
 //	This program is free software; you can redistribute it and/or
@@ -40,8 +40,6 @@
 - (NSString *) htmlString {	
 	NSURL *bubbleMiddleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bubble_middle" ofType:@"png"]];
 	NSString *nui = [NSString stringWithFormat:@"<center><b>%@</b></center> ", [[self story] summary]];
-	NSString *link = [[[self story] date] description];
-	link = [link stringByReplacingOccurrencesOfString:@"#comments" withString:@"?onlycomments=yes"];
 	NSString *str = [[self story] summary];
 	
 	NSRange pos1 = [str rangeOfString: @"http://www.apfeltalk.de/gallery/data"]; //-42 .... 

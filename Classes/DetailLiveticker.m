@@ -4,7 +4,7 @@
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
 //	Copyright (C) 2009	Stephan König (stephankoenig at me dot com), Stefan Kofler
-//						Alexander von Below, Andreas Rami, Michael Fenske, Jesper (Graphics),
+//						Alexander von Below, Andreas Rami, Michael Fenske, Laurids Düllmann, Jesper (Graphics),
 //						Patrick Rollbis (Graphics),
 //						
 //	This program is free software; you can redistribute it and/or
@@ -23,33 +23,12 @@
 //
 
 #import "DetailLiveticker.h"
-
+#import "UIScrollViewPrivate.h"
 
 #define MAX_IMAGE_WIDTH 280
 
 
 @implementation DetailLiveticker
-
-@synthesize story;
-
-
-- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory
-{
-    if (self = [super initWithNibName:nibName bundle:nibBundle])
-        [self setStory:newStory];
-
-    return self;
-}
-
-
-
-- (void)dealloc
-{
-    [story release];
-    [super dealloc];
-}
-
-
 
 - (void)viewDidLoad
 {
