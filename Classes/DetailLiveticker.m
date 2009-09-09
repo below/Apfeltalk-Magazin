@@ -30,49 +30,6 @@
 
 @implementation DetailLiveticker
 
-@synthesize story;
-
-
-- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory
-{
-    if (self = [super initWithNibName:nibName bundle:nibBundle])
-        [self setStory:newStory];
-
-    return self;
-}
-
-
-
-- (void)dealloc
-{
-    [story release];
-    [super dealloc];
-}
-
-
-
-- (void)viewDidLoad
-{
-    [webview setDelegate:self];
-
-    [titleLabel setText:[[self story] title]];
-    //[authorLabel setText:[[self story] author]];
-
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm"];
-	datum.text = [NSString stringWithFormat:@"von %@ - %@", [[self story] author], [dateFormatter stringFromDate:[[self story] date]]];
-    [dateFormatter release];
-
-    [webview loadHTMLString:[self htmlString] baseURL:nil];
-
-// setAllowsRubberBanding: is not documented. I think this will block the app to go into the AppStore
-	// Below: If google can do it, so can we
-	[(UIScrollView *)[webview.subviews objectAtIndex:0] setAllowsRubberBanding:NO];
-
-}
-
-
-
 - (NSString *)htmlString
 {
     int              newHeight;
