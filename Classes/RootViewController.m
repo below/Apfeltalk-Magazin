@@ -4,7 +4,7 @@
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
 //	Copyright (C) 2009	Stephan König (stephankoenig at me dot com), Stefan Kofler
-//						Alexander von Below, Andreas Rami, Michael Fenske, Jesper (Graphics),
+//						Alexander von Below, Andreas Rami, Michael Fenske, Laurids Düllmann, Jesper (Graphics),
 //						Patrick Rollbis (Graphics),
 //						
 //	This program is free software; you can redistribute it and/or
@@ -62,7 +62,7 @@ static NSDate *oldestStoryDate = nil;
 	[newsTable reloadData];
 	UIAlertView *alert = [[UIAlertView alloc]
 						  initWithTitle:@"Credits" // oder einfach Wilkommen in der Touch-Mania.com Applikation?
-						  message:@"Apfeltalk.de App \n \nIdee: Stephan König \nProgrammierung: Alexander von Below, Andreas Rami, Stefan Kofler, Michael Fenske und \nStephan König \nSplashcreen: Patrick Rollbis \n Icons: Jesper Frommherz \n\nMit freundlicher Unterstützung der Apfeltalk GmbH"
+						  message:@"Apfeltalk.de App \n \n\nIdee: Stephan König \n\nProgrammierung: Alexander von Below, Andreas Rami, Stefan Kofler, Michael Fenske und \nStephan König \n\nSplashcreen: Patrick Rollbis \nIcons: Jesper Frommherz \n\nGUI: Laurids Düllmann \n\nMit freundlicher Unterstützung der Apfeltalk GmbH"
 						  delegate:self
 						  cancelButtonTitle:@"OK"
 						  otherButtonTitles:@"Kontakt"
