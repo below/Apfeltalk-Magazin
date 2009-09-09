@@ -23,23 +23,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DetailViewController.h"
 #import "Story.h"
 
 
-@interface DetailLiveticker : UIViewController <UIWebViewDelegate>
+@interface DetailLiveticker : DetailViewController <UIWebViewDelegate>
 {
-    IBOutlet UILabel     *titleLabel;
-    IBOutlet UILabel     *authorLabel;
-    IBOutlet UILabel     *datum;
-    IBOutlet UIWebView   *webview;
-    IBOutlet UIImageView *detailimage;
-
-    Story *story;
 }
-
-@property(retain) Story *story;
-
-- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory;
-- (NSString *)htmlString;
 
 @end
