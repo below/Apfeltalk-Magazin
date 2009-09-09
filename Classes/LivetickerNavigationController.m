@@ -26,7 +26,7 @@
 #import "LivetickerController.h"
 
 
-#define RELOAD_TIME 120
+#define RELOAD_TIME 30
 
 
 @implementation LivetickerNavigationController
