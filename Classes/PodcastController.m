@@ -61,7 +61,6 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{      
 	if ([elementName isEqualToString:@"enclosure"]) {
-		currentElement = [elementName copy];
 		NSString *link = [attributeDict valueForKey:@"url"];
 		[item setLink:link];
 	}

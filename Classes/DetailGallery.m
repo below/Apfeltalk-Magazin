@@ -77,7 +77,7 @@
 }
 
 - (UIImage *) usedimage {
-	return [UIImage imageNamed:@"DetailBackground2.png"];
+	return [UIImage imageNamed:@"header.png"];
 }
 
 -(IBAction)speichern:(id)sender
@@ -131,6 +131,7 @@
 		
 		UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Bild gespeichert" message:@"Das Bild wurde erfolgreich in deine Fotogallerie gespeichert." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[errorAlert show];
+		[errorAlert release];
 		
 	}
 	if (buttonIdx == 0) {

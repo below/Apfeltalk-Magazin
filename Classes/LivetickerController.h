@@ -1,5 +1,5 @@
 //
-//  DetailViewController.h
+//  LivetickerController.h
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
@@ -23,11 +23,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DetailViewController.h"
-#import <MediaPlayer/MediaPlayer.h>
+#import "ATXMLParser.h"
 
-@interface DetailPodcast : DetailViewController <UIWebViewDelegate> {
-	MPMoviePlayerController* theMovie;
+
+@interface LivetickerController : UITableViewController <ATXMLParserDelegateProtocol>
+{
+    NSArray         *stories;
+    NSDateFormatter *shortTimeFormatter;
 }
+
+@property(retain) NSArray *stories;
+@property(retain) NSDateFormatter *shortTimeFormatter;
+
+- (void)reloadTickerEntries:(NSTimer *)timer;
 
 @end

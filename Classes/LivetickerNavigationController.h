@@ -1,12 +1,12 @@
 //
-//  DetailViewController.h
+//  LivetickerNavigationController.h
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
 //	Copyright (C) 2009	Stephan König (stephankoenig at me dot com), Stefan Kofler
 //						Alexander von Below, Andreas Rami, Michael Fenske, Jesper (Graphics),
 //						Patrick Rollbis (Graphics),
-//						
+//
 //	This program is free software; you can redistribute it and/or
 //	modify it under the terms of the GNU General Public License
 //	as published by the Free Software Foundation; either version 2
@@ -23,11 +23,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DetailViewController.h"
-#import <MediaPlayer/MediaPlayer.h>
 
-@interface DetailPodcast : DetailViewController <UIWebViewDelegate> {
-	MPMoviePlayerController* theMovie;
+
+@interface LivetickerNavigationController : UINavigationController
+{
+    NSTimer *reloadTimer;
 }
+
+@property(retain) NSTimer *reloadTimer;
 
 @end

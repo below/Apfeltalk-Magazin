@@ -41,6 +41,7 @@
 }
 @property (readwrite, retain) Story *story;
 
+- (void)setAllowsRubberBanding:(BOOL)allowsRubberBanding;
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory;
 - (NSString *)strip_tags:(NSString *)data :(NSArray *)valid_tags;
 - (NSString *) rightBarButtonTitle;

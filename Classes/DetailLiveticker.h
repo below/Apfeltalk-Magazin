@@ -1,5 +1,5 @@
 //
-//  DetailViewController.h
+//  DetailLiveticker.h
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
@@ -23,11 +23,23 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DetailViewController.h"
-#import <MediaPlayer/MediaPlayer.h>
+#import "Story.h"
 
-@interface DetailPodcast : DetailViewController <UIWebViewDelegate> {
-	MPMoviePlayerController* theMovie;
+
+@interface DetailLiveticker : UIViewController <UIWebViewDelegate>
+{
+    IBOutlet UILabel     *titleLabel;
+    IBOutlet UILabel     *authorLabel;
+    IBOutlet UILabel     *datum;
+    IBOutlet UIWebView   *webview;
+    IBOutlet UIImageView *detailimage;
+
+    Story *story;
 }
+
+@property(retain) Story *story;
+
+- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory;
+- (NSString *)htmlString;
 
 @end

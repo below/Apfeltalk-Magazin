@@ -22,7 +22,6 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
-#import <MediaPlayer/MediaPlayer.h>
 #import "DetailPodcast.h"
 #import "RootViewController.h"
 
@@ -31,7 +30,9 @@
 -(void)playMovieAtURL:(NSURL*)theURL 
 
 {
-    MPMoviePlayerController* theMovie=[[MPMoviePlayerController alloc] initWithContentURL:theURL]; 
+	[theMovie release];
+	// theMovie is an iVar just for the sake of the analyzer...
+    theMovie=[[MPMoviePlayerController alloc] initWithContentURL:theURL]; 
     theMovie.scalingMode=MPMovieScalingModeAspectFill; 
 	
     // Register for the playback finished notification. 
@@ -48,7 +49,6 @@
 // When the movie is done,release the controller. 
 -(void)myMovieFinishedCallback:(NSNotification*)aNotification 
 {
-    MPMoviePlayerController* theMovie=[aNotification object]; 
     [[NSNotificationCenter defaultCenter] removeObserver:self 
                                                     name:MPMoviePlayerPlaybackDidFinishNotification 
                                                   object:theMovie]; 
@@ -63,7 +63,7 @@
 
 - (UIImage *) usedimage {
 	authorLabel.text = nil;
-	return [UIImage imageNamed:@"DetailBackground2.png"];
+	return [UIImage imageNamed:@"header.png"];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
@@ -82,13 +82,27 @@
 	nui = [nui stringByReplacingOccurrencesOfString:@"Miniaturansicht angehängter Grafiken" withString:@""];
 	
 	NSURL *playbuttonURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"playbutton" ofType:@"png"]];
+	NSURL *bubbleMiddleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bubble_middle" ofType:@"png"]];
 	// We should check if this exists
-	NSString *name2 = [NSString stringWithFormat:@"<style type=\"text/css\"> body    {font-family: \"Helvetica\", sans-serif; font-size:13px;\
+	NSString *name2 = [NSString stringWithFormat:@"<style type=\"text/css\"> \
+					   body		{font-family: \"Helvetica\", sans-serif; font-size:13px; margin: 0; padding: 0;\
+					   background: url(%@) \
+					   repeat scroll 0 0;} div.button 	{border:1px solid #B1B1B1;cursor:pointer;\
+					   font-weight:bold;margin-left:10px;margin-right:10px; background-color: white; \
+					   padding-bottom:10px; padding-left:10px;padding-top:10px;text-shadow:0 1px 0 #FFFFFF; \
+					   margin-top: 10px;} div#frame	{padding: 0; margin: 0;} iframe		{padding: 0; margin: 0; \
+					   border: 0;} </style> <script type=\"text/javascript\" \
+					   src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js\" /> body    {font-family: \"Helvetica\", sans-serif; font-size:13px;\
 					   </style> </div> <a href=\"%@\"><center><img src=\"%@\" alt=\"Play Podcast\" /></center></a> </div> </body> ", 
-					   [[self story] link], [playbuttonURL absoluteString]];
+					   [bubbleMiddleURL absoluteString], [[self story] link], [playbuttonURL absoluteString]];
 	
-	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;border: 1px solid rgb(173, 173, 173);\
-			margin: 10px;padding:10px;\"> %@ %@",nui, name2];
+	return [NSString stringWithFormat:@" %@ %@",nui, name2];
+}
+
+- (void) dealloc
+{
+	[theMovie release];
+	[super dealloc];
 }
 
 @end

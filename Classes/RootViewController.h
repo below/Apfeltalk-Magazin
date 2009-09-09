@@ -53,8 +53,6 @@
 	// it parses through the document, from top to bottom...
 	// we collect and cache each sub-element value, and then save each item to our array.
 	// we use these to track each current item, until it's ready to be added to the "stories" array
-	NSString * currentElement;
-
 	NSMutableString * currentText;
 	sqlite3 * database;
 	NSDateFormatter *dateFormatter;
