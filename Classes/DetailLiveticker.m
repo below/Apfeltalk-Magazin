@@ -109,8 +109,11 @@
         }
     }
 
-    return [NSString stringWithFormat:@"<head> <style type=\"text/css\"> body { font:11pt Helvetica; margin:0; padding:0; color:#6a6a6a }"
-            @"</style></head> <body><div style=\"padding-left:20px; padding-right:20px;\">%@</div></body>", htmlString];
+    NSURL *backgroundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bubble_middle" ofType:@"png"]];
+
+    return [NSString stringWithFormat:@"<head> <style type=\"text/css\">"
+            @" body { background:url(%@) repeat-y; font:10pt Helvetica; margin:0; padding:0; color:#6a6a6a }"
+            @"</style></head> <body><div style=\"padding-left:20px; padding-right:20px;\">%@</div></body>", [backgroundURL absoluteString], htmlString];
 }
 
 @end
