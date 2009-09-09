@@ -225,7 +225,9 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 #pragma mark special XML processing
 
 - (NSString *) extractThumbnailLink:(NSString *)htmlInput {
-	NSString *value = nil;
+	NSString *value = nil;	
+	return nil;
+	
 	NSData *data = [currentText dataUsingEncoding:NSUTF8StringEncoding];
 	htmlDocPtr	doc = htmlReadMemory([data bytes],[data length], NULL, NULL, 0);
 	/* Create xpath evaluation context */
@@ -250,7 +252,7 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	
 	xmlXPathFreeContext(xpathCtx); 
 	xmlFreeDoc(doc); 
-	xmlCleanupParser();		
+//	xmlCleanupParser();		
 	return value;
 }
 
