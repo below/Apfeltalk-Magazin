@@ -25,7 +25,7 @@
 #import "Story.h"
 
 NSString *ATStoryTitle = @"title";
-NSString *ATStorySummary = @"summay";
+NSString *ATStorySummary = @"summary";
 NSString *ATStoryDate = @"date";
 NSString *ATStoryAuthor = @"author";
 NSString *ATStoryLink = @"link";
