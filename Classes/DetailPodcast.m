@@ -91,12 +91,12 @@
 					   font-weight:bold;margin-left:10px;margin-right:10px; background-color: white; \
 					   padding-bottom:10px; padding-left:10px;padding-top:10px;text-shadow:0 1px 0 #FFFFFF; \
 					   margin-top: 10px;} div#frame	{padding: 0; margin: 0;} iframe		{padding: 0; margin: 0; \
-					   border: 0;} </style> <script type=\"text/javascript\" \
-					   src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js\" /> body    {font-family: \"Helvetica\", sans-serif; font-size:13px;\
-					   </style> </div> <a href=\"%@\"><center><img src=\"%@\" alt=\"Play Podcast\" /></center></a> </div> </body> ", 
+					   border: 0;} </style> </div> <a href=\"%@\"><center><img src=\"%@\" alt=\"Play Podcast\" /></center></a>   <meta name=\"viewport\" \
+					   content=\"maximum-scale=1.0 width=device-width initial-scale=1.0 user-scalable=no\" /> </div> </body> ", 
 					   [bubbleMiddleURL absoluteString], [[self story] link], [playbuttonURL absoluteString]];
 	
-	return [NSString stringWithFormat:@" %@ %@",nui, name2];
+	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;\
+			border: 0px solid rgb(173, 173, 173);margin: 10px;padding:10px;\">  %@ %@",nui, name2];
 }
 
 - (void) dealloc
