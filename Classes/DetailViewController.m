@@ -113,10 +113,9 @@
 					   { $(\"div#frame\").hide(); $(\"div#show\").click(function(){ $(\"div#frame\").slideToggle();\
 					   }); }); </script> </div> <meta name=\"viewport\" \
 					   content=\"maximum-scale=1.0 width=device-width initial-scale=1.0 user-scalable=no\" /> \
-					   </head> <body>  </body> ", [[[self story] date] description]];
+					   </head> <body>  </body> ", [bubbleMiddleURL absoluteString]];
 	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;\
-			border: 0px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br>",
-			[bubbleMiddleURL absoluteString], nui, name2];
+			border: 0px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br>", nui, name2];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
