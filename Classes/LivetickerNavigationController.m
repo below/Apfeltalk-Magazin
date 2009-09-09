@@ -26,7 +26,7 @@
 #import "LivetickerController.h"
 
 
-#define RELOAD_TIME 120
+#define RELOAD_TIME 30
 
 
 @implementation LivetickerNavigationController
@@ -68,6 +68,7 @@
     [self setReloadTimer:[NSTimer scheduledTimerWithTimeInterval:RELOAD_TIME target:rootViewController selector:@selector(reloadTickerEntries:) userInfo:nil
                                                          repeats:YES]];
     [rootViewController reloadTickerEntries:[self reloadTimer]];
+	
 }
 
 
