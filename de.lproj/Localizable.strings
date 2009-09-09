@@ -23,5 +23,6 @@
 //
 
 "Cancel" = "Abbrechen";
+"LivetickerController.noTicker" = "Kein Liveticker";
 "NewsController.TableView.DeleteButtonLabel" = "Löschen";
 "Parsing Error" = "Parser Fehler";

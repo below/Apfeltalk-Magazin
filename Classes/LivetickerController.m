@@ -108,6 +108,16 @@
 
 
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if ([stories count])
+        return nil;
+    else
+        return NSLocalizedString(@"LivetickerController.noTicker", nil);
+}
+
+
+
 #pragma mark -
 #pragma mark ATXMLParserDelegateProtocol
 
