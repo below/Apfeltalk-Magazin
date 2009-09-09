@@ -38,6 +38,7 @@
 }
 
 - (NSString *) htmlString {	
+	NSURL *bubbleMiddleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bubble_middle" ofType:@"png"]];
 	NSString *nui = [NSString stringWithFormat:@"<center><b>%@</b></center> ", [[self story] summary]];
 	NSString *link = [[[self story] date] description];
 	link = [link stringByReplacingOccurrencesOfString:@"#comments" withString:@"?onlycomments=yes"];
@@ -67,9 +68,10 @@
 	nui = [self strip_tags:nui :tags];
 	
 	NSString *showpicture = [NSString stringWithFormat:@"<img src=\"%@\" width=\"275\" height=\"181\" alt=\"No Medium Picture.\" /> ", str];
-	NSString *name2 = [NSString stringWithFormat:@"<style type=\"text/css\"> body		{font-family: \"Helvetica\", sans-serif; font-size:13px; margin: 0; padding: 0; repeat scroll 0 0;}  </style> </div> </head> </div> ", link];
+	NSString *name2 = [NSString stringWithFormat:@"<style type=\"text/css\"> body		{font-family: \"Helvetica\", sans-serif; font-size:13px; margin: 0; padding: 0; background: url(%@); repeat scroll 0 0;}  </style> </div> </head> </div> ", [bubbleMiddleURL absoluteString]];
 	
-	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;border: 1px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br> %@", showpicture, nui, name2];
+	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;\
+			border: 0px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br> %@", showpicture, nui, name2];
 }
 
 - (NSString *) rightBarButtonTitle {
