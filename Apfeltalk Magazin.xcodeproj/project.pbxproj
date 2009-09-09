@@ -222,8 +222,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4CD36BE61058345800DD09FB /* Up.png */,
-				4CD36BE21058344700DD09FB /* Down.png */,
 				CB1434AE1058616500B5FF14 /* Images */,
 				F6FB7DD5104EDE2F007F5A54 /* fullscreen.xib */,
 				F634304A10362AA4004ACF93 /* DetailView.xib */,
@@ -269,6 +267,8 @@
 				F634306110362AC6004ACF93 /* icon.png */,
 				F6DC30BF1039781600A734AF /* gallery.png */,
 				F6DC30C01039781600A734AF /* magazin.png */,
+				4CD36BE61058345800DD09FB /* Up.png */,
+				4CD36BE21058344700DD09FB /* Down.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
