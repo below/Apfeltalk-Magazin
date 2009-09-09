@@ -53,17 +53,24 @@
 
 - (void)viewDidLoad
 {
-    [webview setDelegate:self];
+    NSArray            *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"Up.png"], [UIImage imageNamed:@"Down.png"], nil];
+	UISegmentedControl *segControl = [[UISegmentedControl alloc] initWithItems:imgArray];
 
-    [titleLabel setText:[[self story] title]];
-    //[authorLabel setText:[[self story] author]];
+	[segControl addTarget:[[[self navigationController] viewControllers] objectAtIndex:0] action:@selector(changeStory:)
+         forControlEvents:UIControlEventValueChanged];
+	[segControl setFrame:CGRectMake(0, 0, 90, 30)];
+	[segControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+	[segControl setMomentary:YES];
 
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm"];
-	datum.text = [NSString stringWithFormat:@"von %@ - %@", [[self story] author], [dateFormatter stringFromDate:[[self story] date]]];
-    [dateFormatter release];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:segControl];
 
-    [webview loadHTMLString:[self htmlString] baseURL:nil];
+    [[self navigationItem] setRightBarButtonItem:rightItem];
+    [[[[self navigationController]viewControllers] objectAtIndex:0] changeStory:segControl];
+
+    [segControl release];
+    [rightItem release];
+
+    [self updateInterface];
 
 #warning: setAllowsRubberBanding: is not documented. I think this will block the app to go into the AppStore
 	[(UIScrollView *)[webview.subviews objectAtIndex:0] setAllowsRubberBanding:NO];
@@ -118,6 +125,29 @@
     return [NSString stringWithFormat:@"<head> <style type=\"text/css\">"
             @" body { background:url(%@) repeat-y; font:10pt Helvetica; margin:0; padding:0; color:#6a6a6a }"
             @"</style></head> <body><div style=\"padding-left:20px; padding-right:20px;\">%@</div></body>", [backgroundURL absoluteString], htmlString];
+}
+
+
+
+- (UISegmentedControl *)storyControl
+{
+    return (UISegmentedControl *)[[[self navigationItem] rightBarButtonItem] customView];
+}
+
+
+
+- (void)updateInterface
+{
+    [webview setDelegate:self];
+
+    [titleLabel setText:[[self story] title]];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+	datum.text = [NSString stringWithFormat:@"von %@ - %@", [[self story] author], [dateFormatter stringFromDate:[[self story] date]]];
+    [dateFormatter release];
+
+    [webview loadHTMLString:[self htmlString] baseURL:nil];
 }
 
 @end

@@ -41,5 +41,7 @@
 
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory;
 - (NSString *)htmlString;
+- (UISegmentedControl *)storyControl;
+- (void)updateInterface;
 
 @end
