@@ -56,7 +56,7 @@
     [webview setDelegate:self];
 
     [titleLabel setText:[[self story] title]];
-    [authorLabel setText:[[self story] author]];
+    //[authorLabel setText:[[self story] author]];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];
@@ -64,7 +64,9 @@
     [dateFormatter release];
 
     [webview loadHTMLString:[self htmlString] baseURL:nil];
-	[(UIScrollView*)[webview.subviews objectAtIndex:0]	 setAllowsRubberBanding:NO];
+
+#warning: setAllowsRubberBanding: is not documented. I think this will block the app to go into the AppStore
+	[(UIScrollView *)[webview.subviews objectAtIndex:0] setAllowsRubberBanding:NO];
 
 }
 
