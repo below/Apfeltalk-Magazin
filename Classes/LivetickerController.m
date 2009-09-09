@@ -63,8 +63,6 @@
     [NSThread detachNewThreadSelector:@selector(parseInBackgroundWithDelegate:) toTarget:parser withObject:self];
 }
 
-
-
 #pragma mark -
 #pragma mark UITableViewDataSource
 

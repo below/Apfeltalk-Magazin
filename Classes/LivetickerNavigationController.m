@@ -68,6 +68,7 @@
     [self setReloadTimer:[NSTimer scheduledTimerWithTimeInterval:RELOAD_TIME target:rootViewController selector:@selector(reloadTickerEntries:) userInfo:nil
                                                          repeats:YES]];
     [rootViewController reloadTickerEntries:[self reloadTimer]];
+	
 }
 
 
