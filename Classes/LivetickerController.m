@@ -58,7 +58,7 @@
 
 - (void)reloadTickerEntries:(NSTimer *)timer
 {
-    ATXMLParser  *parser = [ATXMLParser parserWithURLString:@"http://feeds.apfeltalk.de/apfeltalk-live"];
+    ATXMLParser  *parser = [ATXMLParser parserWithURLString:@"http://www.apfeltalk.de/live/?feed=rss2"];
 
     [NSThread detachNewThreadSelector:@selector(parseInBackgroundWithDelegate:) toTarget:parser withObject:self];
 }
