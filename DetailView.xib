@@ -39,7 +39,7 @@
 					<object class="IBUIImageView" id="488838805">
 						<reference key="NSNextResponder" ref="1035459194"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 323}, {320, 24}}</string>
+						<string key="NSFrame">{{0, 335}, {320, 24}}</string>
 						<reference key="NSSuperview" ref="1035459194"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -79,7 +79,7 @@
 					<object class="IBUIImageView" id="243350983">
 						<reference key="NSNextResponder" ref="1035459194"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 58}, {320, 35}}</string>
+						<string key="NSFrame">{{0, 66}, {320, 35}}</string>
 						<reference key="NSSuperview" ref="1035459194"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -110,8 +110,7 @@
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
-						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
-						<float key="IBUIMinimumFontSize">1.000000e+01</float>
+						<float key="IBUIMinimumFontSize">1.300000e+01</float>
 					</object>
 					<object class="IBUILabel" id="854772169">
 						<reference key="NSNextResponder" ref="1035459194"/>
@@ -128,13 +127,13 @@
 						<string key="IBUIText">Datum</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
-							<double key="NSSize">1.600000e+01</double>
+							<double key="NSSize">1.500000e+01</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<reference key="IBUITextColor" ref="905738156"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">1.000000e+01</float>
+						<float key="IBUIMinimumFontSize">1.200000e+01</float>
 					</object>
 					<object class="IBUILabel" id="275451016">
 						<reference key="NSNextResponder" ref="1035459194"/>
@@ -166,7 +165,7 @@
 					<object class="IBUIWebView" id="73355324">
 						<reference key="NSNextResponder" ref="1035459194"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 75}, {320, 260}}</string>
+						<string key="NSFrame">{{0, 83}, {320, 269}}</string>
 						<reference key="NSSuperview" ref="1035459194"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>

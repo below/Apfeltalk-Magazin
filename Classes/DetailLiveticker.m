@@ -60,10 +60,12 @@
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];
-    [datum setText:[dateFormatter stringFromDate:[[self story] date]]];
+	datum.text = [NSString stringWithFormat:@"von %@ - %@", [[self story] author], [dateFormatter stringFromDate:[[self story] date]]];
     [dateFormatter release];
 
     [webview loadHTMLString:[self htmlString] baseURL:nil];
+	[(UIScrollView*)[webview.subviews objectAtIndex:0]	 setAllowsRubberBanding:NO];
+
 }
 
 

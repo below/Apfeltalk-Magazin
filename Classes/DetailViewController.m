@@ -128,7 +128,7 @@
 	[authorLabel setText:[[self story] author]];
 	NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-	datum.text = [dateFormatter stringFromDate:[[self story] date]];
+	datum.text = [NSString stringWithFormat:@"von %@ - %@", [[self story] author], [dateFormatter stringFromDate:[[self story] date]]];
 	[dateFormatter release];
 
 	//Set the title of the navigation bar
