@@ -33,6 +33,7 @@
 		CB9DBA091048827C00A7B50B /* playbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9DBA081048827C00A7B50B /* playbutton.png */; };
 		CB9E946E104490B700768B8B /* gelesen.db in Resources */ = {isa = PBXBuildFile; fileRef = CB9E946D104490B700768B8B /* gelesen.db */; };
 		CB9E94841044929D00768B8B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9E94831044929D00768B8B /* libsqlite3.dylib */; };
+		CBA438FA105836D9002B2077 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA438F9105836D9002B2077 /* libxml2.dylib */; };
 		CBD0485C10558C74001F57AA /* Three20 in Resources */ = {isa = PBXBuildFile; fileRef = CBD0480810558C74001F57AA /* Three20 */; };
 		F6222F011041D90D00FC030D /* rss.png in Resources */ = {isa = PBXBuildFile; fileRef = F6222F001041D90D00FC030D /* rss.png */; };
 		F62230401043488D00FC030D /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F622303F1043488D00FC030D /* MediaPlayer.framework */; };
@@ -101,6 +102,8 @@
 		CB9DBA081048827C00A7B50B /* playbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playbutton.png; sourceTree = "<group>"; };
 		CB9E946D104490B700768B8B /* gelesen.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = gelesen.db; sourceTree = "<group>"; };
 		CB9E94831044929D00768B8B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		CBA438EC1058361C002B2077 /* UIScrollViewPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScrollViewPrivate.h; sourceTree = "<group>"; };
+		CBA438F9105836D9002B2077 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		CBD0480610558C2E001F57AA /* libThree20.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libThree20.a; sourceTree = "<group>"; };
 		CBD0480810558C74001F57AA /* Three20 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Three20; sourceTree = "<group>"; };
 		F6222F001041D90D00FC030D /* rss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rss.png; sourceTree = "<group>"; };
@@ -145,6 +148,7 @@
 				F62230401043488D00FC030D /* MediaPlayer.framework in Frameworks */,
 				CB9E94841044929D00768B8B /* libsqlite3.dylib in Frameworks */,
 				22250A7210510E5E008B2EEC /* MessageUI.framework in Frameworks */,
+				CBA438FA105836D9002B2077 /* libxml2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +200,7 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				22D4A69E105001D500BC3317 /* COPYING */,
+				CBA438F9105836D9002B2077 /* libxml2.dylib */,
 			);
 			name = "Apfeltalk Magazin";
 			sourceTree = "<group>";
@@ -205,6 +210,7 @@
 			children = (
 				28A0AB4B0D9B1048005BE974 /* Apfeltalk_Magazin_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				CBA438EC1058361C002B2077 /* UIScrollViewPrivate.h */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -432,7 +438,10 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Apfeltalk_Magazin_Prefix.pch;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"\"$(SRCROOT)\"",
+				);
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -451,7 +460,10 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Apfeltalk_Magazin_Prefix.pch;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"\"$(SRCROOT)\"",
+				);
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

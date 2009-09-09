@@ -31,10 +31,13 @@
 	NSDate *date;
 	NSString *author;
 	NSString *link;
+	NSString *thumbnailLink;
 }
 @property (readwrite, copy) NSString *title;
 @property (readwrite, copy) NSString *summary;
 @property (readwrite, copy) NSDate *date;
 @property (readwrite, copy) NSString *author;
 @property (readwrite, copy) NSString *link;
+@property (readwrite, copy) NSString *thumbnailLink;
+
 @end

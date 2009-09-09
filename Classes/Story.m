@@ -24,28 +24,37 @@
 
 #import "Story.h"
 
+NSString *ATStoryTitle = @"title";
+NSString *ATStorySummary = @"summay";
+NSString *ATStoryDate = @"date";
+NSString *ATStoryAuthor = @"author";
+NSString *ATStoryLink = @"link";
+NSString *ATStoryThumbnailLink = @"thumbnailLink";
+
 @implementation Story
-@synthesize title, summary, date, author, link;
+@synthesize title, summary, date, author, link, thumbnailLink;
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
 	if (self = [super init]) {
 		if ([aDecoder allowsKeyedCoding]) {
-			[self setTitle:[aDecoder decodeObjectForKey:@"title"]];
-			[self setSummary:[aDecoder decodeObjectForKey:@"summary"]];
-			[self setDate:[aDecoder decodeObjectForKey:@"date"]];
-			[self setAuthor:[aDecoder decodeObjectForKey:@"author"]];
-			[self setLink:[aDecoder decodeObjectForKey:@"link"]];
+			[self setTitle:[aDecoder decodeObjectForKey:ATStoryTitle]];
+			[self setSummary:[aDecoder decodeObjectForKey:ATStorySummary]];
+			[self setDate:[aDecoder decodeObjectForKey:ATStoryDate]];
+			[self setAuthor:[aDecoder decodeObjectForKey:ATStoryAuthor]];
+			[self setLink:[aDecoder decodeObjectForKey:ATStoryLink]];
+			[self setThumbnailLink:[aDecoder decodeObjectForKey:ATStoryThumbnailLink]];
 		}
 	}
 	return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-	[aCoder encodeObject:[self title] forKey:@"title"];
-	[aCoder encodeObject:[self summary] forKey:@"summary"];
-	[aCoder encodeObject:[self date] forKey:@"date"];
-	[aCoder encodeObject:[self author] forKey:@"author"];
-	[aCoder encodeObject:[self link] forKey:@"link"];
+	[aCoder encodeObject:[self title] forKey:ATStoryTitle];
+	[aCoder encodeObject:[self summary] forKey:ATStorySummary];
+	[aCoder encodeObject:[self date] forKey:ATStoryDate];
+	[aCoder encodeObject:[self author] forKey:ATStoryAuthor];
+	[aCoder encodeObject:[self link] forKey:ATStoryLink];
+	[aCoder encodeObject:[self thumbnailLink] forKey:ATStoryThumbnailLink];
 }
 
 - (void) dealloc
@@ -55,6 +64,7 @@
 	[date release];
 	[author release];
 	[link release];
+	[thumbnailLink release];
 	[super dealloc];
 }
 
