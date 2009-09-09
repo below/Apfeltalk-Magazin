@@ -218,25 +218,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F69090FD1056B06E0044DF36 /* bubble_top.png */,
-				F69090FE1056B06E0044DF36 /* bubble_middle.png */,
-				F69090FF1056B06E0044DF36 /* header.png */,
-				F69091001056B06E0044DF36 /* bubble_bottom.png */,
+				CB1434AE1058616500B5FF14 /* Images */,
 				F6FB7DD5104EDE2F007F5A54 /* fullscreen.xib */,
-				F6FB789E10512B8600B10BA3 /* DetailBackground2.png */,
-				22FB60C4104DBD5100A0F65A /* Icon-Settings.png */,
-				CB9DBA081048827C00A7B50B /* playbutton.png */,
-				4CCD3C6910470EB300627499 /* DetailBackground.png */,
-				CB9E946D104490B700768B8B /* gelesen.db */,
-				F6222F001041D90D00FC030D /* rss.png */,
-				F6E1BB05103DE9340099D241 /* thread_dot.gif */,
-				F6E1BB06103DE9340099D241 /* thread_dot_hot.gif */,
 				F634304A10362AA4004ACF93 /* DetailView.xib */,
-				F634306010362AC6004ACF93 /* Default.png */,
-				F634306110362AC6004ACF93 /* icon.png */,
-				F6DC30BF1039781600A734AF /* gallery.png */,
-				F6DC30C01039781600A734AF /* magazin.png */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
+				CB9E946D104490B700768B8B /* gelesen.db */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				22FB60DD104DC15600A0F65A /* Settings.bundle */,
 				22FB6026104D9DEA00A0F65A /* Localizable.strings */,
@@ -257,6 +243,28 @@
 				CB9E94831044929D00768B8B /* libsqlite3.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CB1434AE1058616500B5FF14 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				F69090FD1056B06E0044DF36 /* bubble_top.png */,
+				F69090FE1056B06E0044DF36 /* bubble_middle.png */,
+				F69090FF1056B06E0044DF36 /* header.png */,
+				F69091001056B06E0044DF36 /* bubble_bottom.png */,
+				F6FB789E10512B8600B10BA3 /* DetailBackground2.png */,
+				22FB60C4104DBD5100A0F65A /* Icon-Settings.png */,
+				CB9DBA081048827C00A7B50B /* playbutton.png */,
+				4CCD3C6910470EB300627499 /* DetailBackground.png */,
+				F6222F001041D90D00FC030D /* rss.png */,
+				F6E1BB05103DE9340099D241 /* thread_dot.gif */,
+				F6E1BB06103DE9340099D241 /* thread_dot_hot.gif */,
+				F634306010362AC6004ACF93 /* Default.png */,
+				F634306110362AC6004ACF93 /* icon.png */,
+				F6DC30BF1039781600A734AF /* gallery.png */,
+				F6DC30C01039781600A734AF /* magazin.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		CB15C8E81049A2D000360BDC /* Story Containers */ = {
