@@ -71,6 +71,7 @@
 - (Class) storyClass;
 - (NSDateFormatter *) dateFormatter;
 - (NSArray *) desiredElementKeys;
+- (NSString *) summaryElementName;
 
 - (void)updateApplicationIconBadgeNumber;
 - (BOOL) databaseContainsURL:(NSString *)link;

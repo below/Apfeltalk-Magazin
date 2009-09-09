@@ -25,6 +25,10 @@
 #import "NewsController.h"
 #import "DetailNews.h"
 
+#import <libxml/HTMLparser.h>
+#import <libxml/xpath.h>
+#import <libxml/xpathInternals.h>
+
 @interface NewsController (private)
 - (NSString *) savedStoryFilepath;
 - (BOOL) saveStories;
@@ -218,6 +222,48 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	[super updateApplicationIconBadgeNumber];	
 }
 
+#pragma mark special XML processing
+
+- (NSString *) extractThumbnailLink:(NSString *)htmlInput {
+	NSString *value = nil;
+	NSData *data = [currentText dataUsingEncoding:NSUTF8StringEncoding];
+	htmlDocPtr	doc = htmlReadMemory([data bytes],[data length], NULL, NULL, 0);
+	/* Create xpath evaluation context */
+	xmlXPathContextPtr xpathCtx = xmlXPathNewContext(doc);
+	
+	xmlChar * xpathExpr = (xmlChar*)"//img[attribute::class=\"thumbnail\"]/attribute::src";
+	
+	xmlXPathObjectPtr xpathObj = xmlXPathEvalExpression(xpathExpr, xpathCtx);
+	if(xpathObj == NULL) {
+		fprintf(stderr,"Error: unable to evaluate xpath expression \"%s\"\n", xpathExpr);
+	}
+	else  {
+		xmlNodeSetPtr nodeset = xpathObj->nodesetval;
+		if (nodeset && nodeset->nodeNr == 1 && nodeset->nodeTab[0]->children){
+			xmlNodePtr child = nodeset->nodeTab[0]->children;
+			
+			if (child->type == XML_TEXT_NODE)
+				value = [NSString stringWithCString:(char*)child->content encoding:NSUTF8StringEncoding];
+		}
+		xmlXPathFreeObject(xpathObj);
+	}		
+	
+	xmlXPathFreeContext(xpathCtx); 
+	xmlFreeDoc(doc); 
+	xmlCleanupParser();		
+	return value;
+}
+
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI 
+ qualifiedName:(NSString *)qName{     
+	if ([elementName isEqualToString:[self summaryElementName]]) {
+		NSString *thumbnailLink = [self extractThumbnailLink:currentText];
+		if ([thumbnailLink length] > 0)
+			[item setThumbnailLink:thumbnailLink];
+	}
+	[super parser:parser didEndElement:elementName namespaceURI:namespaceURI
+	qualifiedName:qName];
+}
 - (void) dealloc {
 	[savedStories release];
 	[super dealloc];

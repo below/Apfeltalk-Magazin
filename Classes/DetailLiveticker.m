@@ -23,7 +23,7 @@
 //
 
 #import "DetailLiveticker.h"
-
+#import "UIScrollViewPrivate.h"
 
 #define MAX_IMAGE_WIDTH 280
 
@@ -65,7 +65,8 @@
 
     [webview loadHTMLString:[self htmlString] baseURL:nil];
 
-#warning: setAllowsRubberBanding: is not documented. I think this will block the app to go into the AppStore
+// setAllowsRubberBanding: is not documented. I think this will block the app to go into the AppStore
+	// Below: If google can do it, so can we
 	[(UIScrollView *)[webview.subviews objectAtIndex:0] setAllowsRubberBanding:NO];
 
 }

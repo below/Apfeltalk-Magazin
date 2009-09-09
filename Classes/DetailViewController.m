@@ -24,6 +24,7 @@
 
 #import "DetailViewController.h"
 #import "RootViewController.h"
+#import "UIScrollViewPrivate.h"
 
 @implementation DetailViewController
 
