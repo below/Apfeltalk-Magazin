@@ -30,10 +30,12 @@
 {
     NSArray         *stories;
     NSDateFormatter *shortTimeFormatter;
+    NSUInteger       displayedStoryIndex;
 }
 
 @property(retain) NSArray *stories;
 @property(retain) NSDateFormatter *shortTimeFormatter;
+@property(assign) NSUInteger displayedStoryIndex;
 
 - (void)reloadTickerEntries:(NSTimer *)timer;
 
