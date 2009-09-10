@@ -1,5 +1,5 @@
 //
-//  AtomicElementView.m
+//  ImageView.m
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
@@ -31,13 +31,11 @@
 @synthesize element;
 @synthesize viewController;
 
-
 // the preferred size of this view is the size of the background image
 + (CGSize)preferredViewSize {
 	return CGSizeMake(320,356);
 	//return CGSizeMake(256,256);
 }
-
 
 // initialize the view, calling super and setting the 
 // properties to nil
@@ -48,7 +46,6 @@
 		viewController = nil;
 		// set the background color of the view to clearn
 		self.backgroundColor=[UIColor clearColor];
-		
     }
     return self;
 }
@@ -56,12 +53,6 @@
 // yes this view can become first responder
 - (BOOL)canBecomeFirstResponder {
 	return YES;
-}
-
-// when a touch event occurs tell the view controller to flip this view to the 
-// back and show the AtomicElementFlippedView instead.
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	//[viewController flipCurrentView];
 }
 
 - (void)drawRect:(CGRect)rect
@@ -133,9 +124,6 @@ CGImageRef AEViewCreateGradientImage (int pixelsWide,
     return theCGImage;
 }
 
-
-
-
 - (UIImage *)reflectedImageRepresentationWithHeight:(NSUInteger)height
 {
 	CGContextRef mainViewContentContext;
@@ -195,7 +183,5 @@ CGImageRef AEViewCreateGradientImage (int pixelsWide,
 	// return the image
 	return theImage;
 }
-
-
 
 @end

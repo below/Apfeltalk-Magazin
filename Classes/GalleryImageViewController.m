@@ -69,12 +69,12 @@
 								 (containerView.bounds.size.height-preferredImageViewSize.height)/2-40,
 								 preferredImageViewSize.width,preferredImageViewSize.height);
 	
-	// create the atomic element view
+	// create the image element view
 	ImageView *localImageElementView = [[ImageView alloc] initWithFrame:viewRect];
 	self.imageView = localImageElementView;
 	[localImageElementView release];
 	
-	// add the atomic element view to the containerView
+	// add the image element view to the containerView
 	NSLog(@"controller. element: %@", element);
 //	atomicElementView.element = element;	
 	//testing
