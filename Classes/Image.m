@@ -27,6 +27,7 @@
 
 @implementation Image
 
+// replace init method
 - (id)initWithDictionary:(NSDictionary *)aDictionary {
 	if ([self init]) {
 		
@@ -38,13 +39,11 @@
 	[super dealloc];
 }
  
-- (UIImage *)stateImageForAtomicElementView {
-//	return [UIImage imageNamed:[NSString stringWithFormat:@"%@_256.png",state]];
+- (UIImage *)imageForView {
 	NSData* imageData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:@"http://www.apfeltalk.de/gallery/data/501/medium/100_2460.JPG"]];
 	UIImage* image = [[UIImage alloc] initWithData:imageData];
 	[imageData release];
 	
-	NSLog(@"returning image");
 	return image;
 }
 

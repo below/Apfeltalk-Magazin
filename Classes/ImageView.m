@@ -69,7 +69,7 @@
 	NSLog(@"draw rect. element: %@", element);
 	// get the background image for the state of the element
 	// position it appropriately and draw the image
-	UIImage *backgroundImage = [element stateImageForAtomicElementView];
+	UIImage *backgroundImage = [element imageForView];
 	CGRect elementSymbolRectangle = CGRectMake(0,0, [backgroundImage size].width, [backgroundImage size].height);
 	[backgroundImage drawInRect:elementSymbolRectangle];
 }

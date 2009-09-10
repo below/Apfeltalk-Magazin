@@ -29,8 +29,7 @@
 @implementation GalleryImageViewController
 
 @synthesize element;
-@synthesize atomicElementFlippedView;
-@synthesize atomicElementView;
+@synthesize imageView;
 @synthesize containerView;
 @synthesize reflectionView;
 @synthesize flipIndicatorButton;
@@ -44,8 +43,7 @@
 - (id)init {
 	if (self = [super init]) {
 		element = nil;
-		atomicElementView = nil;
-		atomicElementFlippedView = nil;
+		imageView = nil;
 		self.frontViewIsVisible=YES;
 		self.hidesBottomBarWhenPushed = YES;
 
@@ -65,16 +63,16 @@
 	
 	containerView.backgroundColor = [UIColor blackColor];
 	
-	CGSize preferredAtomicElementViewSize = [ImageView preferredViewSize];
+	CGSize preferredImageViewSize = [ImageView preferredViewSize];
 	
-	CGRect viewRect = CGRectMake((containerView.bounds.size.width-preferredAtomicElementViewSize.width)/2,
-								 (containerView.bounds.size.height-preferredAtomicElementViewSize.height)/2-40,
-								 preferredAtomicElementViewSize.width,preferredAtomicElementViewSize.height);
+	CGRect viewRect = CGRectMake((containerView.bounds.size.width-preferredImageViewSize.width)/2,
+								 (containerView.bounds.size.height-preferredImageViewSize.height)/2-40,
+								 preferredImageViewSize.width,preferredImageViewSize.height);
 	
 	// create the atomic element view
-	ImageView *localAtomicElementView = [[ImageView alloc] initWithFrame:viewRect];
-	self.atomicElementView = localAtomicElementView;
-	[localAtomicElementView release];
+	ImageView *localImageElementView = [[ImageView alloc] initWithFrame:viewRect];
+	self.imageView = localImageElementView;
+	[localImageElementView release];
 	
 	// add the atomic element view to the containerView
 	NSLog(@"controller. element: %@", element);
@@ -82,10 +80,10 @@
 	//testing
 	
 	//we need to tell the element where our image is located.... for now its hardcoded!!!
-	atomicElementView.element =	[[Image alloc] init];
-	[containerView addSubview:atomicElementView];
+	imageView.element =	[[Image alloc] init];
+	[containerView addSubview:imageView];
 	
-	atomicElementView.viewController = self;
+	imageView.viewController = self;
 	self.view = containerView;
 
 	// create the reflection view
@@ -102,10 +100,10 @@
 	[localReflectionImageView release];
 	
 	// determine the size of the reflection to create
-	NSUInteger reflectionHeight=atomicElementView.bounds.size.height*reflectionFraction;
+	NSUInteger reflectionHeight=imageView.bounds.size.height*reflectionFraction;
 	
 	// create the reflection image, assign it to the UIImageView and add the image view to the containerView
-	reflectionView.image=[self.atomicElementView reflectedImageRepresentationWithHeight:reflectionHeight];
+	reflectionView.image=[self.imageView reflectedImageRepresentationWithHeight:reflectionHeight];
 	reflectionView.alpha=reflectionOpacity;
 	
 	[containerView addSubview:reflectionView];
@@ -130,9 +128,8 @@
 }
 
 - (void)dealloc {
-	[atomicElementView release];
+	[imageView release];
 	[reflectionView release];
-	[atomicElementFlippedView release];
 	[element release];
 	[super dealloc];
 }

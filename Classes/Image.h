@@ -30,6 +30,6 @@
  
 - (id)initWithDictionary:(NSDictionary *)aDictionary;
 
-@property (readonly) UIImage *stateImageForAtomicElementView;
+@property (readonly) UIImage *imageForView;
 
 @end
