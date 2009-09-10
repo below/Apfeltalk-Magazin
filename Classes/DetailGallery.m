@@ -26,7 +26,7 @@
 #import "Fullscreen.h"
 #import "RootViewController.h"
 #import "Apfeltalk_MagazinAppDelegate.h"
-
+#import "GalleryImageViewController.h"
 
 @implementation DetailGallery
 
@@ -117,11 +117,20 @@
 	str = [[[self story] summary] substringWithRange:myRange2];
 	
 	if (buttonIdx == 2) {
-		Fullscreen *dvController = [[Fullscreen alloc] initWithNibName:@"fullscreen" bundle:[NSBundle mainBundle]];
+		/*Fullscreen *dvController = [[Fullscreen alloc] initWithNibName:@"fullscreen" bundle:[NSBundle mainBundle]];
 		dvController.string = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
 		
 		[self.navigationController pushViewController:dvController animated:YES];
 		[dvController release];	
+		 */
+		
+		GalleryImageViewController *galleryImageViewController = [[GalleryImageViewController alloc] init];
+//		GalleryImageViewController *galleryImageViewController = [[GalleryImageViewController alloc] initWithNibName:@"fullscreen" bundle:[NSBundle mainBundle]];
+		[self.navigationController pushViewController:galleryImageViewController animated:YES];
+		[galleryImageViewController release];
+//		[window addSubview:atomicElementView];
+		//[self.view addSubview:atomicElementView];
+//		self.view = atomicElementView;
 	}
 	
     if (buttonIdx == 1) {
