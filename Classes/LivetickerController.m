@@ -32,6 +32,7 @@
 
 @synthesize stories;
 @synthesize shortTimeFormatter;
+@synthesize displayedStoryIndex;
 
 
 - (void)dealloc
@@ -62,6 +63,32 @@
 
     [NSThread detachNewThreadSelector:@selector(parseInBackgroundWithDelegate:) toTarget:parser withObject:self];
 }
+
+
+
+- (void)changeStory:(id)sender
+{
+    NSUInteger  newIndex;
+    Story      *newStory;
+
+    if ([(UISegmentedControl *)sender selectedSegmentIndex] == 0)
+        newIndex = [self displayedStoryIndex] - 1;
+
+    if ([(UISegmentedControl *)sender selectedSegmentIndex] == 1)
+        newIndex = [self displayedStoryIndex] + 1;
+
+    if ([(UISegmentedControl *)sender selectedSegmentIndex] != UISegmentedControlNoSegment)
+    {
+        [self setDisplayedStoryIndex:newIndex];
+        newStory = [[self stories] objectAtIndex:newIndex];
+        [[[[self navigationController] viewControllers] lastObject] setStory:newStory];
+        [[[[self navigationController] viewControllers] lastObject] updateInterface];
+    }
+
+    [(UISegmentedControl *)sender setEnabled:([self displayedStoryIndex] > 0) forSegmentAtIndex:0];
+    [(UISegmentedControl *)sender setEnabled:!([self displayedStoryIndex] == ([[self stories] count] - 1)) forSegmentAtIndex:1];
+}
+
 
 #pragma mark -
 #pragma mark UITableViewDataSource
@@ -97,6 +124,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self setDisplayedStoryIndex:[indexPath row]];
+
     Story            *story = [stories objectAtIndex:[indexPath row]];
     DetailLiveticker *detailController = [[DetailLiveticker alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle] story:story];
 
@@ -115,7 +144,6 @@
 }
 
 
-
 #pragma mark -
 #pragma mark ATXMLParserDelegateProtocol
 
@@ -131,6 +159,16 @@
 
 - (void)parser:(ATXMLParser *)parser setParsedStories:(NSArray *)parsedStories
 {
+    NSInteger diffCount = [parsedStories count] - [[self stories] count];
+
+    if (diffCount > 0)
+    {
+        [self setDisplayedStoryIndex:[self displayedStoryIndex] + diffCount];
+        if ([[[self navigationController] viewControllers] lastObject] != self)
+            [self performSelectorOnMainThread:@selector(changeStory:) withObject:[[[[self navigationController] viewControllers] lastObject] storyControl]
+                                waitUntilDone:NO];
+    }
+
     [self setStories:parsedStories];
 }
 

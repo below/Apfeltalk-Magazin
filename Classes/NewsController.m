@@ -225,10 +225,11 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 #pragma mark special XML processing
 
 - (NSString *) extractThumbnailLink:(NSString *)htmlInput {
-	NSString *value = nil;
-	NSData *data = [currentText dataUsingEncoding:NSUTF8StringEncoding];
+	NSString *value = nil;	
+	
+	NSData *data = [htmlInput dataUsingEncoding:NSUTF8StringEncoding];
 	htmlDocPtr	doc = htmlReadMemory([data bytes],[data length], NULL, NULL, 0);
-	/* Create xpath evaluation context */
+	// Create xpath evaluation context
 	xmlXPathContextPtr xpathCtx = xmlXPathNewContext(doc);
 	
 	xmlChar * xpathExpr = (xmlChar*)"//img[attribute::class=\"thumbnail\"]/attribute::src";
@@ -254,16 +255,17 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	return value;
 }
 
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI 
- qualifiedName:(NSString *)qName{     
-	if ([elementName isEqualToString:[self summaryElementName]]) {
-		NSString *thumbnailLink = [self extractThumbnailLink:currentText];
+- (void)parseXMLFileAtURL:(NSString *)URL {
+	[super parseXMLFileAtURL:URL];
+	
+	// This needs to be done in post-processing, as libxml2 interferes with NSXMLParser
+	for (Story *s in stories) {
+		NSString *thumbnailLink = [self extractThumbnailLink:[s summary]];
 		if ([thumbnailLink length] > 0)
-			[item setThumbnailLink:thumbnailLink];
+			[s setThumbnailLink:thumbnailLink];
 	}
-	[super parser:parser didEndElement:elementName namespaceURI:namespaceURI
-	qualifiedName:qName];
 }
+
 - (void) dealloc {
 	[savedStories release];
 	[super dealloc];
