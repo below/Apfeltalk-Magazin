@@ -23,8 +23,8 @@
 //
  
 #import "GalleryImageViewController.h"
-#import "AtomicElementView.h"
 #import "Image.h"
+#import "ImageView.h"
 
 @implementation GalleryImageViewController
 
@@ -65,14 +65,14 @@
 	
 	containerView.backgroundColor = [UIColor blackColor];
 	
-	CGSize preferredAtomicElementViewSize = [AtomicElementView preferredViewSize];
+	CGSize preferredAtomicElementViewSize = [ImageView preferredViewSize];
 	
 	CGRect viewRect = CGRectMake((containerView.bounds.size.width-preferredAtomicElementViewSize.width)/2,
 								 (containerView.bounds.size.height-preferredAtomicElementViewSize.height)/2-40,
 								 preferredAtomicElementViewSize.width,preferredAtomicElementViewSize.height);
 	
 	// create the atomic element view
-	AtomicElementView *localAtomicElementView = [[AtomicElementView alloc] initWithFrame:viewRect];
+	ImageView *localAtomicElementView = [[ImageView alloc] initWithFrame:viewRect];
 	self.atomicElementView = localAtomicElementView;
 	[localAtomicElementView release];
 	

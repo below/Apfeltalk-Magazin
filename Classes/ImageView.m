@@ -22,13 +22,12 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
-#import "AtomicElementView.h"
 #import "GalleryImageViewController.h"
 #import "Image.h"
 #import <QuartzCore/QuartzCore.h>
+#import "ImageView.h"
 
-
-@implementation AtomicElementView
+@implementation ImageView
 @synthesize element;
 @synthesize viewController;
 

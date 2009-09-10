@@ -27,7 +27,7 @@
 @class Image;
 @class GalleryImageViewController;
 
-@interface AtomicElementView : UIView {
+@interface ImageView : UIView {
 	Image *element;
 	GalleryImageViewController *viewController;
 }

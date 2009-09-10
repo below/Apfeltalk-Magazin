@@ -25,13 +25,13 @@
 #import <UIKit/UIKit.h>
 
 @class Image;
-@class AtomicElementView;
+@class ImageView;
 @class AtomicElementFlippedView;
 
 @interface GalleryImageViewController : UIViewController {
 	Image *element;
 	
-	AtomicElementView *atomicElementView;
+	ImageView *atomicElementView;
 	AtomicElementFlippedView *atomicElementFlippedView;
 	UIImageView *reflectionView;
 	UIView *containerView;	
@@ -42,7 +42,7 @@
 @property (assign) BOOL frontViewIsVisible;
 @property (nonatomic,retain) Image *element;
 @property (nonatomic,retain) UIView *containerView;
-@property (nonatomic,retain) AtomicElementView *atomicElementView;
+@property (nonatomic,retain) ImageView *atomicElementView;
 @property (nonatomic,retain) UIImageView *reflectionView;
 @property (nonatomic,retain) AtomicElementFlippedView *atomicElementFlippedView;
 @property (nonatomic,retain) UIButton *flipIndicatorButton;
