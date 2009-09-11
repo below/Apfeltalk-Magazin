@@ -55,6 +55,7 @@
 	
     // Release the movie instance created in playMovieAtURL
     [theMovie release]; 
+	theMovie = nil;
 }
 
 - (NSString *) rightBarButtonTitle {
