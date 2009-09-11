@@ -129,7 +129,11 @@
 	//[authorLabel setText:[[self story] author]];
 	NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-	datum.text = [NSString stringWithFormat:@"von %@ - %@", [[self story] author], [dateFormatter stringFromDate:[[self story] date]]];
+	if ([[self story] author] == nil) {
+		datum.text = [dateFormatter stringFromDate:[[self story] date]];
+	} else {
+		datum.text = [NSString stringWithFormat:@"von %@ - %@", [[self story] author], [dateFormatter stringFromDate:[[self story] date]]];
+	}
 	[dateFormatter release];
 
 	NSString *thumbnailLink = [[self story] thumbnailLink];
