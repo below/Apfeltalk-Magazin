@@ -337,7 +337,7 @@ static NSDate *oldestStoryDate = nil;
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
-	NSString * errorString = [NSString stringWithFormat:@"Der Feed ist im Moment nicht verfügbar. Versuchen sie es bitte neu."];
+	NSString * errorString = [NSString stringWithFormat:@"Der Feed ist im Moment nicht verfügbar. Versuche es bitte später erneut."];
 	NSLog(@"error parsing XML: %@", errorString);
 	
 	UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Content konnte nicht geladen werden" message:errorString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
