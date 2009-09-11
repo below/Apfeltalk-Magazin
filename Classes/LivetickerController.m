@@ -177,8 +177,8 @@
 - (void)parser:(ATXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
     [(LivetickerNavigationController *)[self navigationController] setReloadTimer:nil];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Parsing Error", nil) message:[parseError localizedDescription]
-                                                       delegate:nil cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Parser Fehler", nil) message:[parseError localizedDescription]
+													   delegate:nil cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:nil];
     [alertView show];
     [alertView release];
 }
