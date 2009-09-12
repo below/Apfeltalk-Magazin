@@ -177,7 +177,7 @@
 - (void)parser:(ATXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
     [(LivetickerNavigationController *)[self navigationController] setReloadTimer:nil];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Parser Fehler", nil) message:[parseError localizedDescription]
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Content konnte nicht geladen werden", nil) message:@"Der Feed ist im Moment nicht verfügbar. Versuche es bitte später erneut."
 													   delegate:nil cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:nil];
     [alertView show];
     [alertView release];
