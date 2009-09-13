@@ -38,5 +38,6 @@
 @property(assign) NSUInteger displayedStoryIndex;
 
 - (void)reloadTickerEntries:(NSTimer *)timer;
+- (void)changeStory:(id)sender;
 
 @end

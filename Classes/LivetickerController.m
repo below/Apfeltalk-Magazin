@@ -28,6 +28,10 @@
 #import "Story.h"
 
 
+#define TIMELABEL_TAG 1
+#define TITLELABEL_TAG 2
+
+
 @implementation LivetickerController
 
 @synthesize stories;
@@ -98,16 +102,47 @@
     static NSString *CellIdendifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdendifier];
 
+    UILabel *timeLabel;
+    UILabel *titleLabel;
+
     if (cell == nil)
     {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdendifier] autorelease];
-        [[cell textLabel] setFont:[UIFont boldSystemFontOfSize:12.0]];
-        [[cell detailTextLabel] setFont:[UIFont boldSystemFontOfSize:12.0]];
+
+        CGRect contentRect = [[cell contentView] frame];
+
+        // Creating the time label
+        timeLabel = [[[UILabel alloc] initWithFrame:CGRectMake(10.0, 0.0, 50.0, contentRect.size.height)] autorelease];
+        [timeLabel setTag:TIMELABEL_TAG];
+        [timeLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
+        [timeLabel setTextColor:[UIColor colorWithRed:0.22 green:0.33 blue:0.53 alpha:1.0]];
+        [timeLabel setHighlightedTextColor:[UIColor whiteColor]];
+        [timeLabel setTextAlignment:UITextAlignmentLeft];
+        [timeLabel setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight];
+
+        [[cell contentView] addSubview:timeLabel];
+
+        // Creating the title label
+        titleLabel = [[[UILabel alloc] initWithFrame:CGRectMake(50.0, 0.0, contentRect.size.width - 60.0, contentRect.size.height)] autorelease];
+        [titleLabel setTag:TITLELABEL_TAG];
+        [titleLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
+        [titleLabel setTextColor:[UIColor blackColor]];
+        [titleLabel setHighlightedTextColor:[UIColor whiteColor]];
+        [titleLabel setTextAlignment:UITextAlignmentLeft];
+        [titleLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+
+        [[cell contentView] addSubview:titleLabel];
+    }
+    else
+    {
+        timeLabel = (UILabel *)[[cell contentView] viewWithTag:TIMELABEL_TAG];
+        titleLabel = (UILabel *)[[cell contentView] viewWithTag:TITLELABEL_TAG];
     }
 
     Story *story = [stories objectAtIndex:[indexPath row]];
 
-	cell.textLabel.text = [NSString stringWithFormat:@"%@      %@", [[self shortTimeFormatter] stringFromDate:[story date]], [story title]];
+    [timeLabel setText:[[self shortTimeFormatter] stringFromDate:[story date]]];
+    [titleLabel setText:[story title]];
 
     return cell;
 }
