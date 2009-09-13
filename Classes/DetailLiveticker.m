@@ -59,7 +59,7 @@
 
 - (NSString *)htmlString
 {
-	thumbnail.image = [UIImage imageNamed:@"rss.png"];
+	thumbnail.image = [UIImage imageNamed:@"ticker.png"];
     int              newHeight;
     float            scaleFactor;
     NSRange          aRange, searchRange, valueRange;
