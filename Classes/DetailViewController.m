@@ -160,6 +160,7 @@
 	return @"Newsoptionen";
 }
 
+
 - (UIImage *) usedimage {
 	return [UIImage imageNamed:@"header.png"];
 }
