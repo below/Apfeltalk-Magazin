@@ -100,16 +100,15 @@
 
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdendifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdendifier] autorelease];
         [[cell textLabel] setFont:[UIFont boldSystemFontOfSize:12.0]];
         [[cell detailTextLabel] setFont:[UIFont boldSystemFontOfSize:12.0]];
     }
 
     Story *story = [stories objectAtIndex:[indexPath row]];
 
-    [[cell detailTextLabel] setText:[story title]];
-    [[cell textLabel] setText:[[self shortTimeFormatter] stringFromDate:[story date]]];
-
+	cell.textLabel.text = [NSString stringWithFormat:@"%@      %@", [[self shortTimeFormatter] stringFromDate:[story date]], [story title]];
+	
     return cell;
 }
 
@@ -172,12 +171,10 @@
     [self setStories:parsedStories];
 }
 
-
-
 - (void)parser:(ATXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
     [(LivetickerNavigationController *)[self navigationController] setReloadTimer:nil];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Parser Fehler", nil) message:[parseError localizedDescription]
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Content konnte nicht geladen werden", nil) message:@"Der Feed ist im Moment nicht verfügbar. Versuche es bitte später erneut."
 													   delegate:nil cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:nil];
     [alertView show];
     [alertView release];

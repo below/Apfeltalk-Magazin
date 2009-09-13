@@ -24,6 +24,7 @@
 
 #import "NewsController.h"
 #import "DetailNews.h"
+#import "Apfeltalk_MagazinAppDelegate.h"
 
 #import <libxml/HTMLparser.h>
 #import <libxml/xpath.h>
@@ -49,6 +50,13 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	} else {
 		NSLog(@"Shake To Reload is off, don't activae UIAccelerometer");
 	}
+	
+	UIBarButtonItem *safariButton = [[UIBarButtonItem alloc] initWithTitle:@"Optionen"
+																	 style:UIBarButtonItemStyleBordered
+																	target:self
+																	action:@selector(openSafari:)];
+	self.navigationItem.leftBarButtonItem = safariButton;
+	[safariButton release];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -62,6 +70,8 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 		accel.delegate = nil;
 	}
 }
+
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 2;
@@ -274,6 +284,74 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 //		NSString *pureText = [self extractText:[s summary]];
 //		NSLog (pureText);
 	}
+}
+
+- (IBAction)openSafari:(id)sender {
+	Apfeltalk_MagazinAppDelegate *appDelegate = (Apfeltalk_MagazinAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	UIActionSheet *myMenu = [[UIActionSheet alloc]
+							 initWithTitle: nil
+							 delegate:self
+							 cancelButtonTitle:@"Abbrechen"
+							 destructiveButtonTitle:nil
+							 otherButtonTitles:@"Alle News als gel. mark.", @"Alle gesp. News löschen",nil];
+	
+    [myMenu showFromTabBar:[[appDelegate tabBarController] tabBar]];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIdx
+	{	
+	if (buttonIdx == 0) {
+		//Alle News als gelesen markieren
+		NSInteger i = 0;
+		for( i = 0; i < 50; i++) {
+		Story *story = [stories objectAtIndex: i];
+		NSString * link = [story link];
+		
+		if ([link length] > 0 && ![self databaseContainsURL:link]) {
+			NSDate *date = [[stories objectAtIndex: i] date];
+			
+			const char *sql = "insert into read(url, date) values(?,?)"; 
+			sqlite3_stmt *insert_statement;
+			int error;
+			error = sqlite3_prepare_v2(database, sql, -1, &insert_statement, NULL); 
+			if (error == SQLITE_OK) {
+				sqlite3_bind_text(insert_statement, 1, [link UTF8String], -1, SQLITE_TRANSIENT); 
+				sqlite3_bind_double(insert_statement, 2, [date timeIntervalSinceReferenceDate]);
+				error = (sqlite3_step(insert_statement) != SQLITE_DONE);
+			}
+			error = sqlite3_finalize(insert_statement);	
+			
+			/*
+			 *	More thinking needs to go into the deletion of reads
+			 *
+			 sqlite3_stmt *delete_statement;
+			 NSString *deleteSql = [NSString stringWithFormat:@"delete from read where date<%f", [[[self class] oldestStoryDate] timeIntervalSinceReferenceDate]];
+			 error = sqlite3_prepare_v2(database, [deleteSql UTF8String], -1, &delete_statement, NULL); 
+			 if (error != SQLITE_OK)
+			 NSLog (@"An error occurred: %s", sqlite3_errmsg(database));
+			 
+			 error = sqlite3_step(delete_statement); 
+			 error = error != SQLITE_DONE;
+			 
+			 error = sqlite3_finalize(delete_statement);	
+			 if (error != SQLITE_OK)
+			 NSLog (@"An error occurred: %s", sqlite3_errmsg(database));
+			 */	
+			[newsTable reloadData];
+			
+			// update the number of unread messages in Application Badge
+			[self updateApplicationIconBadgeNumber];
+		} 
+		}
+	}
+	if (buttonIdx == 1) {
+		//Alle gespeicherten News löschen
+		savedStories = [[NSMutableArray alloc] init];
+		[self saveStories];
+		[newsTable reloadData];
+	}
+    [actionSheet release];
 }
 
 - (void) dealloc {

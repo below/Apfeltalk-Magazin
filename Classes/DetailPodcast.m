@@ -67,6 +67,10 @@
 	return [UIImage imageNamed:@"header.png"];
 }
 
+- (UIImage *) thumbimage {
+	return [UIImage imageNamed:@"apfelshow.png"];
+}
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {    
 	NSString *urlString = [[request URL ] absoluteString];

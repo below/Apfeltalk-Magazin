@@ -127,7 +127,7 @@
     if (buttonIdx == 1) {
 		str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
 		UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:str]]];
-		UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+		UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil); 
 		
 		UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Bild gespeichert" message:@"Das Bild wurde erfolgreich in deine Fotogallerie gespeichert." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[errorAlert show];

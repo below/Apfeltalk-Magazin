@@ -25,7 +25,7 @@
 #import <UIKit/UIKit.h>
 #import "RootViewController.h"
 
-@interface NewsController : RootViewController <UIAccelerometerDelegate> {
+@interface NewsController : RootViewController <UIAccelerometerDelegate, UIActionSheetDelegate> {
 	@private
 	NSMutableArray *savedStories;
 }
