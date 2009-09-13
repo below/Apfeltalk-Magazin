@@ -100,15 +100,14 @@
 
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdendifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdendifier] autorelease];
         [[cell textLabel] setFont:[UIFont boldSystemFontOfSize:12.0]];
         [[cell detailTextLabel] setFont:[UIFont boldSystemFontOfSize:12.0]];
     }
 
     Story *story = [stories objectAtIndex:[indexPath row]];
 
-    [[cell detailTextLabel] setText:[story title]];
-    [[cell textLabel] setText:[[self shortTimeFormatter] stringFromDate:[story date]]];
+	cell.textLabel.text = [NSString stringWithFormat:@"%@      %@", [[self shortTimeFormatter] stringFromDate:[story date]], [story title]];
 
     return cell;
 }
@@ -171,8 +170,6 @@
 
     [self setStories:parsedStories];
 }
-
-
 
 - (void)parser:(ATXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
