@@ -23,7 +23,9 @@
 //
 
 #import "DetailLiveticker.h"
+#import "LivetickerController.h"
 #import "UIScrollViewPrivate.h"
+
 
 #define MAX_IMAGE_WIDTH 280
 
@@ -44,22 +46,20 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:segControl];
 
     [[self navigationItem] setRightBarButtonItem:rightItem];
-    [[[[self navigationController]viewControllers] objectAtIndex:0] changeStory:segControl];
+    [[[[self navigationController] viewControllers] objectAtIndex:0] changeStory:segControl];
 
     [segControl release];
     [rightItem release];
 
+    [webview setDelegate:self];
     [self updateInterface];
 
-#warning: setAllowsRubberBanding: is not documented. I think this will block the app to go into the AppStore
 	[(UIScrollView *)[webview.subviews objectAtIndex:0] setAllowsRubberBanding:NO];
-
 }
-
-
 
 - (NSString *)htmlString
 {
+	thumbnail.image = [UIImage imageNamed:@"rss.png"];
     int              newHeight;
     float            scaleFactor;
     NSRange          aRange, searchRange, valueRange;
@@ -102,11 +102,9 @@
     NSURL *backgroundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bubble_middle" ofType:@"png"]];
 
     return [NSString stringWithFormat:@"<head> <style type=\"text/css\">"
-            @" body { background:url(%@) repeat-y; font:10pt Helvetica; margin:0; padding:0; color:#6a6a6a }"
+            @"body { background:url(%@) repeat-y; font:10pt Helvetica; margin:0; padding:0; color:#6a6a6a }"
             @"</style></head> <body><div style=\"padding-left:20px; padding-right:20px;\">%@</div></body>", [backgroundURL absoluteString], htmlString];
 }
-
-
 
 - (UISegmentedControl *)storyControl
 {
@@ -117,8 +115,6 @@
 
 - (void)updateInterface
 {
-    [webview setDelegate:self];
-
     [titleLabel setText:[[self story] title]];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
