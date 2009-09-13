@@ -234,7 +234,7 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 
 #pragma mark special XML processing
 
-- (NSString *) extractThumbnailLink:(NSString *)htmlInput {
+- (NSString *) extractTextFromHTML:(NSString*)htmlInput forQuery:(NSString *)query {
 	NSString *value = nil;	
 	
 	NSData *data = [htmlInput dataUsingEncoding:NSUTF8StringEncoding];
@@ -242,7 +242,7 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	// Create xpath evaluation context
 	xmlXPathContextPtr xpathCtx = xmlXPathNewContext(doc);
 	
-	xmlChar * xpathExpr = (xmlChar*)"//img[attribute::class=\"thumbnail\"]/attribute::src";
+	xmlChar * xpathExpr = (xmlChar*)[query UTF8String];
 	
 	xmlXPathObjectPtr xpathObj = xmlXPathEvalExpression(xpathExpr, xpathCtx);
 	if(xpathObj == NULL) {
@@ -265,6 +265,14 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	return value;
 }
 
+- (NSString *) extractThumbnailLink:(NSString *)htmlInput {
+	return [self extractTextFromHTML:htmlInput forQuery:@"//img[attribute::class=\"thumbnail\"]/attribute::src"];
+}
+
+- (NSString *) extractText:(NSString *)htmlInput {
+	return [self extractTextFromHTML:htmlInput forQuery:@"/*[1]"];
+}
+
 - (void)parseXMLFileAtURL:(NSString *)URL {
 	[super parseXMLFileAtURL:URL];
 	
@@ -273,6 +281,8 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 		NSString *thumbnailLink = [self extractThumbnailLink:[s summary]];
 		if ([thumbnailLink length] > 0)
 			[s setThumbnailLink:thumbnailLink];
+//		NSString *pureText = [self extractText:[s summary]];
+//		NSLog (pureText);
 	}
 }
 
