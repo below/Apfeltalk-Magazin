@@ -57,10 +57,9 @@
 	[(UIScrollView *)[webview.subviews objectAtIndex:0] setAllowsRubberBanding:NO];
 }
 
-
-
 - (NSString *)htmlString
 {
+	thumbnail.image = [UIImage imageNamed:@"rss.png"];
     int              newHeight;
     float            scaleFactor;
     NSRange          aRange, searchRange, valueRange;
@@ -106,8 +105,6 @@
             @"body { background:url(%@) repeat-y; font:10pt Helvetica; margin:0; padding:0; color:#6a6a6a }"
             @"</style></head> <body><div style=\"padding-left:20px; padding-right:20px;\">%@</div></body>", [backgroundURL absoluteString], htmlString];
 }
-
-
 
 - (UISegmentedControl *)storyControl
 {
