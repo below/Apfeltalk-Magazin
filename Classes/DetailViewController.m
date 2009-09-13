@@ -136,12 +136,8 @@
 	}
 	[dateFormatter release];
 
-	NSString *thumbnailLink = [[self story] thumbnailLink];
-	if (thumbnailLink) {
-		NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailLink]];
-		UIImage * thumbnailImage = [UIImage imageWithData:imageData];
-		[thumbnail setImage:thumbnailImage];
-	}
+	[thumbnail setImage:[self thumbimage]];
+
 	//Set the title of the navigation bar
 	//-150x150
 	NSString * buttonTitle = [self rightBarButtonTitle];
@@ -166,6 +162,16 @@
 
 - (UIImage *) usedimage {
 	return [UIImage imageNamed:@"header.png"];
+}
+
+- (UIImage *) thumbimage {
+	NSString *thumbnailLink = [[self story] thumbnailLink];
+	UIImage * thumbnailImage = nil;
+	if (thumbnailLink) {
+		NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailLink]];
+		thumbnailImage = [UIImage imageWithData:imageData];
+	}
+	return thumbnailImage;
 }
 
 -(IBAction)speichern:(id)sender

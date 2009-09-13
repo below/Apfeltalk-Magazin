@@ -108,7 +108,7 @@
     Story *story = [stories objectAtIndex:[indexPath row]];
 
 	cell.textLabel.text = [NSString stringWithFormat:@"%@      %@", [[self shortTimeFormatter] stringFromDate:[story date]], [story title]];
-
+	
     return cell;
 }
 
