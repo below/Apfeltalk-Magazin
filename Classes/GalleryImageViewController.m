@@ -63,6 +63,17 @@
 	[[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+	if(timer != nil) {
+		[timer invalidate];
+		timer = nil;
+	}
+	
+	[[self navigationController] setNavigationBarHidden:NO animated:NO];
+	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:NO];
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	// show navigation bar
 	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
@@ -140,7 +151,6 @@
 	[reflectionView release];
 	[element release];
 	[timer release];
-	[imageURL release];
 	[super dealloc];
 }
 
