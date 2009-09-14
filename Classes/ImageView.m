@@ -33,20 +33,20 @@
 @synthesize element;
 @synthesize viewController;
 
-// the preferred size of this view is the size of the background image
+// the preferred size of this view is the size of the image
 + (CGSize)preferredViewSize {
-	return CGSizeMake(320,356);
+	//return CGSizeMake(320,356);
+	NSLog(@"return preferredViewSize");
 	//return CGSizeMake(256,256);
+	return CGSizeMake(480,320);
 }
 
-// initialize the view, calling super and setting the 
-// properties to nil
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         // Initialization code here.
 		element = nil;
 		viewController = nil;
-		// set the background color of the view to clearn
+		// clear background color
 		self.backgroundColor=[UIColor clearColor];
     }
     return self;
@@ -63,8 +63,9 @@
 	// get the background image for the state of the element
 	// position it appropriately and draw the image
 	UIImage *backgroundImage = [element imageForView];
-	CGRect elementSymbolRectangle = CGRectMake(0,0, [backgroundImage size].width, [backgroundImage size].height);
-	[backgroundImage drawInRect:elementSymbolRectangle];
+//	CGRect imageRectangle = CGRectMake(0,0, [backgroundImage size].width, [backgroundImage size].height);
+	CGRect imageRectangle = CGRectMake(0,0, 480, 320);
+	[backgroundImage drawInRect:imageRectangle];
 }
 
 

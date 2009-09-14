@@ -22,7 +22,6 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
- 
 #import "GalleryImageViewController.h"
 #import "Image.h"
 #import "ImageView.h"
@@ -36,10 +35,8 @@
 @synthesize flipIndicatorButton;
 @synthesize frontViewIsVisible;
 
-
 #define reflectionFraction 0.35
 #define reflectionOpacity 0.5
-
 
 - (id)init {
 	if (self = [super init]) {
@@ -47,11 +44,14 @@
 		imageView = nil;
 		self.frontViewIsVisible=YES;
 		self.hidesBottomBarWhenPushed = YES;
-
 	}
 	return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[[self navigationController] setNavigationBarHidden:YES animated:YES];
+}
 
 - (void)loadView {	
 	NSLog(@"loadView");
@@ -66,6 +66,7 @@
 	
 	CGSize preferredImageViewSize = [ImageView preferredViewSize];
 	
+	// do we really need this?
 	CGRect viewRect = CGRectMake((containerView.bounds.size.width-preferredImageViewSize.width)/2,
 								 (containerView.bounds.size.height-preferredImageViewSize.height)/2-40,
 								 preferredImageViewSize.width,preferredImageViewSize.height);
@@ -77,10 +78,8 @@
 	
 	// add the image element view to the containerView
 	NSLog(@"controller. element: %@", element);
-//	atomicElementView.element = element;	
-	//testing
 	
-	//we need to tell the element where our image is located.... for now its hardcoded!!!
+	// TODO we need to tell the element where our image is located.... for now its hardcoded!!!
 	imageView.element =	[[Image alloc] init];
 	[containerView addSubview:imageView];
 	
@@ -108,24 +107,6 @@
 	reflectionView.alpha=reflectionOpacity;
 	
 	[containerView addSubview:reflectionView];
-
-	
-	/*UIButton *localFlipIndicator=[[UIButton alloc] initWithFrame:CGRectMake(0,0,30,30)];
-	self.flipIndicatorButton=localFlipIndicator;
-	[localFlipIndicator release];
-	
-	// front view is always visible at first
-	[flipIndicatorButton setBackgroundImage:[UIImage imageNamed:@"flipper_list_blue.png"] forState:UIControlStateNormal];
-	
-	UIBarButtonItem *flipButtonBarItem;
-	flipButtonBarItem=[[UIBarButtonItem alloc] initWithCustomView:flipIndicatorButton];
-	
-	[self.navigationItem setRightBarButtonItem:flipButtonBarItem animated:YES];
-	[flipButtonBarItem release];
-	
-	[flipIndicatorButton addTarget:self action:@selector(flipCurrentView) forControlEvents:(UIControlEventTouchDown   )];
-	 */
-
 }
 
 - (void)dealloc {
