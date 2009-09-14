@@ -4,7 +4,7 @@
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
 //	Copyright (C) 2009	Stephan König (stephankoenig at me dot com), Stefan Kofler
-//						Alexander von Below, Andreas Rami, Michael Fenske, Laurids Düllmann, Jesper (Graphics),
+//						Alexander von Below, Andreas Rami, Michael Fenske, Laurids Düllmann, Jesper Frommherz (Graphics),
 //						Patrick Rollbis (Graphics),
 //						
 //	This program is free software; you can redistribute it and/or
@@ -21,6 +21,7 @@
 //	along with this program; if not, write to the Free Software
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
+
  
 #import "GalleryImageViewController.h"
 #import "Image.h"
@@ -109,7 +110,7 @@
 	[containerView addSubview:reflectionView];
 
 	
-	UIButton *localFlipIndicator=[[UIButton alloc] initWithFrame:CGRectMake(0,0,30,30)];
+	/*UIButton *localFlipIndicator=[[UIButton alloc] initWithFrame:CGRectMake(0,0,30,30)];
 	self.flipIndicatorButton=localFlipIndicator;
 	[localFlipIndicator release];
 	
@@ -123,7 +124,7 @@
 	[flipButtonBarItem release];
 	
 	[flipIndicatorButton addTarget:self action:@selector(flipCurrentView) forControlEvents:(UIControlEventTouchDown   )];
-	 
+	 */
 
 }
 
