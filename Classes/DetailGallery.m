@@ -117,7 +117,7 @@
 	str = [[[self story] summary] substringWithRange:myRange2];
 	
 	if (buttonIdx == 2) {
-		/*Fullscreen *dvController = [[Fullscreen alloc] initWithNibName:@"fullscreen" bundle:[NSBundle mainBundle]];
+		/*Fullscreen *dvController = [[Fullscreen alloc] initWithNibName:@"Fullscreen" bundle:[NSBundle mainBundle]];
 		dvController.string = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
 		
 		[self.navigationController pushViewController:dvController animated:YES];

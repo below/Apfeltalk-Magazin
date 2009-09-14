@@ -31,7 +31,7 @@
 
 - (id)initWithURL:(NSURL *)url {
 	if(self = [super init]) {
-		imageURL = url;
+		imageURL = [url retain];
 	}
 	
 	return self;
@@ -41,9 +41,9 @@
 	[imageURL dealloc];
 	[super dealloc];
 }
- 
+
 - (UIImage *)imageForView {
-	NSData* imageData = [[NSData alloc]initWithContentsOfURL:imageURL];
+	NSData* imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
 	UIImage* image = [[UIImage alloc] initWithData:imageData];
 	[imageData release];
 	

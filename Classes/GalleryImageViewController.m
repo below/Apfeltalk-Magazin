@@ -53,7 +53,7 @@
 - (id)initWithURL:(NSURL *)url {
 	[self init];
 	
-	imageURL = url;
+	imageURL = [url retain];
 	return self;
 }
 

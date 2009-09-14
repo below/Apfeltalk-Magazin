@@ -66,7 +66,7 @@
 		F6E1BB08103DE9340099D241 /* thread_dot_hot.gif in Resources */ = {isa = PBXBuildFile; fileRef = F6E1BB06103DE9340099D241 /* thread_dot_hot.gif */; };
 		F6FB789F10512B8600B10BA3 /* DetailBackground2.png in Resources */ = {isa = PBXBuildFile; fileRef = F6FB789E10512B8600B10BA3 /* DetailBackground2.png */; };
 		F6FB7DD6104EDE2F007F5A54 /* Fullscreen.m in Sources */ = {isa = PBXBuildFile; fileRef = F6FB7DD4104EDE2F007F5A54 /* Fullscreen.m */; };
-		F6FB7DD7104EDE2F007F5A54 /* fullscreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6FB7DD5104EDE2F007F5A54 /* fullscreen.xib */; };
+		F6FB7DD7104EDE2F007F5A54 /* Fullscreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6FB7DD5104EDE2F007F5A54 /* Fullscreen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -157,7 +157,7 @@
 		F6FB789E10512B8600B10BA3 /* DetailBackground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DetailBackground2.png; sourceTree = "<group>"; };
 		F6FB7DD3104EDE2F007F5A54 /* Fullscreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fullscreen.h; sourceTree = "<group>"; };
 		F6FB7DD4104EDE2F007F5A54 /* Fullscreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fullscreen.m; sourceTree = "<group>"; };
-		F6FB7DD5104EDE2F007F5A54 /* fullscreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fullscreen.xib; path = Classes/fullscreen.xib; sourceTree = "<group>"; };
+		F6FB7DD5104EDE2F007F5A54 /* Fullscreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Fullscreen.xib; path = Classes/Fullscreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,7 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				CB1434AE1058616500B5FF14 /* Images */,
-				F6FB7DD5104EDE2F007F5A54 /* fullscreen.xib */,
+				F6FB7DD5104EDE2F007F5A54 /* Fullscreen.xib */,
 				F634304A10362AA4004ACF93 /* DetailView.xib */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				CB9E946D104490B700768B8B /* gelesen.db */,
@@ -417,7 +417,7 @@
 				22FB6028104D9DEA00A0F65A /* Localizable.strings in Resources */,
 				22FB60C5104DBD5100A0F65A /* Icon-Settings.png in Resources */,
 				22FB60DE104DC15600A0F65A /* Settings.bundle in Resources */,
-				F6FB7DD7104EDE2F007F5A54 /* fullscreen.xib in Resources */,
+				F6FB7DD7104EDE2F007F5A54 /* Fullscreen.xib in Resources */,
 				22D4A69F105001D500BC3317 /* COPYING in Resources */,
 				F6FB789F10512B8600B10BA3 /* DetailBackground2.png in Resources */,
 				CBD0485C10558C74001F57AA /* Three20 in Resources */,
