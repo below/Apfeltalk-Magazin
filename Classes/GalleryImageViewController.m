@@ -70,8 +70,8 @@
 		timer = nil;
 	}
 	
-	[[self navigationController] setNavigationBarHidden:NO animated:YES];
-	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
+	[[self navigationController] setNavigationBarHidden:NO animated:NO];
+	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:NO];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
