@@ -151,6 +151,7 @@
 	[reflectionView release];
 	[element release];
 	[timer release];
+    [imageURL release];
 	[super dealloc];
 }
 
