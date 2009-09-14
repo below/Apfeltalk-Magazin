@@ -35,8 +35,6 @@
 
 // the preferred size of this view is the size of the image
 + (CGSize)preferredViewSize {
-	//return CGSizeMake(320,356);
-	NSLog(@"return preferredViewSize");
 	//return CGSizeMake(256,256);
 	return CGSizeMake(480,320);
 }
@@ -59,7 +57,6 @@
 
 - (void)drawRect:(CGRect)rect
 {
-	NSLog(@"draw rect. element: %@", element);
 	// get the background image for the state of the element
 	// position it appropriately and draw the image
 	UIImage *backgroundImage = [element imageForView];

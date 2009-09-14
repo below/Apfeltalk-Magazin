@@ -67,7 +67,6 @@
 }
 
 - (void)hideNavigationBar {
-	NSLog(@"hideNavigationBar");
 	[timer invalidate];
 	timer = nil;
 	
@@ -75,8 +74,6 @@
 }
 
 - (void)loadView {	
-	NSLog(@"loadView");
-	
 	// create and store a container view
 
 	UIView *localContainerView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
@@ -98,7 +95,6 @@
 	[localImageElementView release];
 	
 	// add the image element view to the containerView
-	NSLog(@"controller. element: %@", element);
 	
 	// TODO we need to tell the element where our image is located.... for now its hardcoded!!!
 	imageView.element =	[[Image alloc] init];
