@@ -35,6 +35,7 @@
 	UIView *containerView;	
 	UIButton *flipIndicatorButton;	
 	BOOL frontViewIsVisible;
+	NSTimer *timer;
 }
 
 @property (assign) BOOL frontViewIsVisible;
@@ -43,5 +44,8 @@
 @property (nonatomic,retain) ImageView *imageView;
 @property (nonatomic,retain) UIImageView *reflectionView;
 @property (nonatomic,retain) UIButton *flipIndicatorButton;
+@property (retain) NSTimer *timer;
+
+- (void)hideNavigationBar;
 
 @end

@@ -34,6 +34,7 @@
 @synthesize reflectionView;
 @synthesize flipIndicatorButton;
 @synthesize frontViewIsVisible;
+@synthesize timer;
 
 #define reflectionFraction 0.35
 #define reflectionOpacity 0.5
@@ -51,6 +52,26 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[[self navigationController] setNavigationBarHidden:YES animated:YES];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	
+	//self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(hideNavigationBar) userInfo:nil repeats:YES];
+	[[self navigationController] setNavigationBarHidden:NO animated:YES]; 
+
+	self.timer = [NSTimer scheduledTimerWithTimeInterval:3 
+									 target:self 
+								   selector:@selector(hideNavigationBar) 
+								   userInfo:nil 
+									repeats:NO];	
+}
+
+- (void)hideNavigationBar {
+	NSLog(@"hideNavigationBar");
+	[timer invalidate];
+	timer = nil;
+	
+	[[self navigationController] setNavigationBarHidden:YES animated:YES]; 
 }
 
 - (void)loadView {	
@@ -113,6 +134,7 @@
 	[imageView release];
 	[reflectionView release];
 	[element release];
+	[timer release];
 	[super dealloc];
 }
 
