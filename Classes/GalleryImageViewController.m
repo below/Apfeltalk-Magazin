@@ -35,6 +35,7 @@
 @synthesize flipIndicatorButton;
 @synthesize frontViewIsVisible;
 @synthesize timer;
+@synthesize imageURL;
 
 #define reflectionFraction 0.35
 #define reflectionOpacity 0.5
@@ -49,16 +50,25 @@
 	return self;
 }
 
+- (id)initWithURL:(NSURL *)url {
+	[self init];
+	
+	imageURL = url;
+	return self;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
 	[[self navigationController] setNavigationBarHidden:YES animated:YES];
+	[[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	
-	//self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(hideNavigationBar) userInfo:nil repeats:YES];
+	// show navigation bar
+	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
 	[[self navigationController] setNavigationBarHidden:NO animated:YES]; 
-
+	
+	// create timer to remove navigation bar
 	self.timer = [NSTimer scheduledTimerWithTimeInterval:3 
 									 target:self 
 								   selector:@selector(hideNavigationBar) 
@@ -70,7 +80,8 @@
 	[timer invalidate];
 	timer = nil;
 	
-	[[self navigationController] setNavigationBarHidden:YES animated:YES]; 
+	[[self navigationController] setNavigationBarHidden:YES animated:YES];
+	[[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
 }
 
 - (void)loadView {	
@@ -95,9 +106,7 @@
 	[localImageElementView release];
 	
 	// add the image element view to the containerView
-	
-	// TODO we need to tell the element where our image is located.... for now its hardcoded!!!
-	imageView.element =	[[Image alloc] init];
+	imageView.element =	[[Image alloc] initWithURL:imageURL];
 	[containerView addSubview:imageView];
 	
 	imageView.viewController = self;
@@ -131,8 +140,8 @@
 	[reflectionView release];
 	[element release];
 	[timer release];
+	[imageURL release];
 	[super dealloc];
 }
-
 
 @end

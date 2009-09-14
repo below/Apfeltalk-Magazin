@@ -123,14 +123,12 @@
 		[self.navigationController pushViewController:dvController animated:YES];
 		[dvController release];	
 		 */
+		str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
+//		UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:str]]];
 		
-		GalleryImageViewController *galleryImageViewController = [[GalleryImageViewController alloc] init];
-//		GalleryImageViewController *galleryImageViewController = [[GalleryImageViewController alloc] initWithNibName:@"fullscreen" bundle:[NSBundle mainBundle]];
+		GalleryImageViewController *galleryImageViewController = [[GalleryImageViewController alloc] initWithURL:[NSURL URLWithString:str]];
 		[self.navigationController pushViewController:galleryImageViewController animated:YES];
 		[galleryImageViewController release];
-//		[window addSubview:atomicElementView];
-		//[self.view addSubview:atomicElementView];
-//		self.view = atomicElementView;
 	}
 	
     if (buttonIdx == 1) {

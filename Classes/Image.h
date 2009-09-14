@@ -27,10 +27,12 @@
 
 
 @interface Image : NSObject {
+	NSURL *imageURL;
 }
  
-- (id)initWithDictionary:(NSDictionary *)aDictionary;
+- (id)initWithURL:(NSURL *)url;
 
 @property (readonly) UIImage *imageForView;
+@property (retain, readonly) NSURL *imageURL;
 
 @end

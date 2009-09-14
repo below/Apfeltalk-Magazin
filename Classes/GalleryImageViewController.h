@@ -36,6 +36,7 @@
 	UIButton *flipIndicatorButton;	
 	BOOL frontViewIsVisible;
 	NSTimer *timer;
+	NSURL *imageURL;
 }
 
 @property (assign) BOOL frontViewIsVisible;
@@ -45,7 +46,9 @@
 @property (nonatomic,retain) UIImageView *reflectionView;
 @property (nonatomic,retain) UIButton *flipIndicatorButton;
 @property (retain) NSTimer *timer;
+@property (retain, readonly) NSURL *imageURL;
 
 - (void)hideNavigationBar;
+- (id)initWithURL:(NSURL *)url;
 
 @end

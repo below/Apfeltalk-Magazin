@@ -27,20 +27,23 @@
 
 @implementation Image
 
-// replace init method
-- (id)initWithDictionary:(NSDictionary *)aDictionary {
-	if ([self init]) {
-		
+@synthesize imageURL;
+
+- (id)initWithURL:(NSURL *)url {
+	if(self = [super init]) {
+		imageURL = url;
 	}
+	
 	return self;
 }
 
 - (void)dealloc {
+	[imageURL dealloc];
 	[super dealloc];
 }
  
 - (UIImage *)imageForView {
-	NSData* imageData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:@"http://www.apfeltalk.de/gallery/data/501/medium/100_2460.JPG"]];
+	NSData* imageData = [[NSData alloc]initWithContentsOfURL:imageURL];
 	UIImage* image = [[UIImage alloc] initWithData:imageData];
 	[imageData release];
 	
