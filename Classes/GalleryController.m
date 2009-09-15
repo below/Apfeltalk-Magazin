@@ -74,10 +74,15 @@
 	AsyncImageView* asyncImage = [[[AsyncImageView alloc] initWithFrame:previewImageFrame] autorelease];
 	asyncImage.tag = 999;
 	GalleryStory *story = [stories objectAtIndex:indexPath.row];
-	NSURL *url = [NSURL URLWithString: [story thumbnailLink]];
-	[asyncImage loadImageFromURL:url];
-	
-	[cell.contentView addSubview:asyncImage];    
+	NSString *urlString = [story thumbnailLink];
+	if ([urlString length] > 0) {
+		NSURL *url = [NSURL URLWithString:urlString];
+		[asyncImage loadImageFromURL:url];
+		
+		[cell.contentView addSubview:asyncImage];    		
+	}
+	else
+		NSLog (@"%@ has no thumbnail", [story title]);
 	
 	// We leave it like this for the moment, because the gallery has no read indicators
 	int storyIndex = [indexPath indexAtPosition: [indexPath length] - 1];
