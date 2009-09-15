@@ -29,7 +29,7 @@
 #import "GalleryImageViewController.h"
 
 @interface DetailGallery (private)
-- (void)createMailComposer;
+- (void)createMailComposer:(NSString*)str;
 @end
 
 @implementation DetailGallery
@@ -139,7 +139,8 @@
 		
 	}
 	if (buttonIdx == 0) {
-		/*str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@"/medium"];
+		str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@"/medium"];
+		/*
 		UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:str]]];
 		UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
 		pasteboard.image = image;
@@ -147,9 +148,9 @@
 		
 		if (TARGET_IPHONE_SIMULATOR) {
 			NSLog(@"Keep in mind, that no mail could be send in Simulator mode... just providing the UI");
-			[self createMailComposer];
+			[self createMailComposer:str];
 		} else {
-			[self createMailComposer];
+			[self createMailComposer:str];
 		}
 		
 	}
@@ -157,18 +158,16 @@
     [actionSheet release];
 }
 
-- (void)createMailComposer {
+- (void)createMailComposer:(NSString*)str {
 	MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
 	controller.mailComposeDelegate = self;
-	// TODO: adde picture, change body
+	
+	// adde image as attachment
 	UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:str]]];
-	NSData *imageData = UIImageJPEGRepresentation(roboPic, 1);
-	[picker addAttachmentData:imageData mimeType:@"image/jpg" fileName:@"RobotWithPencil.jpg"];
-	
-	
+	NSData *imageData = UIImageJPEGRepresentation(image, 1);
+	[controller addAttachmentData:imageData mimeType:@"image/jpg" fileName:@"attachment.jpg"];
 	
 	[controller setSubject:[story title] ];
-	[controller setMessageBody:[story summary] isHTML:YES];
 	[self presentModalViewController:controller animated:YES];
 	[controller release];
 }
