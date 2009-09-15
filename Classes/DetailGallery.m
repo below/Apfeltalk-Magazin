@@ -93,7 +93,7 @@
 							 delegate:self
 							 cancelButtonTitle:@"Abbrechen"
 							 destructiveButtonTitle:nil
-							 otherButtonTitles:@"Kopieren", @"Bild speichern", @"Zeige Bild",nil];
+							 otherButtonTitles:@"Per Mail versenden", @"Bild speichern", @"Zeige Bild",nil];
 
     [myMenu showFromTabBar:[[appDelegate tabBarController] tabBar]];
 }
