@@ -26,7 +26,6 @@
 #import "NewsController.h"
 #import "Apfeltalk_MagazinAppDelegate.h"
 
-
 @interface DetailNews (private)
 - (void)createMailComposer;
 @end
@@ -60,14 +59,6 @@
 
 -(IBAction)speichern:(id)sender
 {
-	// This is an ugly hack
-	/*UINavigationController *navController = [self navigationController];
-	NSArray *controllers = [navController viewControllers];
-	
-	NewsController *newsController = (NewsController*) [controllers objectAtIndex:[controllers count] -2];
-	[newsController addSavedStory:[self story]];
-    [[self navigationItem] setRightBarButtonItem:nil animated:YES];
-	 */
 	Apfeltalk_MagazinAppDelegate *appDelegate = (Apfeltalk_MagazinAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	UIActionSheet *myMenu = [[UIActionSheet alloc]

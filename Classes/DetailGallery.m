@@ -28,6 +28,10 @@
 #import "Apfeltalk_MagazinAppDelegate.h"
 #import "GalleryImageViewController.h"
 
+@interface DetailGallery (private)
+- (void)createMailComposer;
+@end
+
 @implementation DetailGallery
 
 - (NSString *) storyTitle {
@@ -117,14 +121,7 @@
 	str = [[[self story] summary] substringWithRange:myRange2];
 	
 	if (buttonIdx == 2) {
-		/*Fullscreen *dvController = [[Fullscreen alloc] initWithNibName:@"Fullscreen" bundle:[NSBundle mainBundle]];
-		dvController.string = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
-		
-		[self.navigationController pushViewController:dvController animated:YES];
-		[dvController release];	
-		 */
 		str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
-//		UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:str]]];
 		
 		GalleryImageViewController *galleryImageViewController = [[GalleryImageViewController alloc] initWithURL:[NSURL URLWithString:str]];
 		[self.navigationController pushViewController:galleryImageViewController animated:YES];
@@ -142,13 +139,37 @@
 		
 	}
 	if (buttonIdx == 0) {
-		str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@"/medium"];
+		/*str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@"/medium"];
 		UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:str]]];
 		UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
 		pasteboard.image = image;
-	    NSLog(@"PasteBoard %@", [[UIPasteboard generalPasteboard] image]);	}
+	    NSLog(@"PasteBoard %@", [[UIPasteboard generalPasteboard] image]);*/
+		
+		if (TARGET_IPHONE_SIMULATOR) {
+			NSLog(@"Keep in mind, that no mail could be send in Simulator mode... just providing the UI");
+			[self createMailComposer];
+		} else {
+			[self createMailComposer];
+		}
+		
+	}
+	
     [actionSheet release];
 }
 
+- (void)createMailComposer {
+	MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
+	controller.mailComposeDelegate = self;
+	// TODO: adde picture, change body
+	[controller setSubject:[story title] ];
+	[controller setMessageBody:[story summary] isHTML:YES];
+	[self presentModalViewController:controller animated:YES];
+	[controller release];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+	[self becomeFirstResponder];
+	[self dismissModalViewControllerAnimated:YES];
+}
 
 @end

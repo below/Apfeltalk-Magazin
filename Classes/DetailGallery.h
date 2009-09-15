@@ -24,8 +24,9 @@
 
 #import <UIKit/UIKit.h>
 #import "DetailViewController.h"
+#import <MessageUI/MessageUI.h>
 
-@interface DetailGallery : DetailViewController <UIWebViewDelegate, UIActionSheetDelegate> {
+@interface DetailGallery : DetailViewController <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
 }
 
 @end
