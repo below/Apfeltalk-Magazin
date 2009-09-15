@@ -122,6 +122,28 @@
 	[(GalleryStory *)item setThumbnailLink:str];
 }
 
+- (void)parserDidEndDocument:(NSXMLParser *)parser {
+	[super parserDidEndDocument:parser];
+	
+	NSMutableArray *anArray = [[NSMutableArray alloc] init];
+	
+	for (Story *curStory in stories)
+	{
+		NSString *urlString = [curStory thumbnailLink];
+		if ([urlString length] == 0) {
+			NSLog(@"found one");
+			[anArray addObject:curStory];
+		}
+	}
+	
+	for (Story *cur in anArray) {
+		[stories removeObject:cur];
+	}
+	
+	[anArray release];
+	[newsTable reloadData];
+}
+
  - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	 // Right now, let's leave it at that because the gallery has no read-indicators
 	 // Navigation logic
