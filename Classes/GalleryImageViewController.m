@@ -26,6 +26,11 @@
 #import "Image.h"
 #import "ImageView.h"
 
+
+#define reflectionFraction 0.35
+#define reflectionOpacity 0.5
+
+
 @implementation GalleryImageViewController
 
 @synthesize element;
@@ -37,8 +42,15 @@
 @synthesize timer;
 @synthesize imageURL;
 
-#define reflectionFraction 0.35
-#define reflectionOpacity 0.5
+
+- (void)setTimer:(NSTimer *)newTimer {
+    if (timer != newTimer) {
+        [timer invalidate];
+        [timer release];
+        timer = [newTimer retain];
+    }
+}
+
 
 - (id)init {
 	if (self = [super init]) {
@@ -65,11 +77,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	if(timer != nil) {
-		[timer invalidate];
-		timer = nil;
-	}
-	
+	[self setTimer:nil];
+
 	[[self navigationController] setNavigationBarHidden:NO animated:NO];
 	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:NO];
 }
@@ -77,20 +86,19 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	// show navigation bar
 	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
-	[[self navigationController] setNavigationBarHidden:NO animated:YES]; 
-	
+	[[self navigationController] setNavigationBarHidden:NO animated:YES];
+
 	// create timer to remove navigation bar
-	self.timer = [NSTimer scheduledTimerWithTimeInterval:3 
-									 target:self 
-								   selector:@selector(hideNavigationBar) 
-								   userInfo:nil 
-									repeats:NO];	
+	self.timer = [NSTimer scheduledTimerWithTimeInterval:3
+                                                  target:self
+                                                selector:@selector(hideNavigationBar:)
+                                                userInfo:nil
+                                                 repeats:NO];
 }
 
-- (void)hideNavigationBar {
-	[timer invalidate];
-	timer = nil;
-	
+- (void)hideNavigationBar:(NSTimer *)theTimer {
+	[self setTimer:nil];
+
 	[[self navigationController] setNavigationBarHidden:YES animated:YES];
 	[[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
 }
@@ -150,7 +158,7 @@
 	[imageView release];
 	[reflectionView release];
 	[element release];
-	[timer release];
+	[self setTimer:nil];
     [imageURL release];
 	[super dealloc];
 }
