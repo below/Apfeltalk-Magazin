@@ -161,6 +161,12 @@
 	MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
 	controller.mailComposeDelegate = self;
 	// TODO: adde picture, change body
+	UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:str]]];
+	NSData *imageData = UIImageJPEGRepresentation(roboPic, 1);
+	[picker addAttachmentData:imageData mimeType:@"image/jpg" fileName:@"RobotWithPencil.jpg"];
+	
+	
+	
 	[controller setSubject:[story title] ];
 	[controller setMessageBody:[story summary] isHTML:YES];
 	[self presentModalViewController:controller animated:YES];
