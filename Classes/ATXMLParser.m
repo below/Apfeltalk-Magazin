@@ -67,21 +67,6 @@
 
 
 
-- (void)dealloc
-{
-    [story release];
-    [stories release];
-    [dateElementName release];
-    [dateFormatter release];
-    [currentContent release];
-    [desiredElementKeys release];
-    [xmlParser release];
-
-    [super dealloc];
-}
-
-
-
 - (void)setDateFormat:(NSString *)format localeIdentifier:(NSString *)identifier
 {
     NSLocale        *locale = [[NSLocale alloc] initWithLocaleIdentifier:identifier];
@@ -187,6 +172,19 @@
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
     [delegate parser:self parseErrorOccurred:parseError];
+}
+
+- (void)dealloc
+{
+    [story release];
+    [stories release];
+    [dateElementName release];
+    [dateFormatter release];
+    [currentContent release];
+    [desiredElementKeys release];
+    [xmlParser release];
+	
+    [super dealloc];
 }
 
 @end
