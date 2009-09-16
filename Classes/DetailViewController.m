@@ -125,7 +125,6 @@
 	nui = [nui stringByReplacingOccurrencesOfString:@"<img" withString:@"<img width='280'"];
 	nui = [nui stringByReplacingOccurrencesOfString:@"<object width=\"425\" height=\"350\">" withString:@"<object width=\"280\">"];
 	nui = [nui stringByReplacingOccurrencesOfString:@"type=\"application/x-shockwave-flash\" width=\"425\" height=\"350\"" withString:@"type=\"application/x-shockwave-flash\" width=\"280\" "];
-	NSLog(@"htmlstring: %@", nui);
 	
 	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;\
 			border: 0px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br>", nui, name2]; 
