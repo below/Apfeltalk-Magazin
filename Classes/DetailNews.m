@@ -122,9 +122,6 @@
 
     if ([self showSave] && [newsController isSavedStory:[self story]])
         [self setShowSave:NO];
-
-    //if (![self showSave])
-      //  [[self navigationItem] setRightBarButtonItem:nil];
 }
 
 - (void)dealloc {

@@ -209,6 +209,8 @@
     [self setStories:parsedStories];
 }
 
+
+
 - (void)parser:(ATXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
     [(LivetickerNavigationController *)[self navigationController] setReloadTimer:nil];

@@ -76,7 +76,7 @@
     [currentContent release];
     [desiredElementKeys release];
     [xmlParser release];
-
+	
     [super dealloc];
 }
 
