@@ -63,6 +63,8 @@
 
 - (void)reloadTickerEntries:(NSTimer *)timer
 {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+
     ATXMLParser  *parser = [ATXMLParser parserWithURLString:@"http://www.apfeltalk.de/live/?feed=rss2"];
 
     [NSThread detachNewThreadSelector:@selector(parseInBackgroundWithDelegate:) toTarget:parser withObject:self];
