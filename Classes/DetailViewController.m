@@ -101,7 +101,7 @@
 	//NSRange pos2 = [nui rangeOfString: @"<img width='1' height='1'"];
 	NSRange myRange2 = NSMakeRange(pos1.location, [nui length] - pos1.location );
 	NSString *deletestring = [nui substringWithRange:myRange2];
-	NSLog([NSString stringWithFormat:@"%i", pos1.location]);
+//	NSLog([NSString stringWithFormat:@"%i", pos1.location]);
 	
 	nui = [nui stringByReplacingOccurrencesOfString:deletestring withString:@""];
 	
@@ -123,6 +123,9 @@
 
 	// scale image to max width of 280
 	nui = [nui stringByReplacingOccurrencesOfString:@"<img" withString:@"<img width='280'"];
+	nui = [nui stringByReplacingOccurrencesOfString:@"<object width=\"425\" height=\"350\">" withString:@"<object width=\"280\">"];
+	nui = [nui stringByReplacingOccurrencesOfString:@"type=\"application/x-shockwave-flash\" width=\"425\" height=\"350\"" withString:@"type=\"application/x-shockwave-flash\" width=\"280\" "];
+	NSLog(@"htmlstring: %@", nui);
 	
 	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;\
 			border: 0px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br>", nui, name2]; 
