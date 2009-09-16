@@ -120,6 +120,10 @@
 					   }); }); </script> </div> <meta name=\"viewport\" \
 					   content=\"maximum-scale=1.0 width=device-width initial-scale=1.0 user-scalable=no\" /> \
 					   </head> <body>  </body> ", [bubbleMiddleURL absoluteString]];
+
+	// scale image to max width of 280
+	nui = [nui stringByReplacingOccurrencesOfString:@"<img" withString:@"<img width='280'"];
+	
 	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;\
 			border: 0px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br>", nui, name2]; 
 }
