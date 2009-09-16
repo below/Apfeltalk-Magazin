@@ -275,7 +275,7 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 
 - (void)parseXMLFileAtURL:(NSString *)URL {
 	[super parseXMLFileAtURL:URL];
-	
+
 	// This needs to be done in post-processing, as libxml2 interferes with NSXMLParser
 	for (Story *s in stories) {
 		NSString *thumbnailLink = [self extractThumbnailLink:[s summary]];
@@ -285,6 +285,9 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 //		NSLog (pureText);
 	}
 }
+
+
+#pragma mark -
 
 - (IBAction)openSafari:(id)sender {
 	Apfeltalk_MagazinAppDelegate *appDelegate = (Apfeltalk_MagazinAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -358,4 +361,5 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	[savedStories release];
 	[super dealloc];
 }
+
 @end

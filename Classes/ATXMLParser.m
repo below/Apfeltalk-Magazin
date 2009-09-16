@@ -149,7 +149,10 @@
     }
     else if ([[desiredElementKeys allKeys] containsObject:elementName])
     {
-        [self setCurrentContent:[NSMutableString string]];
+        if ([elementName isEqualToString:@"enclosure"])
+            [story setLink:[attributeDict valueForKey:@"url"]];
+        else
+            [self setCurrentContent:[NSMutableString string]];
     }
 }
 
@@ -166,7 +169,15 @@
 {
     if ([elementName isEqualToString:@"item"])
     {
-        [stories addObject:[self story]];
+        if ([(NSObject *)delegate respondsToSelector:@selector(parser:shouldAddParsedItem:)])
+        {
+            if ([delegate parser:self shouldAddParsedItem:[self story]])
+                [stories addObject:[self story]];
+        }
+        else
+        {
+            [stories addObject:[self story]];
+        }
     }
     else if ([[desiredElementKeys allKeys] containsObject:elementName])
     {
@@ -177,7 +188,9 @@
         }
         else
         {
-            [story setValue:[self currentContent] forKey:[desiredElementKeys objectForKey:elementName]];
+            NSString *storyKey = [desiredElementKeys objectForKey:elementName];
+            if ([storyKey length] > 0)
+                [story setValue:[self currentContent] forKey:storyKey];
         }
     }
 }

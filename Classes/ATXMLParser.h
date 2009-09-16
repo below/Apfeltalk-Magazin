@@ -32,6 +32,7 @@
 
 @optional
 - (void)parser:(ATXMLParser *)parser didFinishedSuccessfull:(BOOL)success;
+- (BOOL)parser:(ATXMLParser *)parser shouldAddParsedItem:(id)item;
 
 @required
 - (void)parser:(ATXMLParser *)parser setParsedStories:(NSArray *)parsedStories;

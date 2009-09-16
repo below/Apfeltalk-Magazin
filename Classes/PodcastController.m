@@ -51,6 +51,19 @@
 	}
 }
 
+- (void)parseXMLFileAtURL:(NSString *)URL
+{
+    ATXMLParser         *parser = [[ATXMLParser alloc] initWithURLString:URL];
+    NSMutableDictionary *desiredKeys = [NSMutableDictionary dictionaryWithDictionary:[parser desiredElementKeys]];
+
+    [desiredKeys removeObjectForKey:@"link"];
+    [desiredKeys setObject:@"" forKey:@"enclosure"];
+    [parser setDesiredElementKeys:desiredKeys];
+    [parser setDelegate:self];
+    [parser parse];
+    [parser release];
+}
+
 - (Class) detailControllerClass {
 	return [DetailPodcast self];
 }
@@ -59,14 +72,6 @@
 	return @"http://feeds2.feedburner.com/apfeltalk-small";
 }
 
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{      
-	if ([elementName isEqualToString:@"enclosure"]) {
-		NSString *link = [attributeDict valueForKey:@"url"];
-		[item setLink:link];
-	}
-	else
-		[super parser:parser didStartElement:elementName namespaceURI:namespaceURI qualifiedName:qName attributes:attributeDict];
-}
 
 - (void)updateApplicationIconBadgeNumber {
 	//We don't want to update the Application Icon Badge for Podcasts

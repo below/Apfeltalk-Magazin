@@ -25,58 +25,43 @@
 #define kAccelerationThreshold        2.2
 #define kUpdateInterval               (1.0f/10.0f)
 
+#import "ATXMLParser.h"
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 #import "DetailViewController.h"
 #import <MessageUI/MessageUI.h>
 
-@interface RootViewController : UITableViewController <MFMailComposeViewControllerDelegate> {
-	
+
+@interface RootViewController : UITableViewController <ATXMLParserDelegateProtocol, MFMailComposeViewControllerDelegate>
+{
 	IBOutlet UITableView * newsTable;
-		
-	UIActivityIndicatorView * activityIndicator;
-	
-	CGSize cellSize;
-		
-	NSMutableArray * stories;
-	
+
+	NSArray *stories;
+
 	// should we show Icon Badges. (this could be switched on/off in preferences pane)
 	BOOL showIconBadge;
-	
+
 	// should we use shake to relad
 	BOOL shakeToReload;
-		
-	// a temporary item; added to the "stories" array one at a time, and cleared for the next one
-	@protected
-	Story *item;
-		
-	// it parses through the document, from top to bottom...
-	// we collect and cache each sub-element value, and then save each item to our array.
-	// we use these to track each current item, until it's ready to be added to the "stories" array
-	NSMutableString * currentText;
+
+@protected
 	sqlite3 * database;
-	NSDateFormatter *dateFormatter;
-@private
-	NSArray *desiredElementKeysCache;
 }
+
+@property(retain) NSArray *stories;
 
 - (void)parseXMLFileAtURL:(NSString *)URL;
 - (IBAction)openSafari:(id)sender;
 - (IBAction)about:(id)sender;
-- (NSString *) supportFolderPath;
 
-+ (NSDate *) oldestStoryDate;
-+ (void) setOldestStoryDate:(NSDate *)date;
+- (NSString *)supportFolderPath;
+- (NSString *)documentPath;
 - (Class) detailControllerClass;
-- (Class) storyClass;
-- (NSDateFormatter *) dateFormatter;
-- (NSArray *) desiredElementKeys;
-- (NSString *) summaryElementName;
 
 - (void)updateApplicationIconBadgeNumber;
-- (BOOL) databaseContainsURL:(NSString *)link;
+- (BOOL)databaseContainsURL:(NSString *)link;
 
-- (NSString *) documentPath;
 - (BOOL)isShake:(UIAcceleration *)acceleration;
 - (void)activateShakeToReload:(id)delegate;
+
 @end
