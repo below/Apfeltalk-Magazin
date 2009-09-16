@@ -96,9 +96,14 @@
 - (NSString *) htmlString {
 	NSString *nui = [NSString stringWithFormat:@"<center><b>%@</b></center>%@ " , [[self story] title], [[self story] summary]];
 	
-//	NSArray *tags = [NSArray arrayWithObjects: @"a", @"b", @"p", @"br", @"img", @"div",@"li", nil];
-//	nui = [self strip_tags:nui :tags];
-	nui = [nui stringByReplacingOccurrencesOfString:@"Miniaturansicht angehängter Grafiken" withString:@""];
+	NSRange pos1 = [nui rangeOfString: @"<legend>Miniaturansicht angehängter Grafiken</legend>"]; 
+	pos1.location = pos1.location - 62;
+	//NSRange pos2 = [nui rangeOfString: @"<img width='1' height='1'"];
+	NSRange myRange2 = NSMakeRange(pos1.location, [nui length] - pos1.location );
+	NSString *deletestring = [nui substringWithRange:myRange2];
+	NSLog([NSString stringWithFormat:@"%i", pos1.location]);
+	
+	nui = [nui stringByReplacingOccurrencesOfString:deletestring withString:@""];
 	
 	NSURL *bubbleMiddleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bubble_middle" ofType:@"png"]];
 	NSString *name2 = [NSString stringWithFormat:@"<head> <title>Kommentare</title> <style type=\"text/css\"> \
@@ -116,7 +121,7 @@
 					   content=\"maximum-scale=1.0 width=device-width initial-scale=1.0 user-scalable=no\" /> \
 					   </head> <body>  </body> ", [bubbleMiddleURL absoluteString]];
 	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;\
-			border: 0px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br>", nui, name2];
+			border: 0px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br>", nui, name2]; 
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
