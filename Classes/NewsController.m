@@ -116,10 +116,10 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
 	if ([self isShake:acceleration]) {
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-		[super parseXMLFileAtURL:[self documentPath]];
 		if (vibrateOnReload) {
 			AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 		}
+		[super parseXMLFileAtURL:[self documentPath]];
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	}
 }

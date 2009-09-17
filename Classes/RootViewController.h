@@ -31,7 +31,6 @@
 #import "DetailViewController.h"
 #import <MessageUI/MessageUI.h>
 
-
 @interface RootViewController : UITableViewController <ATXMLParserDelegateProtocol, MFMailComposeViewControllerDelegate>
 {
 	IBOutlet UITableView * newsTable;
