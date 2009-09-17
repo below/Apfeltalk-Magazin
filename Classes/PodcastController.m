@@ -83,6 +83,7 @@
 	if ([self isShake:acceleration]) {
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 		[super parseXMLFileAtURL:[self documentPath]];
+		AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	}
 }

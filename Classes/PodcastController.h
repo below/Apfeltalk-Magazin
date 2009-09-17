@@ -24,6 +24,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RootViewController.h"
+#import "AudioToolbox/AudioToolbox.h";
 
 @interface PodcastController : RootViewController <UIAccelerometerDelegate> {	
 }

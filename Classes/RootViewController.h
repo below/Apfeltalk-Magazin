@@ -43,6 +43,9 @@
 
 	// should we use shake to relad
 	BOOL shakeToReload;
+	
+	// should we vibrate on reload
+	BOOL vibrateOnReload;
 
 @protected
 	sqlite3 * database;

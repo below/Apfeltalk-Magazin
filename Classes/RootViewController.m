@@ -263,6 +263,7 @@
 		// no default values have been set, create them here based on what's in our Settings bundle info
 		showIconBadge = YES;
 		shakeToReload = YES;
+		vibrateOnReload = YES;
 	} else {
 		// set the showIconBadge property
 		NSString *iconBadgeToogleValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"showIconBadge"];
@@ -279,9 +280,18 @@
 		} else {
 			shakeToReload = NO;
 		}
+		
+		// set the vibrateOnReload property
+		NSString *vibrateOnReloadToggleValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"vibrateOnReload"];
+		if([vibrateOnReloadToggleValue isEqualToString:@"1"]) {
+			vibrateOnReload = YES;
+		} else {
+			vibrateOnReload = NO;
+		}
+
 	}
 	
-	NSLog(@"Application configuration: [showIconBadge: %d], [shakeToReload: %d]", showIconBadge, shakeToReload);
+	NSLog(@"Application configuration: [showIconBadge: %d], [shakeToReload: %d], [vibrateOnReload: %d]", showIconBadge, shakeToReload, vibrateOnReload);
 }
 
 - (void)parseXMLFileAtURL:(NSString *)URL
