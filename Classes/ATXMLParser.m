@@ -133,7 +133,6 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-	AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     [delegate parser:self setParsedStories:stories];
 }
 
