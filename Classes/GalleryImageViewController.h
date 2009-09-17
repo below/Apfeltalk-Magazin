@@ -48,7 +48,6 @@
 @property (retain) NSTimer *timer;
 @property (retain, readonly) NSURL *imageURL;
 
-- (void)hideNavigationBar;
 - (id)initWithURL:(NSURL *)url;
 
 @end

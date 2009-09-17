@@ -42,6 +42,7 @@
 - (void)dealloc
 {
     [stories release];
+    [shortTimeFormatter release];
 
     [super dealloc];
 }
@@ -56,16 +57,14 @@
     [self setShortTimeFormatter:formatter];
     [formatter release];
 
-    [self setStories:[NSMutableArray array]];
+    [self setStories:[NSArray array]];
 }
 
 
 
 - (void)reloadTickerEntries:(NSTimer *)timer
 {
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-
-    ATXMLParser  *parser = [ATXMLParser parserWithURLString:@"http://www.apfeltalk.de/live/?feed=rss2"];
+    ATXMLParser *parser = [ATXMLParser parserWithURLString:@"http://www.apfeltalk.de/live/?feed=rss2"];
 
     [NSThread detachNewThreadSelector:@selector(parseInBackgroundWithDelegate:) toTarget:parser withObject:self];
 }
@@ -158,6 +157,18 @@
 
 
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if ([stories count])
+        return nil;
+    else
+        return NSLocalizedString(@"LivetickerController.noTicker", nil);
+}
+
+
+#pragma mark -
+#pragma mark UITableViewDelegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self setDisplayedStoryIndex:[indexPath row]];
@@ -167,16 +178,6 @@
 
     [[self navigationController] pushViewController:detailController animated:YES];
     [detailController release];
-}
-
-
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    if ([stories count])
-        return nil;
-    else
-        return NSLocalizedString(@"LivetickerController.noTicker", nil);
 }
 
 
@@ -207,6 +208,8 @@
 
     [self setStories:parsedStories];
 }
+
+
 
 - (void)parser:(ATXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {

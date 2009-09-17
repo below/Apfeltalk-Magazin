@@ -44,27 +44,7 @@
 - (NSString *) htmlString {	
 	NSURL *bubbleMiddleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bubble_middle" ofType:@"png"]];
 	NSString *nui = [NSString stringWithFormat:@"<center><b>%@</b></center> ", [[self story] summary]];
-	NSString *str = [[self story] summary];
-	
-	NSRange pos1 = [str rangeOfString: @"http://www.apfeltalk.de/gallery/data"]; //-42 .... 
-	NSRange pos2 = NSMakeRange(1,2);
-	if ([str rangeOfString:@".jpg\" alt="].location !=NSNotFound){
-		pos2 = [str rangeOfString: @".jpg\" alt="]; //+4 ....
-	}	
-	if ([str rangeOfString:@".JPG\" alt="].location !=NSNotFound){
-		pos2 = [str rangeOfString: @".JPG\" alt="]; //+4 ....
-	}	
-	if ([str rangeOfString:@".png\" alt="].location !=NSNotFound){
-		pos2 = [str rangeOfString: @".png\" alt="]; //+4 ....
-	}	
-	if ([str rangeOfString:@".PNG\" alt="].location !=NSNotFound){
-		pos2 = [str rangeOfString: @".PNG\" alt="]; //+4 ....
-	}
-	pos2.location = pos2.location + 4;
-	NSRange myRange2 = NSMakeRange(pos1.location,pos2.location - pos1.location);
-	str = [[[self story] summary] substringWithRange:myRange2];
-	
-	str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
+	NSString *str = [[[self story] thumbnailLink] stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
 	
 	NSArray *tags = [NSArray arrayWithObjects: @"a", @"b", @"p", @"br", @"div",@"li", nil];
 	nui = [self strip_tags:nui :tags];

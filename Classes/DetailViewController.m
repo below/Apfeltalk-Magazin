@@ -130,6 +130,26 @@
 			border: 0px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br>", nui, name2]; 
 }
 
+
+- (NSString *) rightBarButtonTitle {
+	return @"Newsoptionen";
+}
+
+
+- (UIImage *) usedimage {
+	return [UIImage imageNamed:@"header.png"];
+}
+
+- (UIImage *) thumbimage {
+	NSString *thumbnailLink = [[self story] thumbnailLink];
+	UIImage * thumbnailImage = nil;
+	if (thumbnailLink) {
+		NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailLink]];
+		thumbnailImage = [UIImage imageWithData:imageData];
+	}
+	return thumbnailImage;
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	webview.delegate = self;
@@ -167,28 +187,7 @@
 	[webview release];
 }
 
-- (NSString *) rightBarButtonTitle {
-	return @"Newsoptionen";
-}
-
-
-- (UIImage *) usedimage {
-	return [UIImage imageNamed:@"header.png"];
-}
-
-- (UIImage *) thumbimage {
-	NSString *thumbnailLink = [[self story] thumbnailLink];
-	UIImage * thumbnailImage = nil;
-	if (thumbnailLink) {
-		NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailLink]];
-		thumbnailImage = [UIImage imageWithData:imageData];
-	}
-	return thumbnailImage;
-}
-
--(IBAction)speichern:(id)sender
-{
-}
+//-(IBAction)speichern:(id)sender
 
 
 
@@ -199,19 +198,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 */
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-
-}
-
 
 - (void)dealloc {
 	[story release];

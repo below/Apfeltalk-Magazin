@@ -53,6 +53,21 @@
 	}
 }
 
+- (void)parseXMLFileAtURL:(NSString *)URL
+{
+    ATXMLParser         *parser = [[ATXMLParser alloc] initWithURLString:URL];
+    NSMutableDictionary *desiredKeys = [NSMutableDictionary dictionaryWithDictionary:[parser desiredElementKeys]];
+
+    [desiredKeys removeObjectForKey:@"content:encoded"];
+    [desiredKeys setObject:@"summary" forKey:@"description"];
+
+    [parser setDesiredElementKeys:desiredKeys];
+    [parser setStoryClass:[GalleryStory self]];
+    [parser setDelegate:self];
+    [parser parse];
+    [parser release];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	static NSString *CellIdentifier = @"ImageCell";
@@ -94,68 +109,17 @@
     return cell;
 }
 
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
-	[super parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName];
-	
-	// TODO this need refactoring. the following code is also located in DetailGallery.m
-	
-	NSString *str = [item summary];
-	
-	NSRange pos1 = [str rangeOfString: @"http://www.apfeltalk.de/gallery/data"]; //-42 .... 
-	NSRange pos2 = NSMakeRange(1,2);
-	if ([str rangeOfString:@".jpg\" alt="].location !=NSNotFound){
-		pos2 = [str rangeOfString: @".jpg\" alt="]; //+4 ....
-	}	
-	if ([str rangeOfString:@".JPG\" alt="].location !=NSNotFound){
-		pos2 = [str rangeOfString: @".JPG\" alt="]; //+4 ....
-	}	
-	if ([str rangeOfString:@".png\" alt="].location !=NSNotFound){
-		pos2 = [str rangeOfString: @".png\" alt="]; //+4 ....
-	}	
-	if ([str rangeOfString:@".PNG\" alt="].location !=NSNotFound){
-		pos2 = [str rangeOfString: @".PNG\" alt="]; //+4 ....
-	}
-	pos2.location = pos2.location + 4;
-	NSRange myRange2 = NSMakeRange(pos1.location,pos2.location - pos1.location);
-	str = [[item summary] substringWithRange:myRange2];
-	
-	[(GalleryStory *)item setThumbnailLink:str];
-}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Right now, let's leave it at that because the gallery has no read-indicators
+    // Navigation logic
 
-- (void)parserDidEndDocument:(NSXMLParser *)parser {
-	[super parserDidEndDocument:parser];
-	
-	NSMutableArray *anArray = [[NSMutableArray alloc] init];
-	
-	for (Story *curStory in stories)
-	{
-		NSString *urlString = [curStory thumbnailLink];
-		if ([urlString length] == 0) {
-			NSLog(@"found one");
-			[anArray addObject:curStory];
-		}
-	}
-	
-	for (Story *cur in anArray) {
-		[stories removeObject:cur];
-	}
-	
-	[anArray release];
-	[newsTable reloadData];
-}
+    // Custom code
 
- - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	 // Right now, let's leave it at that because the gallery has no read-indicators
-	 // Navigation logic
-	 	 
-	 // Custom code
-	 
-	 // open in Safari
-	 DetailGallery *dvController = [[DetailGallery alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle] 
-																	story:[stories objectAtIndex: indexPath.row]];
-	 [self.navigationController pushViewController:dvController animated:YES];
-	 [dvController release];
-	 dvController = nil;
+    // open in Safari
+    DetailGallery *dvController = [[DetailGallery alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle] 
+                                                                   story:[stories objectAtIndex: indexPath.row]];
+    [self.navigationController pushViewController:dvController animated:YES];
+    [dvController release];
 	 
 	 // end of custom code
 }
@@ -164,18 +128,9 @@
 	return @"http://www.apfeltalk.de/forum/gallery.rss";
 }
 
-- (NSString *) summaryElementName {
-	// It should be discussed if the design should be changed. "summary" may not be the right key
-	return @"description";
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {return YES;
 	// Return YES for supported orientations
 	return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (Class) storyClass {
-	return [GalleryStory self];
 }
 
 // handle acceleromter event
@@ -187,8 +142,35 @@
 	}
 }
 
-- (void)dealloc {
-	[super dealloc];
+
+#pragma mark -
+#pragma mark ATXMLParserDelegateProtocol
+
+- (BOOL)parser:(ATXMLParser *)parser shouldAddParsedItem:(id)item
+{
+    BOOL      result = NO;
+    NSRange   linkRange, aRange;
+	NSString *aString = [[item summary] lowercaseString];
+
+    linkRange = [aString rangeOfString:@"http://www.apfeltalk.de/gallery/data"];
+
+    if (linkRange.location != NSNotFound)
+    {
+        aRange = [aString rangeOfString:@".jpg\" alt=" options:NSLiteralSearch range:NSMakeRange(linkRange.location, [aString length] - linkRange.location)];
+
+        if (aRange.location == NSNotFound)
+            aRange = [aString rangeOfString:@".png\" alt=" options:NSLiteralSearch
+                                      range:NSMakeRange(linkRange.location, [aString length] - linkRange.location)];
+
+        if (aRange.location != NSNotFound)
+        {
+            linkRange.length = NSMaxRange(aRange) - 6 - linkRange.location;
+            [item setThumbnailLink:[[item summary] substringWithRange:linkRange]];
+            result = YES;
+        }
+    }
+
+    return result;
 }
 
 @end
