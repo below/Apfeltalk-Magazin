@@ -48,7 +48,7 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>VibrateOnReload</string>
+			<string>Ein / Aus</string>
 			<key>Key</key>
 			<string>vibrateOnReload</string>
 			<key>DefaultValue</key>
