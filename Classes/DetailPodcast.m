@@ -56,9 +56,11 @@
 	
 	nui = [nui stringByReplacingOccurrencesOfString:@"Miniaturansicht angehängter Grafiken" withString:@""];
 	
-	NSURL *playbuttonURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"playbutton" ofType:@"png"]];
 	NSURL *bubbleMiddleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bubble_middle" ofType:@"png"]];
 	// We should check if this exists
+	
+	// !!!:below:20090918 
+	// Could -- whoever wrote this abdomination -- clean it up or at least comment it?
 	NSString *name2 = [NSString stringWithFormat:@"<style type=\"text/css\"> \
 					   body		{font-family: \"Helvetica\", sans-serif; font-size:13px; margin: 0; padding: 0;\
 					   background: url(%@) \
@@ -66,9 +68,9 @@
 					   font-weight:bold;margin-left:10px;margin-right:10px; background-color: white; \
 					   padding-bottom:10px; padding-left:10px;padding-top:10px;text-shadow:0 1px 0 #FFFFFF; \
 					   margin-top: 10px;} div#frame	{padding: 0; margin: 0;} iframe		{padding: 0; margin: 0; \
-					   border: 0;} </style> </div> <a href=\"%@\"><center><img src=\"%@\" alt=\"Play Podcast\" /></center></a>   <meta name=\"viewport\" \
+					   border: 0;} </style> </div><meta name=\"viewport\" \
 					   content=\"maximum-scale=1.0 width=device-width initial-scale=1.0 user-scalable=no\" /> </div> </body> ", 
-					   [bubbleMiddleURL absoluteString], [[self story] link], [playbuttonURL absoluteString]];
+					   [bubbleMiddleURL absoluteString]];
 	
 	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;\
 			border: 0px solid rgb(173, 173, 173);margin: 10px;padding:10px;\">  %@ %@",nui, name2];
