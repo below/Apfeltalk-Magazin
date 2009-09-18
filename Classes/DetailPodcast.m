@@ -27,36 +27,6 @@
 
 @implementation DetailPodcast
 
--(void)playMovieAtURL:(NSURL*)theURL 
-
-{
-	[theMovie release];
-	// theMovie is an iVar just for the sake of the analyzer...
-    theMovie=[[MPMoviePlayerController alloc] initWithContentURL:theURL]; 
-    theMovie.scalingMode=MPMovieScalingModeAspectFill; 
-	
-    // Register for the playback finished notification. 
-	
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(myMovieFinishedCallback:) 
-												 name:MPMoviePlayerPlaybackDidFinishNotification 
-											   object:theMovie]; 
-	
-    // Movie playback is asynchronous, so this method returns immediately. 
-    [theMovie play]; 
-} 
-
-// When the movie is done,release the controller. 
--(void)myMovieFinishedCallback:(NSNotification*)aNotification 
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self 
-                                                    name:MPMoviePlayerPlaybackDidFinishNotification 
-                                                  object:theMovie]; 
-	
-    // Release the movie instance created in playMovieAtURL
-    [theMovie release]; 
-	theMovie = nil;
-}
 
 - (NSString *) rightBarButtonTitle {
 	return nil;
@@ -75,7 +45,7 @@
 {    
 	NSString *urlString = [[request URL ] absoluteString];
 	if ([urlString rangeOfString:@".m"].location !=NSNotFound){
-		[self playMovieAtURL:[NSURL URLWithString:[[self story] link]]];
+		//[self playMovieAtURL:[NSURL URLWithString:[[self story] link]]];
 		return NO;
 	}    
 	return YES;

@@ -24,6 +24,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Story.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface DetailViewController : UIViewController <UIWebViewDelegate> {
 	IBOutlet UILabel *datum;
@@ -38,6 +39,7 @@
 	IBOutlet UIImageView *detailimage;
 
 	Story *story;
+	MPMoviePlayerController* theMovie;
 }
 @property (readwrite, retain) Story *story;
 

@@ -27,7 +27,6 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 @interface DetailPodcast : DetailViewController <UIWebViewDelegate> {
-	MPMoviePlayerController* theMovie;
 }
 
 @end

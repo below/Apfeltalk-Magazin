@@ -97,6 +97,10 @@
 	NSString *nui = [NSString stringWithFormat:@"<center><b>%@</b></center>%@ " , [[self story] title], [[self story] summary]];
 	
 	NSRange pos1 = [nui rangeOfString: @"<legend>Miniaturansicht angehängter Grafiken</legend>"]; 
+	NSLog([NSString stringWithFormat:@"%i", pos1.location]);
+	if (pos1.location >10000) {
+		pos1 = [nui rangeOfString: @"<legend>Angehängte Grafiken</legend>"]; 
+	}
 	pos1.location = pos1.location - 62;
 	//NSRange pos2 = [nui rangeOfString: @"<img width='1' height='1'"];
 	NSRange myRange2 = NSMakeRange(pos1.location, [nui length] - pos1.location );
@@ -187,9 +191,47 @@
 	[webview release];
 }
 
-//-(IBAction)speichern:(id)sender
+-(void)playMovieAtURL:(NSURL*)theURL 
 
+{
+	[theMovie release];
+	// theMovie is an iVar just for the sake of the analyzer...
+    theMovie=[[MPMoviePlayerController alloc] initWithContentURL:theURL]; 
+    theMovie.scalingMode=MPMovieScalingModeAspectFill; 
+	
+    // Register for the playback finished notification. 
+	
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+											 selector:@selector(myMovieFinishedCallback:) 
+												 name:MPMoviePlayerPlaybackDidFinishNotification 
+											   object:theMovie]; 
+	
+    // Movie playback is asynchronous, so this method returns immediately. 
+    [theMovie play]; 
+} 
 
+// When the movie is done,release the controller. 
+-(void)myMovieFinishedCallback:(NSNotification*)aNotification 
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self 
+                                                    name:MPMoviePlayerPlaybackDidFinishNotification 
+                                                  object:theMovie]; 
+	
+    // Release the movie instance created in playMovieAtURL
+    [theMovie release]; 
+	theMovie = nil;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	UITouch *touch = [[event allTouches] anyObject];
+	CGPoint location = [touch locationInView:touch.view];
+	
+	if(CGRectContainsPoint([thumbnail frame], location)) {
+		if ([[[self story] link] rangeOfString:@".mp4"].location !=NSNotFound || [[[self story] link] rangeOfString:@".m4v"].location !=NSNotFound){
+			[self playMovieAtURL:[NSURL URLWithString:[[self story] link]]];
+		}
+	}
+}
 
 /*
 // Override to allow orientations other than the default portrait orientation.
