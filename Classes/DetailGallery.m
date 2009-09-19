@@ -99,9 +99,7 @@ void endElement (void *userData, const xmlChar *name) {
 	}		
 }
 
-- (NSString *) htmlString {	
-	NSURL *bubbleMiddleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bubble_middle" ofType:@"png"]];
-	
+- (NSString *) htmlString {		
 	[cleanedString release];
 	cleanedString = [NSMutableString new];
 	xmlSAXHandler saxInfo;
@@ -134,9 +132,8 @@ void endElement (void *userData, const xmlChar *name) {
 	// :below:20090919 Someone who knows css better than me should turn the bold and center tags into css formatting
 	// :below:20090919 Also, anyone is welcome to further optimize this. Do we need the margin, do we need the padding?
 	// Less is better
-	NSString *resultString = [NSString stringWithFormat:@"<div style=\"font-family:'Helvetica', sans-serif; \
-			  font-size:13px; margin: 0; padding: 0;\">\n\
-			  <center>%@<br/><b>%@</b></center></div>", showpicture, cleanedString];
+	NSString *resultString = [NSString stringWithFormat:@"<div style=\"%@\">\n\
+			  <center>%@<br/><b>%@</b></center></div>", [self cssStyleString], showpicture, cleanedString];
 	return resultString;
 }
 

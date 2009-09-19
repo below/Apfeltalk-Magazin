@@ -55,14 +55,20 @@
     return YES; // URL is not http/https and should open in UIWebView
 }
 
+- (NSString *) cssStyleString {
+	// TODO below:20090919 : Someone who knows CSS and HTML needs to put the border to 0 here
+	return @"background-color:F9F9F9; font-family: 'Helvetica', sans-serif; font-size:13px; margin: 0; padding: 0;";
+}
+
 - (NSString *) htmlString {
 	NSString *bodyString = [[self story] summary];
 	NSRange divRange = [bodyString rangeOfString:@"</div>"];
 	if (divRange.location == NSNotFound)
 		return NSLocalizedString (@"Nachricht konnte nicht angezeigt werden", @"");
 	
-	 bodyString = [NSString stringWithFormat:@"<div style=\"font-family: 'Helvetica', sans-serif; font-size:13px; margin: 0; padding: 0;\">\
-					 <center><b>%@</b></center>%@</div>" , [[self story] title], [bodyString substringToIndex:divRange.location]];
+	 bodyString = [NSString stringWithFormat:@"<div style=\"%@\">\
+					 <center><b>%@</b></center>%@</div>" , 
+				   [self cssStyleString], [[self story] title], [bodyString substringToIndex:divRange.location]];
 	return bodyString; 
 }
 

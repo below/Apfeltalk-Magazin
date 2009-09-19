@@ -57,7 +57,9 @@
 	[(UIScrollView *)[webview.subviews objectAtIndex:0] setAllowsRubberBanding:NO];
 }
 
-
+- (NSString *)cssStyleString {
+	return @"font:10pt Helvetica; margin:0; padding:0; color:#6a6a6a;";
+}
 
 - (NSString *)htmlString
 {
@@ -102,8 +104,8 @@
         }
     }
 
-    return [NSString stringWithFormat:@"<div style=\"font:10pt Helvetica; margin:0; padding:0; color:#6a6a6a;\">%@</div>",
-			htmlString];
+    return [NSString stringWithFormat:@"<div style=\"%@\">%@</div>",
+			[self cssStyleString], htmlString];
 }
 
 

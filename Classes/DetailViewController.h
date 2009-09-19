@@ -46,5 +46,6 @@
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory;
 - (NSString *) rightBarButtonTitle;
 - (UIImage *) usedimage;
+- (NSString *) cssStyleString;
 
 @end

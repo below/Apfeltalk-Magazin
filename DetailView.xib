@@ -61,7 +61,7 @@
 						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 					</object>
-					<object class="IBUIImageView" id="224071565">
+					<object class="IBUIImageView" id="796507918">
 						<reference key="NSNextResponder" ref="1035459194"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrameSize">{320, 367}</string>
@@ -218,10 +218,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="854772169"/>
 							<reference ref="1050080762"/>
-							<reference ref="73355324"/>
 							<reference ref="13805268"/>
 							<reference ref="298717051"/>
-							<reference ref="224071565"/>
+							<reference ref="796507918"/>
+							<reference ref="73355324"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -252,7 +252,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">100</int>
-						<reference key="object" ref="224071565"/>
+						<reference key="object" ref="796507918"/>
 						<reference key="parent" ref="1035459194"/>
 					</object>
 				</object>
@@ -277,7 +277,7 @@
 					<string>DetailViewController</string>
 					<string>UIResponder</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{376, 277}, {320, 367}}</string>
+					<string>{{376, 278}, {320, 367}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
