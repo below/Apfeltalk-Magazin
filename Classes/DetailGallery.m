@@ -119,6 +119,8 @@ void endElement (void *userData, const xmlChar *name) {
 	// <br /><br />von: GunBound<br /><br />Beschreibung: Nein, eigentlich ist ja alles klar\u0085<br /><br />6 Kommentare<br/><br/>
 	// TODO: Add a unit test for this
 	
+	// We could try if seperating it by <br/> Tags works...
+	
 	xmlChar *xmlCharString = (xmlChar*)[[[self story] summary] cStringUsingEncoding:NSUTF8StringEncoding];
 	htmlDocPtr	htmlDoc = htmlSAXParseDoc		(xmlCharString, 
 												 "utf-8", 
@@ -126,10 +128,12 @@ void endElement (void *userData, const xmlChar *name) {
 												 cleanedString)	;
 		
 	free (htmlDoc);
-	// :below:20090919 Someone who knows css better than me should turn the bold and center tags into css formatting
 	NSString *str = [[[self story] thumbnailLink] stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
 	
 	NSString *showpicture = [NSString stringWithFormat:@"<img src=\"%@\" width=\"275\" height=\"181\" alt=\"No Medium Picture.\" /> ", str];
+	// :below:20090919 Someone who knows css better than me should turn the bold and center tags into css formatting
+	// :below:20090919 Also, anyone is welcome to further optimize this. Do we need the margin, do we need the padding?
+	// Less is better
 	NSString *resultString = [NSString stringWithFormat:@"<div style=\"font-family:'Helvetica', sans-serif; \
 			  font-size:13px; margin: 0; padding: 0;\">\n\
 			  <center>%@<br/><b>%@</b></center></div>", showpicture, cleanedString];
