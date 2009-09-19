@@ -27,9 +27,6 @@
 #import "UIScrollViewPrivate.h"
 
 
-#define MAX_IMAGE_WIDTH 270
-
-
 @implementation DetailLiveticker
 
 - (void)viewDidLoad
@@ -63,47 +60,8 @@
 - (NSString *)htmlString
 {
 	thumbnail.image = [UIImage imageNamed:@"TickerThumbnail.png"];
-    int              newHeight;
-    float            scaleFactor;
-    NSRange          aRange, searchRange, valueRange;
-    NSMutableString *htmlString = [NSMutableString stringWithString:[[self story] summary]];
 
-    // Scale the images to fit into the webview
-	// !!!:below:20090919 This needs more cleanup, possibly with XQuery. But not today...
-    searchRange = NSMakeRange(0, [htmlString length]);
-    while (searchRange.location < [htmlString length])
-    {
-        aRange = [htmlString rangeOfString:@"width=\"" options:NSLiteralSearch range:searchRange];
-        if (aRange.location != NSNotFound)
-        {
-            searchRange = NSMakeRange(NSMaxRange(aRange), [htmlString length] - NSMaxRange(aRange));
-            aRange = [htmlString rangeOfString:@"\"" options:NSLiteralSearch range:searchRange];
-            valueRange = NSMakeRange(searchRange.location, aRange.location - searchRange.location);
-
-            scaleFactor = (float)MAX_IMAGE_WIDTH / [[htmlString substringWithRange:valueRange] intValue];
-            if (scaleFactor < 1.0)
-            {
-                [htmlString replaceCharactersInRange:valueRange withString:[NSString stringWithFormat:@"%d", MAX_IMAGE_WIDTH]];
-                searchRange = NSMakeRange(valueRange.location, [htmlString length] - valueRange.location);
-                aRange = [htmlString rangeOfString:@"height=\"" options:NSLiteralSearch range:searchRange];
-                if (aRange.location != NSNotFound)
-                {
-                    searchRange = NSMakeRange(NSMaxRange(aRange), [htmlString length] - NSMaxRange(aRange));
-                    aRange = [htmlString rangeOfString:@"\"" options:NSLiteralSearch range:searchRange];
-                    valueRange = NSMakeRange(searchRange.location, aRange.location - searchRange.location);
-                    newHeight = [[htmlString substringWithRange:valueRange] intValue] * scaleFactor;
-                    [htmlString replaceCharactersInRange:valueRange withString:[NSString stringWithFormat:@"%d", newHeight]];
-                    searchRange.length = [htmlString length] - searchRange.location;
-                }
-            }
-        }
-        else
-        {
-            searchRange.location = [htmlString length];
-        }
-    }
-
-    return [NSString stringWithFormat:@"<div style=\"%@\">%@</div>", [self cssStyleString], htmlString];
+    return [NSString stringWithFormat:@"<div style=\"%@\">%@</div>", [self cssStyleString], [self scaledHtmlStringFromHtmlString:[[self story] summary]]];
 }
 
 

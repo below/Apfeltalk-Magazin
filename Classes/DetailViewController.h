@@ -44,8 +44,8 @@
 @property (readwrite, retain) Story *story;
 
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle story:(Story *)newStory;
-- (NSString *) rightBarButtonTitle;
-- (UIImage *) usedimage;
-- (NSString *) cssStyleString;
-
+- (NSString *)rightBarButtonTitle;
+- (UIImage *)usedimage;
+- (NSString *)cssStyleString;
+- (NSString*)scaledHtmlStringFromHtmlString:(NSString*)htmlString ;
 @end

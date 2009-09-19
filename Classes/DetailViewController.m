@@ -26,6 +26,10 @@
 #import "RootViewController.h"
 #import "UIScrollViewPrivate.h"
 
+
+#define MAX_IMAGE_WIDTH 270
+
+
 @implementation DetailViewController
 
 @synthesize story;
@@ -59,6 +63,54 @@
 	return @"background:transparent; font:10pt Helvetica;";
 }
 
+- (NSString *)scaledHtmlStringFromHtmlString:(NSString *)htmlString
+{
+    int              newHeight;
+    float            scaleFactor;
+    NSRange          aRange, searchRange, valueRange;
+    NSMutableString *mutableString = [NSMutableString stringWithString:htmlString];
+
+    // Scale the images to fit into the webview
+	// !!!:below:20090919 This needs more cleanup, possibly with XQuery. But not today...
+    searchRange = NSMakeRange(0, [mutableString length]);
+    while (searchRange.location < [mutableString length])
+    {
+        aRange = [mutableString rangeOfString:@"width=\"" options:NSLiteralSearch range:searchRange];
+        if (aRange.location != NSNotFound)
+        {
+            searchRange = NSMakeRange(NSMaxRange(aRange), [mutableString length] - NSMaxRange(aRange));
+            aRange = [mutableString rangeOfString:@"\"" options:NSLiteralSearch range:searchRange];
+            valueRange = NSMakeRange(searchRange.location, aRange.location - searchRange.location);
+
+            scaleFactor = (float)MAX_IMAGE_WIDTH / [[mutableString substringWithRange:valueRange] intValue];
+            if (scaleFactor < 1.0)
+            {
+                [mutableString replaceCharactersInRange:valueRange withString:[NSString stringWithFormat:@"%d", MAX_IMAGE_WIDTH]];
+                searchRange = NSMakeRange(valueRange.location, [mutableString length] - valueRange.location);
+                aRange = [mutableString rangeOfString:@"height=\"" options:NSLiteralSearch range:searchRange];
+                if (aRange.location != NSNotFound)
+                {
+                    searchRange = NSMakeRange(NSMaxRange(aRange), [mutableString length] - NSMaxRange(aRange));
+                    aRange = [mutableString rangeOfString:@"\"" options:NSLiteralSearch range:searchRange];
+                    valueRange = NSMakeRange(searchRange.location, aRange.location - searchRange.location);
+                    newHeight = [[mutableString substringWithRange:valueRange] intValue] * scaleFactor;
+                    [mutableString replaceCharactersInRange:valueRange withString:[NSString stringWithFormat:@"%d", newHeight]];
+                    searchRange.length = [mutableString length] - searchRange.location;
+                }
+            }
+        }
+        else
+        {
+            searchRange.location = [mutableString length];
+        }
+    }
+
+    // !!!:MacApple:20090919 This scales all image to MAX_IMAGE_WIDTH even if they are smaller, but I have no better idea.
+    [mutableString replaceOccurrencesOfString:@"class=\"resize\"" withString:[NSString stringWithFormat:@"width=%i", MAX_IMAGE_WIDTH] options:NSLiteralSearch
+                                        range:NSMakeRange(0, [mutableString length])];
+    return mutableString;
+}
+
 - (NSString *) htmlString {
 	NSString *bodyString = [[self story] summary];
 	NSRange divRange = [bodyString rangeOfString:@"</div>"];
@@ -70,7 +122,7 @@
 				   [self cssStyleString], [[self story] title],
                    [bodyString substringToIndex:divRange.location]];
 
-	return bodyString; 
+	return [self scaledHtmlStringFromHtmlString:bodyString];
 }
 
 
@@ -186,6 +238,5 @@
 	[lblText release];
 	[super dealloc];
 }
-
 
 @end
