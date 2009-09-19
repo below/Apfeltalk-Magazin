@@ -99,7 +99,8 @@ void endElement (void *userData, const xmlChar *name) {
 	}		
 }
 
-- (NSString *) htmlString {		
+- (NSString *) htmlString
+{
 	[cleanedString release];
 	cleanedString = [NSMutableString new];
 	xmlSAXHandler saxInfo;
@@ -127,13 +128,12 @@ void endElement (void *userData, const xmlChar *name) {
 		
 	free (htmlDoc);
 	NSString *str = [[[self story] thumbnailLink] stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
-	
+
 	NSString *showpicture = [NSString stringWithFormat:@"<img src=\"%@\" width=\"275\" height=\"181\" alt=\"No Medium Picture.\" /> ", str];
-	// :below:20090919 Someone who knows css better than me should turn the bold and center tags into css formatting
-	// :below:20090919 Also, anyone is welcome to further optimize this. Do we need the margin, do we need the padding?
-	// Less is better
-	NSString *resultString = [NSString stringWithFormat:@"<div style=\"%@\">\n\
-			  <center>%@<br/><b>%@</b></center></div>", [self cssStyleString], showpicture, cleanedString];
+
+	NSString *resultString = [NSString stringWithFormat:@"<div style=\"%@\">%@<br/>\
+							  <span style=\"font: bold 10pt Helvetica; text-align:center;\">%@</span></div>", 
+							  [self cssStyleString], showpicture, cleanedString];
 	return resultString;
 }
 

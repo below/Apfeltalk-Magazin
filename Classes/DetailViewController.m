@@ -56,8 +56,7 @@
 }
 
 - (NSString *) cssStyleString {
-	// TODO below:20090919 : Someone who knows CSS and HTML needs to put the border to 0 here
-	return @"background-color:F9F9F9; font-family: 'Helvetica', sans-serif; font-size:13px; margin: 0; padding: 0;";
+	return @"background:transparent; font:10pt Helvetica; margin:0; padding:0";
 }
 
 - (NSString *) htmlString {
@@ -67,8 +66,10 @@
 		return NSLocalizedString (@"Nachricht konnte nicht angezeigt werden", @"");
 	
 	 bodyString = [NSString stringWithFormat:@"<div style=\"%@\">\
-					 <center><b>%@</b></center>%@</div>" , 
-				   [self cssStyleString], [[self story] title], [bodyString substringToIndex:divRange.location]];
+                   <span style=\"text-align:center; font-weight:bold;\">%@</span>%@</div>", 
+				   [self cssStyleString], [[self story] title],
+                   [bodyString substringToIndex:divRange.location]];
+
 	return bodyString; 
 }
 
@@ -95,6 +96,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	webview.delegate = self;
+    [webview setBackgroundColor:[UIColor clearColor]];
     [super viewDidLoad];
 
 	// Very common

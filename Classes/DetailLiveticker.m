@@ -27,7 +27,7 @@
 #import "UIScrollViewPrivate.h"
 
 
-#define MAX_IMAGE_WIDTH 280
+#define MAX_IMAGE_WIDTH 270
 
 
 @implementation DetailLiveticker
@@ -52,6 +52,7 @@
     [rightItem release];
 
     [webview setDelegate:self];
+    [webview setBackgroundColor:[UIColor clearColor]];
     [self updateInterface];
 
 	[(UIScrollView *)[webview.subviews objectAtIndex:0] setAllowsRubberBanding:NO];
