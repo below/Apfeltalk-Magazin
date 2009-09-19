@@ -56,7 +56,7 @@
 }
 
 - (NSString *) cssStyleString {
-	return @"background:transparent; font:10pt Helvetica; margin:0; padding:0";
+	return @"background:transparent; font:10pt Helvetica;";
 }
 
 - (NSString *) htmlString {
@@ -66,7 +66,7 @@
 		return NSLocalizedString (@"Nachricht konnte nicht angezeigt werden", @"");
 	
 	 bodyString = [NSString stringWithFormat:@"<div style=\"%@\">\
-                   <span style=\"text-align:center; font-weight:bold;\">%@</span>%@</div>", 
+                   <div style=\"text-align:center; font-weight:bold;\">%@</div>%@</div>", 
 				   [self cssStyleString], [[self story] title],
                    [bodyString substringToIndex:divRange.location]];
 

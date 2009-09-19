@@ -58,13 +58,11 @@
 	[(UIScrollView *)[webview.subviews objectAtIndex:0] setAllowsRubberBanding:NO];
 }
 
-- (NSString *)cssStyleString {
-	return @"font:10pt Helvetica; margin:0; padding:0;";
-}
+
 
 - (NSString *)htmlString
 {
-	thumbnail.image = [UIImage imageNamed:@"ticker.png"];
+	thumbnail.image = [UIImage imageNamed:@"TickerThumbnail.png"];
     int              newHeight;
     float            scaleFactor;
     NSRange          aRange, searchRange, valueRange;
@@ -105,8 +103,7 @@
         }
     }
 
-    return [NSString stringWithFormat:@"<div style=\"%@\">%@</div>",
-			[self cssStyleString], htmlString];
+    return [NSString stringWithFormat:@"<div style=\"%@\">%@</div>", [self cssStyleString], htmlString];
 }
 
 
