@@ -99,9 +99,8 @@ void endElement (void *userData, const xmlChar *name) {
 	}		
 }
 
-- (NSString *) htmlString {	
-	NSURL *bubbleMiddleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bubble_middle" ofType:@"png"]];
-	
+- (NSString *) htmlString
+{
 	[cleanedString release];
 	cleanedString = [NSMutableString new];
 	xmlSAXHandler saxInfo;
@@ -128,11 +127,10 @@ void endElement (void *userData, const xmlChar *name) {
 	free (htmlDoc);
 	// :below:20090919 Someone who knows css better than me should turn the bold and center tags into css formatting
 	NSString *str = [[[self story] thumbnailLink] stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
-	
+
 	NSString *showpicture = [NSString stringWithFormat:@"<img src=\"%@\" width=\"275\" height=\"181\" alt=\"No Medium Picture.\" /> ", str];
-	NSString *resultString = [NSString stringWithFormat:@"<div style=\"font-family:'Helvetica', sans-serif; \
-			  font-size:13px; margin: 0; padding: 0;\">\n\
-			  <center>%@<br/><b>%@</b></center></div>", showpicture, cleanedString];
+	NSString *resultString = [NSString stringWithFormat:@"<div style=\"background:transparent; font: bold 10pt Helvetica; text-align:center; color:#6a6a6a;\
+                              margin: 0; padding: 0;\">%@<br/>%@</div>", showpicture, cleanedString];
 	return resultString;
 }
 

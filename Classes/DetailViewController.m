@@ -61,8 +61,10 @@
 	if (divRange.location == NSNotFound)
 		return NSLocalizedString (@"Nachricht konnte nicht angezeigt werden", @"");
 	
-	 bodyString = [NSString stringWithFormat:@"<div style=\"font-family: 'Helvetica', sans-serif; font-size:13px; margin: 0; padding: 0;\">\
-					 <center><b>%@</b></center>%@</div>" , [[self story] title], [bodyString substringToIndex:divRange.location]];
+	 bodyString = [NSString stringWithFormat:@"<div style=\"background:transparent; font:10pt Helvetica; color:#6a6a6a; margin:0; padding:0\">\
+                   <div style=\"text-align:center; font-weight:bold;\">%@</div>%@</div>" , [[self story] title],
+                   [bodyString substringToIndex:divRange.location]];
+
 	return bodyString; 
 }
 
@@ -89,6 +91,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	webview.delegate = self;
+    [webview setBackgroundColor:[UIColor clearColor]];
     [super viewDidLoad];
 
 	// Very common

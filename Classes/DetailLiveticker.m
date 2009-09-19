@@ -27,7 +27,7 @@
 #import "UIScrollViewPrivate.h"
 
 
-#define MAX_IMAGE_WIDTH 280
+#define MAX_IMAGE_WIDTH 270
 
 
 @implementation DetailLiveticker
@@ -52,6 +52,7 @@
     [rightItem release];
 
     [webview setDelegate:self];
+    [webview setBackgroundColor:[UIColor clearColor]];
     [self updateInterface];
 
 	[(UIScrollView *)[webview.subviews objectAtIndex:0] setAllowsRubberBanding:NO];
@@ -101,11 +102,7 @@
         }
     }
 
-    NSURL *backgroundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bubble_middle" ofType:@"png"]];
-
-    return [NSString stringWithFormat:@"<head> <style type=\"text/css\">"
-            @"body { background:url(%@) repeat-y; font:10pt Helvetica; margin:0; padding:0; color:#6a6a6a }"
-            @"</style></head> <body><div style=\"padding-left:20px; padding-right:20px;\">%@</div></body>", [backgroundURL absoluteString], htmlString];
+    return [NSString stringWithFormat:@"<div style=\"background:transparent; font:10pt Helvetica; color:#6a6a6a; margin:0; padding:0\">%@</div>", htmlString];
 }
 
 
