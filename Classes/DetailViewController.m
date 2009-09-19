@@ -46,44 +46,6 @@
 }
 */
 
-- (NSString *)strip_tags:(NSString *)data :(NSArray *)valid_tags
-{
-        //use to strip the HTML tags from the data
-        NSScanner *scanner;
-        NSString *text = nil;
-        NSString *tag = nil;
-	
-        //set up the scanner
-        scanner = [NSScanner scannerWithString:data];
-	
-        while([scanner isAtEnd] == NO) {
-		        //find start of tag
-		        [scanner scanUpToString:@"<" intoString:NULL];
-		
-		        //find end of tag
-		        [scanner scanUpToString:@">" intoString:&text];
-		
-		        //get the name of the tag
-		        if([text rangeOfString:@"</"].location != NSNotFound)
-			            tag = [text substringFromIndex:2]; //remove </
-				else {
-			            tag = [text substringFromIndex:1]; //remove <
-			            //find out if there is a space in the tag
-			        if([tag rangeOfString:@" "].location != NSNotFound)
-				            //remove text after a space
-				            tag = [tag substringToIndex:[tag rangeOfString:@" "].location];
-		        }
-		
-		        //if not a valid tag, replace the tag with a space
-		        if([valid_tags containsObject:tag] == NO)
-			            data = [data stringByReplacingOccurrencesOfString:
-								                  [NSString stringWithFormat:@"%@>", text] withString:@""];
-        }
-	
-        //return the cleaned up data
-        return data;
-}
-
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {	
     NSURL *loadURL = [ [ request URL ] retain ]; // retain the loadURL for use

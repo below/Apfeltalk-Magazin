@@ -322,7 +322,7 @@
 	if (acceleration.x > kAccelerationThreshold || acceleration.y > kAccelerationThreshold || acceleration.z > kAccelerationThreshold)
 	{
 		ret = YES;
-		NSLog(@"shake was recognized", acceleration);
+		NSLog(@"shake was recognized");
 	}
 	
 	return ret;
