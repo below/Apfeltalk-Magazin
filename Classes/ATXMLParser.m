@@ -23,7 +23,7 @@
 //
 
 #import "ATXMLParser.h"
-#import "Story.h";
+#import "Story.h"
 
 
 @implementation ATXMLParser

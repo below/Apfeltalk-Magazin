@@ -28,11 +28,50 @@
 #import "Apfeltalk_MagazinAppDelegate.h"
 #import "GalleryImageViewController.h"
 
+#import <libxml/HTMLparser.h>
+
 @interface DetailGallery (private)
 - (void)createMailComposer:(NSString*)str;
 @end
 
 @implementation DetailGallery
+- (NSString *)strip_tags:(NSString *)data :(NSArray *)valid_tags
+{
+	//use to strip the HTML tags from the data
+	NSScanner *scanner;
+	NSString *text = nil;
+	NSString *tag = nil;
+	
+	//set up the scanner
+	scanner = [NSScanner scannerWithString:data];
+	
+	while([scanner isAtEnd] == NO) {
+		//find start of tag
+		[scanner scanUpToString:@"<" intoString:NULL];
+		
+		//find end of tag
+		[scanner scanUpToString:@">" intoString:&text];
+		
+		//get the name of the tag
+		if([text rangeOfString:@"</"].location != NSNotFound)
+			tag = [text substringFromIndex:2]; //remove </
+		else {
+			tag = [text substringFromIndex:1]; //remove <
+			//find out if there is a space in the tag
+			if([tag rangeOfString:@" "].location != NSNotFound)
+				//remove text after a space
+				tag = [tag substringToIndex:[tag rangeOfString:@" "].location];
+		}
+		
+		//if not a valid tag, replace the tag with a space
+		if([valid_tags containsObject:tag] == NO)
+			data = [data stringByReplacingOccurrencesOfString:
+					[NSString stringWithFormat:@"%@>", text] withString:@""];
+	}
+	
+	//return the cleaned up data
+	return data;
+}
 
 - (NSString *) storyTitle {
 	if ([[self story] title] == @"")
@@ -41,19 +80,77 @@
 		return [[self story] title];
 }
 
+#pragma mark libxml SAX Callbacks
+void startDocument (void * user_data) {
+	return;
+	
+	// :below:20090919 Someone who knows css better should remove the center tag, and put that into the formatting, too
+	[(NSMutableString *)user_data appendString:@"<div style=\"font-family:'Helvetica', sans-serif; \
+	 font-size:13px; margin: 0; padding: 0;\
+	 font-style:bold\">\n\
+	 <center>"];
+} 
+
+void characters(	void * 	user_data,
+				const xmlChar * 	ch,
+				int  	len) {
+	NSMutableString *output = (NSMutableString *)user_data;
+	NSString *charString = (NSString *)CFStringCreateWithBytes(kCFAllocatorDefault,
+															   ch, len, 
+															   kCFStringEncodingUTF8, NO);
+	[output appendString:charString];
+	[charString release];
+}
+
+void endElement (void *userData, const xmlChar *name) {
+	if (strcmp((const char *)name, "br") == 0) {
+		NSMutableString *output = (NSMutableString *)userData;
+		[output appendString:@"<br/>"];
+	}		
+}
+
+void endDocument  (void * user_data) {
+	return;
+	[(NSMutableString *)user_data appendString:@"</center></div>"];
+} 
+
 - (NSString *) htmlString {	
 	NSURL *bubbleMiddleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bubble_middle" ofType:@"png"]];
-	NSString *nui = [NSString stringWithFormat:@"<center><b>%@</b></center> ", [[self story] summary]];
+	
+	[cleanedString release];
+	cleanedString = [NSMutableString new];
+	xmlSAXHandler saxInfo;
+	memset(&saxInfo, 0, sizeof(saxInfo));
+	saxInfo.startDocument = &startDocument;
+	saxInfo.characters = &characters;
+	saxInfo.endElement = &endElement;
+	saxInfo.endDocument = &endDocument;
+	
+	// :below:20090919 The following will strip extract the pure text and breaks from the HTML
+	
+	// The big problem is that we don't have really structured input here, so all of this remains pretty brute force
+	
+	// Input is:
+	//	<a href="http://www.apfeltalk.de/gallery/showphoto.php?photo=15992" target="_blank"><img title="Screenshot_2009-09-17_at_16_31_09.png" border="0" src="http://www.apfeltalk.de/gallery/data/500/thumbs/Screenshot_2009-09-17_at_16_31_09.png" alt="Screenshot_2009-09-17_at_16_31_09.png" /></a><br /><br />von: GunBound<br /><br />Beschreibung: Nein, eigentlich ist ja alles klar\u0085<br /><br />6 Kommentare<img width='1' height='1' src='http://rss.feedsportal.com/c/837/f/10954/s/6302265/mf.gif' border='0'/><div class='mf-viral'><table border='0'><tr><td valign='middle'><a href="http://res.feedsportal.com/viral/sendemail2_de.html?title=H\u00f8\u00f8\u00f8\u00f8\u00f8?&link=http://www.apfeltalk.de/gallery/showphoto.php?photo=15992" target="_blank"><img src="http://rss.feedsportal.com/images/emailthis2.gif" border="0" /></a></td><td valign='middle'><a href="http://res.feedsportal.com/viral/bookmark_de.cfm?title=H\u00f8\u00f8\u00f8\u00f8\u00f8?&link=http://www.apfeltalk.de/gallery/showphoto.php?photo=15992" target="_blank"><img src="http://rss.feedsportal.com/images/bookmark.gif" border="0" /></a></td></tr></table></div><br/><br/><a href="http://da.feedsportal.com/r/50216880195/u/82/f/10954/c/837/s/103817829/a2.htm"><img src="http://da.feedsportal.com/r/50216880195/u/82/f/10954/c/837/s/103817829/a2.img" border="0"/></a>
+	// Output should be:
+	// <br /><br />von: GunBound<br /><br />Beschreibung: Nein, eigentlich ist ja alles klar\u0085<br /><br />6 Kommentare<br/><br/>
+	// TODO: Add a unit test for this
+	
+	xmlChar *xmlCharString = (xmlChar*)[[[self story] summary] cStringUsingEncoding:NSUTF8StringEncoding];
+	htmlDocPtr	htmlDoc = htmlSAXParseDoc		(xmlCharString, 
+												 "utf-8", 
+												 &saxInfo, 
+												 cleanedString)	;
+		
+	free (htmlDoc);
+	// :below:20090919 Someone who knows css better than me should turn the bold and center tags into css formatting
 	NSString *str = [[[self story] thumbnailLink] stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
 	
-	NSArray *tags = [NSArray arrayWithObjects: @"a", @"b", @"p", @"br", @"div",@"li", nil];
-	nui = [self strip_tags:nui :tags];
-	
 	NSString *showpicture = [NSString stringWithFormat:@"<img src=\"%@\" width=\"275\" height=\"181\" alt=\"No Medium Picture.\" /> ", str];
-	NSString *name2 = [NSString stringWithFormat:@"<style type=\"text/css\"> body		{font-family: \"Helvetica\", sans-serif; font-size:13px; margin: 0; padding: 0; background: url(%@); repeat scroll 0 0;}  </style> </div> </head> </div> ", [bubbleMiddleURL absoluteString]];
-	
-	return [NSString stringWithFormat:@"<div style=\"-webkit-border-radius: 10px;background-color: white;\
-			border: 0px solid rgb(173, 173, 173);margin: 10px;padding:10px;\"> %@ <br> %@ <br> %@", showpicture, nui, name2];
+	NSString *resultString = [NSString stringWithFormat:@"<div style=\"font-family:'Helvetica', sans-serif; \
+			  font-size:13px; margin: 0; padding: 0;\">\n\
+			  <center>%@<br/><b>%@</b></center></div>", showpicture, cleanedString];
+	return resultString;
 }
 
 - (NSString *) rightBarButtonTitle {

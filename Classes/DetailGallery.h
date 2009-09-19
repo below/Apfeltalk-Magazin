@@ -27,6 +27,7 @@
 #import <MessageUI/MessageUI.h>
 
 @interface DetailGallery : DetailViewController <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
+	NSMutableString *cleanedString;
 }
-
+- (NSString *)strip_tags:(NSString *)data :(NSArray *)valid_tags;
 @end
