@@ -58,7 +58,7 @@
 }
 
 - (NSString *)cssStyleString {
-	return @"font:10pt Helvetica; margin:0; padding:0; color:#6a6a6a;";
+	return @"font:10pt Helvetica; margin:0; padding:0;";
 }
 
 - (NSString *)htmlString
