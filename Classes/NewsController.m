@@ -289,6 +289,30 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	}
 }
 
+#pragma mark -
+#pragma mark ATXMLParserDelegateProtocol
+
+- (BOOL)parser:(ATXMLParser *)parser shouldAddParsedItem:(id)item
+{
+    NSScanner       *scanner = [NSScanner scannerWithString:[item summary]];
+	NSMutableString *resultString = [[NSMutableString alloc] init];
+    NSString        *aString;
+
+    while (![scanner isAtEnd])
+    {
+        if ([scanner scanUpToString:@"<div id='mediaplayer'" intoString:&aString])
+        {
+            [resultString appendString:aString];
+            [scanner scanUpToString:@"</div>" intoString:NULL];
+            [scanner scanString:@"</div>" intoString:NULL];
+        }
+    }
+
+    [item setSummary:resultString];
+    [resultString release];
+
+    return YES;
+}
 
 #pragma mark -
 
