@@ -81,16 +81,6 @@
 }
 
 #pragma mark libxml SAX Callbacks
-void startDocument (void * user_data) {
-	return;
-	
-	// :below:20090919 Someone who knows css better should remove the center tag, and put that into the formatting, too
-	[(NSMutableString *)user_data appendString:@"<div style=\"font-family:'Helvetica', sans-serif; \
-	 font-size:13px; margin: 0; padding: 0;\
-	 font-style:bold\">\n\
-	 <center>"];
-} 
-
 void characters(	void * 	user_data,
 				const xmlChar * 	ch,
 				int  	len) {
@@ -109,11 +99,6 @@ void endElement (void *userData, const xmlChar *name) {
 	}		
 }
 
-void endDocument  (void * user_data) {
-	return;
-	[(NSMutableString *)user_data appendString:@"</center></div>"];
-} 
-
 - (NSString *) htmlString {	
 	NSURL *bubbleMiddleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bubble_middle" ofType:@"png"]];
 	
@@ -121,10 +106,8 @@ void endDocument  (void * user_data) {
 	cleanedString = [NSMutableString new];
 	xmlSAXHandler saxInfo;
 	memset(&saxInfo, 0, sizeof(saxInfo));
-	saxInfo.startDocument = &startDocument;
 	saxInfo.characters = &characters;
 	saxInfo.endElement = &endElement;
-	saxInfo.endDocument = &endDocument;
 	
 	// :below:20090919 The following will strip extract the pure text and breaks from the HTML
 	
