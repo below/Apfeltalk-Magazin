@@ -57,7 +57,7 @@
 
 - (NSString *) cssStyleString {
 	// TODO below:20090919 : Someone who knows CSS and HTML needs to put the border to 0 here
-	return @"background-color:F9F9F9; font-family: 'Helvetica', sans-serif; font-size:13px; margin: 0; padding: 0;";
+	return @"background-color:F9F9F9; font-family: 'Helvetica', sans-serif; font-size:13px; color:#6a6a6a; margin: 0; padding: 0;";
 }
 
 - (NSString *) htmlString {
