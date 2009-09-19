@@ -68,6 +68,7 @@
     NSMutableString *htmlString = [NSMutableString stringWithString:[[self story] summary]];
 
     // Scale the images to fit into the webview
+	// !!!:below:20090919 This needs more cleanup, possibly with XQuery. But not today...
     searchRange = NSMakeRange(0, [htmlString length]);
     while (searchRange.location < [htmlString length])
     {
@@ -101,11 +102,8 @@
         }
     }
 
-    NSURL *backgroundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bubble_middle" ofType:@"png"]];
-
-    return [NSString stringWithFormat:@"<head> <style type=\"text/css\">"
-            @"body { background:url(%@) repeat-y; font:10pt Helvetica; margin:0; padding:0; color:#6a6a6a }"
-            @"</style></head> <body><div style=\"padding-left:20px; padding-right:20px;\">%@</div></body>", [backgroundURL absoluteString], htmlString];
+    return [NSString stringWithFormat:@"<div style=\"font:10pt Helvetica; margin:0; padding:0; color:#6a6a6a;\">%@</div>",
+			htmlString];
 }
 
 
