@@ -24,7 +24,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RootViewController.h"
-#import "AudioToolbox/AudioToolbox.h";
+#import "AudioToolbox/AudioToolbox.h"
 
 @interface GalleryController : RootViewController <UIAccelerometerDelegate> {
 }
