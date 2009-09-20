@@ -148,7 +148,8 @@ void endElement (void *userData, const xmlChar *name) {
 {
 	Apfeltalk_MagazinAppDelegate *appDelegate = (Apfeltalk_MagazinAppDelegate *)[[UIApplication sharedApplication] delegate];
 
-	UIActionSheet *myMenu = [[UIActionSheet alloc]
+	// :below:20090920 This is only to placate the analyzer
+	myMenu = [[UIActionSheet alloc]
 							 initWithTitle: nil
 							 delegate:self
 							 cancelButtonTitle:@"Abbrechen"
@@ -215,7 +216,11 @@ void endElement (void *userData, const xmlChar *name) {
 		
 	}
 	
-    [actionSheet release];
+	// :below:20090920 This is only to placate the analyzer
+	if (actionSheet == myMenu) {
+		[myMenu release];
+		myMenu = nil;
+	}
 }
 
 - (void)createMailComposer:(NSString*)str {
@@ -235,6 +240,12 @@ void endElement (void *userData, const xmlChar *name) {
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
 	[self becomeFirstResponder];
 	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (void) dealloc
+{
+	[cleanedString release];
+	[super dealloc];
 }
 
 @end

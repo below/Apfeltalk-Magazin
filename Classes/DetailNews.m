@@ -60,8 +60,8 @@
 -(IBAction)speichern:(id)sender
 {
 	Apfeltalk_MagazinAppDelegate *appDelegate = (Apfeltalk_MagazinAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
-	UIActionSheet *myMenu = [[UIActionSheet alloc]
+	// :below:20090920 This is only to placate the analyzer
+	 myMenu = [[UIActionSheet alloc]
 							 initWithTitle: nil
 							 delegate:self
 							 cancelButtonTitle:@"Abbrechen"
@@ -97,8 +97,10 @@
 			[self createMailComposer];
 		}
 	}
-	
-    [actionSheet release];
+	if (actionSheet == myMenu) {
+		[myMenu release];		
+		myMenu = nil;
+	}
 }
 
 - (void)createMailComposer {
@@ -122,10 +124,6 @@
 
     if ([self showSave] && [newsController isSavedStory:[self story]])
         [self setShowSave:NO];
-}
-
-- (void)dealloc {
-    [super dealloc];
 }
 
 @end

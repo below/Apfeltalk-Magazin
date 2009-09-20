@@ -139,8 +139,19 @@
 			sqlite3_bind_double(insert_statement, 2, [date timeIntervalSinceReferenceDate]);
 			error = (sqlite3_step(insert_statement) != SQLITE_DONE);
 		}
-		error = sqlite3_finalize(insert_statement);	
+		if (error == SQLITE_OK)
+			error = sqlite3_finalize(insert_statement);	
 		
+		// This code could be resued in the News Controller
+		if (error != SQLITE_OK) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString (@"Datenbank Fehler", @"")
+															message:NSLocalizedString (@"Ein unerwarteter Fehler ist aufgetreten", @"")
+														   delegate:nil
+												  cancelButtonTitle:NSLocalizedString (@"OK", @"") otherButtonTitles:nil];
+			[alert show];
+			[alert release];
+		}
+
 		/*
 		 *	More thinking needs to go into the deletion of reads
 		 *

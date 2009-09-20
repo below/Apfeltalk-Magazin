@@ -236,6 +236,7 @@
 - (void)dealloc {
 	[story release];
 	[lblText release];
+	[myMenu release];
 	[super dealloc];
 }
 

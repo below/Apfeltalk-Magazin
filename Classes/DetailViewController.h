@@ -40,6 +40,7 @@
 
 	Story *story;
 	MPMoviePlayerController* theMovie;
+	UIActionSheet *myMenu;
 }
 @property (readwrite, retain) Story *story;
 

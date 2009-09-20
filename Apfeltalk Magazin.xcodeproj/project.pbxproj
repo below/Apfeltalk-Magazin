@@ -514,6 +514,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IBC_NOTICES = NO;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-Wall",
+					"$(OTHER_CFLAGS)",
+				);
 				PREBINDING = NO;
 				SDKROOT = iphoneos3.0;
 			};
@@ -529,6 +533,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IBC_NOTICES = NO;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-Wall",
+					"$(OTHER_CFLAGS)",
+				);
 				PREBINDING = NO;
 				SDKROOT = iphoneos3.0;
 			};
