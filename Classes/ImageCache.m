@@ -46,8 +46,8 @@
 -(void)insertImage:(UIImage*)image withSize:(NSUInteger)sz forKey:(NSString*)key{
     ImageCacheObject *object = [[ImageCacheObject alloc] initWithSize:sz Image:image];
     while (totalSize + sz > maxSize) {
-        NSDate *oldestTime;
-        NSString *oldestKey;
+        NSDate *oldestTime = nil;
+        NSString *oldestKey = nil;
         for (NSString *key in [myDictionary allKeys]) {
             ImageCacheObject *obj = [myDictionary objectForKey:key];
             if (oldestTime == nil || [obj.timeStamp compare:oldestTime] == NSOrderedAscending) {
