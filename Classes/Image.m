@@ -47,7 +47,7 @@
 	UIImage* image = [[UIImage alloc] initWithData:imageData];
 	[imageData release];
 	
-	return image;
+	return [image autorelease];
 }
 
 @end
