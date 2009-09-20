@@ -43,8 +43,6 @@
 		CB9E94841044929D00768B8B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9E94831044929D00768B8B /* libsqlite3.dylib */; };
 		CBA438FA105836D9002B2077 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA438F9105836D9002B2077 /* libxml2.dylib */; };
 		CBAE2D8110643DE600160997 /* DetailBody.png in Resources */ = {isa = PBXBuildFile; fileRef = CBAE2D8010643DE600160997 /* DetailBody.png */; };
-		CBC2493E106538E3008A07CA /* libThree20.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBD0480610558C2E001F57AA /* libThree20.a */; };
-		CBD0485C10558C74001F57AA /* Three20 in Resources */ = {isa = PBXBuildFile; fileRef = CBD0480810558C74001F57AA /* Three20 */; };
 		F6222F011041D90D00FC030D /* rss.png in Resources */ = {isa = PBXBuildFile; fileRef = F6222F001041D90D00FC030D /* rss.png */; };
 		F62230401043488D00FC030D /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F622303F1043488D00FC030D /* MediaPlayer.framework */; };
 		F634305410362AA4004ACF93 /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F634304A10362AA4004ACF93 /* DetailView.xib */; };
@@ -123,8 +121,6 @@
 		CBA438EC1058361C002B2077 /* UIScrollViewPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScrollViewPrivate.h; sourceTree = "<group>"; };
 		CBA438F9105836D9002B2077 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		CBAE2D8010643DE600160997 /* DetailBody.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DetailBody.png; sourceTree = "<group>"; };
-		CBD0480610558C2E001F57AA /* libThree20.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libThree20.a; sourceTree = "<group>"; };
-		CBD0480810558C74001F57AA /* Three20 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Three20; sourceTree = "<group>"; };
 		F6222F001041D90D00FC030D /* rss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rss.png; sourceTree = "<group>"; };
 		F622303F1043488D00FC030D /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		F634304A10362AA4004ACF93 /* DetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailView.xib; sourceTree = "<group>"; };
@@ -158,7 +154,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBC2493E106538E3008A07CA /* libThree20.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -258,8 +253,6 @@
 			isa = PBXGroup;
 			children = (
 				CBA438F9105836D9002B2077 /* libxml2.dylib */,
-				CBD0480810558C74001F57AA /* Three20 */,
-				CBD0480610558C2E001F57AA /* libThree20.a */,
 				22250A7110510E5E008B2EEC /* MessageUI.framework */,
 				F622303F1043488D00FC030D /* MediaPlayer.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
@@ -408,7 +401,6 @@
 				22FB60DE104DC15600A0F65A /* Settings.bundle in Resources */,
 				F6FB7DD7104EDE2F007F5A54 /* Fullscreen.xib in Resources */,
 				22D4A69F105001D500BC3317 /* COPYING in Resources */,
-				CBD0485C10558C74001F57AA /* Three20 in Resources */,
 				F69091031056B06E0044DF36 /* header.png in Resources */,
 				4CD36BE31058344700DD09FB /* Down.png in Resources */,
 				4CD36BE71058345800DD09FB /* Up.png in Resources */,
