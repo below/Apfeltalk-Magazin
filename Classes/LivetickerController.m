@@ -73,7 +73,7 @@
 
 - (void)changeStory:(id)sender
 {
-    NSUInteger  newIndex;
+    NSUInteger  newIndex = 0;
     Story      *newStory;
 
     if ([(UISegmentedControl *)sender selectedSegmentIndex] == 0)
