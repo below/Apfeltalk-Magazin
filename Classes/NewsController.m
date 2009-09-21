@@ -25,10 +25,7 @@
 #import "NewsController.h"
 #import "DetailNews.h"
 #import "Apfeltalk_MagazinAppDelegate.h"
-
-#import <libxml/HTMLparser.h>
-#import <libxml/xpath.h>
-#import <libxml/xpathInternals.h>
+#import "ATMXMLUtilities.h"
 
 @interface NewsController (private)
 - (NSString *) savedStoryFilepath;
@@ -119,7 +116,7 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 		if (vibrateOnReload) {
 			AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 		}
-		[super parseXMLFileAtURL:[self documentPath]];
+		[self parseXMLFileAtURL:[self documentPath]];
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	}
 }
@@ -235,45 +232,12 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	[super updateApplicationIconBadgeNumber];	
 }
 
-#pragma mark special XML processing
-
-- (NSString *) extractTextFromHTML:(NSString*)htmlInput forQuery:(NSString *)query {
-	NSString *value = nil;	
-	
-	NSData *data = [htmlInput dataUsingEncoding:NSUTF8StringEncoding];
-	htmlDocPtr	doc = htmlReadMemory([data bytes],[data length], NULL, NULL, 0);
-	// Create xpath evaluation context
-	xmlXPathContextPtr xpathCtx = xmlXPathNewContext(doc);
-	
-	xmlChar * xpathExpr = (xmlChar*)[query UTF8String];
-	
-	xmlXPathObjectPtr xpathObj = xmlXPathEvalExpression(xpathExpr, xpathCtx);
-	if(xpathObj == NULL) {
-		fprintf(stderr,"Error: unable to evaluate xpath expression \"%s\"\n", xpathExpr);
-	}
-	else  {
-		xmlNodeSetPtr nodeset = xpathObj->nodesetval;
-		if (nodeset && nodeset->nodeNr == 1 && nodeset->nodeTab[0]->children){
-			xmlNodePtr child = nodeset->nodeTab[0]->children;
-			
-			if (child->type == XML_TEXT_NODE)
-				value = [NSString stringWithCString:(char*)child->content encoding:NSUTF8StringEncoding];
-		}
-		xmlXPathFreeObject(xpathObj);
-	}		
-	
-	xmlXPathFreeContext(xpathCtx); 
-	xmlFreeDoc(doc); 
-	xmlCleanupParser();		
-	return value;
-}
-
 - (NSString *) extractThumbnailLink:(NSString *)htmlInput {
-	return [self extractTextFromHTML:htmlInput forQuery:@"//img[attribute::class=\"thumbnail\"]/attribute::src"];
+	return extractTextFromHTMLForQuery(htmlInput, @"//img[attribute::class=\"thumbnail\"]/attribute::src");
 }
 
 - (NSString *) extractText:(NSString *)htmlInput {
-	return [self extractTextFromHTML:htmlInput forQuery:@"/*[1]"];
+	return extractTextFromHTMLForQuery (htmlInput, @"/*[1]");
 }
 
 - (void)parseXMLFileAtURL:(NSString *)URL {

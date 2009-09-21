@@ -102,7 +102,9 @@ void endElement (void *userData, const xmlChar *name) {
 - (NSString *) htmlString
 {
 	[cleanedString release];
+	[elementString release];
 	cleanedString = [NSMutableString new];
+	elementString = [NSMutableString new];
 	xmlSAXHandler saxInfo;
 	memset(&saxInfo, 0, sizeof(saxInfo));
 	saxInfo.characters = &characters;
@@ -127,12 +129,15 @@ void endElement (void *userData, const xmlChar *name) {
 												 cleanedString)	;
 		
 	free (htmlDoc);
+	[elementString release];
 	NSString *str = [[[self story] thumbnailLink] stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
 
 	NSString *showpicture = [NSString stringWithFormat:@"<img src=\"%@\" width=\"275\" height=\"181\" alt=\"No Medium Picture.\" /> ", str];
 
 	NSString *resultString = [NSString stringWithFormat:@"<div style=\"%@\">%@<br/>%@</div>", [self cssStyleString], showpicture, cleanedString];
-
+	[cleanedString release];
+	cleanedString = nil;
+	
 	return resultString;
 }
 

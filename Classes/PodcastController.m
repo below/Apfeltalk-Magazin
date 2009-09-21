@@ -85,7 +85,7 @@
 		if (vibrateOnReload) {
 			AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 		}
-		[super parseXMLFileAtURL:[self documentPath]];
+		[self parseXMLFileAtURL:[self documentPath]];
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	}
 }

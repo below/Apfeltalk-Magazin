@@ -28,6 +28,7 @@
 
 @interface DetailGallery : DetailViewController <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
 	NSMutableString *cleanedString;
+	NSMutableString *elementString;
 }
 - (NSString *)strip_tags:(NSString *)data :(NSArray *)valid_tags;
 @end

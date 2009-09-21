@@ -25,7 +25,8 @@
 #import "GalleryController.h"
 #import "DetailGallery.h"
 #import "AsyncImageView.h"
-#import "GalleryStory.h"
+#import "Story.h"
+#import "ATMXMLUtilities.h"
 
 @implementation GalleryController
 
@@ -57,15 +58,27 @@
 {
     ATXMLParser         *parser = [[ATXMLParser alloc] initWithURLString:URL];
     NSMutableDictionary *desiredKeys = [NSMutableDictionary dictionaryWithDictionary:[parser desiredElementKeys]];
-
+	
     [desiredKeys removeObjectForKey:@"content:encoded"];
     [desiredKeys setObject:@"summary" forKey:@"description"];
-
+	
     [parser setDesiredElementKeys:desiredKeys];
-    [parser setStoryClass:[GalleryStory self]];
+    [parser setStoryClass:[Story self]];
     [parser setDelegate:self];
     [parser parse];
     [parser release];
+	
+	// This needs to be done in post-processing, as libxml2 interferes with NSXMLParser
+	NSMutableArray *thumbnailStories = [[NSMutableArray alloc] initWithCapacity:[stories count]];
+	for (Story *s in stories) {
+		NSString *thumbnailLink = extractTextFromHTMLForQuery([s summary], @"//img[attribute::alt]/attribute::src");
+		if ([thumbnailLink length] > 0) {
+			[s setThumbnailLink:thumbnailLink];
+			[thumbnailStories addObject:s];
+		}
+	}	
+	[stories release];
+	stories = thumbnailStories;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -88,7 +101,7 @@
 	
 	AsyncImageView* asyncImage = [[[AsyncImageView alloc] initWithFrame:previewImageFrame] autorelease];
 	asyncImage.tag = 999;
-	GalleryStory *story = [stories objectAtIndex:indexPath.row];
+	Story *story = [stories objectAtIndex:indexPath.row];
 	NSString *urlString = [story thumbnailLink];
 	if ([urlString length] > 0) {
 		NSURL *url = [NSURL URLWithString:urlString];
@@ -140,40 +153,9 @@
 		if (vibrateOnReload) {
 			AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 		}
-		[super parseXMLFileAtURL:[self documentPath]];
+		[self parseXMLFileAtURL:[self documentPath]];
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	}
-}
-
-
-#pragma mark -
-#pragma mark ATXMLParserDelegateProtocol
-
-- (BOOL)parser:(ATXMLParser *)parser shouldAddParsedItem:(id)item
-{
-    BOOL      result = NO;
-    NSRange   linkRange, aRange;
-	NSString *aString = [[item summary] lowercaseString];
-
-    linkRange = [aString rangeOfString:@"http://www.apfeltalk.de/gallery/data"];
-
-    if (linkRange.location != NSNotFound)
-    {
-        aRange = [aString rangeOfString:@".jpg\" alt=" options:NSLiteralSearch range:NSMakeRange(linkRange.location, [aString length] - linkRange.location)];
-
-        if (aRange.location == NSNotFound)
-            aRange = [aString rangeOfString:@".png\" alt=" options:NSLiteralSearch
-                                      range:NSMakeRange(linkRange.location, [aString length] - linkRange.location)];
-
-        if (aRange.location != NSNotFound)
-        {
-            linkRange.length = NSMaxRange(aRange) - 6 - linkRange.location;
-            [item setThumbnailLink:[[item summary] substringWithRange:linkRange]];
-            result = YES;
-        }
-    }
-
-    return result;
 }
 
 @end

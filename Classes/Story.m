@@ -57,6 +57,11 @@ NSString *ATStoryThumbnailLink = @"thumbnailLink";
 	[aCoder encodeObject:[self thumbnailLink] forKey:ATStoryThumbnailLink];
 }
 
+- (void) setThumbnailLink:(NSString *)newLink {
+	[thumbnailLink release];
+	thumbnailLink = [newLink copy];
+}
+
 - (void) dealloc
 {
 	[title release];

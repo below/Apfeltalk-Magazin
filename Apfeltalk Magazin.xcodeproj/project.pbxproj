@@ -12,7 +12,6 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		22090EBE104FAC4700A20868 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22090EBD104FAC4700A20868 /* AsyncImageView.m */; };
-		22090F2C104FBECA00A20868 /* GalleryStory.m in Sources */ = {isa = PBXBuildFile; fileRef = 22090F2B104FBECA00A20868 /* GalleryStory.m */; };
 		220A13261059031C001D295D /* ImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A13201059031C001D295D /* ImageView.m */; };
 		220A13271059031C001D295D /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A13221059031C001D295D /* Image.m */; };
 		220A139510590B16001D295D /* GalleryImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A139410590B16001D295D /* GalleryImageViewController.m */; };
@@ -43,6 +42,7 @@
 		CB9E94841044929D00768B8B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9E94831044929D00768B8B /* libsqlite3.dylib */; };
 		CBA438FA105836D9002B2077 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA438F9105836D9002B2077 /* libxml2.dylib */; };
 		CBAE2D8110643DE600160997 /* DetailBody.png in Resources */ = {isa = PBXBuildFile; fileRef = CBAE2D8010643DE600160997 /* DetailBody.png */; };
+		CBC2B8D91068104200040255 /* ATMXMLUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC2B8D81068104200040255 /* ATMXMLUtilities.m */; };
 		F6222F011041D90D00FC030D /* rss.png in Resources */ = {isa = PBXBuildFile; fileRef = F6222F001041D90D00FC030D /* rss.png */; };
 		F62230401043488D00FC030D /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F622303F1043488D00FC030D /* MediaPlayer.framework */; };
 		F634305410362AA4004ACF93 /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F634304A10362AA4004ACF93 /* DetailView.xib */; };
@@ -72,8 +72,6 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22090EBC104FAC4700A20868 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		22090EBD104FAC4700A20868 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
-		22090F2A104FBECA00A20868 /* GalleryStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryStory.h; sourceTree = "<group>"; };
-		22090F2B104FBECA00A20868 /* GalleryStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryStory.m; sourceTree = "<group>"; };
 		220A131F1059031C001D295D /* ImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageView.h; sourceTree = "<group>"; };
 		220A13201059031C001D295D /* ImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageView.m; sourceTree = "<group>"; };
 		220A13211059031C001D295D /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
@@ -121,6 +119,8 @@
 		CBA438EC1058361C002B2077 /* UIScrollViewPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScrollViewPrivate.h; sourceTree = "<group>"; };
 		CBA438F9105836D9002B2077 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		CBAE2D8010643DE600160997 /* DetailBody.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DetailBody.png; sourceTree = "<group>"; };
+		CBC2B8D71068104200040255 /* ATMXMLUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMXMLUtilities.h; sourceTree = "<group>"; };
+		CBC2B8D81068104200040255 /* ATMXMLUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMXMLUtilities.m; sourceTree = "<group>"; };
 		F6222F001041D90D00FC030D /* rss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rss.png; sourceTree = "<group>"; };
 		F622303F1043488D00FC030D /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		F634304A10362AA4004ACF93 /* DetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailView.xib; sourceTree = "<group>"; };
@@ -230,6 +230,8 @@
 				28A0AB4B0D9B1048005BE974 /* Apfeltalk_Magazin_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				CBA438EC1058361C002B2077 /* UIScrollViewPrivate.h */,
+				CBC2B8D71068104200040255 /* ATMXMLUtilities.h */,
+				CBC2B8D81068104200040255 /* ATMXMLUtilities.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -292,8 +294,6 @@
 			children = (
 				CB15C8CC1049A0CF00360BDC /* Story.h */,
 				CB15C8CD1049A0CF00360BDC /* Story.m */,
-				22090F2A104FBECA00A20868 /* GalleryStory.h */,
-				22090F2B104FBECA00A20868 /* GalleryStory.m */,
 			);
 			name = "Story Containers";
 			sourceTree = "<group>";
@@ -431,7 +431,6 @@
 				CB15C89C1049950900360BDC /* DetailNews.m in Sources */,
 				CB15C8CE1049A0CF00360BDC /* Story.m in Sources */,
 				22090EBE104FAC4700A20868 /* AsyncImageView.m in Sources */,
-				22090F2C104FBECA00A20868 /* GalleryStory.m in Sources */,
 				F6FB7DD6104EDE2F007F5A54 /* Fullscreen.m in Sources */,
 				F6658266104FC21300BF91E9 /* RootViewController.m in Sources */,
 				227E1B5F105191D600844235 /* ImageCache.m in Sources */,
@@ -443,6 +442,7 @@
 				220A13261059031C001D295D /* ImageView.m in Sources */,
 				220A13271059031C001D295D /* Image.m in Sources */,
 				220A139510590B16001D295D /* GalleryImageViewController.m in Sources */,
+				CBC2B8D91068104200040255 /* ATMXMLUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
