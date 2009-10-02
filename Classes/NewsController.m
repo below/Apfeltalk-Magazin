@@ -66,6 +66,9 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 		UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
 		accel.delegate = nil;
 	}
+
+    // update the number of unread messages in Application Badge
+    [self updateApplicationIconBadgeNumber];
 }
 
 
@@ -344,9 +347,6 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 				 NSLog (@"An error occurred: %s", sqlite3_errmsg(database));
 				 */	
 				[newsTable reloadData];
-				
-				// update the number of unread messages in Application Badge
-				[self updateApplicationIconBadgeNumber];
 			} 
 		}
 	}
