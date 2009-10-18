@@ -29,7 +29,7 @@
 @interface DetailViewController : UIViewController <UIWebViewDelegate> {
 	IBOutlet UILabel *datum;
 	IBOutlet UILabel *lblText;
-	IBOutlet UIImageView *thumbnail;
+	IBOutlet UIButton *thumbnailButton;
 	IBOutlet UIScrollView *scrollView2;
 	IBOutlet UITextView *sunText;
 	IBOutlet UINavigationBar *Textvar;
@@ -39,7 +39,6 @@
 	IBOutlet UIImageView *detailimage;
 
 	Story *story;
-	MPMoviePlayerController* theMovie;
 	UIActionSheet *myMenu;
 }
 @property (readwrite, retain) Story *story;

@@ -55,12 +55,12 @@
 	[(UIScrollView *)[webview.subviews objectAtIndex:0] setAllowsRubberBanding:NO];
 }
 
-
+- (UIImage *) thumbimage {
+	return [UIImage imageNamed:@"TickerThumbnail.png"];
+}
 
 - (NSString *)htmlString
 {
-	thumbnail.image = [UIImage imageNamed:@"TickerThumbnail.png"];
-
     return [NSString stringWithFormat:@"<div style=\"%@\">%@</div>", [self cssStyleString], [self scaledHtmlStringFromHtmlString:[[self story] summary]]];
 }
 
