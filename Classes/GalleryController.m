@@ -30,43 +30,17 @@
 
 @implementation GalleryController
 
-- (void)viewWillAppear:(BOOL)animated
-{
-	[super viewWillAppear:animated];
+- (NSDictionary *) desiredKeys {
+	NSMutableDictionary *elementKeys = [NSMutableDictionary dictionaryWithDictionary:[super desiredKeys]];
+	[elementKeys removeObjectForKey:@"content:encoded"];
+	[elementKeys setObject:@"summary" forKey:@"description"];
 	
-	if(shakeToReload) {
-		NSLog(@"Shake To Reload is on, activae UIAccelerometer");
-		[self activateShakeToReload:self];
-	} else {
-		NSLog(@"Shake To Reload is off, don't activae UIAccelerometer");
-	}	
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-	
-	// if our view is not active/visible, we don't want to receive Accelerometer events
-	if(shakeToReload)
-	{
-		UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
-		accel.delegate = nil;
-	}
+	return elementKeys;
 }
 
 - (void)parseXMLFileAtURL:(NSString *)URL
 {
-    ATXMLParser         *parser = [[ATXMLParser alloc] initWithURLString:URL];
-    NSMutableDictionary *desiredKeys = [NSMutableDictionary dictionaryWithDictionary:[parser desiredElementKeys]];
-	
-    [desiredKeys removeObjectForKey:@"content:encoded"];
-    [desiredKeys setObject:@"summary" forKey:@"description"];
-	
-    [parser setDesiredElementKeys:desiredKeys];
-    [parser setStoryClass:[Story self]];
-    [parser setDelegate:self];
-    [parser parse];
-    [parser release];
+    [super parseXMLFileAtURL:URL];
 	
 	// This needs to be done in post-processing, as libxml2 interferes with NSXMLParser
 	NSMutableArray *thumbnailStories = [[NSMutableArray alloc] initWithCapacity:[stories count]];
@@ -145,17 +119,4 @@
 	// Return YES for supported orientations
 	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
-// handle acceleromter event
-- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
-	if ([self isShake:acceleration]) {
-		[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-		if (vibrateOnReload) {
-			AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
-		}
-		[self parseXMLFileAtURL:[self documentPath]];
-		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	}
-}
-
 @end

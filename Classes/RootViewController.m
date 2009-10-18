@@ -23,12 +23,11 @@
 //
 
 #import "RootViewController.h"
-
+#import "AudioToolbox/AudioToolbox.h"
 
 @interface RootViewController (private)
 - (BOOL) openDatabase;
 - (NSString *) readDocumentsFilename;
-- (void) setApplicationDefaults;
 @end
 
 
@@ -36,6 +35,9 @@
 
 @synthesize stories;
 
+- (BOOL) shakeToReload {
+	return [[NSUserDefaults standardUserDefaults] boolForKey:@"shakeToReload"];
+}
 
 #pragma mark Instance Methods
 
@@ -247,10 +249,35 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[self openDatabase];
-	// read and set defaults from preference pane
-	[self setApplicationDefaults];
+	
+	if(self.shakeToReload)
+		[self activateShakeToReload:self];
 	
 	[super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	
+	// if our view is not active/visible, we don't want to receive Accelerometer events
+	if(self.shakeToReload)
+	{
+		UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
+		accel.delegate = nil;
+	}
+}
+		
+// handle acceleromter event
+- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
+	if ([self isShake:acceleration]) {
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"vibrateOnReload"]) {
+			AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
+		}
+		[self parseXMLFileAtURL:[self documentPath]];
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	}
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -267,48 +294,24 @@
 	assert (error == 0);
 }
 
-- (void)setApplicationDefaults {
-	NSString *testValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"showIconBadge"];
-	if (testValue == nil)
-	{
-		// no default values have been set, create them here based on what's in our Settings bundle info
-		showIconBadge = YES;
-		shakeToReload = YES;
-		vibrateOnReload = YES;
-	} else {
-		// set the showIconBadge property
-		NSString *iconBadgeToogleValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"showIconBadge"];
-		if([iconBadgeToogleValue isEqualToString: @"1"]) {
-			showIconBadge = YES;
-		} else {
-			showIconBadge = NO;
-		}
-		
-		// set the shakeToReload property
-		NSString *shakeToReloadToggleValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"shakeToReload"];
-		if([shakeToReloadToggleValue isEqualToString: @"1"]) {
-			shakeToReload = YES;
-		} else {
-			shakeToReload = NO;
-		}
-		
-		// set the vibrateOnReload property
-		NSString *vibrateOnReloadToggleValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"vibrateOnReload"];
-		if([vibrateOnReloadToggleValue isEqualToString:@"1"]) {
-			vibrateOnReload = YES;
-		} else {
-			vibrateOnReload = NO;
-		}
+- (NSString *) dateElementName {
+	return @"pubDate";
+}
 
-	}
+- (NSDictionary *) desiredKeys {
+	NSArray      *names = [NSArray arrayWithObjects:@"title", @"link", [self dateElementName], @"dc:creator", @"content:encoded", nil];
+	NSArray      *keys = [NSArray arrayWithObjects:@"title", @"link", @"date", @"author", @"summary", nil];
+	NSDictionary *elementKeys = [NSDictionary dictionaryWithObjects:keys forKeys:names];
 	
-	NSLog(@"Application configuration: [showIconBadge: %d], [shakeToReload: %d], [vibrateOnReload: %d]", showIconBadge, shakeToReload, vibrateOnReload);
+	return elementKeys;
 }
 
 - (void)parseXMLFileAtURL:(NSString *)URL
 {
     ATXMLParser *parser = [[ATXMLParser alloc] initWithURLString:URL];
-
+    [parser setDesiredElementKeys:self.desiredKeys];
+    [parser setStoryClass:[Story self]];
+	[parser setDateElementName:[self dateElementName]];
     [parser setDelegate:self];
     [parser parse];
     [parser release];

@@ -53,11 +53,6 @@
         [self setDateElementName:@"pubDate"];
         [self setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz" localeIdentifier:@"en_US"];
 
-        NSArray      *names = [NSArray arrayWithObjects:@"title", @"link", [self dateElementName], @"dc:creator", @"content:encoded", nil];
-        NSArray      *keys = [NSArray arrayWithObjects:@"title", @"link", @"date", @"author", @"summary", nil];
-        NSDictionary *elementKeys = [NSDictionary dictionaryWithObjects:keys forKeys:names];
-        [self setDesiredElementKeys:elementKeys];
-
         xmlParser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:urlString]];
         [xmlParser setDelegate:self];
     }

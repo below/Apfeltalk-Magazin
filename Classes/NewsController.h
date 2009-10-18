@@ -24,7 +24,6 @@
 
 #import <UIKit/UIKit.h>
 #import "RootViewController.h"
-#import "AudioToolbox/AudioToolbox.h"
 
 @interface NewsController : RootViewController <UIAccelerometerDelegate, UIActionSheetDelegate> {
 	@private

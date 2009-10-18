@@ -40,14 +40,7 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	[savedStories release];
 	savedStories = [[NSKeyedUnarchiver unarchiveObjectWithFile:[self savedStoryFilepath]] mutableCopy];
 	[super viewWillAppear:animated];
-	
-	if(shakeToReload) {
-		NSLog(@"Shake To Reload is on, activae UIAccelerometer");
-		[self activateShakeToReload:self];
-	} else {
-		NSLog(@"Shake To Reload is off, don't activae UIAccelerometer");
-	}
-	
+		
 	UIBarButtonItem *safariButton = [[UIBarButtonItem alloc] initWithTitle:@"Optionen"
 																	 style:UIBarButtonItemStyleBordered
 																	target:self
@@ -59,13 +52,6 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
-	
-	// if our view is not active/visible, we don't want to receive Accelerometer events
-	if(shakeToReload)
-	{
-		UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
-		accel.delegate = nil;
-	}
 
     // update the number of unread messages in Application Badge
     [self updateApplicationIconBadgeNumber];
@@ -110,18 +96,6 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	cell.textLabel.text = [[savedStories objectAtIndex: storyIndex] title];
 	
     return cell;
-}
-
-// handle acceleromter event
-- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
-	if ([self isShake:acceleration]) {
-		[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-		if (vibrateOnReload) {
-			AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
-		}
-		[self parseXMLFileAtURL:[self documentPath]];
-		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	}
 }
 
 //set editingStyle on current row. If set do UITableViewCellEditingStyleDelete, delete button is shown at swipe gesture
@@ -211,7 +185,7 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 
 - (void)updateApplicationIconBadgeNumber {
 	
-	if(showIconBadge) {
+	if([[NSUserDefaults standardUserDefaults] boolForKey:@"showIconBadge"]) {
 		int unreadMessages = 0;
 		
 		//calculate the number of unread messages

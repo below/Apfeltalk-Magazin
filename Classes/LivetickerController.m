@@ -61,11 +61,20 @@
 }
 
 
+- (NSDictionary *) desiredKeys {
+	// :below:20091018 Somewhat ugly...
+	NSArray      *names = [NSArray arrayWithObjects:@"title", @"link", @"pubDate", @"dc:creator", @"content:encoded", nil];
+	NSArray      *keys = [NSArray arrayWithObjects:@"title", @"link", @"date", @"author", @"summary", nil];
+	NSDictionary *elementKeys = [NSDictionary dictionaryWithObjects:keys forKeys:names];
+	
+	return elementKeys;
+}
 
 - (void)reloadTickerEntries:(NSTimer *)timer
 {
     ATXMLParser *parser = [ATXMLParser parserWithURLString:@"http://www.apfeltalk.de/live/?feed=rss2"];
-
+	[parser setDesiredElementKeys:[self desiredKeys]];
+	
     [NSThread detachNewThreadSelector:@selector(parseInBackgroundWithDelegate:) toTarget:parser withObject:self];
 }
 

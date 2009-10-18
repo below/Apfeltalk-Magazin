@@ -37,20 +37,13 @@
 
 	NSArray *stories;
 
-	// should we show Icon Badges. (this could be switched on/off in preferences pane)
-	BOOL showIconBadge;
-
-	// should we use shake to relad
-	BOOL shakeToReload;
-	
-	// should we vibrate on reload
-	BOOL vibrateOnReload;
-
 @protected
 	sqlite3 * database;
 }
 
 @property(retain) NSArray *stories;
+@property (readonly) BOOL shakeToReload;
+@property (readonly) NSDictionary * desiredKeys;
 
 - (void)parseXMLFileAtURL:(NSString *)URL;
 - (IBAction)openSafari:(id)sender;

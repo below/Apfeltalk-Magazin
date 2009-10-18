@@ -27,41 +27,12 @@
 
 @implementation PodcastController
 
-- (void)viewWillAppear:(BOOL)animated
-{
-	[super viewWillAppear:animated];
+- (NSDictionary *) desiredKeys {
+	NSMutableDictionary *elementKeys = [NSMutableDictionary dictionaryWithDictionary:[super desiredKeys]];
+    [elementKeys removeObjectForKey:@"link"];
+    [elementKeys setObject:@"" forKey:@"enclosure"]; // ???:below:20091018 Why not remove it?
 	
-	if(shakeToReload) {
-		NSLog(@"Shake To Reload is on, activae UIAccelerometer");
-		[self activateShakeToReload:self];
-	} else {
-		NSLog(@"Shake To Reload is off, don't activae UIAccelerometer");
-	}	
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-	
-	// if our view is not active/visible, we don't want to receive Accelerometer events
-	if(shakeToReload)
-	{
-		UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
-		accel.delegate = nil;
-	}
-}
-
-- (void)parseXMLFileAtURL:(NSString *)URL
-{
-    ATXMLParser         *parser = [[ATXMLParser alloc] initWithURLString:URL];
-    NSMutableDictionary *desiredKeys = [NSMutableDictionary dictionaryWithDictionary:[parser desiredElementKeys]];
-
-    [desiredKeys removeObjectForKey:@"link"];
-    [desiredKeys setObject:@"" forKey:@"enclosure"];
-    [parser setDesiredElementKeys:desiredKeys];
-    [parser setDelegate:self];
-    [parser parse];
-    [parser release];
+	return elementKeys;
 }
 
 - (Class) detailControllerClass {
@@ -71,23 +42,4 @@
 - (NSString *) documentPath {
 	return @"http://feeds2.feedburner.com/apfeltalk-small";
 }
-
-
-- (void)updateApplicationIconBadgeNumber {
-	//We don't want to update the Application Icon Badge for Podcasts
-	[super updateApplicationIconBadgeNumber];
-}
-
-// handle acceleromter event
-- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
-	if ([self isShake:acceleration]) {
-		[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-		if (vibrateOnReload) {
-			AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
-		}
-		[self parseXMLFileAtURL:[self documentPath]];
-		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	}
-}
-
 @end

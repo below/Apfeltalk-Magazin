@@ -31,7 +31,19 @@
 @synthesize tabBarController;
 
 
+- (void)setApplicationDefaults {
+	// !!!:below:20091018 This is not the Apple recommended way of doing this!
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:@"showIconBadge"] == nil)
+	{
+		// no default values have been set, create them here based on what's in our Settings bundle info
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"showIconBadge"];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shakeToReload"];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"vibrateOnReload"];
+	} 
+}
+
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
+	[self setApplicationDefaults];
     // Add the tab bar controller's current view as a subview of the window
     [window addSubview:tabBarController.view];
 }
