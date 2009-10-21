@@ -34,7 +34,7 @@
 @interface RootViewController : UITableViewController <ATXMLParserDelegateProtocol, MFMailComposeViewControllerDelegate>
 {
 	IBOutlet UITableView * newsTable;
-
+	NSMutableData *xmlData;
 	NSArray *stories;
 
 @protected

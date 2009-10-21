@@ -306,16 +306,47 @@
 	return elementKeys;
 }
 
-- (void)parseXMLFileAtURL:(NSString *)URL
+- (void)parseXMLFileAtURL:(NSString *)URLString
 {
-    ATXMLParser *parser = [[ATXMLParser alloc] initWithURLString:URL];
+	NSURL *url = [NSURL URLWithString:URLString];
+	if (url == nil)
+		return;
+	
+	NSURLConnection *connection = [NSURLConnection connectionWithRequest:[NSURLRequest requestWithURL:url] 
+																delegate:self];
+	[connection start];
+	
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSHTTPURLResponse *)response {
+	long long length = [response expectedContentLength];
+	if (length == NSURLResponseUnknownLength)
+		length = 1024;
+	[xmlData release];
+	xmlData = [[NSMutableData alloc] initWithCapacity:length];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+	[xmlData appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	ATXMLParser *parser = [[ATXMLParser alloc] initWithData:xmlData];
     [parser setDesiredElementKeys:self.desiredKeys];
     [parser setStoryClass:[Story self]];
 	[parser setDateElementName:[self dateElementName]];
     [parser setDelegate:self];
     [parser parse];
-    [parser release];
+    [parser release];	
+	[xmlData release];
+	xmlData = nil;
 }
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+	// !!!:below:20091021 Can someone add error handling, please?
+}
+
 
 - (void)updateApplicationIconBadgeNumber {
 	//logic is now in each Controllers
@@ -346,7 +377,7 @@
 - (void)dealloc
 {	
 	[stories release];
-
+	[xmlData release];
 	[super dealloc];
 }
 

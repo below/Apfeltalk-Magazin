@@ -43,18 +43,43 @@
     return [[[ATXMLParser alloc] initWithURLString:urlString] autorelease];
 }
 
++ (ATXMLParser *)parserWithData:(NSData *)data
+{
+	return [[[ATXMLParser alloc] initWithData:data] autorelease];
+}
 
+- (id) init
+{
+	self = [super init];
+	if (self != nil) {
+		[self setStoryClass:[Story self]];
+		[self setDateElementName:@"pubDate"];
+		[self setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz" localeIdentifier:@"en_US"];
+	}
+	return self;
+}
+
+- (id) initWithData:(NSData *)data {
+    if (self = [self init])
+    {
+        xmlParser = [[NSXMLParser alloc] initWithData:data];
+		if (xmlParser == nil)
+			return nil;
+		// :below:20091021 At least fail if initialization was unsuccessful
+		[xmlParser setDelegate:self];
+    }
+	
+    return self;
+}
 
 - (id)initWithURLString:(NSString *)urlString
 {
-    if (self = [super init])
+    if (self = [self init])
     {
-        [self setStoryClass:[Story self]];
-        [self setDateElementName:@"pubDate"];
-        [self setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz" localeIdentifier:@"en_US"];
-
         xmlParser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:urlString]];
-        [xmlParser setDelegate:self];
+		if (xmlParser == nil)
+			return nil;
+		[xmlParser setDelegate:self];
     }
 
     return self;

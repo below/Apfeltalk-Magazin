@@ -68,8 +68,10 @@
 @property(retain) NSDictionary *desiredElementKeys;
 
 + (ATXMLParser *)parserWithURLString:(NSString *)urlString;
++ (ATXMLParser *)parserWithData:(NSData *)data;
 
 - (id)initWithURLString:(NSString *)urlString;
+- (id) initWithData:(NSData *)data;
 - (void)setDateFormat:(NSString *)format localeIdentifier:(NSString *)identifier;
 - (BOOL)parse;
 - (void)parseInBackgroundWithDelegate:(id <ATXMLParserDelegateProtocol>)object;
