@@ -32,7 +32,7 @@
 	[super viewDidLoad];
 	NSString *extension = [[[self story] link] pathExtension];
 	if ([extension isEqualToString:@"mp4"] || [extension isEqualToString:@"m4v"]
-		|| [extension isEqualToString:@"mov"])
+	|| [extension isEqualToString:@"mov"])
 		[thumbnailButton addTarget:self action:@selector(playMovie) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -97,7 +97,7 @@
 	CFRelease(reachabilityRef);
 	if (success == NO || (flags & kSCNetworkReachabilityFlagsIsWWAN) == kSCNetworkReachabilityFlagsIsWWAN) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString (@"Mobiles Netzwerk", @"")
-														message:NSLocalizedString (@"Videos sind nicht über ein mobiles Netzwerk verfügbar. Bitte verbinden Sie sich mit einem WLAN.Netzwerk", @"")
+														message:NSLocalizedString (@"Videos sind nicht über ein mobiles Netzwerk verfügbar. Bitte verbinden Sie sich mit einem WLAN Netzwerk", @"")
 													   delegate:nil cancelButtonTitle:NSLocalizedString (@"OK", @"")
 											  otherButtonTitles:nil];
 		[alert show];
