@@ -55,6 +55,23 @@
 	stories = thumbnailStories;
 }
 
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    [super connectionDidFinishLoading:connection];
+
+	// This needs to be done in post-processing, as libxml2 interferes with NSXMLParser
+	NSMutableArray *thumbnailStories = [[NSMutableArray alloc] initWithCapacity:[stories count]];
+	for (Story *s in stories) {
+		NSString *thumbnailLink = extractTextFromHTMLForQuery([s summary], @"//img[attribute::alt]/attribute::src");
+		if ([thumbnailLink length] > 0) {
+			[s setThumbnailLink:thumbnailLink];
+			[thumbnailStories addObject:s];
+		}
+	}
+
+	[stories release];
+	stories = thumbnailStories;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	static NSString *CellIdentifier = @"ImageCell";

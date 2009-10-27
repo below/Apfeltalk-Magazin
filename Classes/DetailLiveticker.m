@@ -55,12 +55,19 @@
 	[(UIScrollView *)[webview.subviews objectAtIndex:0] setAllowsRubberBanding:NO];
 }
 
-- (UIImage *) thumbimage {
+
+
+- (UIImage *) thumbimage
+{
 	return [UIImage imageNamed:@"TickerThumbnail.png"];
 }
 
+
+
 - (NSString *)htmlString
 {
+    [thumbnailButton setBackgroundImage:[self thumbimage] forState:UIControlStateNormal];
+
     return [NSString stringWithFormat:@"<div style=\"%@\">%@</div>", [self cssStyleString], [self scaledHtmlStringFromHtmlString:[[self story] summary]]];
 }
 
