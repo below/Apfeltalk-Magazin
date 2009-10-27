@@ -230,6 +230,17 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 	}
 }
 
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    [super connectionDidFinishLoading:connection];
+
+	// This needs to be done in post-processing, as libxml2 interferes with NSXMLParser
+    for (Story *s in stories) {
+        NSString *thumbnailLink = [self extractThumbnailLink:[s summary]];
+        if ([thumbnailLink length] > 0)
+            [s setThumbnailLink:thumbnailLink];
+    }
+}
+
 #pragma mark -
 #pragma mark ATXMLParserDelegateProtocol
 
