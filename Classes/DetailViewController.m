@@ -179,7 +179,8 @@
 
 	NSString * htmlString = [self htmlString];
 	[webview loadHTMLString:htmlString baseURL:nil];
-	[(UIScrollView*)[webview.subviews objectAtIndex:0]	 setAllowsRubberBanding:NO];
+// :below:20091111 Apple wants this removed
+//	[(UIScrollView*)[webview.subviews objectAtIndex:0]	 setAllowsRubberBanding:NO];
 	[webview release];
 }
 

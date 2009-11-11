@@ -51,8 +51,8 @@
     [webview setDelegate:self];
     [webview setBackgroundColor:[UIColor clearColor]];
     [self updateInterface];
-
-	[(UIScrollView *)[webview.subviews objectAtIndex:0] setAllowsRubberBanding:NO];
+// :below:20091111 Apple wants this removed
+//	[(UIScrollView *)[webview.subviews objectAtIndex:0] setAllowsRubberBanding:NO];
 }
 
 
