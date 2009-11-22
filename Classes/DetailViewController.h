@@ -47,5 +47,6 @@
 - (NSString *)rightBarButtonTitle;
 - (UIImage *)usedimage;
 - (NSString *)cssStyleString;
+- (NSString *)baseHtmlString;
 - (NSString*)scaledHtmlStringFromHtmlString:(NSString*)htmlString ;
 @end

@@ -66,9 +66,22 @@
 
 - (NSString *)htmlString
 {
+    NSRange          aRange;
+    NSMutableString *contentString = [NSMutableString stringWithString:[self scaledHtmlStringFromHtmlString:[[self story] summary]]];
+
+    // Remove the last paragraph tags
+    aRange = [contentString rangeOfString:@"</p>" options:NSBackwardsSearch];
+    if (([contentString length] - NSMaxRange(aRange)) <= 1)
+    {
+        [contentString deleteCharactersInRange:aRange];
+        aRange = [contentString rangeOfString:@"<p>" options:NSBackwardsSearch];
+        if (aRange.location != NSNotFound)
+            [contentString deleteCharactersInRange:aRange];
+    }
+
     [thumbnailButton setBackgroundImage:[self thumbimage] forState:UIControlStateNormal];
 
-    return [NSString stringWithFormat:@"<div style=\"%@\">%@</div>", [self cssStyleString], [self scaledHtmlStringFromHtmlString:[[self story] summary]]];
+    return [[self baseHtmlString] stringByReplacingOccurrencesOfString:@"%@" withString:contentString];
 }
 
 

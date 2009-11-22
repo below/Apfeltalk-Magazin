@@ -27,7 +27,7 @@
 #import "UIScrollViewPrivate.h"
 
 
-#define MAX_IMAGE_WIDTH 270
+#define MAX_IMAGE_WIDTH 280
 
 
 @implementation DetailViewController
@@ -60,7 +60,17 @@
 }
 
 - (NSString *) cssStyleString {
-	return @"background:transparent; font:10pt Helvetica;";
+    NSURL *middleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"DetailMiddle" ofType:@"png"]];
+
+	return [NSString stringWithFormat:@"background:url(%@) repeat-y; font:10pt Helvetica; padding-top:95px; padding-left:20px; padding-right:20px", [middleURL absoluteString]];
+}
+
+- (NSString *)baseHtmlString {
+    NSURL *bottomURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"DetailBottom" ofType:@"png"]];
+    NSString *testString = [NSString stringWithFormat:@"<div style=\"position:absolute; top:0px; left:0px; width:320px\"><div style=\"%@\">"
+            @"%@</div><img src=\"%@\" alt=\"DetailBottom\"></div>", [self cssStyleString], @"%@", [bottomURL absoluteString]];
+
+    return testString;
 }
 
 - (NSString *)scaledHtmlStringFromHtmlString:(NSString *)htmlString
@@ -117,10 +127,8 @@
 	if (divRange.location == NSNotFound)
 		return NSLocalizedString (@"Nachricht konnte nicht angezeigt werden", @"");
 	
-	 bodyString = [NSString stringWithFormat:@"<div style=\"%@\">\
-                   <div style=\"text-align:center; font-weight:bold;\">%@</div>%@</div>", 
-				   [self cssStyleString], [[self story] title],
-                   [bodyString substringToIndex:divRange.location]];
+	bodyString = [NSString stringWithFormat:@"<div style=\"text-align:center; font-weight:bold;\">%@</div>%@</div>",  [[self story] title], [bodyString substringToIndex:divRange.location]];
+    bodyString = [[self baseHtmlString] stringByReplacingOccurrencesOfString:@"%@" withString:bodyString];
 
 	return [self scaledHtmlStringFromHtmlString:bodyString];
 }
