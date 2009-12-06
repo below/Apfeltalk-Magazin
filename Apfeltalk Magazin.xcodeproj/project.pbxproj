@@ -41,6 +41,7 @@
 		CB15C87B10498EBF00360BDC /* NewsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15C87A10498EBF00360BDC /* NewsController.m */; };
 		CB15C89C1049950900360BDC /* DetailNews.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15C89B1049950900360BDC /* DetailNews.m */; };
 		CB15C8CE1049A0CF00360BDC /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15C8CD1049A0CF00360BDC /* Story.m */; };
+		CB1E3BC710CC674600B01120 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB1E3BC610CC674600B01120 /* Entitlements.plist */; };
 		CB9E946E104490B700768B8B /* gelesen.db in Resources */ = {isa = PBXBuildFile; fileRef = CB9E946D104490B700768B8B /* gelesen.db */; };
 		CB9E94841044929D00768B8B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9E94831044929D00768B8B /* libsqlite3.dylib */; };
 		CBA438FA105836D9002B2077 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA438F9105836D9002B2077 /* libxml2.dylib */; };
@@ -70,7 +71,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* Apfeltalk_MagazinAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Apfeltalk_MagazinAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* Apfeltalk_MagazinAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Apfeltalk_MagazinAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* Apfeltalk Magazin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Apfeltalk Magazin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* ApfeltalkMagazin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApfeltalkMagazin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22090EBC104FAC4700A20868 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		22090EBD104FAC4700A20868 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
@@ -119,6 +120,7 @@
 		CB15C89B1049950900360BDC /* DetailNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailNews.m; sourceTree = "<group>"; };
 		CB15C8CC1049A0CF00360BDC /* Story.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Story.h; sourceTree = "<group>"; };
 		CB15C8CD1049A0CF00360BDC /* Story.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Story.m; sourceTree = "<group>"; };
+		CB1E3BC610CC674600B01120 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		CB9E946D104490B700768B8B /* gelesen.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = gelesen.db; sourceTree = "<group>"; };
 		CB9E94831044929D00768B8B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		CBA438EC1058361C002B2077 /* UIScrollViewPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScrollViewPrivate.h; sourceTree = "<group>"; };
@@ -197,7 +199,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* Apfeltalk Magazin.app */,
+				1D6058910D05DD3D006BFB54 /* ApfeltalkMagazin.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -225,7 +227,6 @@
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				22D4A69E105001D500BC3317 /* COPYING */,
 				5A6749EB105D5971006135C2 /* Appstore.rtf */,
-				CBC26120108B9DC500E5F36B /* SystemConfiguration.framework */,
 			);
 			name = "Apfeltalk Magazin";
 			sourceTree = "<group>";
@@ -245,6 +246,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CB1E3BC610CC674600B01120 /* Entitlements.plist */,
 				CB1434AE1058616500B5FF14 /* Images */,
 				F6FB7DD5104EDE2F007F5A54 /* Fullscreen.xib */,
 				F634304A10362AA4004ACF93 /* DetailView.xib */,
@@ -260,6 +262,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CBC26120108B9DC500E5F36B /* SystemConfiguration.framework */,
 				CBA438F9105836D9002B2077 /* libxml2.dylib */,
 				22250A7110510E5E008B2EEC /* MessageUI.framework */,
 				F622303F1043488D00FC030D /* MediaPlayer.framework */,
@@ -360,7 +363,7 @@
 			);
 			name = "Apfeltalk Magazin";
 			productName = "Apfeltalk Magazin";
-			productReference = 1D6058910D05DD3D006BFB54 /* Apfeltalk Magazin.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* ApfeltalkMagazin.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -418,6 +421,7 @@
 				4CFA12B410B8C51B00D8AB71 /* DetailBottom.png in Resources */,
 				4CFA12B510B8C51B00D8AB71 /* DetailMiddle.png in Resources */,
 				4CFA12B610B8C51B00D8AB71 /* DetailTop.png in Resources */,
+				CB1E3BC710CC674600B01120 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,7 +539,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Stephan König (2JTE2C8T3A)";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Apfeltalk GmbH";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -550,8 +555,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				PRODUCT_NAME = "Apfeltalk Magazin";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2CF0CE75-8C7A-405D-90D8-705F570E74F6";
+				PRODUCT_NAME = ApfeltalkMagazin;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "80361F76-2A93-4B4E-A627-6CD1D495D530";
 			};
 			name = Distribution;
 		};
