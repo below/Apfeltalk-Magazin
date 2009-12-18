@@ -82,18 +82,21 @@
 	
 	//==== Synchronous call to upload
 	responseData = [ NSURLConnection sendSynchronousRequest:postRequest returningResponse:&response error:nil];
-	
-	NSString *shortLink = [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding];
+	[postRequest release];
+    postRequest = nil;
+    
+	NSString *shortLink = [[[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding]
+                           autorelease]; // :below:20091218 Do we know if this is ASCII?
 	
 	NSRange pos1 = [shortLink rangeOfString: @"shortUrl"];
 	NSRange pos2 = [shortLink rangeOfString: @"userHash"];
 	NSRange range = NSMakeRange(pos1.location + 12,pos2.location - 17 - (pos1.location + 12));
 	shortLink = [shortLink substringWithRange:range];
 		
-	loadingActionSheet = [[UIActionSheet alloc] initWithTitle:@"Sende Tweet..." delegate:nil 
+	loadingActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString (@"Sende Tweet…", @"") delegate:nil 
 											cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
 	[loadingActionSheet showInView:self.view];
-	[t statuses_update:[NSString stringWithFormat:@"Newstipp: %@ %@", [[self story] title], shortLink] delegate:self requestSelector:@selector(status_updateCallback:)];
+	[t statuses_update:[NSString stringWithFormat:NSLocalizedString (@"Newstipp: %@ %@", @""), [[self story] title], shortLink] delegate:self requestSelector:@selector(status_updateCallback:)];
 }
 - (void) status_updateCallback: (NSData *) content {
 	[loadingActionSheet dismissWithClickedButtonIndex:0 animated:YES];
