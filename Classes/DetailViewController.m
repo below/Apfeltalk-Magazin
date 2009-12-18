@@ -123,10 +123,14 @@
 
 - (NSString *) htmlString {
 	NSString *bodyString = [[self story] summary];
-	NSRange divRange = [bodyString rangeOfString:@"</div>"];
+	NSRange divRange = [bodyString rangeOfString:@"<fieldset"];
 	if (divRange.location == NSNotFound)
+        divRange.location = [bodyString length];
+
+    divRange = [bodyString rangeOfString:@"</div>" options:NSBackwardsSearch range:NSMakeRange(0, divRange.location)];
+    if (divRange.location == NSNotFound)
 		return NSLocalizedString (@"Nachricht konnte nicht angezeigt werden", @"");
-	
+
 	bodyString = [NSString stringWithFormat:@"<div style=\"text-align:center; font-weight:bold;\">%@</div>%@</div>",  [[self story] title], [bodyString substringToIndex:divRange.location]];
     bodyString = [[self baseHtmlString] stringByReplacingOccurrencesOfString:@"%@" withString:bodyString];
 
