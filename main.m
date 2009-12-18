@@ -22,8 +22,6 @@
 //	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.//
 //
 
-// Trivial Change
-
 #import <UIKit/UIKit.h>
 
 int main(int argc, char *argv[]) {
