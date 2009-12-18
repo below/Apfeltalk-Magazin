@@ -49,7 +49,7 @@
 	[newsTable reloadData];
 	UIAlertView *alert = [[UIAlertView alloc]
 						  initWithTitle:@"Credits" // oder einfach Wilkommen in der Touch-Mania.com Applikation?
-						  message:@"Apfeltalk.de App \n \n\nIdee: Stephan König \n\nProgrammierung: Alexander von Below, Andreas Rami, Stefan Kofler, Michael Fenske und \nStephan König \n\nSplashcreen: Patrick Rollbis \n\nIcons: Jesper Frommherz und Patrick Rollbis \n\nGUI: Laurids Düllmann \n\nMit freundlicher Unterstützung der Apfeltalk GmbH"
+						  message:@"Apfeltalk.de App \n \n\nIdee: Stephan König \n\nProgrammierung: Alexander von Below, Andreas Rami, Stefan Kofler, Michael Fenske und \nStephan König \n\nSplashscreen: Patrick Rollbis \n\nIcons: Jesper Frommherz und Patrick Rollbis \n\nGUI: Laurids Düllmann \n\nMit freundlicher Unterstützung der Apfeltalk GmbH"
 						  delegate:self
 						  cancelButtonTitle:@"OK"
 						  otherButtonTitles:@"Kontakt"
