@@ -25,7 +25,7 @@
 #import "DetailViewController.h"
 #import "RootViewController.h"
 #import "UIScrollViewPrivate.h"
-
+#import "ATMXMLUtilities.h"
 
 #define MAX_IMAGE_WIDTH 280
 
@@ -122,6 +122,7 @@
 }
 
 - (NSString *) htmlString {
+    // :below:20091220 All of this should be done with proper HTML Parsing
 	NSString *bodyString = [[self story] summary];
 	NSRange divRange = [bodyString rangeOfString:@"<fieldset"];
 	if (divRange.location == NSNotFound)
@@ -131,7 +132,12 @@
     if (divRange.location == NSNotFound)
 		return NSLocalizedString (@"Nachricht konnte nicht angezeigt werden", @"");
 
-	bodyString = [NSString stringWithFormat:@"<div style=\"text-align:center; font-weight:bold;\">%@</div>%@</div>",  [[self story] title], [bodyString substringToIndex:divRange.location]];
+    NSString *extractedString = [bodyString substringToIndex:divRange.location];
+    
+    NSString *queryString = extractTextFromHTMLForQuery(bodyString, @"//div[1]");
+    // This does not work, as the query specifically extracts text
+    
+	bodyString = [NSString stringWithFormat:@"<div style=\"text-align:center; font-weight:bold;\">%@</div>%@</div>",  [[self story] title], extractedString];
     bodyString = [[self baseHtmlString] stringByReplacingOccurrencesOfString:@"%@" withString:bodyString];
 
 	return [self scaledHtmlStringFromHtmlString:bodyString];

@@ -122,7 +122,7 @@
 	int numberOfButtons = [actionSheet numberOfButtons];
 	
 	// assume that when we have 3 buttons, the one with idx 1 is the save button
-    // :below:20091220 This assumption is not correct, all of this should be done with tags
+    // :below:20091220 This assumption is not correct, We should find a smarter way
 	if (buttonIdx == 1 && numberOfButtons == 5) {
 		UINavigationController *navController = [self navigationController];
 		 NSArray *controllers = [navController viewControllers];
