@@ -71,7 +71,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* Apfeltalk_MagazinAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Apfeltalk_MagazinAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* Apfeltalk_MagazinAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Apfeltalk_MagazinAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* ApfeltalkMagazin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApfeltalkMagazin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Apfeltalk Magazin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Apfeltalk Magazin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22090EBC104FAC4700A20868 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		22090EBD104FAC4700A20868 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
@@ -199,7 +199,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* ApfeltalkMagazin.app */,
+				1D6058910D05DD3D006BFB54 /* Apfeltalk Magazin.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -363,7 +363,7 @@
 			);
 			name = "Apfeltalk Magazin";
 			productName = "Apfeltalk Magazin";
-			productReference = 1D6058910D05DD3D006BFB54 /* ApfeltalkMagazin.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Apfeltalk Magazin.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
