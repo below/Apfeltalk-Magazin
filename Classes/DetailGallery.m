@@ -27,6 +27,7 @@
 #import "RootViewController.h"
 #import "Apfeltalk_MagazinAppDelegate.h"
 #import "GalleryImageViewController.h"
+#import "ATMXMLUtilities.h"
 
 #import <libxml/HTMLparser.h>
 
@@ -169,24 +170,19 @@ void endElement (void *userData, const xmlChar *name) {
 {
 	NSString *str = [[self story] summary];
 	
-	NSRange pos1 = [str rangeOfString: @"http://www.apfeltalk.de/gallery/data"]; //-42 .... 
-	NSRange pos2 = NSMakeRange(1,2);
-	NSRange findRange;
+    str = extractTextFromHTMLForQuery(str, @"//img[attribute::title]/attribute::src");
+    
 	
-	findRange = [[str lowercaseString] rangeOfString:@".jpg\" alt="];
-	if (findRange.location !=NSNotFound){
-		pos2 = findRange; //+4 ....
-	}
-	else {
-		findRange = [[str lowercaseString] rangeOfString:@".png\" alt="];
-		if (findRange.location !=NSNotFound){
-			pos2 = findRange; //+4 ....
-		}  
-	}
-	pos2.location = pos2.location + 4;
-	NSRange myRange2 = NSMakeRange(pos1.location,pos2.location - pos1.location);
-	str = [[[self story] summary] substringWithRange:myRange2];
-	
+    if ([str length] == NSNotFound) {
+		UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Keine URL", @"")
+                                                              message:NSLocalizedString (@"Es konnte keine URL für das Bild gefunden werden", @"")
+                                                             delegate:nil cancelButtonTitle:NSLocalizedString (@"OK", @"")
+                                                    otherButtonTitles:nil];
+		[errorAlert show];
+		[errorAlert release];
+        return;
+    }
+    
 	if (buttonIdx == 2) {
 		str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
 		
