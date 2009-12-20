@@ -49,7 +49,7 @@
 	[newsTable reloadData];
 	UIAlertView *alert = [[UIAlertView alloc]
 						  initWithTitle:@"Credits" // oder einfach Wilkommen in der Touch-Mania.com Applikation?
-						  message:@"Apfeltalk.de App \n \n\nIdee: Stephan K√∂nig \n\nProgrammierung: Alexander von Below, Andreas Rami, Stefan Kofler, Michael Fenske und \nStephan K√∂nig \n\nSplashscreen: Patrick Rollbis \n\nIcons: Jesper Frommherz und Patrick Rollbis \n\nGUI: Laurids D√ºllmann \n\nMit freundlicher Unterst√ºtzung der Apfeltalk GmbH"
+						  message:@"Apfeltalk.de App \n \n\nIdee: Stephan König \n\nProgrammierung: Alexander von Below, Andreas Rami, Stefan Kofler, Michael Fenske und \nStephan König \n\nSplashscreen: Patrick Rollbis \n\nIcons: Jesper Frommherz und Patrick Rollbis \n\nGUI: Laurids Düllmann \n\nMit freundlicher Unterstützung der Apfeltalk GmbH"
 						  delegate:self
 						  cancelButtonTitle:@"OK"
 						  otherButtonTitles:@"Kontakt"
@@ -84,24 +84,33 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [stories count];
+	return ([stories count] > 1 ? [stories count] : 1);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
+	/* return the loading cell! */
+	if([stories count] == 0) {
+		if(loadingCell == nil) {
+			[[NSBundle mainBundle] loadNibNamed:@"LoadingCell" owner:self options:nil];
+		}
+		
+		return loadingCell;
+	}
+    
 	static NSString *CellIdentifier = @"Cell";
-
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 		cell.textLabel.font = [UIFont boldSystemFontOfSize:12];
     }
-
+	
 	// Configure the cell.
-
 	int storyIndex = [indexPath row];
+	
 	// Everything below here is customization
-
+	
 	NSString * link = [[stories objectAtIndex: indexPath.row] link];
 	BOOL read = [self databaseContainsURL:link];
 
@@ -119,6 +128,10 @@
 #pragma mark UITableViewDelegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	/* check if this is a loading cell */
+	if([[[tableView cellForRowAtIndexPath:indexPath] reuseIdentifier] isEqual:@"loading"])
+		return;
+	
 	// Navigation logic
 	
 	Story *story = [stories objectAtIndex: indexPath.row];
@@ -284,8 +297,10 @@
 {
 	[super viewDidAppear:animated];
 
-	if ([stories count] == 0)
+	if ([stories count] == 0) {
 		[self parseXMLFileAtURL:[self documentPath]];
+		//[tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+	}
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -377,6 +392,7 @@
 - (void)dealloc
 {	
 	[stories release];
+	[loadingCell release];
 	[xmlData release];
 	[super dealloc];
 }
@@ -397,7 +413,7 @@
 {
     NSLog(@"%@", [parseError localizedDescription]);
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Content konnte nicht geladen werden", nil)
-                                                        message:@"Der Feed ist im Moment nicht verf√ºgbar. Versuche es bitte sp√§ter erneut."
+                                                        message:@"Der Feed ist im Moment nicht verfügbar. Versuche es bitte später erneut."
 													   delegate:nil cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:nil];
     [alertView show];
     [alertView release];

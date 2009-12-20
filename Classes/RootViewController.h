@@ -34,6 +34,7 @@
 @interface RootViewController : UITableViewController <ATXMLParserDelegateProtocol, MFMailComposeViewControllerDelegate>
 {
 	IBOutlet UITableView * newsTable;
+	IBOutlet UITableViewCell *loadingCell;
 	NSMutableData *xmlData;
 	NSArray *stories;
 

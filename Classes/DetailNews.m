@@ -122,7 +122,8 @@
 	int numberOfButtons = [actionSheet numberOfButtons];
 	
 	// assume that when we have 3 buttons, the one with idx 1 is the save button
-	if (buttonIdx == 1 && numberOfButtons == 3) {
+    // :below:20091220 This assumption is not correct, all of this should be done with tags
+	if (buttonIdx == 1 && numberOfButtons == 5) {
 		UINavigationController *navController = [self navigationController];
 		 NSArray *controllers = [navController viewControllers];
 		 
@@ -227,8 +228,10 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	
 	//==== Synchronous call to upload
 	responseData = [ NSURLConnection sendSynchronousRequest:postRequest returningResponse:&response error:nil];
-	
-	NSString *shortLink = [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding];
+	[postRequest release];
+    
+	NSString *shortLink = [[[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding]
+                           autorelease];
 	
 	NSRange pos1 = [shortLink rangeOfString: @"shortUrl"];
 	NSRange pos2 = [shortLink rangeOfString: @"userHash"];

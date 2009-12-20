@@ -45,6 +45,7 @@
 		CB9E946E104490B700768B8B /* gelesen.db in Resources */ = {isa = PBXBuildFile; fileRef = CB9E946D104490B700768B8B /* gelesen.db */; };
 		CB9E94841044929D00768B8B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9E94831044929D00768B8B /* libsqlite3.dylib */; };
 		CBA438FA105836D9002B2077 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA438F9105836D9002B2077 /* libxml2.dylib */; };
+		CBBD046710DE4C020056C183 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBD046610DE4C020056C183 /* LoadingCell.xib */; };
 		CBC26121108B9DC500E5F36B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC26120108B9DC500E5F36B /* SystemConfiguration.framework */; };
 		CBC2B8D91068104200040255 /* ATMXMLUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC2B8D81068104200040255 /* ATMXMLUtilities.m */; };
 		F6222F011041D90D00FC030D /* rss.png in Resources */ = {isa = PBXBuildFile; fileRef = F6222F001041D90D00FC030D /* rss.png */; };
@@ -136,6 +137,7 @@
 		CB9E94831044929D00768B8B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		CBA438EC1058361C002B2077 /* UIScrollViewPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScrollViewPrivate.h; sourceTree = "<group>"; };
 		CBA438F9105836D9002B2077 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		CBBD046610DE4C020056C183 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		CBC26120108B9DC500E5F36B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CBC2B8D71068104200040255 /* ATMXMLUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATMXMLUtilities.h; path = Classes/ATMXMLUtilities.h; sourceTree = "<group>"; };
 		CBC2B8D81068104200040255 /* ATMXMLUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ATMXMLUtilities.m; path = Classes/ATMXMLUtilities.m; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CBBD046610DE4C020056C183 /* LoadingCell.xib */,
 				CB1E3BC610CC674600B01120 /* Entitlements.plist */,
 				CB1434AE1058616500B5FF14 /* Images */,
 				F6FB7DD5104EDE2F007F5A54 /* Fullscreen.xib */,
@@ -486,6 +489,7 @@
 				4CFA12B610B8C51B00D8AB71 /* DetailTop.png in Resources */,
 				CB1E3BC710CC674600B01120 /* Entitlements.plist in Resources */,
 				F69CEE7A10DA94D400E72FD5 /* FBConnect.bundle in Resources */,
+				CBBD046710DE4C020056C183 /* LoadingCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
