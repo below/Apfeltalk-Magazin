@@ -76,6 +76,9 @@
 	
 	static NSString *CellIdentifier = @"ImageCell";
     
+    if ([stories count] == 0) 
+		return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
