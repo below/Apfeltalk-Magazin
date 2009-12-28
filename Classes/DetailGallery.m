@@ -251,20 +251,6 @@ void endElement (void *userData, const xmlChar *name) {
 	[controller release];
 }
 
-- (void)createMailComposer:(NSString*)str {
-	MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
-	controller.mailComposeDelegate = self;
-	
-	// adde image as attachment
-	UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:str]]];
-	NSData *imageData = UIImageJPEGRepresentation(image, 1);
-	[controller addAttachmentData:imageData mimeType:@"image/jpg" fileName:@"attachment.jpg"];
-	
-	[controller setSubject:[story title] ];
-	[self presentModalViewController:controller animated:YES];
-	[controller release];
-}
-
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
 	[self becomeFirstResponder];
 	[self dismissModalViewControllerAnimated:YES];

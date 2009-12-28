@@ -3,8 +3,8 @@
 //  Apfeltalk Magazin
 //
 //	Apfeltalk Magazin -- An iPhone Application for the site http://apfeltalk.de
-//	Copyright (C) 2009	Stephan König (stephankoenig at me dot com), Stefan Kofler
-//						Alexander von Below, Andreas Rami, Michael Fenske, Laurids Düllmann, Jesper Frommherz (Graphics),
+//	Copyright (C) 2009	Stephan K√∂nig (stephankoenig at me dot com), Stefan Kofler
+//						Alexander von Below, Andreas Rami, Michael Fenske, Laurids D√ºllmann, Jesper Frommherz (Graphics),
 //						Patrick Rollbis (Graphics),
 //						
 //	This program is free software; you can redistribute it and/or
@@ -49,7 +49,7 @@
 	[newsTable reloadData];
 	UIAlertView *alert = [[UIAlertView alloc]
 						  initWithTitle:@"Credits" // oder einfach Wilkommen in der Touch-Mania.com Applikation?
-						  message:@"Apfeltalk.de App \n \n\nIdee: Stephan K�nig \n\nProgrammierung: Alexander von Below, Andreas Rami, Stefan Kofler, Michael Fenske und \nStephan K�nig \n\nSplashscreen: Patrick Rollbis \n\nIcons: Jesper Frommherz und Patrick Rollbis \n\nGUI: Laurids D�llmann \n\nMit freundlicher Unterst�tzung der Apfeltalk GmbH"
+						  message:@"Apfeltalk.de App \n \n\nIdee: Stephan König \n\nProgrammierung: Alexander von Below, Andreas Rami, Stefan Kofler, Michael Fenske und \nStephan König \n\nSplashscreen: Patrick Rollbis \n\nIcons: Jesper Frommherz und Patrick Rollbis \n\nGUI: Laurids Düllmann \n\nMit freundlicher Unterstützung der Apfeltalk GmbH"
 						  delegate:self
 						  cancelButtonTitle:@"OK"
 						  otherButtonTitles:@"Kontakt"
@@ -413,7 +413,7 @@
 {
     NSLog(@"%@", [parseError localizedDescription]);
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Content konnte nicht geladen werden", nil)
-                                                        message:@"Der Feed ist im Moment nicht verf�gbar. Versuche es bitte sp�ter erneut."
+                                                        message:@"Der Feed ist im Moment nicht verfügbar. Versuche es bitte später erneut."
 													   delegate:nil cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:nil];
     [alertView show];
     [alertView release];
