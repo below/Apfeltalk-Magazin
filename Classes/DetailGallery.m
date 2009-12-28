@@ -170,10 +170,9 @@ void endElement (void *userData, const xmlChar *name) {
 {
 	NSString *str = [[self story] summary];
 	
-    str = extractTextFromHTMLForQuery(str, @"//img[attribute::title]/attribute::src");
-    
+    NSString *thumbLink = extractTextFromHTMLForQuery(str, @"//img[attribute::title]/attribute::src");
 	
-    if ([str length] == NSNotFound) {
+    if ([thumbLink length] == NSNotFound) {
 		UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Keine URL", @"")
                                                               message:NSLocalizedString (@"Es konnte keine URL für das Bild gefunden werden", @"")
                                                              delegate:nil cancelButtonTitle:NSLocalizedString (@"OK", @"")
@@ -182,47 +181,74 @@ void endElement (void *userData, const xmlChar *name) {
 		[errorAlert release];
         return;
     }
+
+    NSString *imageLink = [thumbLink stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
     
-	if (buttonIdx == 2) {
-		str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
-		
-		GalleryImageViewController *galleryImageViewController = [[GalleryImageViewController alloc] initWithURL:[NSURL URLWithString:str]];
-		[self.navigationController pushViewController:galleryImageViewController animated:YES];
-		[galleryImageViewController release];
-	}
-	
-    if (buttonIdx == 1) {
-		str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
-		UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:str]]];
-		UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil); 
-		
-		UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Bild gespeichert" message:@"Das Bild wurde erfolgreich in deine Fotogallerie gespeichert." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-		[errorAlert show];
-		[errorAlert release];
-		
-	}
-	if (buttonIdx == 0) {
-		str = [str stringByReplacingOccurrencesOfString:@"/thumbs" withString:@"/medium"];
-		/*
-		UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:str]]];
-		UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-		pasteboard.image = image;
-	    NSLog(@"PasteBoard %@", [[UIPasteboard generalPasteboard] image]);*/
-		
-		if (TARGET_IPHONE_SIMULATOR) {
-			NSLog(@"Keep in mind, that no mail could be send in Simulator mode... just providing the UI");
-			[self createMailComposer:str];
-		} else {
-			[self createMailComposer:str];
-		}
-		
-	}
+    switch (buttonIdx) {
+        case 2: {
+            GalleryImageViewController *galleryImageViewController = [[GalleryImageViewController alloc] initWithURL:[NSURL URLWithString:imageLink]];
+            [self.navigationController pushViewController:galleryImageViewController animated:YES];
+            [galleryImageViewController release];
+            break;
+        }
+        case 1:
+        {
+            UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:imageLink]]];
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil); 
+            
+            UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Bild gespeichert" message:@"Das Bild wurde erfolgreich in deine Fotogallerie gespeichert." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [errorAlert show];
+            [errorAlert release];
+            
+        }
+            break;
+        case 0:
+        {
+            imageLink = [thumbLink stringByReplacingOccurrencesOfString:@"/thumbs" withString:@"/medium"];
+            
+            if (TARGET_IPHONE_SIMULATOR)
+                NSLog(@"Keep in mind, that no mail could be send in Simulator mode... just providing the UI");
+            [self createMailComposerWithThumbnailLink:thumbLink];
+        }
+    }
 	
 	// :below:20090920 This is only to placate the analyzer
 	if (actionSheet == myMenu) {
 		[myMenu release];
 		myMenu = nil;
 	}
+}
+
+- (void)createMailComposerWithThumbnailLink:(NSString*)thumbnailLink {
+    
+	MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
+	controller.mailComposeDelegate = self;
+	
+    NSString *imageLink = [thumbnailLink stringByReplacingOccurrencesOfString:@"/thumbs" withString:@"/medium"];
+    
+	// adde image as attachment
+	UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:imageLink]]];
+    if (image == nil) {
+        imageLink = [thumbnailLink stringByReplacingOccurrencesOfString:@"/thumbs" withString:@""];
+        image = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString:imageLink]]];
+    }
+      
+    if (image == nil) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString (@"Foto konnte nicht geladen werden", @"")
+                                                            message:NSLocalizedString (@"Das Foto konnte in keiner Auflösung geladen werden", @"")
+                                                           delegate:nil cancelButtonTitle:NSLocalizedString (@"OK", @"")
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];
+        return;
+    }
+    
+	NSData *imageData = UIImageJPEGRepresentation(image, 1);
+	[controller addAttachmentData:imageData mimeType:@"image/jpg" fileName:@"attachment.jpg"];
+	
+	[controller setSubject:[story title] ];
+	[self presentModalViewController:controller animated:YES];
+	[controller release];
 }
 
 - (void)createMailComposer:(NSString*)str {

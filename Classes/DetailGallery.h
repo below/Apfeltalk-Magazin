@@ -30,5 +30,6 @@
 	NSMutableString *cleanedString;
 	NSMutableString *elementString;
 }
+- (void)createMailComposerWithThumbnailLink:(NSString*)thumbnailLink;
 - (NSString *)strip_tags:(NSString *)data :(NSArray *)valid_tags;
 @end
