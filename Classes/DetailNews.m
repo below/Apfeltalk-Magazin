@@ -107,23 +107,32 @@
 {
 	Apfeltalk_MagazinAppDelegate *appDelegate = (Apfeltalk_MagazinAppDelegate *)[[UIApplication sharedApplication] delegate];
 	// :below:20090920 This is only to placate the analyzer
-	 myMenu = [[UIActionSheet alloc]
-							 initWithTitle: nil
-							 delegate:self
-							 cancelButtonTitle:@"Abbrechen"
-							 destructiveButtonTitle:nil
-							 otherButtonTitles: @"Per Mail versenden" , [self Mailsendecode], @"Newstipp twittern", @"Facebook", nil];
-	
+        
+    myMenu = [[UIActionSheet alloc] init];
+    myMenu.title = nil;
+    myMenu.delegate = self;
+    [myMenu addButtonWithTitle:NSLocalizedString (@"Per Mail versenden", @"")];
+    if ([self Mailsendecode]) // :below:20100101 This is something of a hack
+        [myMenu addButtonWithTitle:[self Mailsendecode]];
+    [myMenu addButtonWithTitle:NSLocalizedString (@"Newstipp twittern", @"")];
+    [myMenu addButtonWithTitle:NSLocalizedString (@"Facebook", @"")];
+    [myMenu addButtonWithTitle:NSLocalizedString (@"Abbrechen", @"")];
+    if ([self Mailsendecode])
+        myMenu.cancelButtonIndex = 4;
+    else
+        myMenu.cancelButtonIndex = 3;
+    	
     [myMenu showFromTabBar:[[appDelegate tabBarController] tabBar]];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIdx
 {	
 	int numberOfButtons = [actionSheet numberOfButtons];
-	
+	int saveEnabled = [self Mailsendecode]?1:0;
+    
 	// assume that when we have 3 buttons, the one with idx 1 is the save button
     // :below:20091220 This assumption is not correct, We should find a smarter way
-	if (buttonIdx == 1 && numberOfButtons == 5) {
+	if (saveEnabled && buttonIdx == 1) {
 		UINavigationController *navController = [self navigationController];
 		 NSArray *controllers = [navController viewControllers];
 		 
@@ -137,15 +146,12 @@
         [self setShowSave:NO];
 
 	if (buttonIdx == 0) {
-		if (TARGET_IPHONE_SIMULATOR) {
+		if (TARGET_IPHONE_SIMULATOR)
 			NSLog(@"Keep in mind, that no mail could be send in Simulator mode... just providing the UI");
-			[self createMailComposer];
-		} else {
-			[self createMailComposer];
-		}
+        [self createMailComposer];
 	}
 	
-	if (buttonIdx == 2) {
+	if (buttonIdx == 1 + saveEnabled) {
 		//Newstipp twittern
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -172,7 +178,7 @@
 		[myAlertView release];
 	}
 	
-	if (buttonIdx == 3) {
+	if (buttonIdx == 2 + saveEnabled) {
 		FBLoginDialog* dialog = [[[FBLoginDialog alloc] initWithSession:session] autorelease];
 		[dialog show];
 	}
