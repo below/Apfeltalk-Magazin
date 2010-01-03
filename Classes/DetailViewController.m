@@ -145,7 +145,7 @@
 
 
 - (NSString *) rightBarButtonTitle {
-	return @"Newsoptionen";
+	return NSLocalizedString (@"Optionen", @"");
 }
 
 
