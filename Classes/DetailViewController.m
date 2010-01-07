@@ -134,7 +134,7 @@
 
     NSString *extractedString = [bodyString substringToIndex:divRange.location];
     
-    NSString *queryString = extractTextFromHTMLForQuery(bodyString, @"//div[1]");
+    // NSString *queryString = extractTextFromHTMLForQuery(bodyString, @"//div[1]"); not used
     // This does not work, as the query specifically extracts text
     
 	bodyString = [NSString stringWithFormat:@"<div style=\"text-align:center; font-weight:bold;\">%@</div>%@</div>",  [[self story] title], extractedString];

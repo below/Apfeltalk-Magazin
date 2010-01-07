@@ -28,7 +28,7 @@
 @interface NewsController : RootViewController <UIAccelerometerDelegate, UIActionSheetDelegate> {
 	@private
 	NSMutableArray *savedStories;
-	UIActionSheet *myMenu;
+	UIActionSheet  *myMenu;
     NSUInteger      displayedStorySection;
     NSUInteger      displayedStoryIndex;
 }
