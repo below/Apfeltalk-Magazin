@@ -34,6 +34,9 @@
 
 @implementation NewsController
 
+@synthesize displayedStorySection;
+@synthesize displayedStoryIndex;
+
 const int SAVED_MESSAGES_SECTION_INDEX = 1;
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -130,6 +133,9 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self setDisplayedStorySection:[indexPath section]];
+    [self setDisplayedStoryIndex:[indexPath row]];
+
 	if ([indexPath section] != SAVED_MESSAGES_SECTION_INDEX) {
 		[super tableView:tableView didSelectRowAtIndexPath:indexPath];
 		 return;
@@ -181,6 +187,45 @@ const int SAVED_MESSAGES_SECTION_INDEX = 1;
 
 - (BOOL) saveStories {
 	return [NSKeyedArchiver archiveRootObject:savedStories toFile:[self savedStoryFilepath]];
+}
+
+- (void)changeStory:(id)sender
+{
+    NSUInteger  newIndex = [self displayedStoryIndex];
+    NSArray    *storiesArray;
+    Story      *newStory;
+
+    if ([self displayedStorySection] != SAVED_MESSAGES_SECTION_INDEX)
+        storiesArray = [self stories];
+    else
+        storiesArray = savedStories;
+
+    switch ([(UISegmentedControl *)sender selectedSegmentIndex])
+    {
+        case 0:     // Options
+            [[[[self navigationController] viewControllers] lastObject] performSelector:@selector(speichern:) withObject:sender];
+            return;
+            break;
+
+        case 1:     // Up
+            newIndex--;
+            break;
+
+        case 2:     // Down
+            newIndex++;
+            break;
+    }
+
+    if ([(UISegmentedControl *)sender selectedSegmentIndex] != UISegmentedControlNoSegment)
+    {
+        [self setDisplayedStoryIndex:newIndex];
+        newStory = [[self stories] objectAtIndex:newIndex];
+        [[[[self navigationController] viewControllers] lastObject] setStory:newStory];
+        [[[[self navigationController] viewControllers] lastObject] updateInterface];
+    }
+
+    [(UISegmentedControl *)sender setEnabled:([self displayedStoryIndex] > 0) forSegmentAtIndex:1];
+    [(UISegmentedControl *)sender setEnabled:!([self displayedStoryIndex] == ([storiesArray count] - 1)) forSegmentAtIndex:2];
 }
 
 - (void)updateApplicationIconBadgeNumber {

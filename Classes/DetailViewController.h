@@ -48,5 +48,7 @@
 - (UIImage *)usedimage;
 - (NSString *)cssStyleString;
 - (NSString *)baseHtmlString;
-- (NSString*)scaledHtmlStringFromHtmlString:(NSString*)htmlString ;
+- (NSString*)scaledHtmlStringFromHtmlString:(NSString*)htmlString;
+- (void)updateInterface;
+
 @end

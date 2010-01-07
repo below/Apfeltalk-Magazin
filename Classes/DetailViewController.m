@@ -163,17 +163,13 @@
 	return thumbnailImage;
 }
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-	webview.delegate = self;
-    [webview setBackgroundColor:[UIColor clearColor]];
-    [super viewDidLoad];
-
+- (void)updateInterface
+{
 	// Very common
 	titleLabel.text = [[self story] title];
-	//[authorLabel setText:[[self story] author]];
 	NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+
 	if ([[self story] author] == nil) {
 		datum.text = [dateFormatter stringFromDate:[[self story] date]];
 	} else {
@@ -182,6 +178,16 @@
 	[dateFormatter release];
 
 	[thumbnailButton setBackgroundImage:[self thumbimage] forState:UIControlStateNormal];
+	[webview loadHTMLString:[self htmlString] baseURL:nil];
+}
+
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad {
+	webview.delegate = self;
+    [webview setBackgroundColor:[UIColor clearColor]];
+    [super viewDidLoad];
+
+    [self updateInterface];
 
 	//Set the title of the navigation bar
 	//-150x150
@@ -195,11 +201,10 @@
     self.navigationItem.rightBarButtonItem = speichernButton;
     [speichernButton release];
 
-	NSString * htmlString = [self htmlString];
-	[webview loadHTMLString:htmlString baseURL:nil];
 // :below:20091111 Apple wants this removed
 //	[(UIScrollView*)[webview.subviews objectAtIndex:0]	 setAllowsRubberBanding:NO];
-	[webview release];
+// :MacApple:20100105 I'm wondering why this doesn't caused a crash
+//	[webview release];
 }
 
 /*

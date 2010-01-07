@@ -82,14 +82,14 @@
 
 - (void)changeStory:(id)sender
 {
-    NSUInteger  newIndex = 0;
+    NSUInteger  newIndex = [self displayedStoryIndex];
     Story      *newStory;
 
     if ([(UISegmentedControl *)sender selectedSegmentIndex] == 0)
-        newIndex = [self displayedStoryIndex] - 1;
+        newIndex--;
 
     if ([(UISegmentedControl *)sender selectedSegmentIndex] == 1)
-        newIndex = [self displayedStoryIndex] + 1;
+        newIndex++;
 
     if ([(UISegmentedControl *)sender selectedSegmentIndex] != UISegmentedControlNoSegment)
     {

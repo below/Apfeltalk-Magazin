@@ -114,7 +114,7 @@
     [myMenu addButtonWithTitle:NSLocalizedString (@"Per Mail versenden", @"")];
     if ([self Mailsendecode]) // :below:20100101 This is something of a hack
         [myMenu addButtonWithTitle:[self Mailsendecode]];
-    [myMenu addButtonWithTitle:NSLocalizedString (@"Newstipp twittern", @"")];
+    [myMenu addButtonWithTitle:NSLocalizedString (@"Twitter", @"")];
     [myMenu addButtonWithTitle:NSLocalizedString (@"Facebook", @"")];
     [myMenu addButtonWithTitle:NSLocalizedString (@"Abbrechen", @"")];
     if ([self Mailsendecode])
@@ -127,7 +127,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIdx
 {	
-	int numberOfButtons = [actionSheet numberOfButtons];
+	// int numberOfButtons = [actionSheet numberOfButtons]; not used
 	int saveEnabled = [self Mailsendecode]?1:0;
     
 	// assume that when we have 3 buttons, the one with idx 1 is the save button
@@ -253,6 +253,28 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 	[[FBRequest requestWithDelegate:self] call:@"facebook.Users.setStatus" params:params];
 }
 
+- (void)viewDidLoad
+{
+    NSArray            *imgArray = [NSArray arrayWithObjects:NSLocalizedString (@"Optionen", @""), [UIImage imageNamed:@"Up.png"], [UIImage imageNamed:@"Down.png"], nil];
+	UISegmentedControl *segControl = [[UISegmentedControl alloc] initWithItems:imgArray];
+
+    [super viewDidLoad];
+
+	[segControl addTarget:[[[self navigationController] viewControllers] objectAtIndex:0] action:@selector(changeStory:)
+         forControlEvents:UIControlEventValueChanged];
+    [segControl setFrame:CGRectMake(0.0, 0.0, 170.0, 30.0)];
+	[segControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+	[segControl setMomentary:YES];
+
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:segControl];
+
+    [[self navigationItem] setRightBarButtonItem:rightItem];
+    [[[[self navigationController] viewControllers] objectAtIndex:0] changeStory:segControl];
+
+    [segControl release];
+    [rightItem release];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     NSArray *controllers = [[self navigationController] viewControllers];
@@ -260,7 +282,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 
     if ([self showSave] && [newsController isSavedStory:[self story]])
         [self setShowSave:NO];
-	
+
 	session = [[FBSession sessionForApplication:@"4b52995a95555faf4ee6daa4267c92c5" secret:@"f3a3bf5c39884676247710b27a978b77" delegate:self] retain];
 }
 

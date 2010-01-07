@@ -29,9 +29,15 @@
 	@private
 	NSMutableArray *savedStories;
 	UIActionSheet *myMenu;
+    NSUInteger      displayedStorySection;
+    NSUInteger      displayedStoryIndex;
 }
+
+@property (assign) NSUInteger displayedStorySection;
+@property (assign) NSUInteger displayedStoryIndex;
 
 - (void) addSavedStory:(Story *)newStory;
 - (BOOL) isSavedStory:(Story *)story;
+- (void)changeStory:(id)sender;
 
 @end
